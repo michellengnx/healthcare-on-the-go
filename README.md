@@ -22,7 +22,7 @@ a brief, high-level description of what kind of application your team is thinkin
 
 #### Output when running sample Java code
 
-- For the code itself, see `[MapQuest.java]()`
+- For the code itself, see [`MapQuest.java`](https://github.com/michellengnx/csc207-project/blob/master/MapQuest.java)
 
 ```
 Response{protocol=h2, code=200, message=, url=https://www.mapquestapi.com/directions/v2/route?key=KEY&from=University%20of%20Toronto&to=York%20Univerisity}
