@@ -17,7 +17,7 @@ public class Something {
                 .addPathSegment("directions")
                 .addPathSegment("v2")
                 .addPathSegment("route")
-                .addQueryParameter("key", "pnI7fJLjm5NikjPKjrFHxFb1oW7rwmWx")
+                .addQueryParameter("key", "KEY")
                 .addQueryParameter("from", "University of Toronto")
                 .addQueryParameter("to", "York Univerisity")
                 .build();
