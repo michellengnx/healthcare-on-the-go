@@ -2,11 +2,12 @@ package org.example;
 
 import okhttp3.*;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class MapQuest {
+public class Something {
     public static void main(String[] args) {
         OkHttpClient client = new OkHttpClient();
 
@@ -16,7 +17,7 @@ public class MapQuest {
                 .addPathSegment("directions")
                 .addPathSegment("v2")
                 .addPathSegment("route")
-                .addQueryParameter("key", "KEY")
+                .addQueryParameter("key", "pnI7fJLjm5NikjPKjrFHxFb1oW7rwmWx")
                 .addQueryParameter("from", "University of Toronto")
                 .addQueryParameter("to", "York Univerisity")
                 .build();
@@ -24,18 +25,21 @@ public class MapQuest {
         Request request = new Request.Builder().url(httpUrl).build();
 
         try {
+            // execute and print API response
             Response response = client.newCall(request).execute();
-            System.out.println(response);
-            JSONObject responseBody = new JSONObject(response.body().string());
-            System.out.println(responseBody);
+            System.out.println("Response : " + response);
+            if (response.code() == 200) {
+                JSONObject responseBody = new JSONObject(response.body().string());
 
-            JSONObject route = responseBody.getJSONObject("route");
-            float distance = route.getFloat("distance") / 10;
-            int eta = route.getInt("time");
+                JSONObject route = responseBody.getJSONObject("route");
+                float distance = route.getFloat("distance") / 10;
+                int eta = route.getInt("time");
 
-            System.out.format("Distance : %f miles, ETA : %d seconds", distance, eta);
-
-        } catch (IOException e) {
+                System.out.format("Distance : %f miles, ETA : %d seconds", distance, eta);
+            } else {
+                System.out.format("Request Failed, error code : %d", response.code());
+            }
+        } catch (IOException | JSONException e) {
             System.out.println(e.getMessage());
         }
     }
