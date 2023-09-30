@@ -12,6 +12,9 @@ a brief, high-level description of what kind of application your team is thinkin
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
+## Link to API documentation
+
+- [https://developer.mapquest.com/documentation/directions-api/route/get](https://developer.mapquest.com/documentation/directions-api/route/get)
 
 ## Authors
 
