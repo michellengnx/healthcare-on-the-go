@@ -1,10 +1,10 @@
 # Healthcare On the Go :ambulance:
 
-## **_Description of Project Domain_**
+## Description of Project Domain
 
 With insufficient accessibility and access to transportation services, hundreds of people, particularly seniors, are under threat of missing critical medical care. Subsequently, our project domain aims to create a specialised and convenient transportation service that will alleviate this problem by following an API similar to Uber. However, instead of offering rides to get customers to a certain destination, our application will help bring healthcare workers to you, your family members, and your friends.
 
-## **_High-level Application Description_**
+## High-level Application Description
 
 Healthcare On The Go addresses the challenge above by allowing caregivers and coordinators to link patients with essential medical services, using our extensive network and collaborative partnerships. 
 
