@@ -16,6 +16,10 @@ a brief, high-level description of what kind of application your team is thinkin
 
 - [https://developer.mapquest.com/documentation/directions-api/route/get](https://developer.mapquest.com/documentation/directions-api/route/get)
 
+## Screenshot of calling the API with Hoppscotch
+
+![image](https://github.com/michellengnx/csc207-project/assets/62626538/590490ff-53fc-429d-8663-975ff41ea9d7)
+
 ## Authors
 
 * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
