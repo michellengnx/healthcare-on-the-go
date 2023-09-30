@@ -35,6 +35,8 @@ Response : Response{protocol=h2, code=200, message=, url=https://www.mapquestapi
 Distance : 10.617559 miles, ETA : 6596 seconds
 ```
 
+Please see MapQuest.java to view the result of a possible request.
+
 ## List of Technical Problems Blocking Progress
 
 - displaying a map for patients to see when ordering a ride
