@@ -37,16 +37,13 @@ Distance : 10.742450 miles, ETA : 6707 seconds
 Process finished with exit code 0
 ```
 
+## List of Technical Problems Blocking Progress
+
+- displaying a map for patients to see when ordering a ride
+- connecting or storing a doctor database to the application
+- creating a 'cancel order' method
+
 ## Authors :information_desk_person:
 
+Group 163 - TUT0401
 See the list of [contributors](https://github.com/michellengnx/csc207-project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments :bow:
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
