@@ -1,10 +1,16 @@
 # Healthcare On the Go :ambulance:
 
-//TODO: 
-a description of the problem domain your team is tentatively wanting to focus on in the project. (e.g., trivia, finance, real estate, etc…)
-//TODO: 
-a brief, high-level description of what kind of application your team is thinking of developing.
+###**_Description of Project Domain_**
 
+With insufficient accessibility and access to transportation services, hundreds of people, particularly seniors, are under threat of missing critical medical care. Subsequently, our project domain aims to create a specialised and convenient transportation service that will alleviate this problem by following an API similar to Uber. However, instead of offering rides to get customers to a certain destination, our application will help bring healthcare workers to you, your family members, and your friends.
+
+###**_High-level Application Description_**
+
+Healthcare On The Go addresses the challenge above by allowing caregivers and coordinators to link patients with essential medical services, using our extensive network and collaborative partnerships. 
+
+Guardians or patients themselves will be able to request the necessary care needed on demand by creating a profile on the application. Through the Healthcare On The Go dashboard, patients will be able to select their desired medical care and the emergency level of the request. Patients will also be able to see the price of the service when ordering a ride, where the cost is calculated based on the distance from the nearest respective doctor and the patient’s location. Moreover, patients will be able to see a brief overview of a caregiver’s service when they accept a request, such as past patients’ comments and ratings.
+
+After a ride is requested, patients will receive confirmation via email or text message with the details of their request. They will also receive another notification when the caregiver is en route. A trusted contact also has the ability to view the doctor’s credentials and receive confirmation once they arrive at the patient’s location.
 
 ## Built With :hammer:
 
