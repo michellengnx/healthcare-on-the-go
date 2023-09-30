@@ -31,10 +31,8 @@ After a ride is requested, patients will receive confirmation via email or text 
 - For the code itself, see [`MapQuest.java`](https://github.com/michellengnx/csc207-project/blob/master/MapQuest.java)
 
 ```
-Response{protocol=h2, code=200, message=, url=https://www.mapquestapi.com/directions/v2/route?key=KEY&from=University%20of%20Toronto&to=York%20Univerisity}
-{"route":{"hasTollRoad":true,"hasBridge":true,"bo ...
-Distance : 10.742450 miles, ETA : 6707 seconds
-Process finished with exit code 0
+Response : Response{protocol=h2, code=200, message=, url=https://www.mapquestapi.com/directions/v2/route?key=KEY&from=University%20of%20Toronto&to=York%20Univerisity}
+Distance : 10.617559 miles, ETA : 6596 seconds
 ```
 
 ## List of Technical Problems Blocking Progress
