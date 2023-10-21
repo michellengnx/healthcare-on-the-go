@@ -1,0 +1,82 @@
+@startuml
+abstract User {
+    -String username
+    -String password
+    -String gender
+    -File insurance
+    -Date birthday
+    -String email
+    -String phoneNumber
+    +void signUp()
+    +void singIn()
+    +void logOut()
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+
+class Patient extends User {
+    -CreditCard creditCard
+    -EmergencyContact emergencyContact
+    -List<Request> requests
+    +bool createRequest(String urgencyLevel, Doctor doctor, Service service, String destination)
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+class Doctor {
+    -String location
+    -List<String> certification
+    -List<Service> qualifiedServices
+    -bool editSchedule()
+    -bool acceptRequest()
+    -bool declineRequest()
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+class CreditCard {
+    -String creditCardNumber
+    -int ccv
+    -String expirationDate
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+class Request {
+    -DateTime creationTime
+    -Doctor doctor
+    -String urgencyLevel
+    -String destination
+    -Service service
+    -float price
+    -float eta
+    -float distance
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+class EmergencyContact {
+    -String username
+    -String phoneNumber
+    -String relationship
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+class Service {
+    -String name
+    -float price
+    +Object getter() // necessary getters
+    +void setter(Object value) // necessary setters
+}
+
+
+
+Patient -- EmergencyContact
+Patient *-- Request
+Patient -- CreditCard
+Request -- Doctor
+Doctor o-- Service
+
+@enduml
