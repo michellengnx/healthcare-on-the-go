@@ -1,0 +1,41 @@
+@startuml
+mainframe bool createRequest(String urgencyLevel, Doctor doctor, Service service, String destination)
+    [-> "RequestView":actionPerformed(urgencyLevel, doctor, service, destination)
+    activate "RequestView"
+
+    "RequestView" -> "RequestController":execute(urgencyLevel, doctor, service, destination)
+    activate "RequestController"
+
+
+    "RequestController" -> "RequestInputData":<<create>>
+    activate "RequestInputData"
+    return InputDataObject
+
+    "RequestController" -> "RequestInteractor":execute(InputDataObject)
+    activate "RequestInteractor"
+
+
+    "RequestInteractor" -> "Patient":createRequest(urgencyLevel,doctor,service,destination)
+    activate "Patient"
+
+    "Patient" -> "RequestFactory":createRequest(urgencyLevel,doctor,service,destination)
+    activate "RequestFactory"
+    "RequestFactory" -> "API":calculatePrice()
+    activate "API"
+    return price
+    "RequestFactory" -> "API":calculateEta()
+    activate "API"
+    return eta
+    "RequestFactory" -> "API":calculateDistance()
+    activate "API"
+    return distance
+
+    return request
+
+    return requestStatus
+
+    return
+
+    return
+
+@enduml
