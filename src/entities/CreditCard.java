@@ -1,6 +1,6 @@
 package org.example.src.entities;
 
-public class creditCard {
+public class CreditCard {
     private String creditCardNumber;
     private int ccv;
     private String expirationDate;
@@ -8,7 +8,7 @@ public class creditCard {
 
 
     //Constructor for credit card set csv
-    public creditCard(String creditCardNumber,int cvv, String expirationDate, String nameOnCard){
+    public CreditCard(String creditCardNumber,int cvv, String expirationDate, String nameOnCard){
         this.creditCardNumber = creditCardNumber;
         this.ccv = cvv;
         this.expirationDate = expirationDate;
@@ -17,19 +17,19 @@ public class creditCard {
 
     //Getters
     public String getCreditCardNumber() {
-        return creditCardNumber;
+        return this.creditCardNumber;
     }
 
     public int getCcv() {
-        return ccv;
+        return this.ccv;
     }
 
     public String getNameOnCard() {
-        return nameOnCard;
+        return this.nameOnCard;
     }
 
     public String getExpirationDate() {
-        return expirationDate;
+        return this.expirationDate;
     }
     //Setters
     public void setCreditCardNumber(String creditCardNumber) {
