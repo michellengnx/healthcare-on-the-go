@@ -19,7 +19,7 @@ public class Doctor implements User {
      * @param id_
      * @param location
      */
-    Doctor(Integer id_, String location, List<String> certifications, List<Service> qualifiedServices) {
+    public Doctor(Integer id_, String location, List<String> certifications, List<Service> qualifiedServices) {
         this.id_ = id_;
         this.location = location;
         this.certifications = certifications;
