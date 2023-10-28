@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import Review;
+import org.example.src.entities.Review;
 
 public class ReviewTests{
     @Test
