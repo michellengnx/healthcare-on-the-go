@@ -1,4 +1,4 @@
-package org.example;
+package org.example.api_example;
 
 import okhttp3.*;
 import org.json.JSONArray;
