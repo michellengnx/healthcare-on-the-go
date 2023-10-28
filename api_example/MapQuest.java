@@ -1,3 +1,8 @@
+<<<<<<<< HEAD:src/MapQuest.java
+========
+package org.example.api_example;
+
+>>>>>>>> e48553f (moved api example to a separate folder):api_example/MapQuest.java
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
