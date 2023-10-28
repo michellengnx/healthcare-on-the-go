@@ -1,7 +1,4 @@
 package org.example.src.entities;
-
-import com.sun.net.httpserver.Request;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +7,7 @@ public class Patient extends User {
     private EmergencyContact emergencyContact;
     private ArrayList<Request> requests;
 
-    public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact) {
+    public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact emergencyContact) {
         super(username, password, email, phoneNumber, gender, insurance, birthday);
         this.creditCard = creditCard;
         this.emergencyContact = emergencyContact;

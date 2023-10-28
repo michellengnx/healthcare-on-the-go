@@ -1,22 +1,25 @@
 package org.example.src.entities;
 
+import java.util.Date;
+
 public class Review{
     private String review;
-    private DateTime time;
+    private Date time;
     private int stars; // how many stars for the review can be from 0 to 5
 
     //preconditions: 0 <= stars <= 5
-    public class Review(String review, DateTime time, int stars){
-        this.review = review
-        this.time = time
-        this.stars = stars
+
+    public Review(String review, Date time, int stars){
+        this.review = review;
+        this.time = time;
+        this.stars = stars;
     }
 
     public String getReview() {
         return this.review;
     }
 
-    public DateTime getTime() {
+    public Date getTime() {
         return this.time;
     }
 
@@ -32,7 +35,7 @@ public class Review{
         this.stars = stars;
     }
 
-    public void setTime(DateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 }
