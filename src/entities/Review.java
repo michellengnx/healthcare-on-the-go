@@ -1,5 +1,4 @@
 package org.example.src.entities;
-
 import java.util.Date;
 
 public class Review{
@@ -8,7 +7,8 @@ public class Review{
     private int stars; // how many stars for the review can be from 0 to 5
 
     //preconditions: 0 <= stars <= 5
-
+    
+    @Test
     public Review(String review, Date time, int stars){
         this.review = review;
         this.time = time;

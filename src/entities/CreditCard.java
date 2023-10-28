@@ -7,7 +7,7 @@ public class CreditCard {
     private String nameOnCard;
 
 
-    //Constructor for credit card set csv
+    //Constructor for credit card set cvv
     public CreditCard(String creditCardNumber,int cvv, String expirationDate, String nameOnCard){
         this.creditCardNumber = creditCardNumber;
         this.ccv = cvv;
