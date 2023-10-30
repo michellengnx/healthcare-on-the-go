@@ -1,10 +1,10 @@
-package org.example.src.entities;
+package entities;
 
 import java.util.Date;
 
 public class ServiceRequest {
     Date creationTime;
-    User doctor;
+    Doctor doctor;
     int urgencyLevel;
     String destination;
     Service service;
@@ -12,7 +12,7 @@ public class ServiceRequest {
     float eta; // calculated using API
     float distance; // calculated using API
 
-    public ServiceRequest(Date creationTime, User doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
+    public ServiceRequest(Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
         this.creationTime = creationTime;
         this.doctor = doctor;
         this.urgencyLevel = urgencyLevel;
@@ -31,11 +31,11 @@ public class ServiceRequest {
         this.creationTime = creationTime;
     }
 
-    public User getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(User doctor) {
+    public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 
