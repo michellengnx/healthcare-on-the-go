@@ -6,12 +6,14 @@ public class Patient extends User {
     private CreditCard creditCard;
     private EmergencyContact emergencyContact;
     private ArrayList<Request> requests;
+    private ArrayList<Doctor> OrderHistory;
 
     public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact emergencyContact) {
         super(username, password, email, phoneNumber, gender, insurance, birthday);
         this.creditCard = creditCard;
         this.emergencyContact = emergencyContact;
         this.requests = new ArrayList<Request>();
+
     }
 
     public CreditCard getCreditCard() {
@@ -37,4 +39,10 @@ public class Patient extends User {
     public void setRequests(ArrayList<Request> requests) {
         this.requests = requests;
     }
+
+ //   public void get_order_history(); loop through requests and add to the list of order history
+
+
+
+
 }
