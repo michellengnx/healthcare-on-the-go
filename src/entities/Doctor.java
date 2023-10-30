@@ -1,8 +1,11 @@
-package org.example.src.entities;
+package entities;
+
+import org.example.src.entities.User;
+;
 
 import java.util.*;
 
-public class Doctor implements User {
+public class Doctor extends User {
     private final Integer id_;
     private final String location;
     // have one default location or use a random variable?
@@ -19,7 +22,8 @@ public class Doctor implements User {
      * @param id_
      * @param location
      */
-    public Doctor(Integer id_, String location, List<String> certifications, List<Service> qualifiedServices) {
+    public Doctor(String username, String password, String email, String phoneNumber, String gender, Date birthday, Integer id_, String location, List<String> certifications, List<Service> qualifiedServices) {
+        super(username, password, email, phoneNumber, gender, birthday);
         this.id_ = id_;
         this.location = location;
         this.certifications = certifications;
@@ -38,19 +42,5 @@ public class Doctor implements User {
         return qualifiedServices;
     }
 
-    public String getReviewsForDoctor(Doctor doctor) {
-        String allReviews = "";
 
-        ArrayList<Doctor> listOfReviews = new ArrayList<>(reviews.keySet());
-        for (Doctor doc : listOfReviews) {
-            if (Objects.equals(doc.id_, doctor.id_)) {
-                List<Review> value = reviews.get(doc);
-                allReviews += value[2].toString() + ": " + value[0] + "Posted on " + value[1].toShortDateString()
-                        + "\n";
-            }
-        }
-        if (allReviews.equals("")) {
-            return "No reviews available.";
-        } return allReviews;
-    }
 }
