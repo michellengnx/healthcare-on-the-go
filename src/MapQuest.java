@@ -1,5 +1,3 @@
-package org.example;
-
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
