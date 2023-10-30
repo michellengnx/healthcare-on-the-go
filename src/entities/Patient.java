@@ -5,13 +5,13 @@ import java.util.Date;
 public class Patient extends User {
     private CreditCard creditCard;
     private EmergencyContact emergencyContact;
-    private ArrayList<Request> requests;
+    private ArrayList<ServiceRequest> requests;
 
     public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact emergencyContact) {
         super(username, password, email, phoneNumber, gender, insurance, birthday);
         this.creditCard = creditCard;
         this.emergencyContact = emergencyContact;
-        this.requests = new ArrayList<Request>();
+        this.requests = new ArrayList<ServiceRequest>();
     }
 
     public CreditCard getCreditCard() {
@@ -22,7 +22,7 @@ public class Patient extends User {
         return emergencyContact;
     }
 
-    public ArrayList<Request> getRequests() {
+    public ArrayList<ServiceRequest> getRequests() {
         return requests;
     }
 
@@ -34,7 +34,7 @@ public class Patient extends User {
         this.emergencyContact = emergencyContact;
     }
 
-    public void setRequests(ArrayList<Request> requests) {
+    public void setRequests(ArrayList<ServiceRequest> requests) {
         this.requests = requests;
     }
 }
