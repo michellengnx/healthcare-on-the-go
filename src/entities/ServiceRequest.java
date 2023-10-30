@@ -2,7 +2,7 @@ package org.example.src.entities;
 
 import java.util.Date;
 
-public class Request {
+public class ServiceRequest {
     Date creationTime;
     User doctor;
     int urgencyLevel;
@@ -12,7 +12,7 @@ public class Request {
     float eta; // calculated using API
     float distance; // calculated using API
 
-    public Request(Date creationTime, User doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
+    public ServiceRequest(Date creationTime, User doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
         this.creationTime = creationTime;
         this.doctor = doctor;
         this.urgencyLevel = urgencyLevel;
