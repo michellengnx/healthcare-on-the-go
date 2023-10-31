@@ -1,4 +1,4 @@
-package org.example.src.entities;
+package entities;
 
 public class Service {
     String name;

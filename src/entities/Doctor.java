@@ -1,7 +1,7 @@
 package entities;
 
 import org.example.src.entities.User;
-;
+
 
 import java.util.*;
 

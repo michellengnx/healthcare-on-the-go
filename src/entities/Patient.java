@@ -1,15 +1,21 @@
 package org.example.src.entities;
+import entities.CreditCard;
+import entities.ServiceRequest;
+import entities.EmergencyContact;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Patient extends User {
+public class Patient extends org.example.src.entities.User {
     private CreditCard creditCard;
     private EmergencyContact emergencyContact;
     private ArrayList<ServiceRequest> requests;
+    private String insurance;
 
     public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact emergencyContact) {
-        super(username, password, email, phoneNumber, gender, insurance, birthday);
+        super(username, password, email, phoneNumber, gender, birthday);
         this.creditCard = creditCard;
+        this.insurance = insurance;
         this.emergencyContact = emergencyContact;
         this.requests = new ArrayList<ServiceRequest>();
     }
