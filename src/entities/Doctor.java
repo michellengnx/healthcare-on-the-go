@@ -1,6 +1,9 @@
 package entities;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 88c4714 (refactored entities so that they all use a consistent package naming scheme)
 import java.util.*;
 
 public class Doctor extends User {
@@ -22,7 +25,6 @@ public class Doctor extends User {
      */
     public Doctor(String username, String password, String email, String phoneNumber, String gender, Date birthday, Integer id_, String location, List<String> certifications, List<Service> qualifiedServices) {
         super(username, password, email, phoneNumber, gender, birthday);
-
         this.id_ = id_;
         this.location = location;
         this.certifications = certifications;
