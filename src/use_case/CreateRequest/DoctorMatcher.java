@@ -7,10 +7,10 @@ import javax.print.Doc;
 import java.util.List;
 
 public class DoctorMatcher {
-    Service service;
-    String destination;
-    CreateRequestDoctorDataAccessInterface doctorDataAccessObject;
-    CreateRequestApiAccessInterface apiAccessObject;
+    private final Service service;
+    private final String destination;
+    private final CreateRequestDoctorDataAccessInterface doctorDataAccessObject;
+    private final CreateRequestApiAccessInterface apiAccessObject;
 
     /**
      * Create a doctor matcher for a given service and destination
