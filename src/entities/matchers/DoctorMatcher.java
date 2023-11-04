@@ -1,7 +1,10 @@
-package use_case.CreateRequest;
+package entities.matchers;
 
 import entities.Doctor;
 import entities.Service;
+import use_case.CreateRequest.CreateRequestApiAccessInterface;
+import use_case.CreateRequest.CreateRequestDoctorDataAccessInterface;
+import use_case.CreateRequest.NoAvailableDoctorException;
 
 import javax.print.Doc;
 import java.util.List;
@@ -9,8 +12,8 @@ import java.util.List;
 public class DoctorMatcher {
     private final Service service;
     private final String destination;
-    private final CreateRequestDoctorDataAccessInterface doctorDataAccessObject;
-    private final CreateRequestApiAccessInterface apiAccessObject;
+    private final DoctorMatcherDataAccessInterface doctorDataAccessObject;
+    private final DoctorMatcherApiAccessInterface apiAccessObject;
 
     /**
      * Create a doctor matcher for a given service and destination
@@ -21,8 +24,8 @@ public class DoctorMatcher {
      */
     public DoctorMatcher(Service service,
                          String destination,
-                         CreateRequestDoctorDataAccessInterface doctorDataAccessObject,
-                         CreateRequestApiAccessInterface apiAccessObject) {
+                         DoctorMatcherDataAccessInterface doctorDataAccessObject,
+                         DoctorMatcherApiAccessInterface apiAccessObject) {
         this.service = service;
         this.destination = destination;
         this.doctorDataAccessObject = doctorDataAccessObject;
@@ -50,7 +53,7 @@ public class DoctorMatcher {
             return closestDoctor;
         }
 
-        float distDoctorWithService = this.apiAccessObject.getDistance(closestDoctorWithService.getLocation(), this.destination);
+        float distDoctorWithService = this.apiAccessObject.getEta(closestDoctorWithService.getLocation(), this.destination);
 
         if (distDoctorWithService < 60) {
             return closestDoctorWithService;
