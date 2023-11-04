@@ -60,8 +60,10 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     distance
             );
 
+            CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
+
             this.userDataAccessObject.saveRequest(patient, request);
-            this.completeRequestPresenter.prepareSuccessView(request);
+            this.completeRequestPresenter.prepareSuccessView(response);
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No Doctors Available!");
         }
