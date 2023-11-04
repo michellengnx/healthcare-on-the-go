@@ -5,10 +5,10 @@ import entities.Service;
 import java.util.Date;
 
 public class CreateRequestInputData {
-    Date creationTime;
-    int urgencyLevel;
-    String destination;
-    Service service;
+    private final Date creationTime;
+    private final int urgencyLevel;
+    private final String destination;
+    private final Service service;
 
     public CreateRequestInputData(Date creationTime, int urgencyLevel, String destination, Service service) {
         this.creationTime = creationTime;
