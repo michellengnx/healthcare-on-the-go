@@ -11,7 +11,7 @@ import entities.matchers.DoctorMatcherDataAccessInterface;
 
 import java.util.Date;
 
-public class CreateRequestInteractor {
+public class CreateRequestInteractor implements CreateRequestInputBoundary {
     final CreateRequestApiAccessInterface apiAccessObject;
     final CreateRequestDoctorDataAccessInterface doctorDataAccessObject;
     final CreateRequestUserDataAccessInterface userDataAccessObject;
