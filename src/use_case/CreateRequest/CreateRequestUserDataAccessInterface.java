@@ -1,7 +1,8 @@
 package use_case.CreateRequest;
 
+import entities.Patient;
 import entities.ServiceRequest;
 
 public interface CreateRequestUserDataAccessInterface {
-    public boolean saveRequest(ServiceRequest request);
+    public void saveRequest(Patient patient, ServiceRequest request);
 }
