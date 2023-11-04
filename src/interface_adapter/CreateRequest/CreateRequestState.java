@@ -7,6 +7,7 @@ public class CreateRequestState {
     private int urgencyLevel = 0;
     private String destination = null;
     private Service service = null;
+    private String createRequestError = null;
     private final Patient patient;
 
     public CreateRequestState(Patient patient) {
@@ -29,6 +30,10 @@ public class CreateRequestState {
         return patient;
     }
 
+    public String getCreateRequestError() {
+        return createRequestError;
+    }
+
     public void setUrgencyLevel(int urgencyLevel) {
         this.urgencyLevel = urgencyLevel;
     }
@@ -39,5 +44,9 @@ public class CreateRequestState {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public void setCreateRequestError(String createRequestError) {
+        this.createRequestError = createRequestError;
     }
 }
