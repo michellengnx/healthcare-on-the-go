@@ -4,7 +4,7 @@ import entities.Patient;
 import entities.Service;
 
 public class CreateRequestState {
-    private int urgencyLevel = 0;
+    private Integer urgencyLevel = 0;
     private String destination = null;
     private Service service = null;
     private String createRequestError = null;
