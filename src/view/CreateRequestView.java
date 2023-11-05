@@ -1,5 +1,6 @@
 package view;
 
+import entities.Service;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
@@ -18,17 +19,17 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
     private final CreateRequestViewModel createRequestViewModel;
 
     private final Integer[] urgencyLevels = {1, 2, 3};
-    private final String[] availableServiceNames = {
-            "Vaccination",
-            "Nutritional support",
-            "Pharmaceutical services",
-            "General health check",
-            "X-ray imaging",
-            "Blood testing",
-            "Psychological care"
+    private final Service[] availableServiceNames = {
+            new Service("Vaccination", 20),
+            new Service("Nutritional support", 10),
+            new Service("Pharmaceutical services", 40),
+            new Service("General health check", 60),
+            new Service("X-ray imaging", 100),
+            new Service("Blood testing", 70),
+            new Service("Psychological care", 150)
     };
     private final JComboBox<Integer> urgencyLevelComboBox = new JComboBox<>(urgencyLevels);
-    private final JComboBox<String> availableServiceComboBox = new JComboBox<>(availableServiceNames);
+    private final JComboBox<Service> availableServiceComboBox = new JComboBox<>(availableServiceNames);
     private final JTextField destinationInputField = new JTextField(30);
     private final CreateRequestController createRequestController;
 
@@ -85,6 +86,34 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                     }
                 }
         );
+
+        urgencyLevelComboBox.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(urgencyLevelComboBox)) {
+                            CreateRequestState currentState = createRequestViewModel.getState();
+                            JComboBox<Integer> myCombo = (JComboBox<Integer>) evt.getSource();
+                            Integer newUrgencyLevel = (Integer)myCombo.getSelectedItem();
+                            currentState.setUrgencyLevel(newUrgencyLevel);
+                        }
+                    }
+                }
+        );
+
+        availableServiceComboBox.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(urgencyLevelComboBox)) {
+                            CreateRequestState currentState = createRequestViewModel.getState();
+                            JComboBox<Service> myCombo = (JComboBox<Service>) evt.getSource();
+                            Service newService = (Service)myCombo.getSelectedItem();
+                            currentState.setService(newService);
+                        }
+                    }
+                }
+        );
+
+
     }
 
     @Override
