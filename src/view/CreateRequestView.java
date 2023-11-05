@@ -57,6 +57,34 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         buttons.add(createRequest);
         cancel = new JButton(createRequestViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+
+        createRequest.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(createRequest)) {
+                            CreateRequestState currentState = createRequestViewModel.getState();
+                            createRequestController.execute(
+                                    new Date(),
+                                    currentState.getUrgencyLevel(),
+                                    currentState.getDestination(),
+                                    currentState.getService(),
+                                    currentState.getPatient()
+                            );
+                        }
+                    }
+                }
+        );
+
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(cancel)) {
+                            return;
+                        }
+                    }
+                }
+        );
     }
 
     @Override
