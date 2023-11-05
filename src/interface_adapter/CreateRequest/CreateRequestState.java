@@ -14,7 +14,7 @@ public class CreateRequestState {
         this.patient = patient;
     }
 
-    public int getUrgencyLevel() {
+    public Integer getUrgencyLevel() {
         return urgencyLevel;
     }
 
@@ -34,7 +34,7 @@ public class CreateRequestState {
         return createRequestError;
     }
 
-    public void setUrgencyLevel(int urgencyLevel) {
+    public void setUrgencyLevel(Integer urgencyLevel) {
         this.urgencyLevel = urgencyLevel;
     }
 
