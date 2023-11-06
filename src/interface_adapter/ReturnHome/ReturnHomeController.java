@@ -1,11 +1,12 @@
 package interface_adapter.ReturnHome;
 
+import use_case.ReturnHome.ReturnHomeInputBoundary;
 import use_case.ReturnHome.ReturnHomeInteractor;
 
 public class ReturnHomeController {
-    ReturnHomeInteractor returnHomeInteractor;
+    ReturnHomeInputBoundary returnHomeInteractor;
 
-    public ReturnHomeController(ReturnHomeInteractor returnHomeInteractor) {
+    public ReturnHomeController(ReturnHomeInputBoundary returnHomeInteractor) {
         this.returnHomeInteractor = returnHomeInteractor;
     }
 
