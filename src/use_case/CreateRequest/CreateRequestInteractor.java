@@ -28,12 +28,14 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
     }
 
     public void execute(CreateRequestInputData createRequestInputData) {
+        // input data
         Service requestedService = createRequestInputData.getService();
         String destination = createRequestInputData.getDestination();
         Date creationTime = createRequestInputData.getCreationTime();
         int urgencyLevel = createRequestInputData.getUrgencyLevel();
         Patient patient = createRequestInputData.getPatient();
 
+        // create doctor matcher and variable to store matched doctor
         DoctorMatcher matcher = new DoctorMatcher(
                 requestedService,
                 destination,
@@ -42,6 +44,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         Doctor matchedDoctor;
 
         try {
+            // attempt to match with a doctor and calculate the necessary values needed to create a request
             matchedDoctor = matcher.match();
             float price = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
             float eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
@@ -60,9 +63,12 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     distance
             );
 
+            // save the user's request and mark the doctor as busy
+            this.userDataAccessObject.saveRequest(patient, request);
+            this.doctorDataAccessObject.markAsBusy(matchedDoctor);
+
             CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
 
-            this.userDataAccessObject.saveRequest(patient, request);
             this.completeRequestPresenter.prepareSuccessView(response);
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No Doctors Available!");
