@@ -11,12 +11,25 @@ import entities.matchers.DoctorMatcherDataAccessInterface;
 
 import java.util.Date;
 
+/**
+ * The interactor responsible for performing the create request use case. This class combines the logic implemented by
+ * the doctor matcher and data access objects and attempts to create a request for a given patient. Exceptional cases
+ * such as the unavailability of doctors are handled appropriately.
+ */
 public class CreateRequestInteractor implements CreateRequestInputBoundary {
     final CreateRequestApiAccessInterface apiAccessObject;
     final CreateRequestDoctorDataAccessInterface doctorDataAccessObject;
     final CreateRequestUserDataAccessInterface userDataAccessObject;
     final CreateRequestOutputBoundary completeRequestPresenter;
 
+    /**
+     * Create a CreateRequestInteractor object with given data access objects, and a presenter.
+     *
+     * @param apiAccessObject Object that can retrieve distance, eta and pricing information.
+     * @param doctorDataAccessObject Object that can retrieve and store information about available doctors.
+     * @param userDataAccessObject Object that can store information about patients.
+     * @param completeRequestPresenter Presenter to be called upon when the use case is complete.
+     */
     public CreateRequestInteractor(CreateRequestApiAccessInterface apiAccessObject,
                                    CreateRequestDoctorDataAccessInterface doctorDataAccessObject,
                                    CreateRequestUserDataAccessInterface userDataAccessObject,
@@ -27,6 +40,15 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         this.completeRequestPresenter = completeRequestPresenter;
     }
 
+    /**
+     * Match the patient with a doctor, create the necessary request, mark the doctor as busy, add the request to the
+     * patient's list, and call the presenter. Price, eta and distance parameters are determined via the
+     * apiAccessObject, doctor matching is performed with the DoctorMatcher, the available doctors are determined via
+     * the doctorDataAccess object, and all other data is supplied through the input data argument. In the case that a
+     * doctor cannot be matched, remain on the same screen and call upon the presenter to display an error message.
+     *
+     * @param createRequestInputData Input data necessary to create a request for medical services.
+     */
     public void execute(CreateRequestInputData createRequestInputData) {
         // input data
         Service requestedService = createRequestInputData.getService();
@@ -50,6 +72,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
             float eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
             float distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
 
+            // create the request
             ServiceRequestFactory serviceRequestFactory = new ServiceRequestFactory();
 
             ServiceRequest request = serviceRequestFactory.create(
