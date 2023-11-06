@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Date;
@@ -103,7 +105,7 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         availableServiceComboBox.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(urgencyLevelComboBox)) {
+                        if (evt.getSource().equals(availableServiceComboBox)) {
                             CreateRequestState currentState = createRequestViewModel.getState();
                             JComboBox<Service> myCombo = (JComboBox<Service>) evt.getSource();
                             Service newService = (Service)myCombo.getSelectedItem();
@@ -113,7 +115,18 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                 }
         );
 
-
+        destinationInputField.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(destinationInputField)) {
+                            CreateRequestState currentState = createRequestViewModel.getState();
+                            JTextField destinationText = (JTextField) evt.getSource();
+                            String newDestination = (String)destinationText.getText();
+                            currentState.setDestination(newDestination);
+                        }
+                    }
+                }
+        );
     }
 
     @Override
