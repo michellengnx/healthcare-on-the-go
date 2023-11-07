@@ -7,7 +7,7 @@ import use_case.ReturnHome.ReturnHomeInteractor;
  * The controller responsible for executing the return home use case interactor.
  */
 public class ReturnHomeController {
-    ReturnHomeInputBoundary returnHomeInteractor;
+    private final ReturnHomeInputBoundary returnHomeInteractor;
 
     /**
      * Create a ReturnHomeController object given an input boundary for the return home use case.

@@ -7,8 +7,8 @@ import use_case.ReturnHome.ReturnHomeOutputBoundary;
  * Presenter that will switch the current screen to the home screen.
  */
 public class ReturnHomePresenter implements ReturnHomeOutputBoundary {
-    ViewManagerModel viewManagerModel;
-    HomeScreenViewModel homeScreenViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final HomeScreenViewModel homeScreenViewModel;
 
     /**
      * Create ReturnHomePresenter object given a view manager model and home screen view model.
@@ -27,7 +27,7 @@ public class ReturnHomePresenter implements ReturnHomeOutputBoundary {
      */
     @Override
     public void prepareSuccessView() {
-        this.viewManagerModel.setActiveView(this.homeScreenViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        this.viewManagerModel.setActiveView(homeScreenViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 }
