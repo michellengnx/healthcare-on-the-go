@@ -4,6 +4,7 @@ import entities.Service;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
+import interface_adapter.ReturnHome.ReturnHomeController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Date;
 
+/**
+ * View that displays the necessary interface for a patient create a new request, and a way to return to the home
+ * screen.
+ */
 public class CreateRequestView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "create request";
 
@@ -30,22 +35,29 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
             new Service("Blood testing", 70),
             new Service("Psychological care", 150)
     };
+
     private final JComboBox<Integer> urgencyLevelComboBox = new JComboBox<>(urgencyLevels);
     private final JComboBox<Service> availableServiceComboBox = new JComboBox<>(availableServiceNames);
     private final JTextField destinationInputField = new JTextField(30);
-    private final CreateRequestController createRequestController;
-
     private final JButton createRequest;
     private final JButton cancel;
 
-    public CreateRequestView(CreateRequestController controller, CreateRequestViewModel createRequestViewModel) {
-        this.createRequestController = controller;
+    private final CreateRequestController createRequestController;
+    private final ReturnHomeController returnHomeController;
+
+    public CreateRequestView(CreateRequestController createRequestController,
+                             ReturnHomeController returnHomeController,
+                             CreateRequestViewModel createRequestViewModel) {
+        this.createRequestController = createRequestController;
+        this.returnHomeController = returnHomeController;
         this.createRequestViewModel = createRequestViewModel;
         createRequestViewModel.addPropertyChangeListener(this);
 
+        // screen title
         JLabel title = new JLabel(createRequestViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // combo boxes and text panels to input the request data
         LabelComboBoxPanel urgencyLevelSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.URGENCY_LABEL), urgencyLevelComboBox
         );
@@ -55,12 +67,14 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         LabelTextPanel destinationInfo = new LabelTextPanel(
                 new JLabel(createRequestViewModel.DESTINATION_LABEL), destinationInputField);
 
+        // buttons to create request and return home
         JPanel buttons = new JPanel();
         createRequest = new JButton(createRequestViewModel.CREATE_REQUEST_BUTTON_LABEL);
         buttons.add(createRequest);
         cancel = new JButton(createRequestViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
+        // create the request with the data in the view's state when the createRequest button is clicked
         createRequest.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -78,12 +92,13 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                 }
         );
 
+        // return to the home screen when cancel button is clicked
         cancel.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(cancel)) {
-                            return;
+                            returnHomeController.execute();
                         }
                     }
                 }
@@ -127,6 +142,14 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                     }
                 }
         );
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(title);
+        this.add(urgencyLevelSelect);
+        this.add(serviceSelect);
+        this.add(destinationInfo);
+        this.add(buttons);
     }
 
     @Override
@@ -136,6 +159,9 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        CreateRequestState createRequestState = (CreateRequestState) evt.getNewValue();
+        if (createRequestState.getCreateRequestError() != null) {
+            JOptionPane.showMessageDialog(this, createRequestState.getCreateRequestError());
+        }
     }
 }
