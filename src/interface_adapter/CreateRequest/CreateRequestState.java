@@ -3,6 +3,9 @@ package interface_adapter.CreateRequest;
 import entities.Patient;
 import entities.Service;
 
+/**
+ * An object used to store the user's input data when creating a request.
+ */
 public class CreateRequestState {
     private Integer urgencyLevel = 0;
     private String destination = null;
@@ -10,6 +13,11 @@ public class CreateRequestState {
     private String createRequestError = null;
     private final Patient patient;
 
+    /**
+     * Create a new CreateRequestState with a given patient.
+     *
+     * @param patient The patient creating the request.
+     */
     public CreateRequestState(Patient patient) {
         this.patient = patient;
     }
