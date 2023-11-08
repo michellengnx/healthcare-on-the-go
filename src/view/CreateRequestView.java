@@ -45,6 +45,14 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
     private final CreateRequestController createRequestController;
     private final ReturnHomeController returnHomeController;
 
+    /**
+     * Create a CreateRequestView object given the appropriate view model and controllers.
+     *
+     * @param createRequestController The controller responsible for executing the use case that creates a request.
+     * @param returnHomeController The controller responsible for executing the use case that sets the view to the
+     *                             home view.
+     * @param createRequestViewModel The view model responsible for storing label values and the view's state.
+     */
     public CreateRequestView(CreateRequestController createRequestController,
                              ReturnHomeController returnHomeController,
                              CreateRequestViewModel createRequestViewModel) {
@@ -152,11 +160,22 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         this.add(buttons);
     }
 
+    /**
+     * Action to be performed when the view is interacted with (nothing).
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * If there is a change in state, check to see whether it is an error. If so, display the error message.
+     *
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         CreateRequestState createRequestState = (CreateRequestState) evt.getNewValue();
