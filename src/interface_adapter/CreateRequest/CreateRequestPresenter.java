@@ -1,6 +1,8 @@
 package interface_adapter.CreateRequest;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewRequest.ViewRequestState;
+import interface_adapter.ViewRequest.ViewRequestViewModel;
 import use_case.CreateRequest.CreateRequestOutputBoundary;
 import use_case.CreateRequest.CreateRequestOutputData;
 
