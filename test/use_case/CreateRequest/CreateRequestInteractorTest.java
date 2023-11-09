@@ -1,7 +1,7 @@
 package use_case.CreateRequest;
 
 import entities.*;
-import interface_adapter.CreateRequest.CreateRequestPresenter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,16 +11,50 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CreateRequestInteractorTest {
+    private CreateRequestInputData inputData;
+    private CreateRequestApiAccessInterface apiAccessObject;
+    private CreateRequestDoctorDataAccessInterface doctorRepository;
+    private CreateRequestUserDataAccessInterface patientRepository;
+    private CreateRequestDoctorDataAccessInterface emptyDoctorRepository;
+
+    /**
+     * Initialize an input data object, and common data access objects.
+     */
+    @BeforeEach
+    void init() {
+         // random input data object
+         inputData = new CreateRequestInputData(
+                new Date(),
+                1,
+                "123 Street Avenue",
+                new Service("X-ray", 200),
+                new Patient(
+                        "patient1",
+                        "pass1",
+                        "patient@mail.com",
+                        "123-123-1231",
+                        "male",
+                        "ins.",
+                        new Date(),
+                        new CreditCard(
+                                "1234567890",
+                                123,
+                                "09/12",
+                                "patient smith"),
+                        new EmergencyContact("dad smith", "123-123-1231", "dad"))
+        );
+        // Synthetic data access objects
+        apiAccessObject = new ApiAccessObject();
+        doctorRepository = new DoctorAccessObject();
+        patientRepository = new UserAccessObject();
+        emptyDoctorRepository = new EmptyDoctorAcessObject();
+    }
+
     /**
      * Test the case when the interactor should call prepareSuccessView on the presenter
      */
     @Test
     void successTest() {
-        // Synthetic data access objects
-        CreateRequestApiAccessInterface apiAccessObject = new ApiAccessObject();
-        CreateRequestDoctorDataAccessInterface doctorRepository = new DoctorAccessObject();
-        CreateRequestUserDataAccessInterface patientRepository = new UserAccessObject();
-
         // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate
         CreateRequestOutputBoundary successPresenter = new CreateRequestOutputBoundary() {
             @Override
@@ -41,30 +75,29 @@ class CreateRequestInteractorTest {
             }
         };
 
-        // random input data object
-        CreateRequestInputData inputData = new CreateRequestInputData(
-                new Date(),
-                1,
-                "123 Street Avenue",
-                new Service("X-ray", 200),
-                new Patient(
-                        "patient1",
-                        "pass1",
-                        "patient@mail.com",
-                        "123-123-1231",
-                        "male",
-                        "ins.",
-                        new Date(),
-                        new CreditCard(
-                                "1234567890",
-                                123,
-                                "09/12",
-                                "patient smith"),
-                        new EmergencyContact("dad smith", "123-123-1231", "dad"))
-        );
         CreateRequestInputBoundary interactor = new CreateRequestInteractor(
                 apiAccessObject, doctorRepository, patientRepository, successPresenter);
-        interactor.execute(inputData); // This will eventually send Output Data to the successPresenter
+        interactor.execute(this.inputData); // This will eventually send Output Data to the successPresenter
+    }
+
+    @Test
+    void failTest() {
+        // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate
+        CreateRequestOutputBoundary failPresenter = new CreateRequestOutputBoundary() {
+            @Override
+            public void prepareSuccessView(CreateRequestOutputData response) {
+                fail("Use case failure is excepted");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+               return;
+            }
+        };
+
+        CreateRequestInputBoundary interactor = new CreateRequestInteractor(
+                apiAccessObject, emptyDoctorRepository, patientRepository, failPresenter);
+        interactor.execute(this.inputData); // This will eventually send Output Data to the failPresenter
     }
 
     private static class ApiAccessObject implements CreateRequestApiAccessInterface {
@@ -105,8 +138,8 @@ class CreateRequestInteractorTest {
                     new Date(),
                     1,
                     "23 Road Lane",
-                    new ArrayList<String>(),
-                    new ArrayList<Service>()));
+                    new ArrayList<>(),
+                    new ArrayList<>()));
 
             return dummyDoctorList;
         }
@@ -119,6 +152,23 @@ class CreateRequestInteractorTest {
         @Override
         public void markAsBusy(Doctor doctor) {
 
+        }
+    }
+
+    private static class EmptyDoctorAcessObject implements CreateRequestDoctorDataAccessInterface {
+
+        @Override
+        public List<Doctor> getAvailableDoctors() {
+            return new ArrayList<>();
+        }
+
+        @Override
+        public List<Doctor> getAvailableDoctors(Service service) {
+            return new ArrayList<>();
+        }
+
+        @Override
+        public void markAsBusy(Doctor doctor) {
         }
     }
 }
