@@ -1,4 +1,4 @@
-package org.example.src.entities;
+/*package org.example.src.entities;
 import java.util.Date;
 
 public class Review{
@@ -38,4 +38,4 @@ public class Review{
     public void setTime(Date time) {
         this.time = time;
     }
-}
+}*/
