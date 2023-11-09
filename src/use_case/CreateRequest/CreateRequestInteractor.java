@@ -6,10 +6,8 @@ import entities.ServiceRequest;
 import entities.factories.service_request.ServiceRequestFactory;
 import entities.matchers.DoctorMatcher;
 import entities.Service;
-import entities.matchers.DoctorMatcherApiAccessInterface;
-import entities.matchers.DoctorMatcherDataAccessInterface;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * The interactor responsible for performing the create request use case. This class combines the logic implemented by
@@ -60,9 +58,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         // create doctor matcher and variable to store matched doctor
         DoctorMatcher matcher = new DoctorMatcher(
                 requestedService,
-                destination,
-                (DoctorMatcherDataAccessInterface) this.doctorDataAccessObject,
-                (DoctorMatcherApiAccessInterface) this.apiAccessObject);
+                createDoctorEtaMap(destination));
         Doctor matchedDoctor;
 
         try {
@@ -97,5 +93,22 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No Doctors Available!");
         }
+    }
+
+    /**
+     * Get a Map from available doctors to their ETA to destination.
+     *
+     * @param destination The destination to which the doctor is traveling.
+     * @return A Map from available doctors to their ETA to destination.
+     */
+    private Map<Doctor, Float> createDoctorEtaMap(String destination) {
+        List<Doctor> availableDoctors = this.doctorDataAccessObject.getAvailableDoctors();
+        Map<Doctor, Float> doctorEtaMap = new HashMap<>();
+
+        for (Doctor doctor : availableDoctors) {
+            doctorEtaMap.put(doctor, this.apiAccessObject.getEta(doctor.getLocation(), destination));
+        }
+
+        return doctorEtaMap;
     }
 }

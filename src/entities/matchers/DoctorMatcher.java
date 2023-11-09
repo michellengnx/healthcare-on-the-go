@@ -7,55 +7,48 @@ import use_case.CreateRequest.CreateRequestDoctorDataAccessInterface;
 import use_case.CreateRequest.NoAvailableDoctorException;
 
 import javax.print.Doc;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DoctorMatcher {
     private final Service service;
-    private final String destination;
-    private final DoctorMatcherDataAccessInterface doctorDataAccessObject;
-    private final DoctorMatcherApiAccessInterface apiAccessObject;
+    private final Map<Doctor, Float> availableDoctorEtas;
 
     /**
-     * Create a doctor matcher for a given service and destination
+     * Create a doctor matcher for a given service and map of available doctors
+     *
      * @param service The service being requested
-     * @param destination The destination to which the doctor will travel
-     * @param doctorDataAccessObject Data access object to source the doctors from
-     * @param apiAccessObject Api access object to calculate ETA
+     * @param availableDoctorEtas Map from available Doctors to their ETAs from the destination
      */
     public DoctorMatcher(Service service,
-                         String destination,
-                         DoctorMatcherDataAccessInterface doctorDataAccessObject,
-                         DoctorMatcherApiAccessInterface apiAccessObject) {
+                         Map<Doctor, Float> availableDoctorEtas) {
         this.service = service;
-        this.destination = destination;
-        this.doctorDataAccessObject = doctorDataAccessObject;
-        this.apiAccessObject = apiAccessObject;
+        this.availableDoctorEtas = availableDoctorEtas;
     }
 
     /**
-     * Find the doctor that is the best match for the requested service/destination. Prioritize finding the doctor
-     * that is specialized to provide this.service and can arrive in the shortest amount of time. However, if the
-     * closest specialized doctor is 1hr or greater away from this.destination, simply return the doctor that can arrive
-     * the fastest.
+     * Find the doctor that is the best match for the requested service. Prioritize finding the doctor that is
+     * specialized to provide this.service and can arrive in the shortest amount of time. However, if the closest
+     * specialized doctor is 1hr or greater away, simply return the doctor that can arrive the fastest.
      * @return Return the best Doctor for the requested service and destination
      * @throws NoAvailableDoctorException If there are no available doctors
      */
     public Doctor match() throws NoAvailableDoctorException {
-        List<Doctor> availableDoctors = this.doctorDataAccessObject.getAvailableDoctors();
-        List<Doctor> availableDoctorsWithService = this.doctorDataAccessObject.getAvailableDoctors(this.service);
-
-        Doctor closestDoctor = getClosestDoctor(availableDoctors);
+        Doctor closestDoctor = getClosestDoctor(availableDoctorEtas);
         Doctor closestDoctorWithService;
 
+        Map<Doctor, Float> availableDoctorsWithServiceEtas = getDoctorsWithServiceEtas(availableDoctorEtas, service);
+
         try {
-            closestDoctorWithService = getClosestDoctor(availableDoctorsWithService);
+            closestDoctorWithService = getClosestDoctor(availableDoctorsWithServiceEtas);
         } catch (NoAvailableDoctorException e) {
             return closestDoctor;
         }
 
-        float distDoctorWithService = this.apiAccessObject.getEta(closestDoctorWithService.getLocation(), this.destination);
+        float etaDoctorWithService = availableDoctorEtas.get(closestDoctorWithService);
 
-        if (distDoctorWithService < 60) {
+        if (etaDoctorWithService < 60) {
             return closestDoctorWithService;
         } else {
             return closestDoctor;
@@ -63,24 +56,23 @@ public class DoctorMatcher {
     }
 
     /**
-     * Find the closest (in terms of time) Doctor in doctors relative to this.destination
-     * @param doctors Doctors you want to find the closest of
+     * Find the Doctor with the minimum value in doctorEtas
+     *
+     * @param doctorEtas Map from Doctors to times, that you want to find the closest of
      * @return Returns the closest Doctor in doctors to this.destination
      * @throws NoAvailableDoctorException If doctors is empty
      */
-    private Doctor getClosestDoctor(List<Doctor> doctors) throws NoAvailableDoctorException {
-        if (doctors.isEmpty()) {
+    private Doctor getClosestDoctor(Map<Doctor, Float> doctorEtas) throws NoAvailableDoctorException {
+        if (doctorEtas.isEmpty()) {
             throw new NoAvailableDoctorException("There are no available doctors");
         }
 
-        Doctor closestDoctor = doctors.get(0);
-        String doctorLocation = closestDoctor.getLocation();
-        float shortestTime = this.apiAccessObject.getEta(doctorLocation, this.destination);
+        Doctor closestDoctor = doctorEtas.keySet().iterator().next();
+        float shortestTime = doctorEtas.get(closestDoctor);
         float currentTime;
 
-        for (Doctor doctor : doctors) {
-            doctorLocation = doctor.getLocation();
-            currentTime = this.apiAccessObject.getEta(doctorLocation, this.destination);
+        for (Doctor doctor : doctorEtas.keySet()) {
+            currentTime = doctorEtas.get(doctor);
 
             if (currentTime < shortestTime) {
                 shortestTime = currentTime;
@@ -89,5 +81,29 @@ public class DoctorMatcher {
         }
 
         return closestDoctor;
+    }
+
+    /**
+     * Filter a <Doctor, Float> Map to only include doctors qualified to provide a given service.
+     *
+     * @param doctorEtas A map from Doctors to their ETA from a location.
+     * @param service The desired service you wish to filter for.
+     * @return A map similar to doctorEtas, but only elements with a doctor qualified to provide service are included.
+     * @throws NoAvailableDoctorException If doctorEtas is empty.
+     */
+    private Map<Doctor, Float> getDoctorsWithServiceEtas(Map<Doctor, Float> doctorEtas, Service service) throws NoAvailableDoctorException {
+        if (doctorEtas.isEmpty()) {
+            throw new NoAvailableDoctorException("There are no available doctors");
+        }
+
+        Map<Doctor, Float> doctorWithServiceEtas = new HashMap<>();
+
+        for (Doctor doctor: doctorEtas.keySet()) {
+            if (doctor.getQualifiedServices().contains(service)) {
+                doctorWithServiceEtas.put(doctor, doctorEtas.get(doctor));
+            }
+        }
+
+        return doctorWithServiceEtas;
     }
 }
