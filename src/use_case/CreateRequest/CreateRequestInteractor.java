@@ -68,7 +68,8 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         try {
             // attempt to match with a doctor and calculate the necessary values needed to create a request
             matchedDoctor = matcher.match();
-            float price = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
+            float servicePrice = requestedService.getPrice();
+            float travelPrice = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
             float eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
             float distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
 
@@ -81,7 +82,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     urgencyLevel,
                     destination,
                     requestedService,
-                    price,
+                    travelPrice + servicePrice,
                     eta,
                     distance
             );
