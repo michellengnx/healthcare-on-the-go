@@ -11,7 +11,7 @@ public interface CreateRequestApiAccessInterface {
      * @param endLoc Address/name representing the end location.
      * @return The distance by car from startLoc to endLoc by car.
      */
-    public float getDistance(String startLoc, String endLoc);
+    public float getDistance(String startLoc, String endLoc) throws InvalidLocationException;
 
     /**
      * Return the estimated time or arrival from startLoc to endLoc by car.
@@ -20,7 +20,7 @@ public interface CreateRequestApiAccessInterface {
      * @param endLoc Address/name representing the end location.
      * @return The estimated time or arrival from startLoc to endLoc by car.
      */
-    public float getEta(String startLoc, String endLoc);
+    public float getEta(String startLoc, String endLoc) throws InvalidLocationException;
 
     /**
      * Return the price of a car ride from startLoc to endLoc by car.
@@ -29,5 +29,5 @@ public interface CreateRequestApiAccessInterface {
      * @param endLoc Address/name representing the end location.
      * @return The estimated price of a car ride from startLoc to endLoc by car.
      */
-    public float getPrice(String startLoc, String endLoc);
+    public float getPrice(String startLoc, String endLoc) throws InvalidLocationException;
 }
