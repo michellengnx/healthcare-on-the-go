@@ -7,8 +7,8 @@ import java.beans.PropertyChangeListener;
 // TODO : IMPLEMENT
 
 public class ViewRequestViewModel extends ViewModel {
-    public ViewRequestViewModel(String viewName) {
-        super(viewName);
+    public ViewRequestViewModel() {
+        super("view request");
     }
 
     @Override
