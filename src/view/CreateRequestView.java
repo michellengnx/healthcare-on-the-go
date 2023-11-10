@@ -66,9 +66,11 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // combo boxes and text panels to input the request data
+        urgencyLevelComboBox.setSelectedItem(1);
         LabelComboBoxPanel urgencyLevelSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.URGENCY_LABEL), urgencyLevelComboBox
         );
+        availableServiceComboBox.setSelectedItem(new Service("Vaccination", 20));
         LabelComboBoxPanel serviceSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.SERVICE_LABEL), availableServiceComboBox
         );
