@@ -7,8 +7,8 @@ import java.beans.PropertyChangeListener;
 // TODO : IMPLEMENT
 
 public class HomeScreenViewModel extends ViewModel {
-    public HomeScreenViewModel(String viewName) {
-        super(viewName);
+    public HomeScreenViewModel() {
+        super("home screen");
     }
 
     @Override
