@@ -61,38 +61,52 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                 createDoctorEtaMap(destination));
         Doctor matchedDoctor;
 
+        float servicePrice;
+        float travelPrice;
+        float eta;
+        float distance;
+
         try {
             // attempt to match with a doctor and calculate the necessary values needed to create a request
             matchedDoctor = matcher.match();
-            float servicePrice = requestedService.getPrice();
-            float travelPrice = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
-            float eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
-            float distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
-
-            // create the request
-            ServiceRequestFactory serviceRequestFactory = new ServiceRequestFactory();
-
-            ServiceRequest request = serviceRequestFactory.create(
-                    creationTime,
-                    matchedDoctor,
-                    urgencyLevel,
-                    destination,
-                    requestedService,
-                    travelPrice + servicePrice,
-                    eta,
-                    distance
-            );
-
-            // save the user's request and mark the doctor as busy
-            this.userDataAccessObject.saveRequest(patient, request);
-            this.doctorDataAccessObject.markAsBusy(matchedDoctor);
-
-            CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
-
-            this.completeRequestPresenter.prepareSuccessView(response);
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No Doctors Available!");
+            return;
         }
+
+        servicePrice = requestedService.getPrice();
+
+        try {
+            travelPrice = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
+            eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
+            distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
+        } catch (InvalidLocationException e) {
+            this.completeRequestPresenter.prepareFailView("Invalid location!");
+            return;
+        }
+
+        // create the request
+        ServiceRequestFactory serviceRequestFactory = new ServiceRequestFactory();
+
+        ServiceRequest request = serviceRequestFactory.create(
+                creationTime,
+                matchedDoctor,
+                urgencyLevel,
+                destination,
+                requestedService,
+                travelPrice + servicePrice,
+                eta,
+                distance
+        );
+
+        // save the user's request and mark the doctor as busy
+        this.userDataAccessObject.saveRequest(patient, request);
+        this.doctorDataAccessObject.markAsBusy(matchedDoctor);
+
+        CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
+
+        this.completeRequestPresenter.prepareSuccessView(response);
+
     }
 
     /**
