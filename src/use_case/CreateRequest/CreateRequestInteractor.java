@@ -56,9 +56,15 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         Patient patient = createRequestInputData.getPatient();
 
         // create doctor matcher and variable to store matched doctor
-        DoctorMatcher matcher = new DoctorMatcher(
-                requestedService,
-                createDoctorEtaMap(destination));
+        DoctorMatcher matcher;
+        try {
+            matcher = new DoctorMatcher(
+                    requestedService,
+                    createDoctorEtaMap(destination));
+        } catch (InvalidLocationException e) {
+            this.completeRequestPresenter.prepareFailView("Invalid location!");
+            return;
+        }
         Doctor matchedDoctor;
 
         float servicePrice;
@@ -115,7 +121,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
      * @param destination The destination to which the doctor is traveling.
      * @return A Map from available doctors to their ETA to destination.
      */
-    private Map<Doctor, Float> createDoctorEtaMap(String destination) {
+    private Map<Doctor, Float> createDoctorEtaMap(String destination) throws InvalidLocationException {
         List<Doctor> availableDoctors = this.doctorDataAccessObject.getAvailableDoctors();
         Map<Doctor, Float> doctorEtaMap = new HashMap<>();
 
