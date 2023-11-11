@@ -1,7 +1,7 @@
 package interface_adapter.ResolveRequest;
 
 import entities.ServiceRequest;
-import org.example.src.entities.Patient;
+import entities.Patient;
 import use_case.ResolveRequest.ResolveRequestInputBoundary;
 import use_case.ResolveRequest.ResolveRequestInputData;
 

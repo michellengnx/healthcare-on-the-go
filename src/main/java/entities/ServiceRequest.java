@@ -12,6 +12,8 @@ public class ServiceRequest {
     float eta; // calculated using API
     float distance; // calculated using API
 
+    private boolean completed;
+
     public ServiceRequest(Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
         this.creationTime = creationTime;
         this.doctor = doctor;
@@ -21,6 +23,7 @@ public class ServiceRequest {
         this.price = price;
         this.eta = eta;
         this.distance = distance;
+        this.completed = false;
     }
 
     public Date getCreationTime() {
@@ -85,5 +88,13 @@ public class ServiceRequest {
 
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

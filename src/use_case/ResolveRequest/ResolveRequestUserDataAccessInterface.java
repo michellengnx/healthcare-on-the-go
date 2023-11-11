@@ -1,7 +1,7 @@
 package use_case.ResolveRequest;
 
 import entities.ServiceRequest;
-import org.example.src.entities.Patient;
+import entities.Patient;
 
 /**
  * Methods to user data access object must implement for the resolve request interactor to function

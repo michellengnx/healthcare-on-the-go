@@ -1,7 +1,7 @@
 package use_case.ResolveRequest;
 
 import entities.ServiceRequest;
-import org.example.src.entities.Patient;
+import entities.Patient;
 
 /**
  * Output data object that stores the a resolved request and corresponding patient.
