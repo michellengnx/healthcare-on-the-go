@@ -16,6 +16,7 @@ class CreateRequestInteractorTest {
     private CreateRequestDoctorDataAccessInterface doctorRepository;
     private CreateRequestUserDataAccessInterface patientRepository;
     private CreateRequestDoctorDataAccessInterface emptyDoctorRepository;
+    private CreateRequestApiAccessInterface invalidApiAccessObject;
 
     /**
      * Initialize an input data object, and common data access objects.
@@ -48,6 +49,7 @@ class CreateRequestInteractorTest {
         doctorRepository = new DoctorAccessObject();
         patientRepository = new UserAccessObject();
         emptyDoctorRepository = new EmptyDoctorAcessObject();
+        invalidApiAccessObject = new InvalidApiAccessObject();
     }
 
     /**
@@ -81,7 +83,7 @@ class CreateRequestInteractorTest {
     }
 
     @Test
-    void failTest() {
+    void failTestNoDoctor() {
         // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate
         CreateRequestOutputBoundary failPresenter = new CreateRequestOutputBoundary() {
             @Override
@@ -100,6 +102,29 @@ class CreateRequestInteractorTest {
         interactor.execute(this.inputData); // This will eventually send Output Data to the failPresenter
     }
 
+    @Test
+    void failTestInvalidLocation() {
+        // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate
+        CreateRequestOutputBoundary failPresenter = new CreateRequestOutputBoundary() {
+            @Override
+            public void prepareSuccessView(CreateRequestOutputData response) {
+                fail("Use case failure is excepted");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                return;
+            }
+        };
+
+        CreateRequestInputBoundary interactor = new CreateRequestInteractor(
+                invalidApiAccessObject, doctorRepository, patientRepository, failPresenter);
+        interactor.execute(this.inputData); // This will eventually send Output Data to the failPresenter
+    }
+
+    /**
+     * Synthetic DAO that returns arbitrary numbers.
+     */
     private static class ApiAccessObject implements CreateRequestApiAccessInterface {
         @Override
         public float getDistance(String startLoc, String endLoc) {
@@ -117,6 +142,29 @@ class CreateRequestInteractorTest {
         }
     }
 
+    /**
+     * Synthetic DAO that always throws an InvalidLocationException
+     */
+    private static class InvalidApiAccessObject implements CreateRequestApiAccessInterface {
+        @Override
+        public float getDistance(String startLoc, String endLoc) throws InvalidLocationException {
+            throw new InvalidLocationException("Location invalid");
+        }
+
+        @Override
+        public float getEta(String startLoc, String endLoc) throws InvalidLocationException {
+            throw new InvalidLocationException("Location invalid");
+        }
+
+        @Override
+        public float getPrice(String startLoc, String endLoc) throws InvalidLocationException {
+            throw new InvalidLocationException("Location invalid");
+        }
+    }
+
+    /**
+     * Synthetic DAO that does nothing
+     */
     private static class UserAccessObject implements CreateRequestUserDataAccessInterface {
 
         @Override
@@ -124,6 +172,9 @@ class CreateRequestInteractorTest {
         }
     }
 
+    /**
+     * Synthetic DAO that returns a doctor list with 1 doctor
+     */
     private static class DoctorAccessObject implements CreateRequestDoctorDataAccessInterface {
 
         @Override
@@ -155,6 +206,9 @@ class CreateRequestInteractorTest {
         }
     }
 
+    /**
+     * Synthetic DAO that returns empty doctor lists
+     */
     private static class EmptyDoctorAcessObject implements CreateRequestDoctorDataAccessInterface {
 
         @Override
