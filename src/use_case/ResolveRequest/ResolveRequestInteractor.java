@@ -6,7 +6,7 @@ import entities.Patient;
 /**
  * The interactor is responsible for performing the resolve request use case. Simply mark a user's request as completed.
  */
-public class ResolveRequestInteractor {
+public class ResolveRequestInteractor implements ResolveRequestInputBoundary {
     ResolveRequestUserDataAccessInterface userDataAccessObject;
     ResolveRequestOutputBoundary resolveRequestPresenter;
 
