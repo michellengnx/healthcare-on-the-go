@@ -13,4 +13,5 @@ public interface ResolveRequestOutputBoundary {
      * @param response Data object containing the resolved request and the patient to which it belongs.
      */
     public void prepareSuccessView(ResolveRequestOutputData response);
+    public void prepareFailView(String errorMsg);
 }
