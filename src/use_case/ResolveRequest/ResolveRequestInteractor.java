@@ -1,7 +1,7 @@
 package use_case.ResolveRequest;
 
 import entities.ServiceRequest;
-import org.example.src.entities.Patient;
+import entities.Patient;
 
 /**
  * The interactor is responsible for performing the resolve request use case. Simply mark a user's request as completed.

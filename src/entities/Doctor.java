@@ -1,6 +1,6 @@
 package entities;
 
-import org.example.src.entities.User;
+import entities.User;
 ;
 
 import java.util.*;
