@@ -1,7 +1,6 @@
 package entities;
 
 import entities.User;
-;
 
 import java.util.*;
 
