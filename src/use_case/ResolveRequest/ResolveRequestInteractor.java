@@ -1,4 +1,4 @@
-package org.example.src.use_case.ResolveRequest;
+package use_case.ResolveRequest;
 
 public class ResolveRequestInteractor {
 }
