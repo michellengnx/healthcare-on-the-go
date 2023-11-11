@@ -13,5 +13,5 @@ public interface ResolveRequestUserDataAccessInterface {
      * @param patient The patient whose request has been completed.
      * @param request The request to be marked as completed.
      */
-    public void resolveRequest(Patient patient, ServiceRequest request);
+    public void resolveRequest(Patient patient, ServiceRequest request) throws NoRequestFoundException;
 }
