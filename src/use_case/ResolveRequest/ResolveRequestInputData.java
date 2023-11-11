@@ -1,7 +1,7 @@
 package use_case.ResolveRequest;
 
 import entities.ServiceRequest;
-import org.example.src.entities.Patient;
+import entities.Patient;
 
 /**
  * Input data object that stores the necessary values to resolve a request.
