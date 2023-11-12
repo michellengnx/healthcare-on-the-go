@@ -22,23 +22,15 @@ public class EditInteractor implements EditInputBoundary {
         String newPhoneNumber = editInputData.getNewPhoneNumber();
         String newInsurance = editInputData.getNewInsurance();
 
-        // remember to implement this method in FileUserDataAcessObject!
         if (userDataAccessObject.existsByName(newUsername)) {
             editPresenter.prepareFailView(newUsername + ": Account with this username already exists.");
         } else {
-            String pwd = userDataAccessObject.get(username).getPassword();
-            String email = userDataAccessObject.get(username).getEmail();
-            String phoneNumber = userDataAccessObject.get(username).getPhoneNumber();
-            String insurance = userDataAccessObject.get(username).getInsurance();
-
-            // if at least one of these parameters have changed from the original, prepare success view
-            if ((!newPassword.equals(pwd)) || (!newEmail.equals(email)) ||
-                    (!newPhoneNumber.equals(phoneNumber)) || (!newInsurance.equals(insurance))) {
-                // remember to implement this method in fileuserdataaccessobject!
-                String changes = userDataAccessObject.editProfile();
-                EditOutputData editOutputData = new EditOutputData(changes, false);
+            String changes = userDataAccessObject.editProfile(username, newUsername, newPassword,
+                    newEmail, newPhoneNumber, newInsurance);
+            if (changes.isEmpty()) {
+                editPresenter.prepareFailView("No edits were made to the user profile.");
             } else {
-                editPresenter.prepareFailView("Password has not changed for" + username + ".");
+                EditOutputData editOutputData = new EditOutputData(changes, false);
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }

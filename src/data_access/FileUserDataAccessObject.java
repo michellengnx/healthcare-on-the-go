@@ -3,15 +3,11 @@ package org.example.src.data_access;
 import org.example.src.entities.User;
 import org.example.src.entities.UserFactory;
 import org.example.src.use_case.edit_profile.EditUserDataAccessInterface;
-import org.example.src.use_case.login.LoginUserDataAccessInterface;
-import org.example.src.use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
-        LoginUserDataAccessInterface, EditUserDataAccessInterface {
+public class FileUserDataAccessObject implements EditUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -41,20 +37,20 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-                assert header.equals("username,password,gender,insurance,birthday,email,number,requests");
+                assert header.equals("username,password,email,number,gender,insurance,birthday");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
+                    String email = String.valueOf(col[headers.get("email")]);
+                    String number = String.valueOf(col[headers.get("number")]);
                     String gender = String.valueOf(col[headers.get("gender")]);
                     String insurance = String.valueOf(col[headers.get("insurance")]);
                     String birthday = String.valueOf(col[headers.get("birthday")]);
-                    String email = String.valueOf(col[headers.get("email")]);
-                    String number = String.valueOf(col[headers.get("number")]);
                     String requests = String.valueOf(col[headers.get("requests")]);
-                    User user = userFactory.create(username, password, gender, insurance, birthday, email, number);
+                    User user = userFactory.create(username, password, email, number, gender, insurance, birthday);
                     accounts.put(username, user);
                 }
             }
@@ -81,8 +77,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
 
             for (User user : accounts.values()) {
                 String line = String.format("%s,%s,%s",
-                        user.getUsername(), user.getPassword(), user.getGender(),
-                        user.getInsurance(), user.getBirthday(), user.getEmail(), user.getPhoneNumber());
+                        user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber(),
+                        user.getGender(), user.getInsurance(), user.getBirthday());
                 writer.write(line);
                 writer.newLine();
             }
@@ -117,29 +113,28 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
 
     // find out if this is okay or better to have separate edit profile methods
     @Override
-    public String editProfile(String username, String newUsername, String newPassword, String newInsurance, String newEmail,
-                              String newPhoneNumber) {
+    public String editProfile(String username, String newUsername, String newPassword, String newEmail,
+                              String newPhoneNumber, String newInsurance) {
         User user = accounts.get(username);
         String changes = "";
 
         if (!username.equals(newUsername)) {
-            changes += "username ";
+            changes += "username,";
             user.setUsername(newUsername);
         } if (!user.getPassword().equals(newPassword)) {
-            changes += " password";
+            changes += "password,";
             user.setPassword(newPassword);
-        } if (!user.getInsurance().equals(newInsurance)) {
-            changes += " insurance,";
-            user.setInsurance(newInsurance);
         } if (!user.getEmail().equals(newEmail)) {
-            changes += " email,";
+            changes += "email,";
             user.setEmail(newEmail);
         } if (!user.getPhoneNumber().equals(newPhoneNumber)) {
-            changes += " phone number";
+            changes += "phone number,";
             user.setPhoneNumber(newPhoneNumber);
+        } if (!user.getInsurance().equals(newInsurance)) {
+            changes += "insurance,";
+            user.setInsurance(newInsurance);
         }
         save();
         return changes;
     }
-
 }
