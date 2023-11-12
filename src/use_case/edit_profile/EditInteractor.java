@@ -1,5 +1,7 @@
 package org.example.src.use_case.edit_profile;
 
+import java.util.ArrayList;
+
 public class EditInteractor implements EditInputBoundary {
 
     final EditUserDataAccessInterface userDataAccessObject;
@@ -32,8 +34,9 @@ public class EditInteractor implements EditInputBoundary {
             // if at least one of these parameters have changed from the original, prepare success view
             if ((!newPassword.equals(pwd)) || (!newEmail.equals(email)) ||
                     (!newPhoneNumber.equals(phoneNumber)) || (!newInsurance.equals(insurance))) {
-                // what should be the parameter for outputdata?
-                EditOutputData editOutputData = new EditOutputData();
+                // remember to implement this method in fileuserdataaccessobject!
+                String changes = userDataAccessObject.editProfile();
+                EditOutputData editOutputData = new EditOutputData(changes, false);
             } else {
                 editPresenter.prepareFailView("Password has not changed for" + username + ".");
                 editPresenter.prepareSuccessView(editOutputData);
