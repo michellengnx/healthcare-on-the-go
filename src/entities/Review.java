@@ -1,4 +1,4 @@
-package entities;
+package org.example.src.entities;
 import java.util.Date;
 
 public class Review {
