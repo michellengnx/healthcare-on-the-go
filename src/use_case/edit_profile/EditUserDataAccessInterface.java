@@ -9,5 +9,6 @@ public interface EditUserDataAccessInterface {
 
     User get(String username);
 
-    String editProfile();
+    String editProfile(String username, String newUsername, String newPassword, String newEmail,
+                       String newPhoneNumber, String newInsurance);
 }
