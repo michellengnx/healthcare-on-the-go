@@ -1,7 +1,7 @@
 package org.example.src.interface_adapter.edit_profile;
 
-import use_case.edit_profile.EditInputData;
-import use_case.edit_profile.EditInputBoundary;
+import org.example.src.use_case.edit_profile.EditInputData;
+import org.example.src.use_case.edit_profile.EditInputBoundary;
 // do I need to import from signup?
 
 import java.util.Date;
