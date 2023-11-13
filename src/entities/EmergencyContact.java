@@ -1,4 +1,4 @@
-package org.example.src.entities;
+package entities;
 //TODO: relationship could be enum
 public class EmergencyContact {
     String name;
