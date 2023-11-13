@@ -8,6 +8,7 @@ public class Patient extends User {
     private EmergencyContact emergencyContact;
     private ArrayList<ServiceRequest> requests;
     private String insurance;
+    private ArrayList<Doctor> orderHistory;
 
     public Patient(String username, String password, String email, String phoneNumber, String gender, String insurance, Date birthday, CreditCard creditCard, EmergencyContact emergencyContact) {
         super(username, password, email, phoneNumber, gender, birthday);
@@ -15,6 +16,7 @@ public class Patient extends User {
         this.emergencyContact = emergencyContact;
         this.insurance = insurance;
         this.requests = new ArrayList<ServiceRequest>();
+        this.orderHistory = new ArrayList<Doctor>();
     }
 
     public CreditCard getCreditCard() {

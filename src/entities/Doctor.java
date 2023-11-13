@@ -14,6 +14,8 @@ public class Doctor extends User {
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
     private final Map<Doctor, List<Review>> reviews = new HashMap<>();
+    private Double rating;
+
 
     /**
      * Requires each doctor to have a unique id.
@@ -27,6 +29,7 @@ public class Doctor extends User {
         this.location = location;
         this.certifications = certifications;
         this.qualifiedServices = qualifiedServices;
+        this.rating = 4.0;
     }
 
     public String getLocation() {
