@@ -35,8 +35,7 @@ public class ResolveRequestInteractor implements ResolveRequestInputBoundary {
 
         try {
             this.userDataAccessObject.resolveRequest(patient, request);
-            ResolveRequestOutputData response = new ResolveRequestOutputData(patient, request);
-            this.resolveRequestPresenter.prepareSuccessView(response);
+            this.resolveRequestPresenter.prepareSuccessView();
         } catch (NoRequestFoundException e) {
             this.resolveRequestPresenter.prepareFailView("Couldn't find request");
         }

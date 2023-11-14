@@ -3,7 +3,6 @@ package interface_adapter.ResolveRequest;
 import interface_adapter.ViewRequest.ViewRequestState;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import use_case.ResolveRequest.ResolveRequestOutputBoundary;
-import use_case.ResolveRequest.ResolveRequestOutputData;
 
 /**
  * Presenter that will update the request being shown.
@@ -21,18 +20,11 @@ public class ResolveRequestPresenter implements ResolveRequestOutputBoundary {
     }
 
     /**
-     * Update the request being shown.
-     *
-     * @param response Data object containing the updated request and the patient to which it belongs.
+     * Update the request being shown (note request has been mutated by the interactor).
      */
     @Override
-    public void prepareSuccessView(ResolveRequestOutputData response) {
-        // Create a new ViewRequestState whose response instance attribute is the resolved response
-        ViewRequestState viewRequestState = this.viewRequestViewModel.getState();
-        viewRequestState.setRequest(response.getRequest());
-
+    public void prepareSuccessView() {
         // set the viewRequestModel's new state, alert the view of the changes
-        this.viewRequestViewModel.setState(viewRequestState);
         this.viewRequestViewModel.firePropertyChanged();
     }
 

@@ -23,16 +23,7 @@ class ResolveRequestInteractorTest {
             new ArrayList<>(),
             new ArrayList<>());
 
-    private final ServiceRequest request = new ServiceRequest(
-            new Date(),
-            sampleDoctor,
-            1,
-            "dest",
-            new Service("x-ray", 20),
-            1,
-            1,
-            1
-    );
+    private ServiceRequest request;
     private Patient oneRequestPatient = new Patient(
             "patient1",
             "pass1",
@@ -48,8 +39,22 @@ class ResolveRequestInteractorTest {
                     "patient smith"),
             new EmergencyContact("dad smith", "123-123-1231", "dad"));
 
+    /**
+     * Create a new patient with a new request
+     */
     @BeforeEach
     public void init() {
+        request = new ServiceRequest(
+                new Date(),
+                sampleDoctor,
+                1,
+                "dest",
+                new Service("x-ray", 20),
+                1,
+                1,
+                1
+        );
+
         oneRequestPatient = new Patient(
                 "patient1",
                 "pass1",
@@ -76,11 +81,8 @@ class ResolveRequestInteractorTest {
     public void successTest() {
         ResolveRequestOutputBoundary successPresenter = new ResolveRequestOutputBoundary() {
             @Override
-            public void prepareSuccessView(ResolveRequestOutputData response) {
-                ServiceRequest request = response.getRequest();
-                Patient patient = response.getPatient();
+            public void prepareSuccessView() {
                 assertTrue(request.isCompleted());
-                assertEquals(request, patient.getRequests().get(0));
             }
 
             @Override
@@ -101,7 +103,7 @@ class ResolveRequestInteractorTest {
     public void failTest() {
         ResolveRequestOutputBoundary successPresenter = new ResolveRequestOutputBoundary() {
             @Override
-            public void prepareSuccessView(ResolveRequestOutputData response) {
+            public void prepareSuccessView() {
                 fail("Use case failure is unexpected.");
             }
 
@@ -115,6 +117,9 @@ class ResolveRequestInteractorTest {
         interactor.execute(new ResolveRequestInputData(oneRequestPatient, oneRequestPatient.getRequests().get(0))); // This will eventually send Output Data to the successPresenter
     }
 
+    /**
+     * Synthetic user data access object.
+     */
     private static class UserDataAccessObject implements ResolveRequestUserDataAccessInterface {
 
         @Override
@@ -123,6 +128,9 @@ class ResolveRequestInteractorTest {
         }
     }
 
+    /**
+     * Synthetic user data access object that raises a NoRequestFoundException.
+     */
     private static class ExceptionUserDataAccessObject implements ResolveRequestUserDataAccessInterface {
 
         @Override
