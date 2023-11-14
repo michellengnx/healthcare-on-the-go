@@ -10,7 +10,6 @@ public interface ResolveRequestOutputBoundary {
     /**
      * Update the ViewRequest view to show that the request has been resolved.
      *
-     * @param response Data object containing the resolved request and the patient to which it belongs.
      */
     public void prepareSuccessView();
     public void prepareFailView(String errorMsg);
