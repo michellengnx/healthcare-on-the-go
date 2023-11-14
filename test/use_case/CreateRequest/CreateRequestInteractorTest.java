@@ -1,9 +1,9 @@
 package use_case.CreateRequest;
 
 import entities.*;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,11 +65,11 @@ class CreateRequestInteractorTest {
             public void prepareSuccessView(CreateRequestOutputData response) {
                 ServiceRequest request = response.getRequest();
                 assertEquals("doc1", request.getDoctor().getUsername());
-                assertEquals(240, request.getPrice());
+                assertEquals(240, request.getPrice(), 0.0001);
                 assertEquals("123 Street Avenue", request.getDestination());
-                assertEquals(30, request.getEta());
+                assertEquals(30, request.getEta(), 0.0001);
                 assertEquals("X-ray", request.getService().getName());
-                assertEquals(20, request.getDistance());
+                assertEquals(20, request.getDistance(), 0.0001);
                 assertEquals(1, request.getUrgencyLevel());
             }
 
