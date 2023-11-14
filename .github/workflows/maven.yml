@@ -40,6 +40,7 @@ jobs:
         - uses: actions/setup-java@v3
           with:
             java-version: '17'
+            distribution: 'temurin'
         - run: mvn -B package --file pom.xml -DskipTests
         - run: mkdir staging && cp target/*.jar staging
         - uses: actions/upload-artifact@v3
