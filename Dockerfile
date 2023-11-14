@@ -1,4 +1,4 @@
-FROM maven:3.9.2-openjdk-17-slim AS build
+FROM eclipse-temurin:17-jdk-jammy AS build
 RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY pom.xml /workspace
