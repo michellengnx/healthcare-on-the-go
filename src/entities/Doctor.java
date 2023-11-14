@@ -1,9 +1,5 @@
 package entities;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 88c4714 (refactored entities so that they all use a consistent package naming scheme)
 import java.util.*;
 
 public class Doctor extends User {
