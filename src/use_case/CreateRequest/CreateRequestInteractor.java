@@ -55,16 +55,8 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         int urgencyLevel = createRequestInputData.getUrgencyLevel();
         Patient patient = createRequestInputData.getPatient();
 
-        // create doctor matcher and variable to store matched doctor
+        // create doctor matcher and variables to store matched doctor
         DoctorMatcher matcher;
-        try {
-            matcher = new DoctorMatcher(
-                    requestedService,
-                    createDoctorEtaMap(destination));
-        } catch (InvalidLocationException e) {
-            this.completeRequestPresenter.prepareFailView("Invalid location!");
-            return;
-        }
         Doctor matchedDoctor;
 
         float servicePrice;
@@ -72,17 +64,21 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         float eta;
         float distance;
 
+        // create a doctor matcher and attempt to match with a doctor
+        // subsequently calculate the necessary values needed to create a request
         try {
-            // attempt to match with a doctor and calculate the necessary values needed to create a request
-            matchedDoctor = matcher.match();
-        } catch (NoAvailableDoctorException e) {
-            this.completeRequestPresenter.prepareFailView("No Doctors Available!");
-            return;
-        }
+            matcher = new DoctorMatcher(
+                    requestedService,
+                    createDoctorEtaMap(destination));
 
-        servicePrice = requestedService.getPrice();
+            // only match if there are available doctors
+            try {
+                matchedDoctor = matcher.match();
+            } catch (NoAvailableDoctorException e) {
+                this.completeRequestPresenter.prepareFailView("No Doctors Available!");
+                return;
+            }
 
-        try {
             travelPrice = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
             eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
             distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
@@ -90,6 +86,8 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
             this.completeRequestPresenter.prepareFailView("Invalid location!");
             return;
         }
+
+        servicePrice = requestedService.getPrice();
 
         // create the request
         ServiceRequestFactory serviceRequestFactory = new ServiceRequestFactory();
@@ -112,7 +110,6 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
 
         this.completeRequestPresenter.prepareSuccessView(response);
-
     }
 
     /**
