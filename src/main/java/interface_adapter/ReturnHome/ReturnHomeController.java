@@ -1,7 +1,6 @@
 package interface_adapter.ReturnHome;
 
 import use_case.ReturnHome.ReturnHomeInputBoundary;
-import use_case.ReturnHome.ReturnHomeInteractor;
 
 /**
  * The controller responsible for executing the return home use case interactor.

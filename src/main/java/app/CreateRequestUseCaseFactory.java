@@ -65,11 +65,11 @@ public class CreateRequestUseCaseFactory {
      * @throws IOException If one of the access objects is unable to open a file / access the api.
      */
     private static CreateRequestController createCreateRequestUseCase(ViewManagerModel viewManagerModel,
-                                                            CreateRequestViewModel createRequestViewModel,
-                                                            ViewRequestViewModel viewRequestViewModel,
-                                                            CreateRequestApiAccessInterface apiAccessObject,
-                                                            CreateRequestUserDataAccessInterface userDataAccessObject,
-                                                            CreateRequestDoctorDataAccessInterface doctorDataAccessObject) throws IOException {
+                                                                      CreateRequestViewModel createRequestViewModel,
+                                                                      ViewRequestViewModel viewRequestViewModel,
+                                                                      CreateRequestApiAccessInterface apiAccessObject,
+                                                                      CreateRequestUserDataAccessInterface userDataAccessObject,
+                                                                      CreateRequestDoctorDataAccessInterface doctorDataAccessObject) throws IOException {
 
         CreateRequestOutputBoundary createRequestOutputBoundary = new CreateRequestPresenter(
                 viewManagerModel,

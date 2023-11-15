@@ -1,7 +1,5 @@
 package use_case.CreateRequest;
 
-import entities.ServiceRequest;
-
 /**
  * Output boundary for the create request presenter. The presenter must implement this adhere to Clean Architecture,
  * and higher or equal policy level classes (namely the interactor) must refer to this interface, rather than the
