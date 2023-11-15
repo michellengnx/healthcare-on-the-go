@@ -1,8 +1,8 @@
 package use_case.ResolveRequest;
 
 import entities.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Date;
