@@ -24,4 +24,8 @@ public class Service {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public String toString() {
+        return name + " - " + "$" + price;
+    }
 }
