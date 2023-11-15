@@ -82,6 +82,9 @@ class CreateRequestInteractorTest {
         interactor.execute(this.inputData); // This will eventually send Output Data to the successPresenter
     }
 
+    /**
+     * Ensure the fail presenter is called when there are no available doctors
+     */
     @Test
     void failTestNoDoctor() {
         // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate
@@ -102,6 +105,9 @@ class CreateRequestInteractorTest {
         interactor.execute(this.inputData); // This will eventually send Output Data to the failPresenter
     }
 
+    /**
+     * Ensure the fail presenter is called when the input location is invalid
+     */
     @Test
     void failTestInvalidLocation() {
         // Synthetic output boundary that ensure prepareSuccessView is called, and that the response data is accurate

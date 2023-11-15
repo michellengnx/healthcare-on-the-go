@@ -63,6 +63,9 @@ class DoctorMatcherTest {
                 nutritionalServicesList);
     }
 
+    /**
+     * Ensure the closest doctor is returned when no specialized doctors are available.
+     */
     @Test
     void noSpecializedDoctorTest() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
@@ -79,6 +82,9 @@ class DoctorMatcherTest {
         }
     }
 
+    /**
+     * Ensure the specialized doctor is returned when they are less than 60 minutes away.
+     */
     @Test
     void hasSpecializedDoctorTest() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
@@ -96,6 +102,9 @@ class DoctorMatcherTest {
         }
     }
 
+    /**
+     * Ensure the closest doctor is returned when the specialized doctor is an hour or more away.
+     */
     @Test
     void specializedDoctorTooFarTest() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
@@ -113,6 +122,9 @@ class DoctorMatcherTest {
         }
     }
 
+    /**
+     * Ensure an exception is raised when no doctors are available.
+     */
     @Test
     void failTest() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
