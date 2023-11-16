@@ -1,6 +1,6 @@
 package entities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 /* TODO: Date is deprecated; look into alternative for util.Date */

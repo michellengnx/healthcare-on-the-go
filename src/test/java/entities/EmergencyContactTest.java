@@ -1,6 +1,8 @@
 package entities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EmergencyContactTest {
     @Test
@@ -10,9 +12,8 @@ public class EmergencyContactTest {
                 "6473036832",
                 "friend"
         );
-        assert emergencyContact.getName().equals("Michelle");
-        assert emergencyContact.getPhoneNumber().equals("6473036832");
-        assert emergencyContact.getRelationship().equals("friend");
-
+        assertEquals("Michelle",emergencyContact.getName());
+        assertEquals("6473036832",emergencyContact.getPhoneNumber());
+        assertEquals("friend",emergencyContact.getRelationship());
     }
 }

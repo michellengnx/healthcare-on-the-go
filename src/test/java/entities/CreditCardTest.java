@@ -1,6 +1,8 @@
 package entities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreditCardTest {
     @Test
@@ -11,10 +13,10 @@ public class CreditCardTest {
                 "Tomorrow",
                 "Michelle N"
         );
-        assert creditCard.getCreditCardNumber().equals("000000000000");
-        assert creditCard.getCcv() == 123;
-        assert creditCard.getNameOnCard().equals("Michelle N");
-        assert creditCard.getExpirationDate().equals("Tomorrow");
+        assertEquals("000000000000", creditCard.getCreditCardNumber());
+        assertEquals(123,creditCard.getCcv());
+        assertEquals("Tomorrow", creditCard.getExpirationDate());
+        assertEquals("Michelle N",creditCard.getNameOnCard());
 
 
     }
