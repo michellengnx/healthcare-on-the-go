@@ -1,6 +1,5 @@
 package entities;
 
-
 import java.util.*;
 
 public class Doctor extends User {
@@ -39,6 +38,4 @@ public class Doctor extends User {
     public List<Service> getQualifiedServices() {
         return qualifiedServices;
     }
-
-
 }
