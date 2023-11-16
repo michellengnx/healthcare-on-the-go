@@ -1,8 +1,10 @@
 package entities;
 
 public class CreditCard {
+//   TODO: cc number should not be string
     private String creditCardNumber;
     private int ccv;
+//   TODO: expirationDate should not be string
     private String expirationDate;
     private String nameOnCard;
 
