@@ -7,8 +7,8 @@ public abstract class User {
     private String password;
     private String email;
     private String phoneNumber;
+//    TODO: can gender be enum OR boolean? is having it as string prone to error?
     private String gender;
-//    private String insurance;
     private Date birthday;
 
     public User(String username, String password, String email, String phoneNumber, String gender, Date birthday) {
@@ -17,7 +17,6 @@ public abstract class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-//        this.insurance = insurance;
         this.birthday = birthday;
     }
 
@@ -40,10 +39,6 @@ public abstract class User {
     public String getGender() {
         return gender;
     }
-
-//    public String getInsurance() {
-//        return insurance;
-//    }
 
     public Date getBirthday() {
         return birthday;
@@ -68,10 +63,6 @@ public abstract class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-//    public void setInsurance(String insurance) {
-//        this.insurance = insurance;
-//    }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
