@@ -1,7 +1,7 @@
 package use_case.ResolveRequest;
 
 /**
- *
+ * Input boundary to be implemented by the RequestRequestInteractor
  */
 public interface ResolveRequestInputBoundary {
     /**
