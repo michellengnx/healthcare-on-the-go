@@ -7,6 +7,7 @@ public abstract class User {
     private String password;
     private String email;
     private String phoneNumber;
+//    TODO: can gender be enum OR boolean? is having it as string prone to error?
     private String gender;
     private Date birthday;
 
