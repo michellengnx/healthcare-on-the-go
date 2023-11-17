@@ -6,6 +6,7 @@ import entities.Patient;
 import use_case.edit_profile.EditUserDataAccessInterface;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -36,28 +37,35 @@ public class FilePatientDataAccessObject implements EditUserDataAccessInterface 
             save();
         } else {
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                String header = reader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+            String header = reader.readLine();
 
-                assert header.equals("username,password,email,number,gender,insurance,birthday,credit card,emergency contact,requests");
+            assert header.equals("username,password,email,number,gender,insurance,birthday,credit card number,cvv,credit card expiration date,name on card,emergency contact name,emergency contact phone number,emergency contact relationship,requests");
 
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    // does the type of credit card, birthday, emergency contact need to change?
-                    String[] col = row.split(",");
-                    String username = String.valueOf(col[headers.get("username")]);
-                    String password = String.valueOf(col[headers.get("password")]);
-                    String email = String.valueOf(col[headers.get("email")]);
-                    String number = String.valueOf(col[headers.get("number")]);
-                    String gender = String.valueOf(col[headers.get("gender")]);
-                    String insurance = String.valueOf(col[headers.get("insurance")]);
-                    String birthday = String.valueOf(col[headers.get("birthday")]);
-                    String creditCard = String.valueOf(col[headers.get("credit card")]);
-                    String emergencyContact = String.valueOf(col[headers.get("emergency contact")]);
-                    String requests = String.valueOf(col[headers.get("requests")]);
-                    Patient patient = new Patient(username, password, email, number, gender, insurance, birthday, creditCard, emergencyContact);
-                    accounts.put(username, patient);
-                }
+            String row;
+            while ((row = reader.readLine()) != null) {
+                // does the type of credit card, birthday, emergency contact need to change?
+                String[] col = row.split(",");
+                String username = String.valueOf(col[headers.get("username")]);
+                String password = String.valueOf(col[headers.get("password")]);
+                String email = String.valueOf(col[headers.get("email")]);
+                String number = String.valueOf(col[headers.get("number")]);
+                String gender = String.valueOf(col[headers.get("gender")]);
+                String insurance = String.valueOf(col[headers.get("insurance")]);
+                String birthdate = String.valueOf(col[headers.get("birthday")]);
+                String creditCardNumber = String.valueOf(col[headers.get("credit card number")]);
+                int cvv = Integer.parseInt(col[headers.get("cvv")]);
+                String expirationDate = String.valueOf(col[headers.get("credit card expiration date")]);
+                String nameOnCard = String.valueOf(col[headers.get("name on card")]);
+                String emergencyContactName = String.valueOf(col[headers.get("emergency contact name")]);
+                String emergencyContactPhoneNumber = String.valueOf(col[headers.get("emergency contact phone number")]);
+                String emergencyContactRelationship = String.valueOf(col[headers.get("emergency contact relationship")]);
+                String requests = String.valueOf(col[headers.get("requests")]);
+                Date birthday = new SimpleDateFormat("dd/MM/yyyy").parse(birthdate);
+                CreditCard creditCard = new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard);
+                EmergencyContact emergencyContact = new EmergencyContact(emergencyContactName, emergencyContactPhoneNumber, emergencyContactRelationship);
+                Patient patient = new Patient(username, password, email, number, gender, insurance, birthday, creditCard, emergencyContact);
+                accounts.put(username, patient);
             }
         }
     }
