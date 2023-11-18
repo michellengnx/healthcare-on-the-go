@@ -7,10 +7,7 @@ import use_case.edit_profile.EditUserDataAccessInterface;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Date;
+import java.util.*;
 
 public class FilePatientDataAccessObject implements EditUserDataAccessInterface {
 
@@ -116,86 +113,39 @@ public class FilePatientDataAccessObject implements EditUserDataAccessInterface 
         return !old.equals(updated);
     }
 
-    /**
-     * Edit the patient's current username to their desired new username.
-     * @param username
-     * @param password verifies if the changes to the account are made by the patient themselves
-     * @param newUsername
-     * @return a note about whether the change has been successful or not.
-     */
+    private boolean optionPresent(String parameter) {
+        Optional param = Optional.ofNullable(parameter);
+        return param.isPresent();
+    }
 
-    // see if we can change this to an exception
-    public String editUsername(String username, String password, String newUsername) {
+    public Integer editProfile(String username, String newUsername, String newPassword,
+                              String newInsurance, String newEmail, String newPhoneNumber) {
+        Integer changes = 0;
         Patient patient = accounts.get(username);
-        boolean passwordCorrect = password.equals(patient.getPassword());
-        boolean usernameOccupied = existsByName(newUsername);
-        if (!usernameOccupied && passwordCorrect) {
+        if (optionPresent(newUsername) && !existsByName(newUsername)) {
+            // if there is no change between the usernames, the usernameOccupied would have caught it.
+            // Therefore, no need for changeExists function.
             patient.setUsername(newUsername);
             save();
-            return "Username successfully changed to " + newUsername + "!";
-        } else if (usernameOccupied) {
-            return newUsername + "is already used by a different user. Please choose a different username.";
-        }
-        // if there is no change between the usernames, the usernameOccupied would have caught it.
-        // Therefore, no need for changeExists function.
-        return "Password is incorrect. Please try again.";
-    }
-
-    public String editPassword(String username, String password, String newPassword) {
-        Patient patient = accounts.get(username);
-        boolean changeExists = changeExists(password, newPassword);
-        boolean passwordCorrect = password.equals(patient.getPassword());
-        if (changeExists && passwordCorrect) {
+            changes += 1;
+        } if (optionPresent(newPassword) && changeExists(patient.getPassword(), newPassword)) {
             patient.setPassword(newPassword);
             save();
-            return "Password has successfully been changed!";
-        }
-        return "Password is incorrect. Please try again.";
-    }
-
-    public String editInsurance(String username, String password, String newInsurance) {
-        Patient patient = accounts.get(username);
-        boolean changeExists = changeExists(patient.getInsurance(), newInsurance);
-        boolean passwordCorrect = password.equals(patient.getPassword());
-        if (changeExists && passwordCorrect) {
+            changes += 1;
+        } if (optionPresent(newInsurance) && changeExists(patient.getInsurance(), newInsurance)) {
             patient.setInsurance(newInsurance);
             save();
-            return "Your insurance has successfully been changed!";
-        } else if (!passwordCorrect) {
-            return "Password is incorrect. Please try again.";
-        }
-        return "New insurance inputted is the same as the old one previously stored. Please try again.";
-    }
-
-    public String editEmail(String username, String password, String newEmail) {
-        Patient patient = accounts.get(username);
-        boolean changeExists = changeExists(patient.getEmail(), newEmail);
-        boolean passwordCorrect = password.equals(patient.getPassword());
-        if (changeExists && passwordCorrect) {
+            changes += 1;
+        } if (optionPresent(newEmail) && changeExists(patient.getEmail(), newEmail)) {
             patient.setEmail(newEmail);
             save();
-            return "Your email has been successfully changed to " + newEmail + "!";
-        } else if (!passwordCorrect) {
-            return "Password is incorrect. Please try again.";
-        }
-        return "New email inputted is the same as the old email previously stored. Please try again.";
-    }
-
-    public String editPhoneNumber(String username, String password, String newPhoneNumber) {
-        Patient patient = accounts.get(username);
-        boolean changeExists = changeExists(patient.getPhoneNumber(), newPhoneNumber);
-        boolean passwordCorrect = password.equals(patient.getPassword());
-        if (changeExists) {
+            changes += 1;
+        } if (optionPresent(newPhoneNumber) && changeExists(patient.getPhoneNumber(), newPhoneNumber)) {
             patient.setPhoneNumber(newPhoneNumber);
             save();
-            return "Your phone number has been successfully changed to " + newPhoneNumber + "!";
-        } else if (!passwordCorrect) {
-            return "Password is incorrect. Please try again.";
+            changes += 1;
         }
-        return "New phone number inputted is the same as the old one previously stored. Please try again.";
+        return changes;
     }
-
-    // for view model, show the whole profile instead of the change
-    // new view^
 }
 
