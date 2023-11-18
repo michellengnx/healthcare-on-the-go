@@ -6,8 +6,6 @@ package interface_adapter.edit_profile;
 import use_case.edit_profile.EditInputBoundary;
 import use_case.edit_profile.EditInputData;
 
-import java.util.Date;
-
 public class EditController {
     final EditInputBoundary editUseCaseInteractor;
 

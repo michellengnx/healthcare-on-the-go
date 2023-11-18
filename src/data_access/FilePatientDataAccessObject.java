@@ -6,6 +6,7 @@ import entities.Patient;
 import use_case.edit_profile.EditUserDataAccessInterface;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class FilePatientDataAccessObject implements EditUserDataAccessInterface 
 
     private final Map<String, Patient> accounts = new HashMap<>();
 
-    public FilePatientDataAccessObject(String csvPath) throws IOException {
+    public FilePatientDataAccessObject(String csvPath) throws IOException, ParseException {
         csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);

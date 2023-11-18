@@ -1,4 +1,4 @@
-package org.example.src.use_case.edit_profile;
+package use_case.edit_profile;
 
 import java.util.ArrayList;
 
@@ -22,15 +22,12 @@ public class EditInteractor implements EditInputBoundary {
         String newPhoneNumber = editInputData.getNewPhoneNumber();
         String newInsurance = editInputData.getNewInsurance();
 
-        if (userDataAccessObject.existsByName(newUsername)) {
-            editPresenter.prepareFailView(newUsername + ": Account with this username already exists.");
+        Integer changes = userDataAccessObject.editProfile(username, newUsername, newPassword,
+                newInsurance, newEmail, newPhoneNumber);
+        if (changes == 0) {
+            editPresenter.prepareFailView("No changes have been made to the account");
         } else {
-            String changes = userDataAccessObject.editProfile(username, newUsername, newPassword,
-                    newEmail, newPhoneNumber, newInsurance);
-            if (changes.isEmpty()) {
-                editPresenter.prepareFailView("No edits were made to the user profile.");
-            } else {
-                EditOutputData editOutputData = new EditOutputData(changes, false);
+            EditOutputData editOutputData = new EditOutputData(changes, false);
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }

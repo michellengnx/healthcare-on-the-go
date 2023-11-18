@@ -1,15 +1,15 @@
-package org.example.src.use_case.edit_profile;
+package use_case.edit_profile;
 
 public class EditOutputData {
-    private final String changes;
+    private final Integer changes;
     private boolean useCaseFailed;
 
-    public EditOutputData(String changes, boolean useCaseFailed) {
+    public EditOutputData(Integer changes, boolean useCaseFailed) {
         this.changes = changes;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public String getChanges() {
+    public Integer getChanges() {
         return changes;
     }
 }
