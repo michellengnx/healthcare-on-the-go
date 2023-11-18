@@ -31,5 +31,4 @@ public class EditInteractor implements EditInputBoundary {
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }
-    }
 }
