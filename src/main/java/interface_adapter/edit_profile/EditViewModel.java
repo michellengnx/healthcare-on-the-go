@@ -1,0 +1,43 @@
+package interface_adapter.edit_profile;
+
+import interface_adapter.ViewModel;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+public class EditViewModel extends ViewModel {
+
+    public final String TITLE_LABEL = "Edit View";
+    public static final String NEW_USERNAME_LABEL = "Choose new username";
+    public static final String NEW_PASSWORD_LABEL = "Choose new password";
+    public static final String NEW_INSURANCE_LABEL = "Input new insurance";
+    public static final String NEW_EMAIL_LABEL = "Input new email";
+    public static final String NEW_PHONE_NUMBER_LABEL = "Input new phone number";
+
+    public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit profile";
+    public static final String CANCEL_BUTTON_LABEL = "Cancel";
+
+    private EditState state = new EditState();
+
+    public EditViewModel() {
+        super("edit");
+    }
+
+    public void setState(EditState state) {
+        this.state = state;
+    }
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    public EditState getState() {
+        return state;
+    }
+}
