@@ -69,6 +69,14 @@ public class EditState {
         return newPhoneNumberError;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setUsernameError(String usernameError) {
+        this.usernameError = usernameError;
+    }
+
     public void setNewUsername(String newUsername) {
         this.newUsername = newUsername;
     }

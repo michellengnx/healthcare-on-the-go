@@ -27,7 +27,7 @@ public class EditInteractor implements EditInputBoundary {
         if (changes == 0) {
             editPresenter.prepareFailView("No changes have been made to the account");
         } else {
-            EditOutputData editOutputData = new EditOutputData(changes, false);
+            EditOutputData editOutputData = new EditOutputData(username, false);
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }

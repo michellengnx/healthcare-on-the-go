@@ -1,15 +1,15 @@
 package use_case.edit_profile;
 
 public class EditOutputData {
-    private final Integer changes;
+    private final String username;
     private boolean useCaseFailed;
 
-    public EditOutputData(Integer changes, boolean useCaseFailed) {
-        this.changes = changes;
+    public EditOutputData(String username, boolean useCaseFailed) {
+        this.username = username;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public Integer getChanges() {
-        return changes;
+    public String getUsername() {
+        return username;
     }
 }
