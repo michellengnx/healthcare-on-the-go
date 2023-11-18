@@ -8,4 +8,7 @@ public class ViewRequestState {
 
     public void setRequest(ServiceRequest request) {
     }
+
+    public void setViewRequestError(String error) {
+    }
 }
