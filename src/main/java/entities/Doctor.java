@@ -10,9 +10,14 @@ public class Doctor extends User {
     private final List<String> certifications;
     // would you use a random method to make up certifications based on request?
     private final List<Service> qualifiedServices;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
-    private final Map<Doctor, List<Review>> reviews = new HashMap<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     public Double getRating() {
         return rating;
