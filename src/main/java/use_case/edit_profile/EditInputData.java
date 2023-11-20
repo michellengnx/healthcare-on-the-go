@@ -2,43 +2,38 @@ package use_case.edit_profile;
 
 public class EditInputData {
     // should optional be here too?
+    // initalize to current one?
     final private String username;
-    final private String newUsername;
-    final private String newPassword;
-    final private String newInsurance;
-    final private String newEmail;
-    final private String newPhoneNumber;
+    final private String password;
+    final private String email;
+    final private String phoneNumber;
+    final private String insurance;
 
-    public EditInputData(String username, String newUsername, String newPassword,
-                         String newInsurance, String newEmail, String newPhoneNumber) {
+    public EditInputData(String username, String password, String email, String phoneNumber, String insurance) {
         this.username = username;
-        this.newUsername = newUsername;
-        this.newPassword = newPassword;
-        this.newInsurance = newInsurance;
-        this.newEmail = newEmail;
-        this.newPhoneNumber = newPhoneNumber;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.insurance = insurance;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getNewUsername() {
-        return newUsername;
-    }
-    public String getNewPassword() {
-        return newPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public String getNewInsurance() {
-        return newInsurance;
+    public String getEmail() {
+        return email;
     }
 
-    public String getNewEmail() {
-        return newEmail;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getNewPhoneNumber() {
-        return newPhoneNumber;
+    public String getInsurance() {
+        return insurance;
     }
 }

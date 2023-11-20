@@ -10,12 +10,10 @@ public class EditController {
         this.editUseCaseInteractor = editUseCaseInteractor;
 
     }
-    // would this be newParameterName, rather than just parameterName?
 
-    public void execute(String username, String newUsername, String newPassword,
-                        String newInsurance, String newEmail, String newPhoneNumber) {
-        EditInputData editInputData = new EditInputData(username, newUsername, newPassword,
-                newInsurance, newEmail, newPhoneNumber);
+    public void execute(String username, String password, String email, String phoneNumber, String insurance) {
+        EditInputData editInputData = new EditInputData(username, password, email, phoneNumber, insurance);
+
         editUseCaseInteractor.execute(editInputData);
     }
 }

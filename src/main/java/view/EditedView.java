@@ -11,16 +11,14 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class EditedView extends JPanel implements ActionListener, PropertyChangeListener {
-
     public final String viewName = "edited";
     private final EditedViewModel editedViewModel;
-
+    // should other buttons be here? aim: show the profile after changes have been made
     JLabel username;
     JLabel password;
-    JLabel insurance;
     JLabel email;
     JLabel phoneNumber;
-
+    JLabel insurance;
     final JButton returnHomePage;
 
     /**
@@ -34,7 +32,12 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel usernameInfo = new JLabel("Changes have been successfully saved: ");
+        // should these buttons be here?
         username = new JLabel();
+        password = new JLabel();
+        email = new JLabel();
+        phoneNumber = new JLabel();
+        insurance = new JLabel();
 
         JPanel buttons = new JPanel();
         returnHomePage = new JButton(editedViewModel.EXIT_BUTTON_LABEL);
@@ -45,8 +48,12 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(usernameInfo);
-        this.add(username);
+        this.add(usernameInfo); // should this be called username info?
+        this.add(username); // buttons should be here?
+        this.add(password);
+        this.add(email);
+        this.add(phoneNumber);
+        this.add(insurance);
         this.add(buttons);
     }
 
@@ -61,5 +68,6 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
     public void propertyChange(PropertyChangeEvent evt) {
         EditedState state = (EditedState) evt.getNewValue();
         username.setText(state.getUsername());
+        // should I add the other parameters here too?
     }
 }

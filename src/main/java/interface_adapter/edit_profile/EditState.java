@@ -1,32 +1,30 @@
 package interface_adapter.edit_profile;
 
 public class EditState {
+
+    // do I need to make the parameters optional in FilePatientDataAccessObject if there is a respective error for null?
     private String username = "";
     private String usernameError = null;
-    private String newUsername = "";
-    private String newUsernameError = null;
-    private String newPassword = "";
-    private String newPasswordError = null;
-    private String newEmail = "";
-    private String newEmailError = null;
-    private String newPhoneNumber = "";
-    private String newPhoneNumberError = null;
-    private String newInsurance = "";
-    private String newInsuranceError = null;
+    private String password = "";
+    private String passwordError = null;
+    private String email = "";
+    private String emailError = null;
+    private String phoneNumber = "";
+    private String phoneNumberError = null;
+    private String insurance = "";
+    private String insuranceError = null;
 
     public EditState(EditState copy) {
         username = copy.username;
         usernameError = copy.usernameError;
-        newUsername = copy.newUsername;
-        newUsernameError = copy.newUsernameError;
-        newPassword = copy.newPassword;
-        newPasswordError = copy.newPasswordError;
-        newEmail = copy.newEmail;
-        newEmailError = copy.newEmailError;
-        newPhoneNumber = copy.newPhoneNumber;
-        newPhoneNumberError = copy.newPhoneNumberError;
-        newInsurance = copy.newInsurance;
-        newInsuranceError = copy.newInsuranceError;
+        password = copy.password;
+        passwordError = copy.passwordError;
+        email = copy.email;
+        emailError = copy.emailError;
+        phoneNumber = copy.phoneNumber;
+        phoneNumberError = copy.phoneNumberError;
+        insurance = copy.insurance;
+        insuranceError = copy.insuranceError;
     }
 
     public EditState() {}
@@ -39,42 +37,36 @@ public class EditState {
         return usernameError;
     }
 
-    public String getNewUsername() {
-        return newUsername;
-    }
-    public String getNewUsernameError() {
-        return newUsernameError;
+    public String getPassword() {
+        return password;
     }
 
-    public String getNewPassword() {
-        return newPassword;
+    public String getPasswordError() {
+        return passwordError;
     }
 
-    public String getNewPasswordError() {
-        return newPasswordError;
-    }
-    public String getNewEmail() {
-        return newEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public String getNewEmailError() {
-        return newEmailError;
+    public String getEmailError() {
+        return emailError;
     }
 
-    public String getNewPhoneNumber() {
-        return newPhoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getNewPhoneNumberError() {
-        return newPhoneNumberError;
+    public String getPhoneNumberError() {
+        return phoneNumberError;
     }
 
-    public String getNewInsurance() {
-        return newInsurance;
+    public String getInsurance() {
+        return insurance;
     }
 
-    public String getNewInsuranceError() {
-        return newInsuranceError;
+    public String getInsuranceError() {
+        return insuranceError;
     }
 
 
@@ -86,42 +78,34 @@ public class EditState {
         this.usernameError = usernameError;
     }
 
-    public void setNewUsername(String newUsername) {
-        this.newUsername = newUsername;
+    public void setPassword(String newPassword) {
+        this.password = password;
     }
 
-    public void setNewUsernameError(String newUsernameError) {
-        this.newUsernameError = newUsernameError;
+    public void setPasswordError(String passwordError) {
+        this.passwordError = passwordError;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setEmailError(String emailError) {
+        this.emailError = emailError;
     }
 
-    public void setNewPasswordError(String newPasswordError) {
-        this.newPasswordError = newPasswordError;
-    }
-    public void setNewEmail(String newEmail) {
-        this.newEmail = newEmail;
+    public void setPhoneNumber(String newPhoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setNewEmailError(String newEmailError) {
-        this.newEmailError = newEmailError;
+    public void setPhoneNumberError(String newPhoneNumberError) {
+        this.phoneNumberError = phoneNumberError;
     }
 
-    public void setNewPhoneNumber(String newPhoneNumber) {
-        this.newPhoneNumber = newPhoneNumber;
+    public void setInsurance(String newInsurance) {
+        this.insurance = insurance;
     }
 
-    public void setNewPhoneNumberError(String newPhoneNumberError) {
-        this.newPhoneNumberError = newPhoneNumberError;
-    }
-
-    public void setNewInsurance(String newInsurance) {
-        this.newInsurance = newInsurance;
-    }
-
-    public void setNewInsuranceError(String newInsuranceError) {
-        this.newInsuranceError = newInsuranceError;
+    public void setInsuranceError(String newInsuranceError) {
+        this.insuranceError = insuranceError;
     }
 }

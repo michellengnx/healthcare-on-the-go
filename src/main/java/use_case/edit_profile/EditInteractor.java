@@ -1,33 +1,38 @@
 package use_case.edit_profile;
 
+import entities.Patient;
+import entities.User;
+
 import java.util.ArrayList;
 
 public class EditInteractor implements EditInputBoundary {
 
-    final EditUserDataAccessInterface userDataAccessObject;
+    final EditUserDataAccessInterface patientDataAccessObject;
     final EditOutputBoundary editPresenter;
 
-    public EditInteractor(EditUserDataAccessInterface userDataAccessInterface,
+    public EditInteractor(EditUserDataAccessInterface patientDataAccessInterface,
                           EditOutputBoundary editOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
+        this.patientDataAccessObject = patientDataAccessInterface;
         this.editPresenter = editOutputBoundary;
     }
 
     @Override
     public void execute(EditInputData editInputData) {
         String username = editInputData.getUsername();
-        String newUsername = editInputData.getNewUsername();
-        String newPassword = editInputData.getNewPassword();
-        String newEmail = editInputData.getNewEmail();
-        String newPhoneNumber = editInputData.getNewPhoneNumber();
-        String newInsurance = editInputData.getNewInsurance();
+        String password = editInputData.getPassword();
+        String email = editInputData.getEmail();
+        String phoneNumber = editInputData.getPhoneNumber();
+        String insurance = editInputData.getInsurance();
 
-        Integer changes = userDataAccessObject.editProfile(username, newUsername, newPassword,
-                newInsurance, newEmail, newPhoneNumber);
+        // Assume user is already logged in, therefore, do not need to check if the user exists
+        Integer changes = patientDataAccessObject.editProfile(username, password, email, phoneNumber, insurance);
         if (changes == 0) {
             editPresenter.prepareFailView("No changes have been made to the account");
         } else {
-            EditOutputData editOutputData = new EditOutputData(username, false);
+            // should all users mentioned here be patient instead?
+            Patient patient = patientDataAccessObject.get(editInputData.getUsername());
+
+            EditOutputData editOutputData = new EditOutputData(patient.getUsername(), false);
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }

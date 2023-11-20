@@ -55,7 +55,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         LabelTextPanel emailInfo = new LabelTextPanel(
                 new JLabel("Email"), emailInputField);
         LabelTextPanel phoneNumberInfo = new LabelTextPanel(
-                new JLabel("Phone Number"), phoneNumberInputField);
+                new JLabel("Phone number"), phoneNumberInputField);
         LabelTextPanel insuranceInfo = new LabelTextPanel(
                 new JLabel("Insurance"), insuranceInputField);
 
@@ -74,11 +74,10 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
                             editController.execute(
                                     currentState.getUsername(),
-                                    currentState.getNewUsername(),
-                                    currentState.getNewPassword(),
-                                    currentState.getNewInsurance(),
-                                    currentState.getNewEmail(),
-                                    currentState.getNewPhoneNumber()
+                                    currentState.getPassword(),
+                                    currentState.getEmail(),
+                                    currentState.getPhoneNumber(),
+                                    currentState.getInsurance()
                             );
                         }
                     }
@@ -106,6 +105,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
             }
         });
+        // what does this do?
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         passwordInputField.addKeyListener(
@@ -113,6 +113,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditState currentState = editViewModel.getState();
+                        currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
                         // ask
                         editViewModel.setState(currentState);
                     }
@@ -127,6 +128,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
                     }
                 }
+
         );
 
         this.add(title);

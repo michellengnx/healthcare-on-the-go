@@ -119,40 +119,28 @@ public class FilePatientDataAccessObject implements EditUserDataAccessInterface 
         return !old.equals(updated);
     }
 
-    /**
-     * Return true if and only if the optional parameter was given a value and is not null.
-     * @param parameter could be new username, new password, new email, new insurance, new phone number.
-     * @return whether the value stored in the parameter is present and not null.
-     */
-    private boolean optionPresent(String parameter) {
-        Optional<String> param = Optional.ofNullable(parameter);
-        return param.isPresent();
-    }
-
-    public Integer editProfile(String username, String newUsername, String newPassword,
-                               String newEmail, String newPhoneNumber, String newInsurance) {
+    // user sees a view with their current details in their profile
+    public Integer editProfile(String username, String password, String email, String phoneNumber, String insurance) {
         int changes = 0;
         Patient patient = accounts.get(username);
-        if (optionPresent(newUsername) && !existsByName(newUsername)) {
-            // if there is no change between the usernames, the exists by name method would have caught it.
-            // Therefore, no need for changeExists function.
-            patient.setUsername(newUsername);
+        if (changeExists(patient.getUsername(), username) && !existsByName(username)) {
+            patient.setUsername(username);
             save();
             changes += 1;
-        } if (optionPresent(newPassword) && changeExists(patient.getPassword(), newPassword)) {
-            patient.setPassword(newPassword);
+        } if (changeExists(patient.getPassword(), password)) {
+            patient.setPassword(password);
             save();
             changes += 1;
-        } if (optionPresent(newEmail) && changeExists(patient.getEmail(), newEmail)) {
-            patient.setEmail(newEmail);
+        } if (changeExists(patient.getEmail(), email)) {
+            patient.setEmail(email);
             save();
             changes += 1;
-        } if (optionPresent(newPhoneNumber) && changeExists(patient.getPhoneNumber(), newPhoneNumber)) {
-            patient.setPhoneNumber(newPhoneNumber);
+        } if (changeExists(patient.getPhoneNumber(), phoneNumber)) {
+            patient.setPhoneNumber(phoneNumber);
             save();
             changes += 1;
-        } if (optionPresent(newInsurance) && changeExists(patient.getInsurance(), newInsurance)) {
-            patient.setInsurance(newInsurance);
+        } if (changeExists(patient.getInsurance(), insurance)) {
+            patient.setInsurance(insurance);
             save();
             changes += 1;
         }
