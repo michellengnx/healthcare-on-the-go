@@ -26,10 +26,10 @@ public class EditPresenter implements EditOutputBoundary {
         EditedState editedState = editedViewModel.getState();
         editedState.setUsername(response.getUsername());
         this.editedViewModel.setState(editedState);
-        editedViewModel.firePropertyChanged();
+        this.editedViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(editedViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        this.viewManagerModel.setActiveView(editedViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
