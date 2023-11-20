@@ -14,9 +14,9 @@ public class LeaveReviewInteractor {
 
     }
     public void execute (LeaveReviewInputData leaveReviewInputData) {
-        review.doctor.settotalreviews(review.doctor.gettotalreviews() + 1);
-        review.doctor.
-    }
+    //    review.doctor.settotalreviews(review.doctor.gettotalreviews() + 1);
+     //   review.doctor.
+
 
 
 
