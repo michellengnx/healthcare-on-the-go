@@ -10,9 +10,9 @@ public class EditViewModel extends ViewModel {
     public final String TITLE_LABEL = "Edit View";
     public static final String NEW_USERNAME_LABEL = "Choose new username";
     public static final String NEW_PASSWORD_LABEL = "Choose new password";
-    public static final String NEW_INSURANCE_LABEL = "Input new insurance";
-    public static final String NEW_EMAIL_LABEL = "Input new email";
-    public static final String NEW_PHONE_NUMBER_LABEL = "Input new phone number";
+    public static final String NEW_EMAIL_LABEL = "Enter new email";
+    public static final String NEW_PHONE_NUMBER_LABEL = "Enter new phone number";
+    public static final String NEW_INSURANCE_LABEL = "Enter new insurance";
 
     public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit profile";
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
