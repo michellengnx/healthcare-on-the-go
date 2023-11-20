@@ -14,8 +14,26 @@ public class Doctor extends User {
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
     private final Map<Doctor, List<Review>> reviews = new HashMap<>();
-    private Double rating;
 
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    private Double rating;
+    private int totalreviews;
+
+
+    public int getTotalreviews() {
+        return totalreviews;
+    }
+
+    public void setTotalreviews(int totalreviews) {
+        this.totalreviews = totalreviews;
+    }
 
     /**
      * Requires each doctor to have a unique id.
@@ -30,6 +48,7 @@ public class Doctor extends User {
         this.certifications = certifications;
         this.qualifiedServices = qualifiedServices;
         this.rating = 4.0;
+        this.totalreviews = 0;
     }
 
     public String getLocation() {
