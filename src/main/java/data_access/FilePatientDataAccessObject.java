@@ -3,7 +3,7 @@ package data_access;
 import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
-import use_case.edit_profile.EditUserDataAccessInterface;
+import use_case.edit_profile.EditPatientDataAccessInterface;
 
 import java.io.*;
 import java.text.ParseException;
@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 // add implements SignupUserDataAccessInterface, LoginUserDataAccessInterface
-public class FilePatientDataAccessObject implements EditUserDataAccessInterface {
+public class FilePatientDataAccessObject implements EditPatientDataAccessInterface {
 
     private final File csvFile;
 

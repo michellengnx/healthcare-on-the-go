@@ -1,8 +1,6 @@
 package interface_adapter.edit_profile;
-
+// these fields will be populated by the homeviewmodel, which is populated by loginviewmodel, which is populated by signupviewmodel
 public class EditState {
-
-    // do I need to make the parameters optional in FilePatientDataAccessObject if there is a respective error for null?
     private String username = "";
     private String usernameError = null;
     private String password = "";

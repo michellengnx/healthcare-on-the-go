@@ -8,6 +8,7 @@ import java.beans.PropertyChangeSupport;
 public class EditViewModel extends ViewModel {
 
     public final String TITLE_LABEL = "Edit View";
+    // when are these labels used?
     public static final String NEW_USERNAME_LABEL = "Choose new username";
     public static final String NEW_PASSWORD_LABEL = "Choose new password";
     public static final String NEW_EMAIL_LABEL = "Enter new email";
@@ -18,6 +19,7 @@ public class EditViewModel extends ViewModel {
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
     public static final String CLEAR_BUTTON_LABEL = "Clear";
 
+    // all the fields are empty here
     private EditState state = new EditState();
 
     public EditViewModel() {

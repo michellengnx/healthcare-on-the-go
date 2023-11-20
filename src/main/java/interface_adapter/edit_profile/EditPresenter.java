@@ -24,8 +24,11 @@ public class EditPresenter implements EditOutputBoundary {
     public void prepareSuccessView(EditOutputData response) {
 
         EditedState editedState = editedViewModel.getState();
-        // does this make sense for an edit use case?
         editedState.setUsername(response.getUsername());
+        editedState.setPassword(response.getPassword());
+        editedState.setEmail(response.getEmail());
+        editedState.setPhoneNumber(response.getPhoneNumber());
+        editedState.setInsurance(response.getInsurance());
         this.editedViewModel.setState(editedState);
         this.editedViewModel.firePropertyChanged();
 
@@ -36,8 +39,11 @@ public class EditPresenter implements EditOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         EditState editState = editViewModel.getState();
-        // do I need to set the other parameters' errors too?
         editState.setUsernameError(error);
+        editState.setPasswordError(error);
+        editState.setEmailError(error);
+        editState.setPhoneNumberError(error);
+        editState.setInsuranceError(error);
         editViewModel.firePropertyChanged();
     }
 }

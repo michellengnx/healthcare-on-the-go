@@ -91,7 +91,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
             @Override
             public void keyTyped(KeyEvent e) {
                 EditState currentState = editViewModel.getState();
-                currentState.setUsername(usernameInputField.getText() +e.getKeyChar());
+                currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
                 editViewModel.setState(currentState);
             }
 
@@ -114,7 +114,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                     public void keyTyped(KeyEvent e) {
                         EditState currentState = editViewModel.getState();
                         currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
-                        // ask
                         editViewModel.setState(currentState);
                     }
 
@@ -131,11 +130,80 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
         );
 
+        emailInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setEmail(emailInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        phoneNumberInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setPhoneNumber(phoneNumberInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        insuranceInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setPassword(insuranceInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
         this.add(title);
         this.add(usernameInfo);
         this.add(usernameErrorField);
         this.add(passwordInfo);
         this.add(passwordErrorField);
+        this.add(emailInfo);
+        this.add(emailErrorField);
+        this.add(phoneNumberInfo);
+        this.add(phoneNumberErrorField);
+        this.add(insuranceInfo);
+        this.add(insuranceErrorField);
         this.add(buttons);
     }
 

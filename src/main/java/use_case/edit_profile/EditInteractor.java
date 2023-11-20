@@ -1,16 +1,13 @@
 package use_case.edit_profile;
 
 import entities.Patient;
-import entities.User;
-
-import java.util.ArrayList;
 
 public class EditInteractor implements EditInputBoundary {
 
-    final EditUserDataAccessInterface patientDataAccessObject;
+    final EditPatientDataAccessInterface patientDataAccessObject;
     final EditOutputBoundary editPresenter;
 
-    public EditInteractor(EditUserDataAccessInterface patientDataAccessInterface,
+    public EditInteractor(EditPatientDataAccessInterface patientDataAccessInterface,
                           EditOutputBoundary editOutputBoundary) {
         this.patientDataAccessObject = patientDataAccessInterface;
         this.editPresenter = editOutputBoundary;
@@ -29,10 +26,10 @@ public class EditInteractor implements EditInputBoundary {
         if (changes == 0) {
             editPresenter.prepareFailView("No changes have been made to the account");
         } else {
-            // should all users mentioned here be patient instead?
             Patient patient = patientDataAccessObject.get(editInputData.getUsername());
 
-            EditOutputData editOutputData = new EditOutputData(patient.getUsername(), false);
+            EditOutputData editOutputData = new EditOutputData(patient.getUsername(), patient.getPassword(),
+                    patient.getEmail(), patient.getPhoneNumber(), patient.getInsurance(),false);
                 editPresenter.prepareSuccessView(editOutputData);
             }
         }

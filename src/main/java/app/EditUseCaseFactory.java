@@ -8,7 +8,7 @@ import interface_adapter.edited_profile.EditedViewModel;
 import use_case.edit_profile.EditInputBoundary;
 import use_case.edit_profile.EditInteractor;
 import use_case.edit_profile.EditOutputBoundary;
-import use_case.edit_profile.EditUserDataAccessInterface;
+import use_case.edit_profile.EditPatientDataAccessInterface;
 import view.EditView;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class EditUseCaseFactory {
     public static EditView create(ViewManagerModel viewManagerModel,
                                   EditViewModel editViewModel,
                                   EditedViewModel editedViewModel,
-                                  EditUserDataAccessInterface userDataAccessObject) {
+                                  EditPatientDataAccessInterface userDataAccessObject) {
 
         try {
             EditController editController = createEditUseCase(viewManagerModel, editViewModel, editedViewModel, userDataAccessObject);
@@ -37,11 +37,11 @@ public class EditUseCaseFactory {
             ViewManagerModel viewManagerModel,
             EditViewModel editViewModel,
             EditedViewModel editedViewModel,
-            EditUserDataAccessInterface userDataAccessObject) throws IOException {
+            EditPatientDataAccessInterface patientDataAccessObject) throws IOException {
 
         EditOutputBoundary editOutputBoundary = new EditPresenter(viewManagerModel, editedViewModel, editViewModel);
 
-        EditInputBoundary editInteractor = new EditInteractor(userDataAccessObject, editOutputBoundary);
+        EditInputBoundary editInteractor = new EditInteractor(patientDataAccessObject, editOutputBoundary);
 
         return new EditController(editInteractor);
     }
