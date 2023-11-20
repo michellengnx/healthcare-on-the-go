@@ -7,24 +7,26 @@ public class EditState {
     private String newUsernameError = null;
     private String newPassword = "";
     private String newPasswordError = null;
-    private String newInsurance = "";
-    private String newInsuranceError = null;
     private String newEmail = "";
     private String newEmailError = null;
     private String newPhoneNumber = "";
     private String newPhoneNumberError = null;
+    private String newInsurance = "";
+    private String newInsuranceError = null;
 
     public EditState(EditState copy) {
         username = copy.username;
         usernameError = copy.usernameError;
+        newUsername = copy.newUsername;
+        newUsernameError = copy.newUsernameError;
         newPassword = copy.newPassword;
         newPasswordError = copy.newPasswordError;
-        newInsurance = copy.newInsurance;
-        newInsuranceError = copy.newInsuranceError;
         newEmail = copy.newEmail;
         newEmailError = copy.newEmailError;
         newPhoneNumber = copy.newPhoneNumber;
         newPhoneNumberError = copy.newPhoneNumberError;
+        newInsurance = copy.newInsurance;
+        newInsuranceError = copy.newInsuranceError;
     }
 
     public EditState() {}
@@ -37,6 +39,13 @@ public class EditState {
         return usernameError;
     }
 
+    public String getNewUsername() {
+        return newUsername;
+    }
+    public String getNewUsernameError() {
+        return newUsernameError;
+    }
+
     public String getNewPassword() {
         return newPassword;
     }
@@ -44,15 +53,6 @@ public class EditState {
     public String getNewPasswordError() {
         return newPasswordError;
     }
-
-    public String getNewInsurance() {
-        return newInsurance;
-    }
-
-    public String getNewInsuranceError() {
-        return newInsuranceError;
-    }
-
     public String getNewEmail() {
         return newEmail;
     }
@@ -68,6 +68,15 @@ public class EditState {
     public String getNewPhoneNumberError() {
         return newPhoneNumberError;
     }
+
+    public String getNewInsurance() {
+        return newInsurance;
+    }
+
+    public String getNewInsuranceError() {
+        return newInsuranceError;
+    }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -92,15 +101,6 @@ public class EditState {
     public void setNewPasswordError(String newPasswordError) {
         this.newPasswordError = newPasswordError;
     }
-
-    public void setNewInsurance(String newInsurance) {
-        this.newInsurance = newInsurance;
-    }
-
-    public void setNewInsuranceError(String newInsuranceError) {
-        this.newInsuranceError = newInsuranceError;
-    }
-
     public void setNewEmail(String newEmail) {
         this.newEmail = newEmail;
     }
@@ -115,5 +115,13 @@ public class EditState {
 
     public void setNewPhoneNumberError(String newPhoneNumberError) {
         this.newPhoneNumberError = newPhoneNumberError;
+    }
+
+    public void setNewInsurance(String newInsurance) {
+        this.newInsurance = newInsurance;
+    }
+
+    public void setNewInsuranceError(String newInsuranceError) {
+        this.newInsuranceError = newInsuranceError;
     }
 }
