@@ -1,8 +1,6 @@
 package use_case.edit_profile;
 
 public class EditInputData {
-    // should optional be here too?
-    // initalize to current one?
     final private String username;
     final private String password;
     final private String email;

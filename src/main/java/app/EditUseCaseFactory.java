@@ -16,15 +16,18 @@ import java.io.IOException;
 
 public class EditUseCaseFactory {
 
+    /** Prevent instantiation. */
+
     private EditUseCaseFactory() {}
 
-    public static EditView create(ViewManagerModel viewManagerModel,
-                                  EditViewModel editViewModel,
-                                  EditedViewModel editedViewModel,
-                                  EditPatientDataAccessInterface userDataAccessObject) {
+    public static EditView create(
+            ViewManagerModel viewManagerModel,
+            EditViewModel editViewModel,
+            EditedViewModel editedViewModel,
+            EditPatientDataAccessInterface patientDataAccessObject) {
 
         try {
-            EditController editController = createEditUseCase(viewManagerModel, editViewModel, editedViewModel, userDataAccessObject);
+            EditController editController = createEditUseCase(viewManagerModel, editViewModel, editedViewModel, patientDataAccessObject);
             return new EditView(editViewModel, editController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
