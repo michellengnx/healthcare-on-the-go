@@ -31,7 +31,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         JLabel title = new JLabel("Edited Profile Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel usernameInfo = new JLabel("Changes have been successfully saved: ");
+        JLabel userProfileInfo = new JLabel("Changes have been successfully saved: ");
         // should these buttons be here?
         username = new JLabel();
         password = new JLabel();
@@ -48,7 +48,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(usernameInfo); // should this be called username info?
+        this.add(userProfileInfo); // should this be called username info?
         this.add(username); // buttons should be here?
         this.add(password);
         this.add(email);
@@ -68,6 +68,10 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
     public void propertyChange(PropertyChangeEvent evt) {
         EditedState state = (EditedState) evt.getNewValue();
         username.setText(state.getUsername());
-        // should I add the other parameters here too?
+        password.setText(state.getPassword());
+        email.setText(state.getEmail());
+        phoneNumber.setText(state.getPhoneNumber());
+        insurance.setText(state.getInsurance());
+        // check if other parameters are needed
     }
 }

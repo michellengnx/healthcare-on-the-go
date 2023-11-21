@@ -3,7 +3,6 @@ package interface_adapter.edited_profile;
 public class EditedState {
     private String username = "";
     // should password be asterisked?
-    // does it need all these other parameters or is just username fine like in logged in state?
     private String password = "";
     private String email = "";
     private String phoneNumber = "";
@@ -26,6 +25,7 @@ public class EditedState {
     public String getPassword() {
         return password;
     }
+
     public String getEmail() {
         return email;
     }
@@ -45,6 +45,7 @@ public class EditedState {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
