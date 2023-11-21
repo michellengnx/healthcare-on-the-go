@@ -105,7 +105,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
             }
         });
-        // what does this do?
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         passwordInputField.addKeyListener(
