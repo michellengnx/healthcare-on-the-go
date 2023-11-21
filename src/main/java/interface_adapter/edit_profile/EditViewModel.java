@@ -17,7 +17,6 @@ public class EditViewModel extends ViewModel {
 
     public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit profile";
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
-    public static final String CLEAR_BUTTON_LABEL = "Clear";
 
     // all the fields are empty here
     private EditState state = new EditState();

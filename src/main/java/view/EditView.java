@@ -17,26 +17,24 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     public final String viewName = "edit";
     private final EditViewModel editViewModel;
-
-    // where does 15 come from?
     final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
 
     final JPasswordField passwordInputField = new JPasswordField(15);
     private final JLabel passwordErrorField = new JLabel();
 
-    final JTextField emailInputField = new JTextField(15);
+    final JTextField emailInputField = new JTextField(25);
     private final JLabel emailErrorField = new JLabel();
 
-    final JTextField phoneNumberInputField = new JTextField(15);
+    /** 11-digit Canadian phone number */
+    final JTextField phoneNumberInputField = new JTextField(11);
     private final JLabel phoneNumberErrorField = new JLabel();
 
-    final JTextField insuranceInputField = new JTextField(15);
+    final JTextField insuranceInputField = new JTextField(30);
     private final JLabel insuranceErrorField = new JLabel();
 
     final JButton editProfile;
     final JButton cancel;
-    private final JButton clear;
     private final EditController editController;
 
     public EditView(EditViewModel editViewModel, EditController controller) {
@@ -64,7 +62,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         buttons.add(editProfile);
         cancel = new JButton(editViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-        clear = new JButton(editViewModel.CLEAR_BUTTON_LABEL);
 
         editProfile.addActionListener(
                 new ActionListener() {

@@ -119,7 +119,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         return !old.equals(updated);
     }
 
-    // user sees a view with their current details in their profile
+    /** Patient sees a view with their current details outlined in their profile */
     public Integer editProfile(String username, String password, String email, String phoneNumber, String insurance) {
         int changes = 0;
         Patient patient = accounts.get(username);
