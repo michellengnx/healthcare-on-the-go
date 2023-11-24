@@ -80,6 +80,8 @@ public class ServiceRequest {
     public float getEta() {
         return eta;
     }
+    public User getPatient() {return patient;}
+
 
     public void setEta(float eta) {
         this.eta = eta;

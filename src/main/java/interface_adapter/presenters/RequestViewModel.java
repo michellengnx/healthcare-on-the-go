@@ -27,11 +27,16 @@ public class RequestViewModel {
 
 
         for ( ServiceRequest request: requests){
-            this.userName.add(request.)
-
+            this.userName.add(request.getPatient().getUsername());
+            this.doctorNames.add(request.getDoctor().getUsername());
+            this.services.add(request.getService().getName())
+            this.destinations.add(request.getDestination());
+            this.urgencys.add(request.getUrgencyLevel());;
+            this.etas.add(request.getEta());
+            this.distances.add(request.getDistance());
+            this.completed.add(request.isCompleted());;
 
         }
     }
 
-        // Populate other fields as needed
     }

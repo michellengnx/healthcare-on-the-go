@@ -13,7 +13,7 @@ public class ResolveRequestInteractor implements ResolveRequestInputBoundary {
     /**
      * Create a ResolveRequestInteractor object with a given user data access object, and a presenter.
      *
-     * @param userDataAccessObject Object that can edit information about patient requests.
+     * @param userDataAccessObject Object that can edit information about patient requests.csv.
      * @param resolveRequestPresenter Presenter to be called upon when the use case is complete.
      */
     public ResolveRequestInteractor(ResolveRequestUserDataAccessInterface userDataAccessObject,
