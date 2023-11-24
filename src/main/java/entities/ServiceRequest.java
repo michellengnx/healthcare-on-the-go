@@ -12,9 +12,12 @@ public class ServiceRequest {
     float eta; // calculated using API
     float distance; // calculated using API
 
+    User patient;
+
     private boolean completed;
 
-    public ServiceRequest(Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
+    public ServiceRequest(User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
+        this.patient = patient;
         this.creationTime = creationTime;
         this.doctor = doctor;
         this.urgencyLevel = urgencyLevel;
