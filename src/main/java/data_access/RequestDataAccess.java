@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface RequestDataAccess {
     ArrayList<ServiceRequest> getRequestUser(String userName);
+    void addRequest(ServiceRequest request);
 }
