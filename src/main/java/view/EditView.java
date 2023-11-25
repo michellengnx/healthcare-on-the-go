@@ -188,7 +188,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditState currentState = editViewModel.getState();
-                        currentState.setPassword(insuranceInputField.getText() + e.getKeyChar());
+                        currentState.setInsurance(insuranceInputField.getText() + e.getKeyChar());
                         editViewModel.setState(currentState);
                     }
 
