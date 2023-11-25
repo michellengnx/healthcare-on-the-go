@@ -19,20 +19,15 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     private final EditViewModel editViewModel;
 
     final JTextField usernameInputField = new JTextField(15);
-    private final JLabel usernameErrorField = new JLabel();
 
     final JPasswordField passwordInputField = new JPasswordField(15);
-    private final JLabel passwordErrorField = new JLabel();
 
     final JTextField emailInputField = new JTextField(25);
-    private final JLabel emailErrorField = new JLabel();
 
     /** 11-digit Canadian phone number */
     final JTextField phoneNumberInputField = new JTextField(11);
-    private final JLabel phoneNumberErrorField = new JLabel();
 
     final JTextField insuranceInputField = new JTextField(30);
-    private final JLabel insuranceErrorField = new JLabel();
 
     final JButton editProfile;
     final JButton cancel;
@@ -86,26 +81,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
         cancel.addActionListener(this);
 
-        showPasswordCheckBox.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // Toggle the visibility of password characters
-                        if (showPasswordCheckBox.isSelected()) {
-                            passwordInputField.setEchoChar((char) 0); // Show characters
-                        } else {
-                            passwordInputField.setEchoChar('*'); // Hide characters
-                        }
-                    }
-                }
-        );
-
-        // Password panel that includes the password field and the show/hide checkbox
-        JPanel passwordPanel = new JPanel(new GridLayout(3, 1));
-        passwordPanel.add(passwordInfo);
-        passwordPanel.add(passwordErrorField);
-        passwordPanel.add(showPasswordCheckBox);
-
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -124,7 +99,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
             }
         });
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         passwordInputField.addKeyListener(
                 new KeyListener() {
@@ -148,7 +122,24 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
         );
 
-        this.add(showPasswordCheckBox);
+        showPasswordCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
+        // Password panel that includes the password field and the show/hide checkbox
+        JPanel passwordPanel = new JPanel(new GridLayout(3, 1));
+        passwordPanel.add(passwordInfo);
+        passwordPanel.add(showPasswordCheckBox);
 
         emailInputField.addKeyListener(
                 new KeyListener() {
@@ -213,16 +204,14 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         this.add(title);
         this.add(usernameInfo);
-        this.add(usernameErrorField);
         this.add(passwordPanel);
         this.add(emailInfo);
-        this.add(emailErrorField);
         this.add(phoneNumberInfo);
-        this.add(phoneNumberErrorField);
         this.add(insuranceInfo);
-        this.add(insuranceErrorField);
         this.add(buttons);
     }
 
