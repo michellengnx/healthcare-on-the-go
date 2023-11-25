@@ -53,7 +53,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         String destination = createRequestInputData.getDestination();
         Date creationTime = createRequestInputData.getCreationTime();
         int urgencyLevel = createRequestInputData.getUrgencyLevel();
-        Patient patient = createRequestInputData.getPatient();
+        Patient patient = this.userDataAccessObject.getPatient(createRequestInputData.getPatientName());
 
         // create doctor matcher and variables to store matched doctor
         DoctorMatcher matcher;
@@ -107,7 +107,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         this.userDataAccessObject.saveRequest(patient, request);
         this.doctorDataAccessObject.markAsBusy(matchedDoctor);
 
-        CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
+        CreateRequestOutputData response = new CreateRequestOutputData(request, patient.getUsername());
 
         this.completeRequestPresenter.prepareSuccessView(response);
     }

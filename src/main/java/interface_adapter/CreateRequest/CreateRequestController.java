@@ -1,6 +1,5 @@
 package interface_adapter.CreateRequest;
 
-import entities.Patient;
 import entities.Service;
 import use_case.CreateRequest.CreateRequestInputBoundary;
 import use_case.CreateRequest.CreateRequestInputData;
@@ -29,15 +28,15 @@ public class CreateRequestController {
      * @param urgencyLevel The request's level of urgency (1 is low, 3 is high).
      * @param destination Where the request is to be carried out.
      * @param service The service requested.
-     * @param user The user issuing the request.
+     * @param patientName The username of the patient issuing the request.
      */
-    public void execute(Date creationTime, int urgencyLevel, String destination, Service service, Patient user) {
+    public void execute(Date creationTime, int urgencyLevel, String destination, Service service, String patientName) {
         CreateRequestInputData createRequestInputData = new CreateRequestInputData(
                 creationTime,
                 urgencyLevel,
                 destination,
                 service,
-                user
+                patientName
         );
 
         createRequestInteractor.execute(createRequestInputData);
