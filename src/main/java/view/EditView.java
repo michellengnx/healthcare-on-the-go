@@ -119,7 +119,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
                     }
                 }
-
         );
 
         showPasswordCheckBox.addActionListener(
@@ -232,5 +231,4 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     private void setFields(EditState state) {
         usernameInputField.setText(state.getUsername());
     }
-
 }
