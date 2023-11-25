@@ -17,6 +17,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     public final String viewName = "edit";
     private final EditViewModel editViewModel;
+
     final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
 
@@ -36,6 +37,8 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     final JButton editProfile;
     final JButton cancel;
     private final EditController editController;
+
+    private final JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
 
     public EditView(EditViewModel editViewModel, EditController controller) {
 
@@ -79,10 +82,29 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                         }
                     }
                 }
-
         );
 
         cancel.addActionListener(this);
+
+        showPasswordCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
+        // Password panel that includes the password field and the show/hide checkbox
+        JPanel passwordPanel = new JPanel(new GridLayout(3, 1));
+        passwordPanel.add(passwordInfo);
+        passwordPanel.add(passwordErrorField);
+        passwordPanel.add(showPasswordCheckBox);
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
@@ -125,6 +147,8 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
 
         );
+
+        this.add(showPasswordCheckBox);
 
         emailInputField.addKeyListener(
                 new KeyListener() {
@@ -192,8 +216,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         this.add(title);
         this.add(usernameInfo);
         this.add(usernameErrorField);
-        this.add(passwordInfo);
-        this.add(passwordErrorField);
+        this.add(passwordPanel);
         this.add(emailInfo);
         this.add(emailErrorField);
         this.add(phoneNumberInfo);
@@ -207,6 +230,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
      * React to a button click that results in evt.
      */
     public void actionPerformed(ActionEvent evt) {
+        //check where the event is coming from - if statements
         System.out.println("Click " + evt.getActionCommand());
     }
 
