@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class EditViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Edit View";
+    public static final String TITLE_LABEL = "Edit View";
     // when are these labels used?
     public static final String NEW_USERNAME_LABEL = "Choose new username";
     public static final String NEW_PASSWORD_LABEL = "Choose new password";
