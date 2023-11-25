@@ -3,7 +3,7 @@ package use_case.edit_profile;
 import entities.Patient;
 
 public interface EditPatientDataAccessInterface {
-    void save(Patient patient);
+    boolean existsByName(String identifier);
 
     Patient get(String username);
 
