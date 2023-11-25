@@ -137,7 +137,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         );
 
         // Password panel that includes the password field and the show/hide checkbox
-        JPanel passwordPanel = new JPanel(new GridLayout(3, 1));
+        JPanel passwordPanel = new JPanel(new GridLayout(2, 1));
         passwordPanel.add(passwordInfo);
         passwordPanel.add(showPasswordCheckBox);
 
