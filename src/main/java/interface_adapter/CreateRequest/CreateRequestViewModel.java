@@ -1,6 +1,5 @@
 package interface_adapter.CreateRequest;
 
-import entities.Patient;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -23,11 +22,11 @@ public class CreateRequestViewModel extends ViewModel {
     /**
      * Create a CreateRequestViewModel object with a given patient.
      *
-     * @param patient The patient creating the request.
+     * @param patientName The username of the patient creating the request.
      */
-    public CreateRequestViewModel(Patient patient) {
+    public CreateRequestViewModel(String patientName) {
         super("create request");
-        this.state = new CreateRequestState(patient);
+        this.state = new CreateRequestState(patientName);
     }
 
     public void setState(CreateRequestState state) {
