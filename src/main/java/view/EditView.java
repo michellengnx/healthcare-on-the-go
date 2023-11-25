@@ -41,24 +41,24 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         this.editViewModel = editViewModel;
         this.editViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Edit Profile Screen");
+        JLabel title = new JLabel(EditViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel usernameInfo = new LabelTextPanel(
-                new JLabel("Username"), usernameInputField);
+                new JLabel(EditViewModel.NEW_USERNAME_LABEL), usernameInputField);
         LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel("Password"), passwordInputField);
+                new JLabel(EditViewModel.NEW_PASSWORD_LABEL), passwordInputField);
         LabelTextPanel emailInfo = new LabelTextPanel(
-                new JLabel("Email"), emailInputField);
+                new JLabel(EditViewModel.NEW_EMAIL_LABEL), emailInputField);
         LabelTextPanel phoneNumberInfo = new LabelTextPanel(
-                new JLabel("Phone number"), phoneNumberInputField);
+                new JLabel(EditViewModel.NEW_PHONE_NUMBER_LABEL), phoneNumberInputField);
         LabelTextPanel insuranceInfo = new LabelTextPanel(
-                new JLabel("Insurance"), insuranceInputField);
+                new JLabel(EditViewModel.NEW_INSURANCE_LABEL), insuranceInputField);
 
         JPanel buttons = new JPanel();
-        editProfile = new JButton(editViewModel.EDIT_PROFILE_BUTTON_LABEL);
+        editProfile = new JButton(EditViewModel.EDIT_PROFILE_BUTTON_LABEL);
         buttons.add(editProfile);
-        cancel = new JButton(editViewModel.CANCEL_BUTTON_LABEL);
+        cancel = new JButton(EditViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
         // pre-populates text fields with the patient's current profile details
