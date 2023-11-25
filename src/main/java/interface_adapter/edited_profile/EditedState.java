@@ -2,7 +2,6 @@ package interface_adapter.edited_profile;
 
 public class EditedState {
     private String username = "";
-    // should password be asterisked?
     private String password = "";
     private String email = "";
     private String phoneNumber = "";

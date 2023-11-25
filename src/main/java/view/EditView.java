@@ -61,6 +61,14 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         cancel = new JButton(editViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
+        // pre-populates text fields with the patient's current profile details
+        EditState editState = editViewModel.getState();
+        usernameInputField.setText(editState.getUsername());
+        passwordInputField.setText(editState.getPassword());
+        emailInputField.setText(editState.getEmail());
+        phoneNumberInputField.setText(editState.getPhoneNumber());
+        insuranceInputField.setText(editState.getInsurance());
+
         editProfile.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -230,5 +238,9 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     private void setFields(EditState state) {
         usernameInputField.setText(state.getUsername());
+        passwordInputField.setText(state.getPassword());
+        emailInputField.setText(state.getEmail());
+        phoneNumberInputField.setText(state.getPhoneNumber());
+        insuranceInputField.setText(state.getInsurance());
     }
 }
