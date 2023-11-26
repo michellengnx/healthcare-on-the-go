@@ -24,8 +24,8 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     final JTextField emailInputField = new JTextField(25);
 
-    /** 11-digit Canadian phone number */
-    final JTextField phoneNumberInputField = new JTextField(11);
+    /** 10-digit Canadian phone number */
+    final JTextField phoneNumberInputField = new JTextField(12);
 
     final JTextField insuranceInputField = new JTextField(30);
 
