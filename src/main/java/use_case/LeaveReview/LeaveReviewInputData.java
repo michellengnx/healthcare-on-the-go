@@ -5,13 +5,13 @@ import java.util.Date;
 public class LeaveReviewInputData {
     String review;
     int stars;
-    Doctor doctor;
+    String doctorName;
     Date reviewdate;
 
-    public LeaveReviewInputData(String review, int stars, Doctor doctor, Date reviewdate){
+    public LeaveReviewInputData(String review, int stars, String doctorName, Date reviewdate){
         this.review = review;
         this.stars = stars;
-        this.doctor = doctor;
+        this.doctorName = doctorName;
         this.reviewdate = reviewdate;
 
     }
@@ -21,8 +21,8 @@ public class LeaveReviewInputData {
     int getStars() {
         return stars;
     }
-    Doctor getDoctor() {
-        return doctor;
+    String getDoctor() {
+        return doctorName ;
     }
     Date getReviewDate() {
         return reviewdate;

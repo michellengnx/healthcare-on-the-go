@@ -1,7 +1,5 @@
 package use_case.LeaveReview;
-import java.time.LocalDateTime;
-//Import..
-
+import entities.Doctor;
 
 public class LeaveReviewInteractor implements LeaveReviewInputBoundary{
     LeaveReviewDoctorDataAccessInterface doctorDAO;
@@ -15,13 +13,13 @@ public class LeaveReviewInteractor implements LeaveReviewInputBoundary{
     }
     @Override
     public void execute (LeaveReviewInputData leaveReviewInputData) {
-      //  if (doctor not in patient.orderhistory)
-        //userPresenter.prepareFailView("You can only rate Doctors you have received service from")
-        // else:
 
-    //    review.doctor.settotalreviews(review.doctor.gettotalreviews() + 1);
-     //   review.doctor.
+        Doctor doctor = doctorDAO.getDoctor(leaveReviewInputData.getDoctor());
+        doctor.setTotalReviews(doctor.getTotalReviews() + 1);
+        int temp = doctor.getTotalReviews();
 
+        doctor.setRating((doctor.getRating()*(temp-1)+ leaveReviewInputData.getStars())/temp);
+        doctorDAO.save(doctor);
     }
 
 

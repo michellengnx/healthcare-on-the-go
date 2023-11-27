@@ -31,11 +31,11 @@ public class Doctor extends User {
     private int totalreviews;
 
 
-    public int getTotalreviews() {
+    public int getTotalReviews() {
         return totalreviews;
     }
 
-    public void setTotalreviews(int totalreviews) {
+    public void setTotalReviews(int totalreviews) {
         this.totalreviews = totalreviews;
     }
 
