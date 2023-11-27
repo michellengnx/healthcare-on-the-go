@@ -12,4 +12,8 @@ public class HomeScreenInputData {
     public HomeScreenInputData(String viewName) {
         this.viewName = viewName;
     }
+
+    public String getViewName() {
+        return viewName;
+    }
 }
