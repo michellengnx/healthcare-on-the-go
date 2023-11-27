@@ -4,8 +4,11 @@ import entities.Doctor;
 import entities.Patient;
 import entities.ServiceRequest;
 import entities.factories.service_request.ServiceRequestFactory;
+import entities.matchers.ClosestDoctorStrategy;
 import entities.matchers.DoctorMatcher;
 import entities.Service;
+import entities.matchers.DoctorMatchingStrategy;
+import entities.matchers.LowestEtaDoctorStrategy;
 
 import java.util.*;
 
@@ -56,6 +59,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         Patient patient = this.userDataAccessObject.getPatient(createRequestInputData.getPatientName());
 
         // create doctor matcher and variables to store matched doctor
+        DoctorMatchingStrategy lowestEtaStrategy;
         DoctorMatcher matcher;
         Doctor matchedDoctor;
 
@@ -67,9 +71,10 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         // create a doctor matcher and attempt to match with a doctor
         // subsequently calculate the necessary values needed to create a request
         try {
+            lowestEtaStrategy = new LowestEtaDoctorStrategy(createDoctorEtaMap(destination));
             matcher = new DoctorMatcher(
                     requestedService,
-                    createDoctorEtaMap(destination));
+                    lowestEtaStrategy);
 
             // only match if there are available doctors
             try {

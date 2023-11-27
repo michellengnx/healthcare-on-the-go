@@ -72,7 +72,7 @@ class DoctorMatcherTest {
         doctorEta.put(nutritionalServicesSpecialist, 30f);
         doctorEta.put(checkUpSpecialist, 40f);
 
-        DoctorMatcher matcher = new DoctorMatcher(xRay, doctorEta);
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorEta));
 
         try {
             Doctor matchedDoctor = matcher.match();
@@ -92,7 +92,7 @@ class DoctorMatcherTest {
         doctorEta.put(nutritionalServicesSpecialist, 30f);
         doctorEta.put(checkUpSpecialist, 40f);
 
-        DoctorMatcher matcher = new DoctorMatcher(xRay, doctorEta);
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorEta));
 
         try {
             Doctor matchedDoctor = matcher.match();
@@ -112,7 +112,7 @@ class DoctorMatcherTest {
         doctorEta.put(nutritionalServicesSpecialist, 30f);
         doctorEta.put(checkUpSpecialist, 40f);
 
-        DoctorMatcher matcher = new DoctorMatcher(xRay, doctorEta);
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorEta));
 
         try {
             Doctor matchedDoctor = matcher.match();
@@ -129,7 +129,7 @@ class DoctorMatcherTest {
     void failTest() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
 
-        DoctorMatcher matcher = new DoctorMatcher(xRay, doctorEta);
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorEta));
 
         try {
             matcher.match();
