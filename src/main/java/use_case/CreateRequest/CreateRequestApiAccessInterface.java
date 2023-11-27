@@ -1,9 +1,14 @@
 package use_case.CreateRequest;
 
+import entities.factories.service_request.DistanceCalculator;
+import entities.factories.service_request.EtaCalculator;
+import entities.factories.service_request.InvalidLocationException;
+import entities.factories.service_request.TravelCostCalculator;
+
 /**
  * Methods that an API access object must implement for the create request interactor to function properly.
  */
-public interface CreateRequestApiAccessInterface {
+public interface CreateRequestApiAccessInterface extends TravelCostCalculator, DistanceCalculator, EtaCalculator {
     /**
      * Return the distance by car from startLoc to endLoc by car.
      *

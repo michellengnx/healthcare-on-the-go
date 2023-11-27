@@ -1,4 +1,4 @@
-package use_case.CreateRequest;
+package entities.factories.service_request;
 
 /**
  * Exception to be thrown whenever an argument to a function is an invalid location.
