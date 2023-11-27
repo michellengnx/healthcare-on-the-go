@@ -9,10 +9,10 @@ public class HomeScreenController {
     /**
      * Create a HomeScreenController given the appropriate interactor.
      *
-     * @param homeScreenInterator The interactor that will execute the home screen use case.
+     * @param homeScreenInteractor The interactor that will execute the home screen use case.
      */
-    public HomeScreenController(HomeScreenInputBoundary homeScreenInterator) {
-        this.homeScreenInteractor = homeScreenInterator;
+    public HomeScreenController(HomeScreenInputBoundary homeScreenInteractor) {
+        this.homeScreenInteractor = homeScreenInteractor;
     }
 
     /**

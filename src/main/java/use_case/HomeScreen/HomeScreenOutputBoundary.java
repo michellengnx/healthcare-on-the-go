@@ -4,5 +4,5 @@ public interface HomeScreenOutputBoundary {
     /**
      * Switch the current view to viewName.
      */
-    public void prepareSuccessView(String viewName);
+    public void prepareSuccessView(HomeScreenOutputData outputData);
 }
