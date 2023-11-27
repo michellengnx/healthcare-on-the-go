@@ -6,11 +6,7 @@ With insufficient accessibility and access to transportation services, hundreds 
 
 ## Software Specification
 
-Healthcare On The Go addresses the challenge above by allowing caregivers and coordinators to link patients with essential medical services, using our extensive network and collaborative partnerships. 
-
-Guardians or patients themselves will be able to request the necessary care needed on demand by creating a profile on the application. Through the Healthcare On The Go dashboard, patients will be able to select their desired medical care and the emergency level of the request. Patients will also be able to see the price of the service when ordering a ride, where the cost is calculated based on the distance from the nearest respective doctor and the patient’s location. Moreover, patients will be able to see a brief overview of a caregiver’s service when they accept a request, such as past patients’ comments and ratings.
-
-After a ride is requested, patients will receive confirmation via email or text message with the details of their request. They will also receive another notification when the caregiver is en route. A trusted contact also has the ability to view the doctor’s credentials and receive confirmation once they arrive at the patient’s location.
+Healthcare On The Go addresses the challenge above by linking patients with essential medical services. Patients can request the necessary care needed on demand by creating a profile on the application. Through the Healthcare On The Go dashboard, patients will be able to select their desired medical care, the urgency level of the request, and their location. The program will then display a visual representation of the distance between the patient and the doctor, the price of the service when ordering a ride, and the ETA of the doctor. Additionally, patients will be able to leave a review for the doctor that attended them.
 
 ## Built With :hammer:
 
