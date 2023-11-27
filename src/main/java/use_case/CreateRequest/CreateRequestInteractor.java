@@ -69,9 +69,9 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     requestedService,
                     lowestEtaStrategy);
             request = ServiceRequestFactory.create(
-                    (DistanceCalculator) this.apiAccessObject,
-                    (EtaCalculator) this.apiAccessObject,
-                    (TravelCostCalculator) this.apiAccessObject,
+                    this.apiAccessObject,
+                    this.apiAccessObject,
+                    this.apiAccessObject,
                     matcher,
                     requestedService,
                     destination,
