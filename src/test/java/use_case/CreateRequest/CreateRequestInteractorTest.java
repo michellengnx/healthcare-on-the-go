@@ -1,6 +1,7 @@
 package use_case.CreateRequest;
 
 import entities.*;
+import entities.factories.service_request.InvalidLocationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
