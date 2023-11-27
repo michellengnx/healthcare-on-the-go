@@ -14,6 +14,7 @@ public class HomeScreenInteractor implements HomeScreenInputBoundary {
      */
     @Override
     public void execute(HomeScreenInputData homeScreenInputData) {
-        homeScreenPresenter.prepareSuccessView(homeScreenInputData.getViewName());
+        HomeScreenOutputData outputData = new HomeScreenOutputData(homeScreenInputData.getViewName());
+        homeScreenPresenter.prepareSuccessView(outputData);
     }
 }
