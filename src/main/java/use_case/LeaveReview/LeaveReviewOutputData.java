@@ -2,19 +2,21 @@ package use_case.LeaveReview;
 import entities.Doctor;
 import java.util.Date;
 
-public class LeaveReviewInputData {
+
+public class LeaveReviewOutputData {
+
     String review;
     int stars;
     Doctor doctor;
     Date reviewdate;
 
-    public LeaveReviewInputData(String review, int stars, Doctor doctor, Date reviewdate){
+    public LeaveReviewOutputData(String review, int stars, Doctor doctor, Date reviewdate) {
         this.review = review;
         this.stars = stars;
         this.doctor = doctor;
         this.reviewdate = reviewdate;
-
     }
+
     String getReview() {
         return review;
     }
@@ -28,3 +30,5 @@ public class LeaveReviewInputData {
         return reviewdate;
     }
 }
+
+
