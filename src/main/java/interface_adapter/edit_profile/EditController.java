@@ -11,8 +11,12 @@ public class EditController {
 
     }
 
-    public void execute(String username, String password, String email, String phoneNumber, String insurance) {
-        EditInputData editInputData = new EditInputData(username, password, email, phoneNumber, insurance);
+    public void execute(String username, String password, String email, String phoneNumber, String insurance,
+                        String emergencyName, String emergencyNumber, String emergencyRelationship,
+                        String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard) {
+        EditInputData editInputData = new EditInputData(username, password, email, phoneNumber, insurance,
+                emergencyName, emergencyNumber, emergencyRelationship,
+                creditCardNumber, cvv, expirationDate, nameOnCard);
 
         editUseCaseInteractor.execute(editInputData);
     }
