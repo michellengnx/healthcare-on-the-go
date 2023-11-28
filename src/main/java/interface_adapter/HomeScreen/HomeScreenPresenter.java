@@ -34,12 +34,21 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
      */
     @Override
     public void prepareSuccessView(HomeScreenOutputData outputData) {
-        if (outputData.getViewName().equals("create request")) {
-            this.viewManagerModel.setActiveView(createRequestViewModel.getViewName());
-
-        } else {
-            this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
+        switch(outputData.getViewName()) {
+            case "create request":
+                this.viewManagerModel.setActiveView(createRequestViewModel.getViewName());
+                break;
+            case "logout":
+                // this.viewManagerModel.setActiveView(signupViewModel.getViewName());
+                break;
+            case "view requests":
+                this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
+                break;
+            case "leave review":
+                // this.viewManagerModel.setActiveView(leaveReviewViewModel.getViewName());
+                break;
         }
+
         this.viewManagerModel.firePropertyChanged();
     }
 }
