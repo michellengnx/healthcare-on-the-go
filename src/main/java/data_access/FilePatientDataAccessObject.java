@@ -119,31 +119,63 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         return !old.equals(updated);
     }
 
-    /** Patient sees a view with their current details outlined in their profile */
-    public Integer editProfile(String username, String password, String email, String phoneNumber, String insurance) {
-        int changes = 0;
+    /**
+     * Return whether changes to a patient's profile have been requested by a patient
+     * @param username the patient wants to now be associated with
+     * @param password the patient wants to now be associated with
+     * @param email the patient wants to now be associated with
+     * @param phoneNumber the patient wants to now be associated with
+     * @param insurance the patient wants to now be associated with
+     * @return the number of changes made to a patient's profile. Return -1 if the new username requested by
+     * the user is already taken.
+     */
+    // make errors for other parameters like password
+    // do the same for the other parameters - validation + fail views
+    // integrate Emergency Contact & Credit Card into this
+    public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
+                                 String emergencyName, String emergencyNumber, String emergencyRelationship,
+                                 String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard) {
+        // make the array list equal all false to indicate no changes have been made
+        // removes redundant if clauses
+        // create an error for username, password, email
+        Integer[] changes = new Integer[11];
         Patient patient = accounts.get(username);
-        if (changeExists(patient.getUsername(), username) && !existsByName(username)) {
-            patient.setUsername(username);
-            save();
-            changes += 1;
-        } if (changeExists(patient.getPassword(), password)) {
+
+        if (changeExists(patient.getUsername(), username)) {
+            if (existsByName(username)) {
+                changes[0] = -1;
+            } else {
+                patient.setUsername(username);
+                save();
+                changes[0] = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             );
+            } if (changeExists(patient.getPassword(), password)) {
+            // introduce if statement with password validator
             patient.setPassword(password);
             save();
-            changes += 1;
+            changes[1] = 1;
         } if (changeExists(patient.getEmail(), email)) {
+            // introduce if statement
             patient.setEmail(email);
             save();
-            changes += 1;
+            changes[2] = 1;
         } if (changeExists(patient.getPhoneNumber(), phoneNumber)) {
             patient.setPhoneNumber(phoneNumber);
             save();
-            changes += 1;
+            changes[3] = 1;
         } if (changeExists(patient.getInsurance(), insurance)) {
             patient.setInsurance(insurance);
             save();
-            changes += 1;
-        }
+            changes[4] = 1;
+        } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) &&
+                    changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
+                patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
+                save();
+                changes[5] = 1;
+            } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
+                patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
+                save();
+                changes[6] = 1;
+            }
         return changes;
     }
 }
