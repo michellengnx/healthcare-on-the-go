@@ -135,8 +135,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
                                  String emergencyName, String emergencyNumber, String emergencyRelationship,
                                  String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard) {
-        // make the array list equal all false to indicate no changes have been made
-        // removes redundant if clauses
         // create an error for username, password, email
         Integer[] changes = new Integer[11];
         Patient patient = accounts.get(username);
@@ -148,7 +146,8 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
                 patient.setUsername(username);
                 save();
                 changes[0] = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             );
-            } if (changeExists(patient.getPassword(), password)) {
+            }
+        } if (changeExists(patient.getPassword(), password)) {
             // introduce if statement with password validator
             patient.setPassword(password);
             save();
@@ -168,13 +167,13 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             changes[4] = 1;
         } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) &&
                     changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
-                patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
-                save();
-                changes[5] = 1;
-            } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
-                patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
-                save();
-                changes[6] = 1;
+            patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
+            save();
+            changes[5] = 1;
+        } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
+            patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
+            save();
+            changes[6] = 1;
             }
         return changes;
     }
