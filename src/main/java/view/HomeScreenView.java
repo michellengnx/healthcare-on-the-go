@@ -21,7 +21,7 @@ import java.util.Date;
  * screen.
  */
 public class HomeScreenView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "create request";
+    public final String viewName = "home screen";
 
     private final HomeScreenViewModel homeScreenViewModel;
     private final JButton createRequest;
