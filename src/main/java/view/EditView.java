@@ -58,6 +58,15 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         JLabel title = new JLabel(EditViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JLabel subheading_main = new JLabel(EditViewModel.SUBHEADING_MAIN_LABEL);
+        subheading_main.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+        JLabel subheading_card = new JLabel(EditViewModel.SUBHEADING_CREDIT_CARD_LABEL);
+        subheading_card.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+        JLabel subheading_emergency = new JLabel(EditViewModel.SUBHEADING_EMERGENCY_CONTACT_LABEL);
+        subheading_emergency.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_USERNAME_LABEL), usernameInputField);
         LabelTextPanel passwordInfo = new LabelTextPanel(
@@ -72,7 +81,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(EditViewModel.NEW_CREDIT_CARD_NUMBER_LABEL), creditCardNumberInputField);
         LabelNumberPanel cvvInfo = new LabelNumberPanel(
                 new JLabel(EditViewModel.NEW_CVV_LABEL), cvvInputField);
-        LabelTextPanel expirationDateInfo = new LabelTextPanel(
+        LabelDatePanel expirationDateInfo = new LabelDatePanel(
                 new JLabel(EditViewModel.NEW_EXPIRATION_DATE_LABEL), expirationDateInputField);
         LabelTextPanel nameOnCardInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_NAME_ON_CARD_LABEL), nameOnCardInputField);
@@ -88,6 +97,20 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         buttons.add(editProfile);
         cancel = new JButton(EditViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+
+        // left-align the input fields
+        usernameInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        passwordInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        emailInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        phoneNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        insuranceInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        creditCardNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        cvvInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        expirationDateInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        nameOnCardInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        emergencyNameInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        emergencyNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        emergencyRelationshipInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         editProfile.addActionListener(
                 new ActionListener() {
@@ -323,6 +346,12 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        JPanel creditCardPanel = new JPanel(new GridLayout(4, 1));
+        creditCardPanel.add(creditCardNumberInfo);
+        creditCardPanel.add(cvvInfo);
+        creditCardPanel.add(expirationDateInfo);
+        creditCardPanel.add(nameOnCardInfo);
+
         emergencyNameInputField.addKeyListener(
                 new KeyListener() {
                     @Override
@@ -386,16 +415,26 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        JPanel emergencyPanel = new JPanel(new GridLayout(3, 1));
+        emergencyPanel.add(emergencyNameInfo);
+        emergencyPanel.add(emergencyNumberInfo);
+        emergencyPanel.add(emergencyRelationshipInfo);
+
 
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(subheading_main);
         this.add(usernameInfo);
         this.add(passwordPanel);
         this.add(emailInfo);
         this.add(phoneNumberInfo);
         this.add(insuranceInfo);
+        this.add(subheading_card);
+        this.add(creditCardPanel);
+        this.add(subheading_emergency);
+        this.add(emergencyPanel);
         this.add(buttons);
     }
 
