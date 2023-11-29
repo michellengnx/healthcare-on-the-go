@@ -22,12 +22,26 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     final JPasswordField passwordInputField = new JPasswordField(15);
 
-    final JTextField emailInputField = new JTextField(25);
+    final JTextField emailInputField = new JTextField(15);
 
     /** 10-digit Canadian phone number */
-    final JTextField phoneNumberInputField = new JTextField(12);
+    final JTextField phoneNumberInputField = new JTextField(15);
 
-    final JTextField insuranceInputField = new JTextField(30);
+    final JTextField insuranceInputField = new JTextField(15);
+
+    final JTextField creditCardNumberInputField = new JTextField(15);
+
+    final JFormattedTextField cvvInputField = new JFormattedTextField(3);
+
+    final JTextField expirationDateInputField = new JTextField(4);
+
+    final JTextField nameOnCardInputField = new JTextField(15);
+
+    final JTextField emergencyNameInputField = new JTextField(15);
+
+    final JTextField emergencyNumberInputField = new JTextField(15);
+
+    final JTextField emergencyRelationshipInputField = new JTextField(15);
 
     final JButton editProfile;
     final JButton cancel;
@@ -54,6 +68,20 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(EditViewModel.NEW_PHONE_NUMBER_LABEL), phoneNumberInputField);
         LabelTextPanel insuranceInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_INSURANCE_LABEL), insuranceInputField);
+        LabelTextPanel creditCardNumberInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_CREDIT_CARD_NUMBER_LABEL), creditCardNumberInputField);
+        LabelNumberPanel cvvInfo = new LabelNumberPanel(
+                new JLabel(EditViewModel.NEW_CVV_LABEL), cvvInputField);
+        LabelTextPanel expirationDateInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_EXPIRATION_DATE_LABEL), expirationDateInputField);
+        LabelTextPanel nameOnCardInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_NAME_ON_CARD_LABEL), nameOnCardInputField);
+        LabelTextPanel emergencyNameInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_EMERGENCY_NAME_LABEL), emergencyNameInputField);
+        LabelTextPanel emergencyNumberInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_EMERGENCY_NUMBER_LABEL), emergencyNumberInputField);
+        LabelTextPanel emergencyRelationshipInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.NEW_EMERGENCY_RELATIONSHIP_LABEL), emergencyRelationshipInputField);
 
         JPanel buttons = new JPanel();
         editProfile = new JButton(EditViewModel.EDIT_PROFILE_BUTTON_LABEL);
@@ -68,6 +96,13 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         emailInputField.setText(editState.getEmail());
         phoneNumberInputField.setText(editState.getPhoneNumber());
         insuranceInputField.setText(editState.getInsurance());
+        creditCardNumberInputField.setText(editState.getCreditCardNumber());
+        cvvInputField.setValue(editState.getCvv());
+        expirationDateInputField.setText(editState.getExpirationDate());
+        nameOnCardInputField.setText(editState.getNameOnCard());
+        emergencyNameInputField.setText(editState.getEmergencyName());
+        emergencyNumberInputField.setText(editState.getEmergencyNumber());
+        emergencyRelationshipInputField.setText(editState.getEmergencyRelationship());
 
         editProfile.addActionListener(
                 new ActionListener() {
@@ -80,7 +115,14 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                                     currentState.getPassword(),
                                     currentState.getEmail(),
                                     currentState.getPhoneNumber(),
-                                    currentState.getInsurance()
+                                    currentState.getInsurance(),
+                                    currentState.getCreditCardNumber(),
+                                    currentState.getCvv(),
+                                    currentState.getExpirationDate(),
+                                    currentState.getNameOnCard(),
+                                    currentState.getEmergencyName(),
+                                    currentState.getEmergencyNumber(),
+                                    currentState.getEmergencyRelationship()
                             );
                         }
                     }
@@ -144,7 +186,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         );
 
         // Password panel that includes the password field and the show/hide checkbox
-        JPanel passwordPanel = new JPanel(new GridLayout(2, 1));
+        JPanel passwordPanel = new JPanel(new GridLayout(1, 2));
         passwordPanel.add(passwordInfo);
         passwordPanel.add(showPasswordCheckBox);
 
@@ -211,6 +253,156 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        creditCardNumberInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setCreditCardNumber(creditCardNumberInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        cvvInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setCvv(Integer.valueOf(cvvInputField.getText() + e.getKeyChar()));
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        // change to date package
+        expirationDateInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setExpirationDate(expirationDateInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        nameOnCardInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setNameOnCard(nameOnCardInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        emergencyNameInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setEmergencyName(emergencyNameInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        emergencyNumberInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setEmergencyNumber(emergencyNumberInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        emergencyRelationshipInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setEmergencyRelationship(emergencyRelationshipInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -235,12 +427,19 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         EditState state = (EditState) evt.getNewValue();
         setFields(state);
     }
-
+// @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        SignupState state = (SignupState) evt.getNewValue();
+//        if (state.getUsernameError() != null) {
+//            JOptionPane.showMessageDialog(this, state.getUsernameError());
+//        }
+//    }
     private void setFields(EditState state) {
         usernameInputField.setText(state.getUsername());
         passwordInputField.setText(state.getPassword());
         emailInputField.setText(state.getEmail());
         phoneNumberInputField.setText(state.getPhoneNumber());
         insuranceInputField.setText(state.getInsurance());
+
     }
 }
