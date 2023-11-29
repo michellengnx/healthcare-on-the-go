@@ -56,7 +56,7 @@ public class EditInputData {
     }
 
     public String getEmergencyNumber() {
-        return emergencyNumber
+        return emergencyNumber;
     }
 
     public String getEmergencyRelationship() {
