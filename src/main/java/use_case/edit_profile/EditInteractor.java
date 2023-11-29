@@ -33,24 +33,22 @@ public class EditInteractor implements EditInputBoundary {
         String nameOnCard = editInputData.getNameOnCard();
 
         Integer[] changes = patientDataAccessObject.editProfile(username, password, email, phoneNumber, insurance,
-                emergencyName, emergencyNumber, emergencyRelationship,
-                creditCardNumber, cvv, expirationDate, nameOnCard);
-        // -1 means a style error
-        if (changes[0] == -1 && changes[1] == -1)  {
-            editPresenter.prepareFailView("Username already taken by another user and password doesn't satisfy the necessary requirements");
-        } else if (changes[0] == -1) {
-            editPresenter.prepareFailView("Username already taken by another user");
+                creditCardNumber, cvv, expirationDate, nameOnCard,
+                emergencyName, emergencyNumber, emergencyRelationship);
+
+        if (changes[0] == -1) {
+            editPresenter.prepareFailView("Username already exists.");
         } else if (changes[1] == -1) {
-            editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements");
+            editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.");
         } else if (Arrays.stream(changes).distinct().count() <= 1) {
-            editPresenter.prepareFailView("No changes have been made to the account");
+            editPresenter.prepareFailView("No changes have been made to the account.");
         } else {
             Patient patient = patientDataAccessObject.get(editInputData.getUsername());
 
             EditOutputData editOutputData = new EditOutputData(patient.getUsername(), patient.getPassword(),
                     patient.getEmail(), patient.getPhoneNumber(), patient.getInsurance(),
-                    patient.getEmergencyContact().getName(), patient.getEmergencyContact().getPhoneNumber(), patient.getEmergencyContact().getRelationship(),
                     patient.getCreditCard().getCreditCardNumber(), patient.getCreditCard().getCcv(), patient.getCreditCard().getExpirationDate(), patient.getCreditCard().getNameOnCard(),
+                    patient.getEmergencyContact().getName(), patient.getEmergencyContact().getPhoneNumber(), patient.getEmergencyContact().getRelationship(),
                     false);
             editPresenter.prepareSuccessView(editOutputData);
         }
