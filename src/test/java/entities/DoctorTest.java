@@ -34,11 +34,6 @@ public class DoctorTest {
         assertEquals(expectedCertifications, doctor.getCertifications(), "Certifications should match the initialized value");
     }
 
-//    @Test
-//    public void testGetQualifiedServices() {
-//        List<Service> expectedServices = Arrays.asList(new Service("Service1",100), new Service("Service2", 100));
-//        assertArrayEquals( expectedServices.toArray(), doctor.getQualifiedServices().toArray() );
-//    }
 
     @Test
     public void testDoctorInitialization() {
