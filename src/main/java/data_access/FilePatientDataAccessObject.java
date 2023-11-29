@@ -113,7 +113,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      * @param identifier the username to check.
      * @return whether a user exists with username identifier.
      */
-
+    @Override
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
@@ -188,10 +188,13 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
                 changes[0] = 1;
             }
         } if (changeExists(patient.getPassword(), password)) {
-            // introduce if statement with password validator
-            patient.setPassword(password);
-            save();
-            changes[1] = 1;
+            if (!hasValidPassword(password)) {
+                changes[1] = -1;
+            } else {
+                patient.setPassword(password);
+                save();
+                changes[1] = 1;
+            }
         } if (changeExists(patient.getEmail(), email)) {
             patient.setEmail(email);
             save();
