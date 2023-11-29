@@ -89,21 +89,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         cancel = new JButton(EditViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
-        // pre-populates text fields with the patient's current profile details
-        EditState editState = editViewModel.getState();
-        usernameInputField.setText(editState.getUsername());
-        passwordInputField.setText(editState.getPassword());
-        emailInputField.setText(editState.getEmail());
-        phoneNumberInputField.setText(editState.getPhoneNumber());
-        insuranceInputField.setText(editState.getInsurance());
-        creditCardNumberInputField.setText(editState.getCreditCardNumber());
-        cvvInputField.setValue(editState.getCvv());
-        expirationDateInputField.setText(editState.getExpirationDate());
-        nameOnCardInputField.setText(editState.getNameOnCard());
-        emergencyNameInputField.setText(editState.getEmergencyName());
-        emergencyNumberInputField.setText(editState.getEmergencyNumber());
-        emergencyRelationshipInputField.setText(editState.getEmergencyRelationship());
-
         editProfile.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -425,21 +410,29 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditState state = (EditState) evt.getNewValue();
+
+        // pre-populate input fields
         setFields(state);
+
+        if (state.getUsernameError() != null) {
+            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        } if (state.getPasswordError() != null) {
+            JOptionPane.showMessageDialog(this, state.getPasswordError());
+        }
     }
-// @Override
-//    public void propertyChange(PropertyChangeEvent evt) {
-//        SignupState state = (SignupState) evt.getNewValue();
-//        if (state.getUsernameError() != null) {
-//            JOptionPane.showMessageDialog(this, state.getUsernameError());
-//        }
-//    }
+
     private void setFields(EditState state) {
         usernameInputField.setText(state.getUsername());
         passwordInputField.setText(state.getPassword());
         emailInputField.setText(state.getEmail());
         phoneNumberInputField.setText(state.getPhoneNumber());
         insuranceInputField.setText(state.getInsurance());
-
+        creditCardNumberInputField.setText(state.getCreditCardNumber());
+        cvvInputField.setValue(state.getCvv());
+        expirationDateInputField.setText(state.getExpirationDate());
+        nameOnCardInputField.setText(state.getNameOnCard());
+        emergencyNameInputField.setText(state.getEmergencyName());
+        emergencyNumberInputField.setText(state.getEmergencyNumber());
+        emergencyRelationshipInputField.setText(state.getEmergencyRelationship());
     }
 }
