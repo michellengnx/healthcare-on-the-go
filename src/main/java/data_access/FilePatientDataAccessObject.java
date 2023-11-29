@@ -9,6 +9,8 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // add implements SignupUserDataAccessInterface, LoginUserDataAccessInterface
 public class FilePatientDataAccessObject implements EditPatientDataAccessInterface {
@@ -115,7 +117,35 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
+    @Override
+    public boolean hasValidPassword(String password) {
+        // Regex to check valid password.
+//        At least 8 chars
+//
+//        Contains at least one digit
+//
+//        Contains at least one lower alpha char and one upper alpha char
+//
+//        Contains at least one char within a set of special chars (@#%$^ etc.)
+//
+        String regex = "^.(?=.{8,})(?=..[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=]).$\n";
 
+
+        Pattern p = Pattern.compile(regex);
+
+        if (password == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(password);
+
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
+    }
     private boolean changeExists(String old, String updated) {
         return !old.equals(updated);
     }
@@ -134,7 +164,8 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      * @param emergencyName that the patient wants to be associated with.
      * @param emergencyNumber that the patient wants to be associated with.
      * @param emergencyRelationship that the patient wants to be associated with.
-     * @return 0 if no changes have been found in a field,
+     * @return
+     * 0 if no changes have been found in a field,
      * 1 if a successful change was found,
      * -1 if an unsuccessful chang was found.
      */
