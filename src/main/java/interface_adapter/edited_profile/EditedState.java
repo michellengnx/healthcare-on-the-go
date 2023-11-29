@@ -6,6 +6,13 @@ public class EditedState {
     private String email = "";
     private String phoneNumber = "";
     private String insurance = "";
+    private String creditCardNumber = "";
+    private Integer cvv = 0;
+    private String expirationDate = "";
+    private String nameOnCard = "";
+    private String emergencyName = "";
+    private String emergencyNumber = "";
+    private String emergencyRelationship = "";
 
     public EditedState(EditedState copy) {
         username = copy.username;
@@ -13,6 +20,13 @@ public class EditedState {
         email = copy.email;
         phoneNumber = copy.phoneNumber;
         insurance = copy.insurance;
+        creditCardNumber = copy.creditCardNumber;
+        cvv = copy.cvv;
+        expirationDate = copy.expirationDate;
+        nameOnCard = copy.nameOnCard;
+        emergencyName = copy.emergencyName;
+        emergencyNumber = copy.emergencyNumber;
+        emergencyRelationship = copy.emergencyRelationship;
     }
 
     public EditedState() {}
@@ -37,6 +51,34 @@ public class EditedState {
         return insurance;
     }
 
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public Integer getCvv() {
+        return cvv;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public String getEmergencyName() {
+        return emergencyName;
+    }
+
+    public String getEmergencyNumber() {
+        return emergencyNumber;
+    }
+
+    public String getEmergencyRelationship() {
+        return emergencyRelationship;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -57,4 +99,31 @@ public class EditedState {
         this.insurance = insurance;
     }
 
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public void setCvv(Integer cvv) {
+        this.cvv = cvv;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
+
+    public void setEmergencyName(String emergencyName) {
+        this.emergencyName = emergencyName;
+    }
+
+    public void setEmergencyNumber(String emergencyNumber) {
+        this.emergencyNumber = emergencyNumber;
+    }
+
+    public void setEmergencyRelationship(String emergencyRelationship) {
+        this.emergencyRelationship = emergencyRelationship;
+    }
 }

@@ -6,13 +6,13 @@ public class EditInputData {
     final private String email;
     final private String phoneNumber;
     final private String insurance;
-    final private String emergencyName;
-    final private String emergencyNumber;
-    final private String emergencyRelationship;
     final private String creditCardNumber;
     final private Integer cvv;
     final private String expirationDate;
     final private String nameOnCard;
+    final private String emergencyName;
+    final private String emergencyNumber;
+    final private String emergencyRelationship;
 
     public EditInputData(String username, String password, String email, String phoneNumber, String insurance,
                          String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,

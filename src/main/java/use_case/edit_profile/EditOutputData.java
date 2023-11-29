@@ -6,13 +6,13 @@ public class EditOutputData {
     private final String email;
     private final String phoneNumber;
     private final String insurance;
-    private final String emergencyName;
-    private final String emergencyNumber;
-    private final String emergencyRelationship;
     private final String creditCardNumber;
     private final Integer cvv;
     private final String expirationDate;
     private final String nameOnCard;
+    private final String emergencyName;
+    private final String emergencyNumber;
+    private final String emergencyRelationship;
 
     private boolean useCaseFailed;
 
@@ -54,6 +54,7 @@ public class EditOutputData {
     public String getInsurance() {
         return insurance;
     }
+
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
