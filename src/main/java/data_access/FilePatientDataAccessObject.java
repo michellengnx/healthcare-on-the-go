@@ -134,8 +134,8 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     // do the same for the other parameters - validation + fail views
     // integrate Emergency Contact & Credit Card into this
     public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
-                                 String emergencyName, String emergencyNumber, String emergencyRelationship,
-                                 String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard) {
+                                 String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
+                                 String emergencyName, String emergencyNumber, String emergencyRelationship) {
         // create an error for username, password, email
         Integer[] changes = new Integer[11];
         Patient patient = accounts.get(username);
@@ -165,16 +165,16 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             patient.setInsurance(insurance);
             save();
             changes[4] = 1;
+        } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
+            patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
+            save();
+            changes[5] = 1;
         } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) &&
                     changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
             patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
             save();
-            changes[5] = 1;
-        } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
-            patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
-            save();
             changes[6] = 1;
-            }
+        }
         return changes;
     }
 }
