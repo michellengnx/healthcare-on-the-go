@@ -3,13 +3,12 @@ package entities.factories.user;
 import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
-import entities.User;
 
 import java.util.Date;
 
 //This use case will be handling only Patient type of user for now
-public class UserFactory {
-    public User create(
+public class PatientUserFactory {
+    public  Patient create(
             String username,
             String password,
             String email,
