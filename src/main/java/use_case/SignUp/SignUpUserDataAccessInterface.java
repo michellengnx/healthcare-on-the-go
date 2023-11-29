@@ -1,13 +1,11 @@
 package use_case.SignUp;
 
-import entities.User;
+import entities.Patient;
 
 public interface SignUpUserDataAccessInterface {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
 
-    boolean passwordDoesNotMatch(String password, String repeatPassword);
-
-    void save(User user);
+    void save(Patient patient);
 }
