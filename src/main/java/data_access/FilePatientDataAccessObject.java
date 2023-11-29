@@ -121,23 +121,31 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     }
 
     /**
-     * Return whether changes to a patient's profile have been requested by a patient
-     * @param username the patient wants to now be associated with
-     * @param password the patient wants to now be associated with
-     * @param email the patient wants to now be associated with
-     * @param phoneNumber the patient wants to now be associated with
-     * @param insurance the patient wants to now be associated with
-     * @return the number of changes made to a patient's profile. Return -1 if the new username requested by
-     * the user is already taken.
+     * Edit the profile of a patient
+     * @param username that the patient wants to be associated with.
+     * @param password that the patient wants to be associated with.
+     * @param email that the patient wants to be associated with.
+     * @param phoneNumber that the patient wants to be associated with.
+     * @param insurance that the patient wants to be associated with.
+     * @param creditCardNumber that the patient wants to be associated with.
+     * @param cvv that the patient wants to be associated with.
+     * @param expirationDate that the patient wants to be associated with.
+     * @param nameOnCard that the patient wants to be associated with.
+     * @param emergencyName that the patient wants to be associated with.
+     * @param emergencyNumber that the patient wants to be associated with.
+     * @param emergencyRelationship that the patient wants to be associated with.
+     * @return 0 if no changes have been found in a field,
+     * 1 if a successful change was found,
+     * -1 if an unsuccessful chang was found.
      */
-    // make errors for other parameters like password
-    // do the same for the other parameters - validation + fail views
-    // integrate Emergency Contact & Credit Card into this
+    // add password validator
+    @Override
     public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
                                  String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                                  String emergencyName, String emergencyNumber, String emergencyRelationship) {
-        // create an error for username, password, email
-        Integer[] changes = new Integer[11];
+
+        // integer list that initialized 7 Integer elements, with each defaulted to 0
+        Integer[] changes = new Integer[7];
         Patient patient = accounts.get(username);
 
         if (changeExists(patient.getUsername(), username)) {
