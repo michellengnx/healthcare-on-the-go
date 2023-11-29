@@ -12,6 +12,6 @@ public interface EditPatientDataAccessInterface {
     Patient get(String username);
 
     Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
-                              String emergencyName, String emergencyNumber, String emergencyRelationship,
-                              String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard);
+                          String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
+                          String emergencyName, String emergencyNumber, String emergencyRelationship);
 }
