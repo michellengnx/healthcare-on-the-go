@@ -12,6 +12,7 @@ public class EditPresenter implements EditOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final EditedViewModel editedViewModel;
 
+
     public EditPresenter(ViewManagerModel viewManagerModel,
                          EditedViewModel editedViewModel,
                          EditViewModel editViewModel) {
@@ -29,6 +30,13 @@ public class EditPresenter implements EditOutputBoundary {
         editedState.setEmail(response.getEmail());
         editedState.setPhoneNumber(response.getPhoneNumber());
         editedState.setInsurance(response.getInsurance());
+        editedState.setCreditCardNumber(response.getCreditCardNumber());
+        editedState.setCvv(response.getCvv());
+        editedState.setExpirationDate(response.getExpirationDate());
+        editedState.setNameOnCard(response.getNameOnCard());
+        editedState.setEmergencyName(response.getEmergencyName());
+        editedState.setEmergencyNumber(response.getEmergencyNumber());
+        editedState.setEmergencyRelationship(response.getEmergencyRelationship());
         this.editedViewModel.setState(editedState);
         this.editedViewModel.firePropertyChanged();
 
@@ -41,9 +49,6 @@ public class EditPresenter implements EditOutputBoundary {
         EditState editState = editViewModel.getState();
         editState.setUsernameError(error);
         editState.setPasswordError(error);
-        editState.setEmailError(error);
-        editState.setPhoneNumberError(error);
-        editState.setInsuranceError(error);
         editViewModel.firePropertyChanged();
     }
 }
