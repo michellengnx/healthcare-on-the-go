@@ -2,7 +2,7 @@ package app;
 
 
 import data_access.FilePatientDataAccessObject;
-import entities.factories.user.UserFactory;
+import entities.factories.user.PatientUserFactory;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpPresenter;
 import interface_adapter.SignUp.SignUpViewModel;
@@ -40,10 +40,10 @@ public class SignUpUseCaseFactory {
         // Notice how we pass this method's parameters to the Presenter.
         SignUpOutputBoundary signUpOutputBoundary = new SignUpPresenter(viewManagerModel, signUpViewModel);
 
-        UserFactory userFactory = new UserFactory();
+        PatientUserFactory patientUserFactory = new PatientUserFactory();
 
         SignUpInputBoundary userSignUpInteractor = new SignUpInteractor(
-                userDataAccessObject, signUpOutputBoundary, userFactory);
+                userDataAccessObject, signUpOutputBoundary, patientUserFactory);
 
         return new SignUpController(userSignUpInteractor);
     }
