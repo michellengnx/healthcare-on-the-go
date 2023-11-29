@@ -1,36 +1,40 @@
 package use_case.SignUp;
 
-import entities.User;
-import entities.factories.user.UserFactory;
+import entities.Patient;
+import entities.factories.user.PatientUserFactory;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class SignUpInteractor implements SignUpInputBoundary {
     final SignUpUserDataAccessInterface userDataAccessObject;
     final SignUpOutputBoundary userPresenter;
-    final UserFactory userFactory;
+    final PatientUserFactory patientUserFactory;
 
     public SignUpInteractor(SignUpUserDataAccessInterface signUpDataAccessInterface,
                             SignUpOutputBoundary signUpOutputBoundary,
-                            UserFactory userFactory) {
+                            PatientUserFactory patientUserFactory) {
         this.userDataAccessObject = signUpDataAccessInterface;
         this.userPresenter = signUpOutputBoundary;
-        this.userFactory = userFactory;
+        this.patientUserFactory = patientUserFactory;
     }
 
     @Override
     public void execute(SignUpInputData signUpInputData) {
+//        This check requires querying the csv file
         if (userDataAccessObject.existsByUsername(signUpInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         } else if (userDataAccessObject.existsByEmail(signUpInputData.getEmail())) {
             userPresenter.prepareFailView("Email already exists.");
         }
-        else if (userDataAccessObject.passwordDoesNotMatch(signUpInputData.getPassword(), signUpInputData.getRepeatPassword())) {
+
+//        This check doesn't require querying the csv file and should be helper method for the use case
+        else if (!passwordMatches(signUpInputData.getPassword(), signUpInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         } else {
 
             LocalDate now = LocalDate.now();
-            User user = userFactory.create(
+            Patient patient = patientUserFactory.create(
                     signUpInputData.getUsername(),
                     signUpInputData.getPassword(),
                     signUpInputData.getEmail(),
@@ -45,14 +49,33 @@ public class SignUpInteractor implements SignUpInputBoundary {
                     signUpInputData.getContactName(),
                     signUpInputData.getContactPhoneNumber(),
                     signUpInputData.getContactRelationship());
-            userDataAccessObject.save(user);
+
+            userDataAccessObject.save(patient);
 
             SignUpOutputData signUpOutputData =
                     new SignUpOutputData(
-                            user.getUsername(),
+                            patient.getUsername(),
                             now.toString(),
                             false);
             userPresenter.prepareSuccessView(signUpOutputData);
         }
+    }
+
+    private boolean passwordMatches(String password, String repeatPassword) {
+        return Objects.equals(password, repeatPassword);
+    }
+
+    //    TODO: expand implementation
+    private boolean isPasswordValid(String password) {
+        // Example: Password must be at least 8 characters long
+        return password.length() >= 8;
+    }
+
+    //    TODO: expand implementation
+
+    private boolean isValidEmail(String email) {
+        // Example: Simple email format check using regular expression
+        String emailRegex = "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$";
+        return email.matches(emailRegex);
     }
 }
