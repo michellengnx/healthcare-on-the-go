@@ -25,8 +25,10 @@ public class SignUpController {
                         String nameOnCard,
                         String contactName,
                         String contactPhoneNumber,
-                        String contactRelationship) {
-        SignUpInputData signUpInputData = new SignUpInputData(
+                        String contactRelationship)
+    {
+        SignUpInputData signUpInputData = new SignUpInputData
+                                                  (
                 username,
                 password,
                 repeatPassword,
@@ -36,7 +38,8 @@ public class SignUpController {
                 insurance,
                 birthday,
                 creditCardNumber,ccv,expirationDate,nameOnCard,
-                contactName,contactPhoneNumber,contactRelationship);
+                contactName,contactPhoneNumber,contactRelationship
+                                                  );
 
         userSignUpUseCaseInteractor.execute(signUpInputData);
     }
