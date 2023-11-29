@@ -3,6 +3,8 @@ package data_access;
 import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
+import entities.User;
+import use_case.SignUp.SignUpUserDataAccessInterface;
 import use_case.edit_profile.EditPatientDataAccessInterface;
 
 import java.io.*;
@@ -12,8 +14,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// add implements SignupUserDataAccessInterface, LoginUserDataAccessInterface
-public class FilePatientDataAccessObject implements EditPatientDataAccessInterface {
+// add implements LoginUserDataAccessInterface
+public class FilePatientDataAccessObject implements EditPatientDataAccessInterface, SignUpUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -219,5 +221,18 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         }
         return changes;
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return accounts.containsKey(username);
+    }
+
+//    TODO: implement
+    @Override
+    public boolean existsByEmail(String email) {
+        return false;
+    }
+
+
 }
 
