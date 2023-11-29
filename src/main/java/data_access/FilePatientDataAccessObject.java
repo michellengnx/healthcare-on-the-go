@@ -24,17 +24,17 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("email", 2);
-        headers.put("phone number", 3);
+        headers.put("phone_number", 3);
         headers.put("gender", 4);
         headers.put("insurance", 5);
         headers.put("birthday", 6);
-        headers.put("credit card number", 7);
+        headers.put("credit_card_number", 7);
         headers.put("cvv", 8);
-        headers.put("credit card expiration date", 9);
-        headers.put("name on card", 10);
-        headers.put("emergency contact name", 11);
-        headers.put("emergency contact phone number", 12);
-        headers.put("emergency contact relationship", 13);
+        headers.put("card_expiration_date", 9);
+        headers.put("name_on_card", 10);
+        headers.put("emergency_contact_name", 11);
+        headers.put("emergency_phone_number", 12);
+        headers.put("emergency_contact_relationship", 13);
         headers.put("requests", 14);
 
         if (csvFile.length() == 0) {
@@ -43,7 +43,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-                assert header.equals("username,password,email,phone number,gender,insurance,birthday,credit card number,cvv,credit card expiration date,name on card,emergency contact name,emergency contact phone number,emergency contact relationship,requests");
+                assert header.equals("username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship,requests");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -51,17 +51,17 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
                     String email = String.valueOf(col[headers.get("email")]);
-                    String number = String.valueOf(col[headers.get("phone number")]);
+                    String number = String.valueOf(col[headers.get("phone_number")]);
                     String gender = String.valueOf(col[headers.get("gender")]);
                     String insurance = String.valueOf(col[headers.get("insurance")]);
                     Date birthday = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(col[headers.get("birthday")]));
-                    String creditCardNumber = String.valueOf(col[headers.get("credit card number")]);
+                    String creditCardNumber = String.valueOf(col[headers.get("credit_card_number")]);
                     int cvv = Integer.parseInt(col[headers.get("cvv")]);
-                    String expirationDate = String.valueOf(col[headers.get("credit card expiration date")]);
-                    String nameOnCard = String.valueOf(col[headers.get("name on card")]);
-                    String emergencyContactName = String.valueOf(col[headers.get("emergency contact name")]);
-                    String emergencyContactPhoneNumber = String.valueOf(col[headers.get("emergency contact phone number")]);
-                    String emergencyContactRelationship = String.valueOf(col[headers.get("emergency contact relationship")]);
+                    String expirationDate = String.valueOf(col[headers.get("card_expiration_date")]);
+                    String nameOnCard = String.valueOf(col[headers.get("name_on_card")]);
+                    String emergencyContactName = String.valueOf(col[headers.get("emergency_contact_name")]);
+                    String emergencyContactPhoneNumber = String.valueOf(col[headers.get("emergency_phone_number")]);
+                    String emergencyContactRelationship = String.valueOf(col[headers.get("emergency_contact_relationship")]);
                     String requests = String.valueOf(col[headers.get("requests")]);
                     CreditCard creditCard = new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard);
                     EmergencyContact emergencyContact = new EmergencyContact(emergencyContactName, emergencyContactPhoneNumber, emergencyContactRelationship);
@@ -91,9 +91,10 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             writer.newLine();
 
             for (Patient patient : accounts.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
                         patient.getUsername(), patient.getPassword(), patient.getEmail(), patient.getPhoneNumber(),
-                        patient.getGender(), patient.getInsurance(), patient.getBirthday());
+                        patient.getGender(), patient.getInsurance(), patient.getBirthday(),
+                        patient.getCreditCard(), patient.getEmergencyContact());
                 writer.write(line);
                 writer.newLine();
             }
@@ -145,7 +146,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             } else {
                 patient.setUsername(username);
                 save();
-                changes[0] = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             );
+                changes[0] = 1;
             }
         } if (changeExists(patient.getPassword(), password)) {
             // introduce if statement with password validator
@@ -153,7 +154,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             save();
             changes[1] = 1;
         } if (changeExists(patient.getEmail(), email)) {
-            // introduce if statement
             patient.setEmail(email);
             save();
             changes[2] = 1;
