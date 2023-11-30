@@ -18,7 +18,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
     private final Map<Integer, ArrayList<String>> requests = new HashMap<>();
     private final File csvFile;
 
-    public FileRequestDataAccessObject(String csvPath, ServiceRequestFactory requestFactory) throws IOException {
+    public FileRequestDataAccessObject(String csvPath) throws IOException {
         csvFile = new File(csvPath);
         headers.put("patient", 0);
         headers.put("creation_time", 1);

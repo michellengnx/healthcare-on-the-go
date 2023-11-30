@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ViewRequestViewModel extends ViewModel {
     private ArrayList<String> userName;
 
-    private ArrayList<String> creationTime
+    private ArrayList<String> creationTime;
 
     private ArrayList<String> doctorNames;
     private ArrayList<String> services;
@@ -53,8 +53,14 @@ public class ViewRequestViewModel extends ViewModel {
             this.urgencys.add(Integer.parseInt(request.get(3)));
             this.etas.add(Float.parseFloat(request.get(7)));
             this.distances.add(Float.parseFloat(request.get(8)));
-            this.completed.add(request);
-
+            // read the completed column to get true or false.
+            if (requests.get(9).equals("true"))
+            {
+                this.completed.add(true);
+            }
+            else{
+                this.completed.add(false);
+            }
         }
     }
 
