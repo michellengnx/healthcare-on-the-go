@@ -1,6 +1,7 @@
 package use_case.edit_profile;
 
 public class EditInputData {
+    final private String oldUsername;
     final private String username;
     final private String password;
     final private String email;
@@ -14,9 +15,10 @@ public class EditInputData {
     final private String emergencyNumber;
     final private String emergencyRelationship;
 
-    public EditInputData(String username, String password, String email, String phoneNumber, String insurance,
+    public EditInputData(String oldUsername, String username, String password, String email, String phoneNumber, String insurance,
                          String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                          String emergencyName, String emergencyNumber, String emergencyRelationship) {
+        this.oldUsername = oldUsername;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -31,6 +33,7 @@ public class EditInputData {
         this.emergencyRelationship = emergencyRelationship;
     }
 
+    public String getOldUsername() {return oldUsername;}
     public String getUsername() {
         return username;
     }

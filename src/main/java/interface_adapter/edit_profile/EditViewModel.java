@@ -9,6 +9,7 @@ public class EditViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Edit View";
     public static final String SUBHEADING_MAIN_LABEL = "Main Profile Details";
+    public static final String OLD_USERNAME_LABEL = "Enter old username";
     public static final String NEW_USERNAME_LABEL = "Enter new username";
     public static final String NEW_PASSWORD_LABEL = "Enter new password";
     public static final String NEW_EMAIL_LABEL = "Enter new email";
