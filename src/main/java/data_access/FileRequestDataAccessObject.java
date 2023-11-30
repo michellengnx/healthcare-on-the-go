@@ -12,10 +12,7 @@ import java.util.stream.Collectors;
 public class FileRequestDataAccessObject implements RequestDataAccess {
 
 
-    /**
-     * @param userName
-     * @return
-     */
+
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<Integer, ArrayList<String>> requests = new HashMap<>();
@@ -32,6 +29,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         headers.put("price", 6);
         headers.put("eta", 7);
         headers.put("distance", 8);
+        headers.put("isComplete,", 9);
         if (csvFile.length() == 0) {
             save();
         } else {
@@ -40,7 +38,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance");
+                assert header.equals("patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance,isComplete");
                 String row;
                 int id = 0;
                 while ((row = reader.readLine()) != null) {
@@ -54,6 +52,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
                     String eta = String.valueOf(col[headers.get("eta")]);
                     String patient = String.valueOf(col[headers.get("patient")]);
                     String distance = String.valueOf(col[headers.get("distance")]);
+                    String isComplete = String.valueOf(col[headers.get("isComplete")]);
 
                     ArrayList<String> list = new ArrayList<>();
                     list.add(0, patient);
@@ -65,6 +64,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
                     list.add(6, price);
                     list.add(7, eta);
                     list.add(8, distance);
+                    list.add(9,isComplete);
                     requests.put(id, list);
                     id++;
                 }
@@ -101,6 +101,13 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         list.add(7, Float.toString(request.getEta()));
         list.add(8, Float.toString(request.getDistance()));
 
+        // Store a string 'true' if  its completes and "false" if it's not complete
+        if (request.isCompleted()){
+            list.add(9,"true");
+        }
+        else{
+            list.add(9,"false");
+        }
         requests.put(requests.size(), list);
         this.save();
     }
@@ -114,8 +121,8 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
             for (ArrayList<String> request : requests.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
-                        request.get(0), request.get(1), request.get(2), request.get(3), request.get(4), request.get(5), request.get(6), request.get(7), request.get(8));
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                        request.get(0), request.get(1), request.get(2), request.get(3), request.get(4), request.get(5), request.get(6), request.get(7), request.get(8), request.get(9));
                 writer.write(line);
                 writer.newLine();
             }

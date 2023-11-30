@@ -15,7 +15,7 @@ public class ViewRequestUseCase {
         this.requestDataAccess = requestDataAccess;
     }
 
-    public ArrayList<ServiceRequest> getRequestDetails(String userName) {
+    public ArrayList<ArrayList<String>> getRequestDetails(String userName) {
         return requestDataAccess.getRequestUser(userName);
     }
 
