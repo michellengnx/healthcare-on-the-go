@@ -18,6 +18,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     public final String viewName = "edit";
     private final EditViewModel editViewModel;
 
+    final JTextField oldUsernameInputField = new JTextField(15);
     final JTextField usernameInputField = new JTextField(15);
 
     final JPasswordField passwordInputField = new JPasswordField(15);
@@ -31,9 +32,10 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     final JTextField creditCardNumberInputField = new JTextField(15);
 
-    final JFormattedTextField cvvInputField = new JFormattedTextField(3);
+    final JFormattedTextField cvvInputField = new JFormattedTextField();
 
-    final JTextField expirationDateInputField = new JTextField(4);
+
+    final JTextField expirationDateInputField = new JTextField(10);
 
     final JTextField nameOnCardInputField = new JTextField(15);
 
@@ -59,14 +61,19 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel subheading_main = new JLabel(EditViewModel.SUBHEADING_MAIN_LABEL);
-        subheading_main.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        subheading_main.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_main.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel subheading_card = new JLabel(EditViewModel.SUBHEADING_CREDIT_CARD_LABEL);
-        subheading_card.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        subheading_card.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_card.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel subheading_emergency = new JLabel(EditViewModel.SUBHEADING_EMERGENCY_CONTACT_LABEL);
-        subheading_emergency.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        subheading_emergency.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_emergency.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        LabelTextPanel oldUsernameInfo = new LabelTextPanel(
+                new JLabel(EditViewModel.OLD_USERNAME_LABEL), oldUsernameInputField);
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_USERNAME_LABEL), usernameInputField);
         LabelTextPanel passwordInfo = new LabelTextPanel(
@@ -79,6 +86,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(EditViewModel.NEW_INSURANCE_LABEL), insuranceInputField);
         LabelTextPanel creditCardNumberInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_CREDIT_CARD_NUMBER_LABEL), creditCardNumberInputField);
+        cvvInputField.setColumns(14);
         LabelNumberPanel cvvInfo = new LabelNumberPanel(
                 new JLabel(EditViewModel.NEW_CVV_LABEL), cvvInputField);
         LabelDatePanel expirationDateInfo = new LabelDatePanel(
@@ -99,18 +107,19 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         buttons.add(cancel);
 
         // left-align the input fields
-        usernameInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        passwordInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        emailInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        phoneNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        insuranceInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        creditCardNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        cvvInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        expirationDateInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        nameOnCardInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        emergencyNameInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        emergencyNumberInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        emergencyRelationshipInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        oldUsernameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        usernameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        passwordInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        emailInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        phoneNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        insuranceInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        creditCardNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cvvInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        expirationDateInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nameOnCardInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        emergencyNameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        emergencyNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        emergencyRelationshipInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         editProfile.addActionListener(
                 new ActionListener() {
@@ -119,6 +128,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                             EditState currentState = editViewModel.getState();
 
                             editController.execute(
+                                    currentState.getOldUsername(),
                                     currentState.getUsername(),
                                     currentState.getPassword(),
                                     currentState.getEmail(),
@@ -139,6 +149,26 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
         cancel.addActionListener(this);
 
+        oldUsernameInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EditState currentState = editViewModel.getState();
+                        currentState.setOldUsername(oldUsernameInputField.getText() + e.getKeyChar());
+                        editViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -425,14 +455,18 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_main);
+        this.add(oldUsernameInfo);
         this.add(usernameInfo);
         this.add(passwordPanel);
         this.add(emailInfo);
         this.add(phoneNumberInfo);
         this.add(insuranceInfo);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_card);
         this.add(creditCardPanel);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_emergency);
         this.add(emergencyPanel);
         this.add(buttons);
@@ -467,7 +501,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         phoneNumberInputField.setText(state.getPhoneNumber());
         insuranceInputField.setText(state.getInsurance());
         creditCardNumberInputField.setText(state.getCreditCardNumber());
-        cvvInputField.setValue(state.getCvv());
+        // cvvInputField.setText(state.getCvv());
         expirationDateInputField.setText(state.getExpirationDate());
         nameOnCardInputField.setText(state.getNameOnCard());
         emergencyNameInputField.setText(state.getEmergencyName());
