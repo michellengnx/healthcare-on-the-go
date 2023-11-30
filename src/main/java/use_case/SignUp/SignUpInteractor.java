@@ -2,9 +2,9 @@ package use_case.SignUp;
 
 import entities.Patient;
 import entities.factories.user.PatientUserFactory;
+import use_case.SignUp.validators.InputValidation;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class SignUpInteractor implements SignUpInputBoundary {
     final SignUpUserDataAccessInterface userDataAccessObject;
@@ -29,7 +29,7 @@ public class SignUpInteractor implements SignUpInputBoundary {
         }
 
 //        This check doesn't require querying the csv file and should be helper method for the use case
-        else if (!passwordMatches(signUpInputData.getPassword(), signUpInputData.getRepeatPassword())) {
+        else if (!InputValidation.passwordMatches(signUpInputData.getPassword(), signUpInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         } else {
 
@@ -61,21 +61,5 @@ public class SignUpInteractor implements SignUpInputBoundary {
         }
     }
 
-    private boolean passwordMatches(String password, String repeatPassword) {
-        return Objects.equals(password, repeatPassword);
-    }
 
-    //    TODO: expand implementation
-    private boolean isPasswordValid(String password) {
-        // Example: Password must be at least 8 characters long
-        return password.length() >= 8;
-    }
-
-    //    TODO: expand implementation
-
-    private boolean isValidEmail(String email) {
-        // Example: Simple email format check using regular expression
-        String emailRegex = "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$";
-        return email.matches(emailRegex);
-    }
 }
