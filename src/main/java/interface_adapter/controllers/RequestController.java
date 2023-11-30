@@ -1,7 +1,7 @@
 package interface_adapter.controllers;
 
 import use_case.ViewRequestUseCase;
-import interface_adapter.presenters.RequestViewModel;
+import interface_adapter.ViewRequest.ViewRequestViewModel;
 
 public class RequestController {
     private ViewRequestUseCase viewRequestUseCase;
@@ -10,9 +10,9 @@ public class RequestController {
         this.viewRequestUseCase = viewRequestUseCase;
     }
 
-    public RequestViewModel viewRequest(String userName) {
+    public ViewRequestViewModel viewRequest(String userName) {
         var request = viewRequestUseCase.getRequestDetails(userName);
-        return new RequestViewModel(request);
+        return new ViewRequestViewModel(request);
     }
     }
 
