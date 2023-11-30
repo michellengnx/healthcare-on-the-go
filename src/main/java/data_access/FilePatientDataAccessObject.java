@@ -39,7 +39,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         headers.put("emergency_contact_name", 11);
         headers.put("emergency_phone_number", 12);
         headers.put("emergency_contact_relationship", 13);
-        headers.put("requests", 14);
 
         if (csvFile.length() == 0) {
             save();
@@ -47,7 +46,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-                assert header.equals("username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship,requests");
+                assert header.equals("username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -66,7 +65,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
                     String emergencyContactName = String.valueOf(col[headers.get("emergency_contact_name")]);
                     String emergencyContactPhoneNumber = String.valueOf(col[headers.get("emergency_phone_number")]);
                     String emergencyContactRelationship = String.valueOf(col[headers.get("emergency_contact_relationship")]);
-                    String requests = String.valueOf(col[headers.get("requests")]);
                     CreditCard creditCard = new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard);
                     EmergencyContact emergencyContact = new EmergencyContact(emergencyContactName, emergencyContactPhoneNumber, emergencyContactRelationship);
                     Patient patient = new Patient(username, password, email, number, gender, insurance, birthday, creditCard, emergencyContact);
@@ -95,10 +93,11 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             writer.newLine();
 
             for (Patient patient : accounts.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
                         patient.getUsername(), patient.getPassword(), patient.getEmail(), patient.getPhoneNumber(),
                         patient.getGender(), patient.getInsurance(), patient.getBirthday(),
-                        patient.getCreditCard(), patient.getEmergencyContact());
+                        patient.getCreditCard().getCreditCardNumber(), patient.getCreditCard().getCcv(), patient.getCreditCard().getExpirationDate(), patient.getCreditCard().getNameOnCard(),
+                        patient.getEmergencyContact().getName(), patient.getEmergencyContact().getPhoneNumber(), patient.getEmergencyContact().getRelationship());
                 writer.write(line);
                 writer.newLine();
             }
@@ -173,15 +172,17 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      */
     // add password validator
     @Override
-    public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
+    public Integer[] editProfile(String oldUsername, String username, String password, String email, String phoneNumber, String insurance,
                                  String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                                  String emergencyName, String emergencyNumber, String emergencyRelationship) {
 
         // integer list that initialized 7 Integer elements, with each defaulted to 0
         Integer[] changes = new Integer[7];
-        Patient patient = accounts.get(username);
+        Arrays.fill(changes, 0);
 
-        if (changeExists(patient.getUsername(), username)) {
+        Patient patient = accounts.get(oldUsername);
+
+        if (changeExists(oldUsername, username)) {
             if (existsByName(username)) {
                 changes[0] = -1;
             } else {
