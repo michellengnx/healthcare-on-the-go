@@ -93,10 +93,10 @@ public class ApiAccessObject {
             if (response.code() == 200) {
                 return request.url().toString();
             } else {
-                throw new InvalidLocationException("Invalid location");
+                throw new ApiAccessException();
             }
         } catch (IOException | JSONException e) {
-            throw new ApiAccessException();
+            throw new InvalidLocationException("Invalid location");
         }
     }
 
@@ -140,10 +140,10 @@ public class ApiAccessObject {
 
                 return distanceEtaMap;
             } else {
-                throw new InvalidLocationException("Invalid location");
+                throw new ApiAccessException();
             }
         } catch (IOException | JSONException e) {
-            throw new ApiAccessException();
+            throw new InvalidLocationException("Invalid location");
         }
     }
 }

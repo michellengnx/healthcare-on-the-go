@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ApiAccessObjectTest {
     private final String apiKey = "";
-    private ApiAccessObject apiAccessObject = new ApiAccessObject(apiKey);
+    private final ApiAccessObject apiAccessObject = new ApiAccessObject(apiKey);
 
     @Test
     void testGetEta() {
@@ -25,15 +25,35 @@ class ApiAccessObjectTest {
     }
 
     @Test
+    void testGetEtaFail() {
+        if (this.apiKey.equals("")) {
+            return;
+        } else {
+            assertThrows(InvalidLocationException.class, () -> {apiAccessObject.getEta("NSIUFDsifuy9gyfq8", "York University");});
+            assertThrows(ApiAccessException.class, () -> {(new ApiAccessObject("")).getEta("1", " 1");});
+        }
+    }
+
+    @Test
     void testGetDistance() {
         if (this.apiKey.equals("")) {
             return;
         } else {
             try {
-                assertEquals(87, apiAccessObject.getDistance("University of Toronto", "York University"), 1);
+                assertEquals(8.7, apiAccessObject.getDistance("University of Toronto", "York University"), 1);
             } catch (InvalidLocationException | ApiAccessException e) {
                 fail("Successful API call expected");
             }
+        }
+    }
+
+    @Test
+    void testGetDistanceFail() {
+        if (this.apiKey.equals("")) {
+            return;
+        } else {
+            assertThrows(InvalidLocationException.class, () -> {apiAccessObject.getDistance("NSIUFDsifuy9gyfq8", "York University");});
+            assertThrows(ApiAccessException.class, () -> {(new ApiAccessObject("")).getDistance("1", " 1");});
         }
     }
 
@@ -51,6 +71,16 @@ class ApiAccessObjectTest {
     }
 
     @Test
+    void testGetPriceFail() {
+        if (this.apiKey.equals("")) {
+            return;
+        } else {
+            assertThrows(InvalidLocationException.class, () -> {apiAccessObject.getPrice("NSIUFDsifuy9gyfq8", "York University");});
+            assertThrows(ApiAccessException.class, () -> {(new ApiAccessObject("")).getPrice("1", " 1");});
+        }
+    }
+
+    @Test
     void testGetTrafficMap() {
         if (this.apiKey.equals("")) {
             return;
@@ -60,6 +90,15 @@ class ApiAccessObjectTest {
             } catch (InvalidLocationException | ApiAccessException e) {
                 fail("Successful API call expected");
             }
+        }
+    }
+
+    @Test
+    void testGetTrafficMapFail() {
+        if (this.apiKey.equals("")) {
+            return;
+        } else {
+            assertThrows(ApiAccessException.class, () -> {(new ApiAccessObject("")).getTrafficMap("1", " 1");});
         }
     }
 }
