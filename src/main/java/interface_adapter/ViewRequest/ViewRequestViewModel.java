@@ -6,7 +6,7 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-// TODO : IMPLEMENT
+
 
 public class ViewRequestViewModel extends ViewModel {
     private ArrayList<String> userName;
@@ -33,16 +33,6 @@ public class ViewRequestViewModel extends ViewModel {
         this.etas = new ArrayList<Float>();
         this.distances = new ArrayList<Float>();
         this.completed = new ArrayList<Boolean>();
-
-// headers.put("patient", 0);
-//        headers.put("creation_time", 1);
-//        headers.put("doctor", 2);
-//        headers.put("urgency_level", 3);
-//        headers.put("destination", 4);
-//        headers.put("service", 5);
-//        headers.put("price", 6);
-//        headers.put("eta", 7);
-//        headers.put("distance", 8);
 
         for (ArrayList<String> request : requests) {
             this.userName.add(request.get(0));
@@ -81,5 +71,6 @@ public class ViewRequestViewModel extends ViewModel {
     }
 
     public void setState(ViewRequestState viewRequestState) {
+
     }
 }

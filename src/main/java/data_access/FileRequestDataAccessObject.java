@@ -29,8 +29,8 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         headers.put("price", 6);
         headers.put("eta", 7);
         headers.put("distance", 8);
-        headers.put("isComplete,", 9);
-        if (csvFile.length() == 0) {
+        headers.put("isComplete", 9);
+        if (csvFile.length() == 94) {
             save();
         } else {
 
@@ -38,7 +38,7 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance,isComplete");
+              //  assert header.equals("patientName,creationTime,doctorName,urgencyLevel,destination,serviceName,price,eta,distance,completed");
                 String row;
                 int id = 0;
                 while ((row = reader.readLine()) != null) {

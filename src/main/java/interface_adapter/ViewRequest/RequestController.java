@@ -1,7 +1,6 @@
-package interface_adapter.controllers;
+package interface_adapter.ViewRequest;
 
-import use_case.ViewRequestUseCase;
-import interface_adapter.ViewRequest.ViewRequestViewModel;
+import use_case.ViewRequest.ViewRequestUseCase;
 
 public class RequestController {
     private ViewRequestUseCase viewRequestUseCase;
