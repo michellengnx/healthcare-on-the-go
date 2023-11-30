@@ -13,6 +13,7 @@ public class Doctor extends User {
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
     private final Map<Doctor, List<Review>> reviews = new HashMap<>();
+    private boolean isBusy = false;
 
     /**
      * Requires each doctor to have a unique id.
@@ -37,5 +38,13 @@ public class Doctor extends User {
 
     public List<Service> getQualifiedServices() {
         return qualifiedServices;
+    }
+
+    public boolean isBusy() {
+        return isBusy;
+    }
+
+    public void setBusy(boolean busy) {
+        isBusy = busy;
     }
 }
