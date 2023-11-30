@@ -16,9 +16,9 @@ public class EditInteractor implements EditInputBoundary {
         this.patientDataAccessObject = patientDataAccessInterface;
         this.editPresenter = editOutputBoundary;
     }
-
     @Override
     public void execute(EditInputData editInputData) {
+        String oldUsername = editInputData.getOldUsername();
         String username = editInputData.getUsername();
         String password = editInputData.getPassword();
         String email = editInputData.getEmail();
@@ -32,7 +32,10 @@ public class EditInteractor implements EditInputBoundary {
         String expirationDate = editInputData.getExpirationDate();
         String nameOnCard = editInputData.getNameOnCard();
 
-        Integer[] changes = patientDataAccessObject.editProfile(username, password, email, phoneNumber, insurance,
+        Patient patient = patientDataAccessObject.get(editInputData.getUsername());
+
+
+        Integer[] changes = patientDataAccessObject.editProfile(oldUsername, username, password, email, phoneNumber, insurance,
                 creditCardNumber, cvv, expirationDate, nameOnCard,
                 emergencyName, emergencyNumber, emergencyRelationship);
 
@@ -40,10 +43,9 @@ public class EditInteractor implements EditInputBoundary {
             editPresenter.prepareFailView("Username already exists.");
         } else if (changes[1] == -1) {
             editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.");
-        } else if (Arrays.stream(changes).distinct().count() <= 1) {
+        } else if (noChanges(changes)) {
             editPresenter.prepareFailView("No changes have been made to the account.");
         } else {
-            Patient patient = patientDataAccessObject.get(editInputData.getUsername());
 
             EditOutputData editOutputData = new EditOutputData(patient.getUsername(), patient.getPassword(),
                     patient.getEmail(), patient.getPhoneNumber(), patient.getInsurance(),
@@ -52,5 +54,14 @@ public class EditInteractor implements EditInputBoundary {
                     false);
             editPresenter.prepareSuccessView(editOutputData);
         }
+    }
+
+    private boolean noChanges(Integer[] list) {
+        for (Integer num: list) {
+            if (num != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
