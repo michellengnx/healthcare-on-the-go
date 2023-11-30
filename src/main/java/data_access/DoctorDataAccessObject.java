@@ -7,6 +7,7 @@ import entities.Doctor;
 import entities.Review;
 import entities.Service;
 
+import javax.print.Doc;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -178,10 +179,17 @@ public class DoctorDataAccessObject {
     }
 
     public void markAsBusy(Doctor doctor) {
-
+        doctor.setBusy(true);
+        save();
     }
 
     public List<Doctor> getAvailableDoctors() {
-
+        List<Doctor> availableDoctors = new ArrayList<>();
+        for (Doctor doctor : doctorList) {
+            if (!doctor.isBusy()) {
+                availableDoctors.add(doctor);
+            }
+        }
+        return availableDoctors;
     }
 }
