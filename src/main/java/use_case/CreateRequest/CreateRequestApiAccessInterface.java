@@ -10,7 +10,7 @@ import entities.factories.service_request.TravelCostCalculator;
  */
 public interface CreateRequestApiAccessInterface extends TravelCostCalculator, DistanceCalculator, EtaCalculator {
     /**
-     * Return the distance by car from startLoc to endLoc by car.
+     * Return the distance by car from startLoc to endLoc by car in km.
      *
      * @param startLoc Address/name representing the starting location.
      * @param endLoc Address/name representing the end location.
@@ -19,7 +19,7 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
     public float getDistance(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 
     /**
-     * Return the estimated time or arrival from startLoc to endLoc by car.
+     * Return the estimated time or arrival from startLoc to endLoc by car in minutes.
      *
      * @param startLoc Address/name representing the starting location.
      * @param endLoc Address/name representing the end location.
@@ -28,7 +28,7 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
     public float getEta(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 
     /**
-     * Return the price of a car ride from startLoc to endLoc by car.
+     * Return the price of a car ride from startLoc to endLoc by car in minutes.
      *
      * @param startLoc Address/name representing the starting location.
      * @param endLoc Address/name representing the end location.

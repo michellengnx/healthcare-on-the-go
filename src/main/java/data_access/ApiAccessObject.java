@@ -34,7 +34,7 @@ public class ApiAccessObject {
     }
 
     /**
-     * Get the ETA from a start to an end location in hours
+     * Get the ETA from a start to an end location in minutes
      *
      * @param start The start location
      * @param end The end location
@@ -43,8 +43,8 @@ public class ApiAccessObject {
      */
     public float getEta(String start, String end) throws InvalidLocationException, ApiAccessException {
         List<String> fields = new ArrayList<>();
-        fields.add("eta");
-        return requestRoutingData(start, end, fields).get("eta");
+        fields.add("time");
+        return requestRoutingData(start, end, fields).get("time") / 60;
     }
 
     /**
@@ -57,10 +57,10 @@ public class ApiAccessObject {
      */
     public float getPrice(String start, String end) throws InvalidLocationException, ApiAccessException {
         List<String> fields = new ArrayList<>();
-        fields.add("eta");
+        fields.add("time");
         fields.add("distance");
         Map<String, Float> routingData = requestRoutingData(start, end, fields);
-        return routingData.get("distance") * 0.1f + routingData.get("eta") * 20;
+        return routingData.get("distance") * 0.05f + routingData.get("time") * 0.002f;
     }
 
     /**
@@ -90,10 +90,8 @@ public class ApiAccessObject {
         try {
             // execute and print API response
             Response response = client.newCall(request).execute();
-            System.out.println("Response : " + response);
             if (response.code() == 200) {
-                JSONObject responseBody = new JSONObject(response.body().string());
-                return responseBody.getString("url");
+                return request.url().toString();
             } else {
                 throw new InvalidLocationException("Invalid location");
             }
