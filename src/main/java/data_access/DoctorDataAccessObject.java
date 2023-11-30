@@ -22,6 +22,12 @@ public class DoctorDataAccessObject {
     private final List<Doctor> doctorList = new ArrayList<>();
 
 
+    /**
+     * Create a DoctorDataAccessObject
+     *
+     * @param doctorFilePath The file path where doctor entities are stored.
+     * @param servicesFilePath The file path where available services are stored.
+     */
     public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath) {
         this.doctorFilePath = doctorFilePath;
         this.servicesFilePath = servicesFilePath;
@@ -46,6 +52,7 @@ public class DoctorDataAccessObject {
                 List<String> certifications = Arrays.asList(nextRecord[8].split(";"));
                 boolean isBusy = Boolean.parseBoolean(nextRecord[9]);
 
+                // Only add the service to the doctor's available service if it is also in the service data file
                 List<Service> qualifiedServices = new ArrayList<>();
                 Service currentSerivce;
                 for (String serviceName : nextRecord[10].split(";")) {
@@ -153,7 +160,8 @@ public class DoctorDataAccessObject {
                 } else {
                     qualifiedServices = "";
                 }
-                String[] data2 = { username,
+                String[] doctorData = {
+                        username,
                         password,
                         gender,
                         birthday,
@@ -164,25 +172,32 @@ public class DoctorDataAccessObject {
                         certifications,
                         isBusy,
                         qualifiedServices };
-                writer.writeNext(data2);
-
+                writer.writeNext(doctorData);
 
             }
             // closing writer connection
             writer.close();
-
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
+    /**
+     * Set a doctor's status to bust, both in memory, and in persistent data.
+     *
+     * @param doctor Doctor to be marked as busy.
+     */
     public void markAsBusy(Doctor doctor) {
         doctor.setBusy(true);
         save();
     }
 
+    /**
+     * Get a list of all doctors that aren't marked as busy.
+     *
+     * @return A list of all doctors that aren't marked as busy.
+     */
     public List<Doctor> getAvailableDoctors() {
         List<Doctor> availableDoctors = new ArrayList<>();
         for (Doctor doctor : doctorList) {
