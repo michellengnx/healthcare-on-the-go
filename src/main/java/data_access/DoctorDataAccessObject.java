@@ -1,14 +1,13 @@
 package data_access;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import entities.Doctor;
 import entities.Review;
 import entities.Service;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DateFormat;
@@ -99,7 +98,83 @@ public class DoctorDataAccessObject {
     }
 
     private void save() {
+        File file = new File(this.reviewsFilePath);
+        try {
+            // create FileWriter object with file as parameter
+            FileWriter outputfile = new FileWriter(file);
 
+            // create CSVWriter object filewriter object as parameter
+            CSVWriter writer = new CSVWriter(outputfile);
+
+            // adding header to csv
+            String[] header = {
+                    "username",
+                    "password",
+                    "gender",
+                    "birthday",
+                    "email",
+                    "number",
+                    "id",
+                    "location",
+                    "certifications",
+                    "isBusy",
+                    "qualifiedServices"
+            };
+            writer.writeNext(header);
+
+            for (Doctor doctor : this.doctorList) {
+                String username = doctor.getUsername();
+                String password = doctor.getPassword();
+                String gender = doctor.getGender();
+                String birthday = new SimpleDateFormat("MM/dd/yyyy").format(doctor.getBirthday());
+                String email = doctor.getEmail();
+                String number = doctor.getPhoneNumber();
+                String id = doctor.getId_().toString();
+                String location = doctor.getLocation();
+                StringBuilder certificationsBuilder = new StringBuilder();
+                String certifications;
+                for (String certification : doctor.getCertifications()) {
+                    certificationsBuilder.append(";").append(certification);
+                }
+                if (!certificationsBuilder.toString().isEmpty()) {
+                    certifications = certificationsBuilder.toString().substring(1);
+                } else {
+                    certifications = "";
+                }
+                String isBusy = String.valueOf(doctor.isBusy());
+                StringBuilder servicesBuilder = new StringBuilder();
+                String qualifiedServices;
+                for (Service service : doctor.getQualifiedServices()) {
+                    certificationsBuilder.append(";").append(service.getName());
+                }
+                if (!certificationsBuilder.toString().isEmpty()) {
+                    qualifiedServices = certificationsBuilder.toString().substring(1);
+                } else {
+                    qualifiedServices = "";
+                }
+                String[] data2 = { username,
+                        password,
+                        gender,
+                        birthday,
+                        email,
+                        number,
+                        id,
+                        location,
+                        certifications,
+                        isBusy,
+                        qualifiedServices };
+                writer.writeNext(data2);
+
+
+            }
+            // closing writer connection
+            writer.close();
+
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void markAsBusy(Doctor doctor) {
