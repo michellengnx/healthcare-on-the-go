@@ -3,6 +3,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import use_case.CreateRequest.ApiAccessException;
 import use_case.CreateRequest.InvalidLocationException;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ApiAccessObject {
-    private String apiKey;
+    private final String apiKey;
 
     public ApiAccessObject(String apiKey) {
         this.apiKey = apiKey;
@@ -26,7 +27,7 @@ public class ApiAccessObject {
      * @return The distance from start to end
      * @throws InvalidLocationException One of the inputted locations has invalid
      */
-    public float getDistance(String start, String end) throws InvalidLocationException {
+    public float getDistance(String start, String end) throws InvalidLocationException, ApiAccessException {
         List<String> fields = new ArrayList<>();
         fields.add("distance");
         return requestRoutingData(start, end, fields).get("distance") / 10;
@@ -40,7 +41,7 @@ public class ApiAccessObject {
      * @return The ETA from start to end
      * @throws InvalidLocationException One of the inputted locations has invalid
      */
-    public float getEta(String start, String end) throws InvalidLocationException {
+    public float getEta(String start, String end) throws InvalidLocationException, ApiAccessException {
         List<String> fields = new ArrayList<>();
         fields.add("eta");
         return requestRoutingData(start, end, fields).get("eta");
@@ -54,7 +55,7 @@ public class ApiAccessObject {
      * @return The travel price from start to end
      * @throws InvalidLocationException One of the inputted locations has invalid
      */
-    public float getPrice(String start, String end) throws InvalidLocationException {
+    public float getPrice(String start, String end) throws InvalidLocationException, ApiAccessException {
         List<String> fields = new ArrayList<>();
         fields.add("eta");
         fields.add("distance");
@@ -70,7 +71,7 @@ public class ApiAccessObject {
      * @return A URL for an image that displays a route from start to end
      * @throws InvalidLocationException One of the inputted locations has invalid
      */
-    public String getTrafficMap(String start, String end) throws InvalidLocationException {
+    public String getTrafficMap(String start, String end) throws InvalidLocationException, ApiAccessException {
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl httpUrl = new HttpUrl.Builder()
@@ -97,7 +98,7 @@ public class ApiAccessObject {
                 throw new InvalidLocationException("Invalid location");
             }
         } catch (IOException | JSONException e) {
-            throw new InvalidLocationException("Invalid location");
+            throw new ApiAccessException();
         }
     }
 
@@ -110,7 +111,7 @@ public class ApiAccessObject {
      * @return Map from strings that denote fields, to floats, that denote information corresponding to said field
      * @throws InvalidLocationException Either the start or end location was invalid
      */
-    private Map<String, Float> requestRoutingData(String start, String end, List<String> fields) throws InvalidLocationException {
+    private Map<String, Float> requestRoutingData(String start, String end, List<String> fields) throws InvalidLocationException, ApiAccessException {
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl httpUrl = new HttpUrl.Builder()
@@ -144,7 +145,7 @@ public class ApiAccessObject {
                 throw new InvalidLocationException("Invalid location");
             }
         } catch (IOException | JSONException e) {
-            throw new InvalidLocationException("Invalid location");
+            throw new ApiAccessException();
         }
     }
 }

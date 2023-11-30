@@ -16,7 +16,7 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
      * @param endLoc Address/name representing the end location.
      * @return The distance by car from startLoc to endLoc by car.
      */
-    public float getDistance(String startLoc, String endLoc) throws InvalidLocationException;
+    public float getDistance(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 
     /**
      * Return the estimated time or arrival from startLoc to endLoc by car.
@@ -25,7 +25,7 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
      * @param endLoc Address/name representing the end location.
      * @return The estimated time or arrival from startLoc to endLoc by car.
      */
-    public float getEta(String startLoc, String endLoc) throws InvalidLocationException;
+    public float getEta(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 
     /**
      * Return the price of a car ride from startLoc to endLoc by car.
@@ -34,5 +34,5 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
      * @param endLoc Address/name representing the end location.
      * @return The estimated price of a car ride from startLoc to endLoc by car.
      */
-    public float getPrice(String startLoc, String endLoc) throws InvalidLocationException;
+    public float getPrice(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 }
