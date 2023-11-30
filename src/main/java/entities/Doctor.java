@@ -47,4 +47,8 @@ public class Doctor extends User {
     public void setBusy(boolean busy) {
         isBusy = busy;
     }
+
+    public Integer getId_() {
+        return id_;
+    }
 }
