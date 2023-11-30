@@ -19,20 +19,20 @@ import java.util.*;
 public class DoctorDataAccessObject {
     private final String doctorFilePath;
     private final String servicesFilePath;
-    private final String reviewsFilePath;
     private final List<Doctor> doctorList = new ArrayList<>();
 
 
-    public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath, String reviewsFilePath) {
+    public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath) {
         this.doctorFilePath = doctorFilePath;
         this.servicesFilePath = servicesFilePath;
-        this.reviewsFilePath = reviewsFilePath;
 
         try {
             Map<String, Service> availableServices = getServices();
             FileReader filereader = new FileReader(doctorFilePath);
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
+
+            csvReader.readNext();
 
             while ((nextRecord = csvReader.readNext()) != null) {
                 String username = nextRecord[0];
@@ -55,7 +55,6 @@ public class DoctorDataAccessObject {
                     }
                 }
 
-                List<Review> reviews = new ArrayList<>();
                 Doctor newDoctor = new Doctor(
                         username,
                         password,
@@ -84,6 +83,7 @@ public class DoctorDataAccessObject {
             FileReader filereader = new FileReader(this.servicesFilePath);
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
+            csvReader.readNext();
 
             while ((nextRecord = csvReader.readNext()) != null) {
                 String serviceName = nextRecord[0];
@@ -99,7 +99,7 @@ public class DoctorDataAccessObject {
     }
 
     private void save() {
-        File file = new File(this.reviewsFilePath);
+        File file = new File(this.doctorFilePath);
         try {
             // create FileWriter object with file as parameter
             FileWriter outputfile = new FileWriter(file);
