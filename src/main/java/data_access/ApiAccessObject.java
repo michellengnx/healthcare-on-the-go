@@ -91,6 +91,15 @@ public class ApiAccessObject {
         }
     }
 
+    /**
+     * Helper function that calls the api and requests routing information. Returns information relevant to
+     * the public methods. This function ought ot be modified if more public methods are added.
+     *
+     * @param start The start location
+     * @param end The end location
+     * @return Map from strings that denote fields, to floats, that denote information corresponding to said field
+     * @throws InvalidLocationException Either the start or end location was invalid
+     */
     private Map<String, Float> requestDistanceAndEta(String start, String end) throws InvalidLocationException {
         OkHttpClient client = new OkHttpClient();
 
