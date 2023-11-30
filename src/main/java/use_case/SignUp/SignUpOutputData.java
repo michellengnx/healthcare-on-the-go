@@ -25,4 +25,7 @@ public class SignUpOutputData {
         this.creationTime = creationTime;
     }
 
+    public boolean getUseCaseFailed() {
+        return useCaseFailed;
+    }
 }
