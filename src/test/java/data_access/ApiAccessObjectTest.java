@@ -8,7 +8,7 @@ import use_case.CreateRequest.InvalidLocationException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ApiAccessObjectTest {
-    private ApiAccessObject apiAccessObject = new ApiAccessObject("pnI7fJLjm5NikjPKjrFHxFb1oW7rwmWx");
+    private ApiAccessObject apiAccessObject = new ApiAccessObject("");
 
     @Test
     void testGetEta() {
