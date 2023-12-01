@@ -60,7 +60,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         // create doctor matcher and variables to store matched doctor
         DoctorMatchingStrategy lowestEtaStrategy;
         DoctorMatcher matcher;
-        ServiceRequest request;
+        ServiceRequest request = null;
 
         // create a doctor matcher and attempt to create a service request
         try {
@@ -84,6 +84,9 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No available doctors!");
             return;
+        } catch (ApiAccessException e) {
+            this.completeRequestPresenter.prepareFailView("There was a problem accessing the API, please try again later!");
+            return;
         }
 
         // save the user's request and mark the doctor as busy
@@ -101,7 +104,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
      * @param destination The destination to which the doctor is traveling.
      * @return A Map from available doctors to their ETA to destination.
      */
-    private Map<Doctor, Float> createDoctorEtaMap(String destination) throws InvalidLocationException {
+    private Map<Doctor, Float> createDoctorEtaMap(String destination) throws InvalidLocationException, ApiAccessException {
         List<Doctor> availableDoctors = this.doctorDataAccessObject.getAvailableDoctors();
         Map<Doctor, Float> doctorEtaMap = new HashMap<>();
 
