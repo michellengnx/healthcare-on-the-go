@@ -1,7 +1,6 @@
 package interface_adapter.edited_profile;
 
 public class EditedState {
-    private String username = "";
     private String password = "";
     private String email = "";
     private String phoneNumber = "";
@@ -15,7 +14,6 @@ public class EditedState {
     private String emergencyRelationship = "";
 
     public EditedState(EditedState copy) {
-        username = copy.username;
         password = copy.password;
         email = copy.email;
         phoneNumber = copy.phoneNumber;
