@@ -27,18 +27,17 @@ public class ResolveRequestPresenter implements ResolveRequestOutputBoundary {
     }
 
     /**
+     * @param errorMsg
+     */
+    @Override
+    public void prepareFailView(String errorMsg) {
+
+    }
+}
+
+    /**
      * Set the error message of the viewRequest state.
      *
      * @param error The error message to be sent.
      */
-    @Override
-    public void prepareFailView(String error) {
-        // Create a new CreateRequestState with the given error message
-        ViewRequestState viewRequestState = this.viewRequestViewModel.getState();
-        viewRequestState.setViewRequestError(error);
 
-        // alert the view of the state change
-        this.viewRequestViewModel.setState(viewRequestState);
-        this.viewRequestViewModel.firePropertyChanged();
-    }
-}
