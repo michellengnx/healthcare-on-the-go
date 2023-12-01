@@ -5,6 +5,7 @@ import data_access.FilePatientDataAccessObject;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
+import use_case.LockView.LockViewModel;
 import use_case.SignUp.SignUpInputData;
 import use_case.SignUp.SignUpInteractor;
 import use_case.SignUp.SignUpOutputData;
@@ -23,9 +24,11 @@ public class LockView extends JFrame implements ActionListener {
     private JButton signup;
     private JPanel labelPanel;
     private JLabel welcome;
-    public LockView(){
-        this.login = new JButton("login");
-        this.signup = new JButton("signup");
+    private LockViewModel lockViewModel;
+    public LockView(LockViewModel lockViewModel){
+        this.lockViewModel = lockViewModel;
+        this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
+        this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
         this.buttonPanel = new JPanel(new FlowLayout());
         this.labelPanel = new JPanel(new FlowLayout());
         this.setSize(800,600);
@@ -48,12 +51,12 @@ public class LockView extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+
     }
 
 
     public static void main(String[] args) throws IOException, ParseException {
         FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("/data/patinets.csv");
-        new LockView();
 
     }
 }
