@@ -25,7 +25,6 @@ public class EditPresenter implements EditOutputBoundary {
     public void prepareSuccessView(EditOutputData response) {
 
         EditedState editedState = editedViewModel.getState();
-        editedState.setUsername(response.getUsername());
         editedState.setPassword(response.getPassword());
         editedState.setEmail(response.getEmail());
         editedState.setPhoneNumber(response.getPhoneNumber());
@@ -47,7 +46,6 @@ public class EditPresenter implements EditOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         EditState editState = editViewModel.getState();
-        editState.setUsernameError(error);
         editState.setPasswordError(error);
         editViewModel.firePropertyChanged();
     }
