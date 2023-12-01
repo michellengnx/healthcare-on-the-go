@@ -1,5 +1,9 @@
 package interface_adapter.edited_profile;
 
+/**
+ * Represents the state of an edited profile, containing various fields such as password, email, phone number,
+ * insurance details, credit card information, and emergency contact details.
+ */
 public class EditedState {
     private String password = "";
     private String email = "";
@@ -13,6 +17,11 @@ public class EditedState {
     private String emergencyNumber = "";
     private String emergencyRelationship = "";
 
+    /**
+     * Constructs an EditedState object by copying the content of another EditedState object.
+     *
+     * @param copy The EditedState object to copy.
+     */
     public EditedState(EditedState copy) {
         password = copy.password;
         email = copy.email;
@@ -27,6 +36,9 @@ public class EditedState {
         emergencyRelationship = copy.emergencyRelationship;
     }
 
+    /**
+     * Constructs an empty EditedState object.
+     */
     public EditedState() {}
 
     public String getPassword() {

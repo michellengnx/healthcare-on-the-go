@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Represents the view for displaying an edited profile.
+ */
 public class EditedView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "edited";
     private final EditedViewModel editedViewModel;
@@ -27,7 +30,9 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
     final JButton returnHomePage;
 
     /**
-     * A window with a title and a JButton.
+     * Constructs an EditedView object.
+     * * A window with a title and a JButton.
+     * @param editedViewModel The view model associated with the edited profile view.
      */
     public EditedView(EditedViewModel editedViewModel) {
         this.editedViewModel = editedViewModel;
@@ -81,6 +86,11 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Handles changes in the property.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditedState state = (EditedState) evt.getNewValue();

@@ -6,16 +6,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Interactor responsible for handling the editing of a patient's profile.
+ */
 public class EditInteractor implements EditInputBoundary {
 
     final EditPatientDataAccessInterface patientDataAccessObject;
     final EditOutputBoundary editPresenter;
 
+    /**
+     * Constructs an EditInteractor.
+     *
+     * @param patientDataAccessInterface the data access object to retrieve and modify patient data.
+     * @param editOutputBoundary the presenter to handle output for successful and failed edits.
+     */
     public EditInteractor(EditPatientDataAccessInterface patientDataAccessInterface,
                           EditOutputBoundary editOutputBoundary) {
         this.patientDataAccessObject = patientDataAccessInterface;
         this.editPresenter = editOutputBoundary;
     }
+
+    /**
+     * Executes the edit operation based on the provided input data.
+     *
+     * @param editInputData The input data containing information for profile editing.
+     */
     @Override
     public void execute(EditInputData editInputData) {
         String username = editInputData.getUsername();
@@ -53,6 +68,12 @@ public class EditInteractor implements EditInputBoundary {
         }
     }
 
+    /**
+     * Checks if any changes have been made.
+     *
+     * @param list The list of changes made during the edit operation.
+     * @return True if no changes occurred, the list is only populated with zeros, otherwise false.
+     */
     private boolean noChanges(Integer[] list) {
         for (Integer num: list) {
             if (num != 0) {

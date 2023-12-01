@@ -1,5 +1,8 @@
 package interface_adapter.edit_profile;
 // these fields will be populated by the homeviewmodel, which is populated by loginviewmodel, which is populated by signupviewmodel
+/**
+ * An object used to store the user's input data when editing a patient profile.
+ */
 public class EditState {
     private String username = "";
     private String password = "";
@@ -15,6 +18,11 @@ public class EditState {
     private String emergencyNumber = "";
     private String emergencyRelationship = "";
 
+    /**
+     * Constructs an EditState object by copying the content of another EditState object.
+     *
+     * @param copy The EditState object to copy.
+     */
     public EditState(EditState copy) {
         username = copy.username;
         password = copy.password;
@@ -31,6 +39,9 @@ public class EditState {
         emergencyRelationship = copy.emergencyRelationship;
     }
 
+    /**
+     * Constructs an empty EditState object.
+     */
     public EditState() {}
 
     public String getUsername() {

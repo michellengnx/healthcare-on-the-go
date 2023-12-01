@@ -14,6 +14,9 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test class for the EditInteractor that handles editing a patient's profile.
+ */
 public class EditProfileInteractorTest {
     private EditPatientDataAccessInterface patientDataAccessInterface;
     private EditOutputBoundary successPresenter;
@@ -33,6 +36,9 @@ public class EditProfileInteractorTest {
                     "patient smith"),
             new EmergencyContact("dad smith", "123-123-1234", "dad"));
 
+    /**
+     * Sets up the test environment by adding a sample patient to the file data access object.
+     */
     @BeforeEach
     public void addPatient() {
         try {
@@ -49,6 +55,9 @@ public class EditProfileInteractorTest {
         }
     }
 
+    /**
+     * Test to verify successful editing of a patient's profile.
+     */
     @Test
     void successTest() {
         EditInputData inputData = new EditInputData(

@@ -5,6 +5,9 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * ViewModel responsible for managing the state of the Edit Profile view.
+ */
 public class EditViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Edit View";
@@ -27,27 +30,48 @@ public class EditViewModel extends ViewModel {
     public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit profile";
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
-    // all the fields are empty here
+    // Represents the state of the Edit Profile view
     private EditState state = new EditState();
 
+    /**
+     * Constructs an EditViewModel object.
+     */
     public EditViewModel() {
         super("edit");
     }
 
+    /**
+     * Sets the state of the Edit Profile view.
+     *
+     * @param state The EditState object representing the view state.
+     */
     public void setState(EditState state) {
         this.state = state;
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    /**
+     * Notifies listeners about the change in the state of the view.
+     */
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
 
+    /**
+     * Adds a PropertyChangeListener to monitor changes in the view state.
+     *
+     * @param listener The PropertyChangeListener to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Retrieves the current state of the Edit Profile view.
+     *
+     * @return The current EditState representing the view's state.
+     */
     public EditState getState() {
         return state;
     }

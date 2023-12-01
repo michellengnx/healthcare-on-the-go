@@ -451,6 +451,11 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Handles changes in the property.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditState state = (EditState) evt.getNewValue();
@@ -466,6 +471,11 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         }
     }
 
+    /**
+     * Sets the input fields based on the state data.
+     *
+     * @param state The state containing user profile information.
+     */
     private void setFields(EditState state) {
         usernameInputField.setText(state.getUsername());
         passwordInputField.setText(state.getPassword());

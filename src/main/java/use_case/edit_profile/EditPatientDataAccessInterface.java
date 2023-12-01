@@ -4,6 +4,9 @@ import entities.Patient;
 
 import java.util.List;
 
+/**
+ * Interface defining methods to access and modify patient data.
+ */
 public interface EditPatientDataAccessInterface {
 
     void save(Patient patient);

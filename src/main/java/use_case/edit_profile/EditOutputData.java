@@ -1,5 +1,8 @@
 package use_case.edit_profile;
 
+/**
+ * Data class representing output after editing a profile.
+ */
 public class EditOutputData {
     private final String password;
     private final String email;
@@ -14,6 +17,23 @@ public class EditOutputData {
     private final String emergencyRelationship;
 
     private boolean useCaseFailed;
+
+    /**
+     * Constructor to initialize the output data after editing a profile.
+     *
+     * @param password the updated password.
+     * @param email the updated email.
+     * @param phoneNumber the updated phone number.
+     * @param insurance the updated insurance information.
+     * @param creditCardNumber the updated credit card number.
+     * @param cvv the updated CVV.
+     * @param expirationDate the updated expiration date of the credit card.
+     * @param nameOnCard the updated name on the card.
+     * @param emergencyName the updated emergency contact's name.
+     * @param emergencyNumber the updated emergency contact's phone number.
+     * @param emergencyRelationship the updated relationship with the emergency contact.
+     * @param useCaseFailed flag indicating if the use case failed.
+     */
 
     public EditOutputData(String password, String email, String phoneNumber, String insurance,
                           String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
