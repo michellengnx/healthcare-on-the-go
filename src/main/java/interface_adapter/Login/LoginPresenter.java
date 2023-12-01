@@ -1,8 +1,6 @@
 package interface_adapter.Login;
 
 
-import interface_adapter.Loggedin.LoggedinState;
-import interface_adapter.Loggedin.LoggedinViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.Login.LoginOutputBoundary;
 import use_case.Login.LoginOutputData;
@@ -10,11 +8,11 @@ import use_case.Login.LoginOutputData;
 public class LoginPresenter implements LoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
-    private final LoggedinViewModel loggedInViewModel;
+    private final LoggedInViewModel loggedInViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public LoginPresenter(ViewManagerModel viewManagerModel,
-                          LoggedinViewModel loggedInViewModel,
+                          LoggedInViewModel loggedInViewModel,
                           LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.loggedInViewModel = loggedInViewModel;
@@ -25,9 +23,9 @@ public class LoginPresenter implements LoginOutputBoundary {
     public void prepareSuccessView(LoginOutputData response) {
         // On success, switch to the logged in view.
 
-        LoggedinState loggedinState = loggedInViewModel.getState();
-        loggedinState.setUsername(response.getUsername());
-        this.loggedInViewModel.setState(loggedinState);
+        LoggedInState loggedInState = loggedInViewModel.getState();
+        loggedInState.setUsername(response.getUsername());
+        this.loggedInViewModel.setState(loggedInState);
         this.loggedInViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
