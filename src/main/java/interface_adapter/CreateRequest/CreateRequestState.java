@@ -11,15 +11,14 @@ public class CreateRequestState {
     private String destination = null;
     private Service service = null;
     private String createRequestError = null;
-    private final Patient patient;
+    private Patient patient;
 
     /**
      * Create a new CreateRequestState with a given patient.
      *
-     * @param patient The patient creating the request.
      */
-    public CreateRequestState(Patient patient) {
-        this.patient = patient;
+    public CreateRequestState() {
+
     }
 
     public Integer getUrgencyLevel() {
@@ -56,5 +55,9 @@ public class CreateRequestState {
 
     public void setCreateRequestError(String createRequestError) {
         this.createRequestError = createRequestError;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

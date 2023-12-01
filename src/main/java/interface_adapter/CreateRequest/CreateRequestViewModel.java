@@ -23,11 +23,10 @@ public class CreateRequestViewModel extends ViewModel {
     /**
      * Create a CreateRequestViewModel object with a given patient.
      *
-     * @param patient The patient creating the request.
      */
-    public CreateRequestViewModel(Patient patient) {
+    public CreateRequestViewModel() {
         super("create request");
-        this.state = new CreateRequestState(patient);
+        this.state = new CreateRequestState();
     }
 
     public void setState(CreateRequestState state) {
