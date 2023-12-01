@@ -120,10 +120,6 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        if (!homeScreenViewModel.getState().isActiveRequest()) {
-            requestView.setVisible(false);
-        }
-
         this.add(title);
         this.add(requestView);
         this.add(buttons);
@@ -152,7 +148,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
 
     private void switchScreen(ActionEvent evt, JButton buttonPressed, String viewName) {
         HomeScreenState homeScreenState = homeScreenViewModel.getState();
-        homeScreenState.setActiveRequest(false);
+        requestView.setVisible(false);
         homeScreenViewModel.setState(homeScreenState);
         homeScreenViewModel.firePropertyChanged();
 
@@ -160,6 +156,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             homeScreenController.execute(
                     "create request"
             );
+            requestView.setVisible(true);
         }
     }
 }
