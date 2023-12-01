@@ -14,6 +14,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Manages data access for patient profiles using a CSV file as the data store.
+ */
 // add implements LoginUserDataAccessInterface
 public class FilePatientDataAccessObject implements EditPatientDataAccessInterface, SignUpUserDataAccessInterface {
 
@@ -119,6 +122,13 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
+
+    /**
+     * Checks whether the provided password meets the required criteria.
+     *
+     * @param password The password to validate.
+     * @return True if the password meets the specified criteria, otherwise false.
+     */
     @Override
     public boolean hasValidPassword(String password) {
         // Regex to check valid password.
@@ -153,23 +163,24 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     }
 
     /**
-     * Edit the profile of a patient
-     * @param username that is associated with the user's profile (not editable).
-     * @param password that the patient wants to be associated with.
-     * @param email that the patient wants to be associated with.
-     * @param phoneNumber that the patient wants to be associated with.
-     * @param insurance that the patient wants to be associated with.
-     * @param creditCardNumber that the patient wants to be associated with.
-     * @param cvv that the patient wants to be associated with.
-     * @param expirationDate that the patient wants to be associated with.
-     * @param nameOnCard that the patient wants to be associated with.
-     * @param emergencyName that the patient wants to be associated with.
-     * @param emergencyNumber that the patient wants to be associated with.
-     * @param emergencyRelationship that the patient wants to be associated with.
-     * @return
-     * 0 if no changes have been found in a field,
-     * 1 if a successful change was found,
-     * -1 if an unsuccessful chang was found.
+     * Edits the profile of a patient.
+     *
+     * @param username the username associated with the user's profile (not editable).
+     * @param password the new password for the patient.
+     * @param email the new email for the patient.
+     * @param phoneNumber the new phone number for the patient.
+     * @param insurance the new insurance information for the patient.
+     * @param creditCardNumber the new credit card number for the patient.
+     * @param cvv the new CVV for the patient's credit card.
+     * @param expirationDate the new expiration date for the patient's credit card.
+     * @param nameOnCard the new name on the credit card for the patient.
+     * @param emergencyName the new emergency contact name for the patient.
+     * @param emergencyNumber the new emergency contact number for the patient.
+     * @param emergencyRelationship the new relationship with the emergency contact for the patient.
+     * @return An array representing changes made:
+     *         - 0 if no changes have been found in a field,
+     *         - 1 if a successful change was found,
+     *         - -1 if an unsuccessful change was found.
      */
     // add password validator
     @Override
@@ -212,11 +223,23 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         return changes;
     }
 
+    /**
+     * Checks whether a user exists with a specific username.
+     *
+     * @param username The username to check.
+     * @return True if a user exists with the provided username, otherwise false.
+     */
     @Override
     public boolean existsByUsername(String username) {
         return accounts.containsKey(username);
     }
 
+    /**
+     * Checks whether a user exists with a specific email.
+     *
+     * @param email The email to check.
+     * @return True if a user exists with the provided email, otherwise false.
+     */
 //    TODO: implement
     @Override
     public boolean existsByEmail(String email) {

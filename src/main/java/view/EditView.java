@@ -13,6 +13,9 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Represents the view for editing a user profile.
+ */
 public class EditView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "edit";
@@ -24,7 +27,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     final JTextField emailInputField = new JTextField(15);
 
-    /** 10-digit Canadian phone number */
     final JTextField phoneNumberInputField = new JTextField(15);
 
     final JTextField insuranceInputField = new JTextField(15);
@@ -50,6 +52,12 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
     private final JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
 
+    /**
+     * Constructs an EditView object.
+     *
+     * @param editViewModel the view model associated with the edit profile view.
+     * @param controller the controller handling edit profile actions.
+     */
     public EditView(EditViewModel editViewModel, EditController controller) {
 
         this.editController = controller;
@@ -465,7 +473,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         phoneNumberInputField.setText(state.getPhoneNumber());
         insuranceInputField.setText(state.getInsurance());
         creditCardNumberInputField.setText(state.getCreditCardNumber());
-        // cvvInputField.setText(state.getCvv());
+        cvvInputField.setText(String.valueOf(state.getCvv()));
         expirationDateInputField.setText(state.getExpirationDate());
         nameOnCardInputField.setText(state.getNameOnCard());
         emergencyNameInputField.setText(state.getEmergencyName());
