@@ -99,7 +99,7 @@ public class ViewRequestsView extends JFrame implements ActionListener {
         FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requests.csv");
 
 
-        ArrayList<ArrayList<String>> data = fileRequestDataAccessObject.getRequestUser("patient1");
+        ArrayList<ArrayList<String>> data = fileRequestDataAccessObject.getRequestUser("patient2");
         // Example instantiation of ViewRequestViewModel
         ViewRequestViewModel viewModel = new ViewRequestViewModel();
         viewModel.setViewRequestState(new ViewRequestState(data));
