@@ -56,7 +56,7 @@ public class CreateRequestState {
         this.createRequestError = createRequestError;
     }
 
-    public void setPatientName(String patientName) {
+    public void setPatient(String patientName) {
         this.patientName = patientName;
     }
 }
