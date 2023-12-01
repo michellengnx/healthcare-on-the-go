@@ -1,6 +1,5 @@
 package interface_adapter.ResolveRequest;
 
-import interface_adapter.ViewRequest.ViewRequestState;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import use_case.ResolveRequest.ResolveRequestOutputBoundary;
 

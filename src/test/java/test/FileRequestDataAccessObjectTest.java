@@ -100,6 +100,7 @@ class FileRequestDataAccessObjectTest {
         fileRequestDataAccessObject.addRequest(request, patient.getUsername());
         ViewRequestUseCase viewRequestUseCase = new ViewRequestUseCase(fileRequestDataAccessObject);
         ArrayList<ArrayList<String>> patientRequests = viewRequestUseCase.getRequestDetails("patient1");
+        fileRequestDataAccessObject.clear();
 
         // Assert that 'result' and 'patientRequests' are equal
         assertEquals(result.size(), patientRequests.size(), "Sizes of result and patientRequests should be equal");

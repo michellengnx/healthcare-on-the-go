@@ -110,6 +110,13 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         }
         requests.put(requests.size(), list);
         this.save();
+
+
+    }
+    @Override
+    public void clear() {
+        requests.clear(); // Clear all requests except headers
+        save(); // Save the changes to the file (empty content)
     }
 
 
