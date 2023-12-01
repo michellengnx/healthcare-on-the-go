@@ -3,7 +3,7 @@ package data_access;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.CreateRequest.ApiAccessException;
-import use_case.CreateRequest.InvalidLocationException;
+import entities.factories.service_request.InvalidLocationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

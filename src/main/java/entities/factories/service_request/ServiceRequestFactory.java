@@ -31,7 +31,7 @@ public class ServiceRequestFactory {
                                  Service service,
                                  String destination,
                                  int urgencyLevel,
-                                 Date creationTime) throws NoAvailableDoctorException, InvalidLocationException {
+                                 Date creationTime) throws NoAvailableDoctorException, InvalidLocationException, DataUnavailableException {
         Doctor doctor = doctorMatcher.match();
         float price = travelCostCalculator.getPrice(doctor.getLocation(), destination) + service.getPrice();
         float eta = etaCalculator.getEta(doctor.getLocation(), destination);

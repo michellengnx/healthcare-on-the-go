@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import use_case.CreateRequest.ApiAccessException;
-import use_case.CreateRequest.InvalidLocationException;
+import entities.factories.service_request.InvalidLocationException;
 
 import java.io.IOException;
 import java.util.ArrayList;

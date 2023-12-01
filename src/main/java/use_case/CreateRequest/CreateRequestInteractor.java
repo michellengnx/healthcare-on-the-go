@@ -84,7 +84,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         } catch (NoAvailableDoctorException e) {
             this.completeRequestPresenter.prepareFailView("No available doctors!");
             return;
-        } catch (ApiAccessException e) {
+        } catch (DataUnavailableException e) {
             this.completeRequestPresenter.prepareFailView("There was a problem accessing the API, please try again later!");
             return;
         }
