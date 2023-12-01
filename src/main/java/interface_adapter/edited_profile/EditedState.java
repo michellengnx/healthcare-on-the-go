@@ -1,25 +1,45 @@
 package interface_adapter.edited_profile;
 
+/**
+ * Represents the state of an edited profile, containing various fields such as password, email, phone number,
+ * insurance details, credit card information, and emergency contact details.
+ */
 public class EditedState {
-    private String username = "";
     private String password = "";
     private String email = "";
     private String phoneNumber = "";
     private String insurance = "";
+    private String creditCardNumber = "";
+    private Integer cvv = 0;
+    private String expirationDate = "";
+    private String nameOnCard = "";
+    private String emergencyName = "";
+    private String emergencyNumber = "";
+    private String emergencyRelationship = "";
 
+    /**
+     * Constructs an EditedState object by copying the content of another EditedState object.
+     *
+     * @param copy The EditedState object to copy.
+     */
     public EditedState(EditedState copy) {
-        username = copy.username;
         password = copy.password;
         email = copy.email;
         phoneNumber = copy.phoneNumber;
         insurance = copy.insurance;
+        creditCardNumber = copy.creditCardNumber;
+        cvv = copy.cvv;
+        expirationDate = copy.expirationDate;
+        nameOnCard = copy.nameOnCard;
+        emergencyName = copy.emergencyName;
+        emergencyNumber = copy.emergencyNumber;
+        emergencyRelationship = copy.emergencyRelationship;
     }
 
+    /**
+     * Constructs an empty EditedState object.
+     */
     public EditedState() {}
-
-    public String getUsername() {
-        return username;
-    }
 
     public String getPassword() {
         return password;
@@ -37,8 +57,32 @@ public class EditedState {
         return insurance;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public Integer getCvv() {
+        return cvv;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public String getEmergencyName() {
+        return emergencyName;
+    }
+
+    public String getEmergencyNumber() {
+        return emergencyNumber;
+    }
+
+    public String getEmergencyRelationship() {
+        return emergencyRelationship;
     }
 
     public void setPassword(String password) {
@@ -57,4 +101,31 @@ public class EditedState {
         this.insurance = insurance;
     }
 
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public void setCvv(Integer cvv) {
+        this.cvv = cvv;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
+
+    public void setEmergencyName(String emergencyName) {
+        this.emergencyName = emergencyName;
+    }
+
+    public void setEmergencyNumber(String emergencyNumber) {
+        this.emergencyNumber = emergencyNumber;
+    }
+
+    public void setEmergencyRelationship(String emergencyRelationship) {
+        this.emergencyRelationship = emergencyRelationship;
+    }
 }
