@@ -9,15 +9,14 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class EditProfileInteractorTest {
-    private EditInputData editInputData;
     private EditPatientDataAccessInterface patientDataAccessInterface;
+    private EditOutputBoundary successPresenter;
 
     private final Patient samplePatient = new Patient(
             "patient1",
@@ -34,55 +33,26 @@ public class EditProfileInteractorTest {
                     "patient smith"),
             new EmergencyContact("dad smith", "123-123-1234", "dad"));
 
-    /**
-     * ensures there is at least 1 user in the CSV file for testing purposes
-     */
     @BeforeEach
     public void addPatient() {
-        FilePatientDataAccessObject fudao;
         try {
-            // Clear the file content before adding a new patient
             PrintWriter writer = new PrintWriter("./users.csv");
             writer.print("");
             writer.close();
 
-            fudao = new FilePatientDataAccessObject("./users.csv");
+            FilePatientDataAccessObject fudao = new FilePatientDataAccessObject("./users.csv");
+            fudao.save(samplePatient);
+
+            patientDataAccessInterface = fudao;
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
-
-        fudao.save(samplePatient);
     }
 
     @Test
-    void successTest() throws IOException, ParseException {
-        EditOutputBoundary successPresenter = new EditOutputBoundary() {
-            @Override
-            public void prepareSuccessView(EditOutputData patient) {
-                assertEquals(samplePatient.getUsername(), editInputData.getUsername());
-                assertEquals(samplePatient.getPassword(), editInputData.getPassword());
-                assertEquals(samplePatient.getEmail(), editInputData.getEmail());
-                assertEquals(samplePatient.getPhoneNumber(), editInputData.getPhoneNumber());
-                assertEquals(samplePatient.getInsurance(), editInputData.getInsurance());
-                assertEquals(samplePatient.getCreditCard().getCreditCardNumber(), editInputData.getCreditCardNumber());
-                assertEquals(samplePatient.getCreditCard().getCcv(), editInputData.getCvv());
-                assertEquals(samplePatient.getCreditCard().getExpirationDate(), editInputData.getExpirationDate());
-                assertEquals(samplePatient.getCreditCard().getNameOnCard(), editInputData.getNameOnCard());
-                assertEquals(samplePatient.getEmergencyContact().getName(), editInputData.getEmergencyName());
-                assertEquals(samplePatient.getEmergencyContact().getPhoneNumber(), editInputData.getEmergencyNumber());
-                assertEquals(samplePatient.getEmergencyContact().getRelationship(), editInputData.getEmergencyRelationship());
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected");
-
-            }
-
-        };
+    void successTest() {
         EditInputData inputData = new EditInputData(
                 "patient1",
-                "kayumova",
                 "Abcd123@",
                 "izora.kayumova@mail.utoronto.ca",
                 "437-241-3083",
@@ -94,7 +64,30 @@ public class EditProfileInteractorTest {
                 "mama Smith",
                 "125-125-1235",
                 "mom");
-        patientDataAccessInterface = new FilePatientDataAccessObject("./user.csv");
+
+        successPresenter = new EditOutputBoundary() {
+            @Override
+            public void prepareSuccessView(EditOutputData patient) {
+                assertEquals(samplePatient.getUsername(), inputData.getUsername());
+                assertEquals(samplePatient.getPassword(), inputData.getPassword());
+                assertEquals(samplePatient.getEmail(), inputData.getEmail());
+                assertEquals(samplePatient.getPhoneNumber(), inputData.getPhoneNumber());
+                assertEquals(samplePatient.getInsurance(), inputData.getInsurance());
+                assertEquals(samplePatient.getCreditCard().getCreditCardNumber(), inputData.getCreditCardNumber());
+                assertEquals(samplePatient.getCreditCard().getCcv(), inputData.getCvv());
+                assertEquals(samplePatient.getCreditCard().getExpirationDate(), inputData.getExpirationDate());
+                assertEquals(samplePatient.getCreditCard().getNameOnCard(), inputData.getNameOnCard());
+                assertEquals(samplePatient.getEmergencyContact().getName(), inputData.getEmergencyName());
+                assertEquals(samplePatient.getEmergencyContact().getPhoneNumber(), inputData.getEmergencyNumber());
+                assertEquals(samplePatient.getEmergencyContact().getRelationship(), inputData.getEmergencyRelationship());
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected");
+            }
+        };
+
         EditInputBoundary interactor = new EditInteractor(patientDataAccessInterface, successPresenter);
         interactor.execute(inputData);
     }
