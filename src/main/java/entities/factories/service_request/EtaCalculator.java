@@ -8,5 +8,5 @@ public interface EtaCalculator {
      * @param endLoc Address/name representing the end location.
      * @return The estimated time or arrival from startLoc to endLoc by car.
      */
-    public float getEta(String startLoc, String endLoc) throws InvalidLocationException;
+    public float getEta(String startLoc, String endLoc) throws InvalidLocationException, DataUnavailableException;
 }

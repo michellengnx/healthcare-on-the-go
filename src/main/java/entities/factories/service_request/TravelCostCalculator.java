@@ -8,5 +8,5 @@ public interface TravelCostCalculator {
      * @param endLoc Address/name representing the end location.
      * @return The estimated price of a car ride from startLoc to endLoc by car.
      */
-    public float getPrice(String startLoc, String endLoc) throws InvalidLocationException;
+    public float getPrice(String startLoc, String endLoc) throws InvalidLocationException, DataUnavailableException;
 }
