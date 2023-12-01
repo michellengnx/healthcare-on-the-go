@@ -67,7 +67,6 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditedState state = (EditedState) evt.getNewValue();
-        username.setText(state.getUsername());
         password.setText(state.getPassword());
         email.setText(state.getEmail());
         phoneNumber.setText(state.getPhoneNumber());

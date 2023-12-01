@@ -1,0 +1,2 @@
+username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship
+patient1,Abcd123@,izora.kayumova@mail.utoronto.ca,437-241-3083,male,GSC Everywhere,Thu Nov 30 23:29:14 EST 2023,0123456789,456,08/26,patient Eve,mama Smith,125-125-1235,mom
