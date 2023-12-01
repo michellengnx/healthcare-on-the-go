@@ -11,6 +11,7 @@ import view.CreateRequestView;
 public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     private CreateRequestViewModel createRequestViewModel;
     private ViewRequestViewModel viewRequestViewModel;
+    private HomeScreenViewModel homeScreenViewModel;
     private ViewManagerModel viewManagerModel;
 
     /**
@@ -21,10 +22,12 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
      */
     public HomeScreenPresenter(CreateRequestViewModel createRequestViewModel,
                                ViewRequestViewModel viewRequestViewModel,
-                               ViewManagerModel viewManagerModel) {
+                               ViewManagerModel viewManagerModel,
+                               HomeScreenViewModel homeScreenViewModel) {
         this.createRequestViewModel = createRequestViewModel;
         this.viewRequestViewModel = viewRequestViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.homeScreenViewModel = homeScreenViewModel;
     }
 
     /**
@@ -36,6 +39,8 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     public void prepareSuccessView(HomeScreenOutputData outputData) {
         switch(outputData.getViewName()) {
             case "create request":
+                CreateRequestState createRequestState = createRequestViewModel.getState();
+                createRequestState.setPatient(homeScreenViewModel.getState().getPatient());
                 this.viewManagerModel.setActiveView(createRequestViewModel.getViewName());
                 break;
             case "logout":

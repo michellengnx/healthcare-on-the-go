@@ -19,19 +19,22 @@ public class HomeScreenUseCaseFactory {
         HomeScreenController homeScreenController = createHomeScreenUseCase(
                 viewManagerModel,
                 createRequestViewModel,
-                viewRequestViewModel);
+                viewRequestViewModel,
+                homeScreenViewModel);
         return new HomeScreenView(homeScreenController, homeScreenViewModel);
 
     }
 
     private static HomeScreenController createHomeScreenUseCase(ViewManagerModel viewManagerModel,
-                                                                   CreateRequestViewModel createRequestViewModel,
-                                                                   ViewRequestViewModel viewRequestViewModel) {
+                                                                CreateRequestViewModel createRequestViewModel,
+                                                                ViewRequestViewModel viewRequestViewModel,
+                                                                HomeScreenViewModel homeScreenViewModel) {
 
         HomeScreenOutputBoundary homeScreenOutputBoundary = new HomeScreenPresenter(
                 createRequestViewModel,
                 viewRequestViewModel,
-                viewManagerModel);
+                viewManagerModel,
+                homeScreenViewModel);
 
         HomeScreenInputBoundary homeScreenInputBoundary = new HomeScreenInteractor(
                 homeScreenOutputBoundary);
