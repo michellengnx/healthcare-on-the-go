@@ -18,6 +18,8 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
 
 
       - name: Add coverage to PR
