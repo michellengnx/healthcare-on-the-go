@@ -1,7 +1,6 @@
 package use_case.edit_profile;
 
 public class EditOutputData {
-    private final String username;
     private final String password;
     private final String email;
     private final String phoneNumber;
@@ -16,11 +15,10 @@ public class EditOutputData {
 
     private boolean useCaseFailed;
 
-    public EditOutputData(String username, String password, String email, String phoneNumber, String insurance,
+    public EditOutputData(String password, String email, String phoneNumber, String insurance,
                           String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                           String emergencyName, String emergencyNumber, String emergencyRelationship,
                           boolean useCaseFailed) {
-        this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -33,10 +31,6 @@ public class EditOutputData {
         this.emergencyNumber = emergencyNumber;
         this.emergencyRelationship = emergencyRelationship;
         this.useCaseFailed = useCaseFailed;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getPassword() {
