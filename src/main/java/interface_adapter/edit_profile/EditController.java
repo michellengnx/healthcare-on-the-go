@@ -11,10 +11,10 @@ public class EditController {
 
     }
 
-    public void execute(String oldUsername, String username, String password, String email, String phoneNumber, String insurance,
+    public void execute(String username, String password, String email, String phoneNumber, String insurance,
                         String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                         String emergencyName, String emergencyNumber, String emergencyRelationship) {
-        EditInputData editInputData = new EditInputData(oldUsername, username, password, email, phoneNumber, insurance,
+        EditInputData editInputData = new EditInputData(username, password, email, phoneNumber, insurance,
                 creditCardNumber, cvv, expirationDate, nameOnCard,
                 emergencyName, emergencyNumber, emergencyRelationship);
 
