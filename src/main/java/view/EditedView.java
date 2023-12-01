@@ -18,7 +18,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
     JLabel phoneNumber;
     JLabel insurance;
     JLabel creditCardName;
-    // LabelNumberPanel cvv;
+    JLabel cvv;
     JLabel expirationDate;
     JLabel nameOnCard;
     JLabel emergencyName;
@@ -42,7 +42,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         phoneNumber = new JLabel();
         insurance = new JLabel();
         creditCardName = new JLabel();
-        // cvv = new LabelNumberPanel();
+        cvv = new JLabel();
         expirationDate = new JLabel();
         nameOnCard = new JLabel();
         emergencyName = new JLabel();
@@ -65,7 +65,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         this.add(phoneNumber);
         this.add(insurance);
         this.add(creditCardName);
-        // this.add(cvv);
+        this.add(cvv);
         this.add(expirationDate);
         this.add(nameOnCard);
         this.add(emergencyName);
@@ -89,7 +89,7 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         phoneNumber.setText(state.getPhoneNumber());
         insurance.setText(state.getInsurance());
         creditCardName.setText(state.getCreditCardNumber());
-        // cvv.setValue(state.getCvv());
+        cvv.setText(String.valueOf(state.getCvv()));
         expirationDate.setText(state.getExpirationDate());
         nameOnCard.setText(state.getNameOnCard());
         emergencyName.setText(state.getEmergencyName());
