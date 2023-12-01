@@ -3,6 +3,7 @@ package app;
 
 import data_access.FilePatientDataAccessObject;
 import entities.factories.user.PatientUserFactory;
+import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpPresenter;
 import interface_adapter.SignUp.SignUpViewModel;
@@ -22,10 +23,10 @@ public class SignUpUseCaseFactory {
     private SignUpUseCaseFactory() {}
 
     public static SignUpView create(
-            ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, FilePatientDataAccessObject userDataAccessObject) {
+            ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, LoginViewModel loginViewModel, FilePatientDataAccessObject userDataAccessObject) {
 
         try {
-            SignUpController signUpController = createUserSignUpUseCase(viewManagerModel, signUpViewModel, userDataAccessObject);
+            SignUpController signUpController = createUserSignUpUseCase(viewManagerModel,  signUpViewModel, loginViewModel, userDataAccessObject);
             return new SignUpView(signUpController, signUpViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -35,10 +36,10 @@ public class SignUpUseCaseFactory {
     }
 
 
-    private static SignUpController createUserSignUpUseCase(ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, SignUpUserDataAccessInterface userDataAccessObject) throws IOException {
+    private static SignUpController createUserSignUpUseCase(ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel,  LoginViewModel loginViewModel, SignUpUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        SignUpOutputBoundary signUpOutputBoundary = new SignUpPresenter(viewManagerModel, signUpViewModel);
+        SignUpOutputBoundary signUpOutputBoundary = new SignUpPresenter(viewManagerModel, signUpViewModel, loginViewModel);
 
         PatientUserFactory patientUserFactory = new PatientUserFactory();
 
