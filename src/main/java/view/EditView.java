@@ -84,10 +84,9 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(EditViewModel.NEW_INSURANCE_LABEL), insuranceInputField);
         LabelTextPanel creditCardNumberInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_CREDIT_CARD_NUMBER_LABEL), creditCardNumberInputField);
-        cvvInputField.setColumns(14);
         LabelNumberPanel cvvInfo = new LabelNumberPanel(
-                new JLabel(EditViewModel.NEW_CVV_LABEL), cvvInputField);
-        LabelDatePanel expirationDateInfo = new LabelDatePanel(
+                new JLabel(EditViewModel.NEW_CVV_LABEL), cvvInputField, 15);
+        LabelTextPanel expirationDateInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_EXPIRATION_DATE_LABEL), expirationDateInputField);
         LabelTextPanel nameOnCardInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_NAME_ON_CARD_LABEL), nameOnCardInputField);
@@ -103,20 +102,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         buttons.add(editProfile);
         cancel = new JButton(EditViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-
-        // left-align the input fields
-        usernameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        passwordInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        emailInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        phoneNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        insuranceInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        creditCardNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        cvvInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        expirationDateInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        nameOnCardInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        emergencyNameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        emergencyNumberInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        emergencyRelationshipInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         editProfile.addActionListener(
                 new ActionListener() {
@@ -200,7 +185,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         );
 
         // Password panel that includes the password field and the show/hide checkbox
-        JPanel passwordPanel = new JPanel(new GridLayout(1, 2));
+        JPanel passwordPanel = new JPanel();
         passwordPanel.add(passwordInfo);
         passwordPanel.add(showPasswordCheckBox);
 
@@ -266,6 +251,13 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
         );
+
+        JPanel mainPanel = new JPanel(new GridLayout(5, 1));
+        mainPanel.add(usernameInfo);
+        mainPanel.add(passwordPanel);
+        mainPanel.add(emailInfo);
+        mainPanel.add(phoneNumberInfo);
+        mainPanel.add(insuranceInfo);
 
         creditCardNumberInputField.addKeyListener(
                 new KeyListener() {
@@ -433,11 +425,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         this.add(title);
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_main);
-        this.add(usernameInfo);
-        this.add(passwordPanel);
-        this.add(emailInfo);
-        this.add(phoneNumberInfo);
-        this.add(insuranceInfo);
+        this.add(mainPanel);
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_card);
         this.add(creditCardPanel);
