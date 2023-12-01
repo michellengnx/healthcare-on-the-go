@@ -24,7 +24,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     private final Map<String, Patient> accounts = new HashMap<>();
 
     public FilePatientDataAccessObject(String csvPath) throws IOException, ParseException {
-        csvFile = new File(csvPath);
+        csvFile = new File("/Users/izorakayumova/Documents/csc207_project/data/patient.csv");
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("email", 2);
@@ -57,7 +57,8 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
                     String number = String.valueOf(col[headers.get("phone_number")]);
                     String gender = String.valueOf(col[headers.get("gender")]);
                     String insurance = String.valueOf(col[headers.get("insurance")]);
-                    Date birthday = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(col[headers.get("birthday")]));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                    Date birthday = dateFormat.parse(String.valueOf(col[headers.get("birthday")]));
                     String creditCardNumber = String.valueOf(col[headers.get("credit_card_number")]);
                     int cvv = Integer.parseInt(col[headers.get("cvv")]);
                     String expirationDate = String.valueOf(col[headers.get("card_expiration_date")]);
@@ -129,7 +130,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
 //
 //        Contains at least one char within a set of special chars (@#%$^ etc.)
 //
-        String regex = "^.(?=.{8,})(?=..[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=]).$\n";
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
 
 
         Pattern p = Pattern.compile(regex);
@@ -153,7 +154,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
 
     /**
      * Edit the profile of a patient
-     * @param username that the patient wants to be associated with.
+     * @param username that is associated with the user's profile (not editable).
      * @param password that the patient wants to be associated with.
      * @param email that the patient wants to be associated with.
      * @param phoneNumber that the patient wants to be associated with.
@@ -172,54 +173,44 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      */
     // add password validator
     @Override
-    public Integer[] editProfile(String oldUsername, String username, String password, String email, String phoneNumber, String insurance,
+    public Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
                                  String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                                  String emergencyName, String emergencyNumber, String emergencyRelationship) {
 
-        // integer list that initialized 7 Integer elements, with each defaulted to 0
-        Integer[] changes = new Integer[7];
+        // integer list that initialized 7 Integer elements for each parameter that is editable
+        Integer[] changes = new Integer[6];
         Arrays.fill(changes, 0);
 
-        Patient patient = accounts.get(oldUsername);
+        Patient patient = accounts.get(username);
 
-        if (changeExists(oldUsername, username)) {
-            if (existsByName(username)) {
+        if (changeExists(patient.getPassword(), password)) {
+            if (!hasValidPassword(password)) {
                 changes[0] = -1;
             } else {
-                patient.setUsername(username);
-                save();
-                changes[0] = 1;
-            }
-        } if (changeExists(patient.getPassword(), password)) {
-            if (!hasValidPassword(password)) {
-                changes[1] = -1;
-            } else {
                 patient.setPassword(password);
-                save();
-                changes[1] = 1;
+                changes[0] = 1;
             }
         } if (changeExists(patient.getEmail(), email)) {
             patient.setEmail(email);
-            save();
-            changes[2] = 1;
+            changes[1] = 1;
         } if (changeExists(patient.getPhoneNumber(), phoneNumber)) {
             patient.setPhoneNumber(phoneNumber);
-            save();
-            changes[3] = 1;
+            changes[2] = 1;
         } if (changeExists(patient.getInsurance(), insurance)) {
             patient.setInsurance(insurance);
-            save();
-            changes[4] = 1;
+            changes[3] = 1;
         } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
             patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
-            save();
-            changes[5] = 1;
+            changes[4] = 1;
         } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) &&
                     changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
             patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
-            save();
-            changes[6] = 1;
+            changes[5] = 1;
         }
+
+        System.out.println("Password change detected: " + changes[1]);
+
+        save();
         return changes;
     }
 
