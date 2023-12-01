@@ -1,14 +1,24 @@
 package view;
 
+import app.SignUpUseCaseFactory;
+import data_access.FilePatientDataAccessObject;
 import interface_adapter.SignUp.SignUpController;
+import interface_adapter.SignUp.SignUpViewModel;
+import interface_adapter.ViewManagerModel;
+import use_case.SignUp.SignUpInputData;
+import use_case.SignUp.SignUpInteractor;
+import use_case.SignUp.SignUpOutputData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
 
 public class LockView extends JFrame implements ActionListener {
     private JPanel buttonPanel;
+    private final String patientDataPath = "/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/patients.csv";
     private JButton login;
     private JButton signup;
     private JPanel labelPanel;
@@ -38,23 +48,11 @@ public class LockView extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(login)){
-            System.out.println("login");
-
-
-
-
-
-
-        } else if (e.getSource().equals(signup))
-
-
-        }
-
-
     }
 
-    public static void main(String[] args){
+
+    public static void main(String[] args) throws IOException, ParseException {
+        FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("/data/patinets.csv");
         new LockView();
 
     }
