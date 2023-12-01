@@ -13,7 +13,7 @@ public class CreateRequestInputData {
     private final int urgencyLevel;
     private final String destination;
     private final Service service;
-    private final Patient patient;
+    private final String patientName;
 
     /**
      * Create a CreateRequestInputData object that contains the given values.
@@ -22,14 +22,14 @@ public class CreateRequestInputData {
      * @param urgencyLevel An integer value denoting how urgent the request is (1 being the least urgent, and 3 being the most).
      * @param destination Where the request is to be carried out.
      * @param service The service requested.
-     * @param patient The patient who requested the service.
+     * @param patientName The username of the patient who requested the service.
      */
-    public CreateRequestInputData(Date creationTime, int urgencyLevel, String destination, Service service, Patient patient) {
+    public CreateRequestInputData(Date creationTime, int urgencyLevel, String destination, Service service, String patientName) {
         this.creationTime = creationTime;
         this.urgencyLevel = urgencyLevel;
         this.destination = destination;
         this.service = service;
-        this.patient = patient;
+        this.patientName = patientName;
     }
 
     public Date getCreationTime() {
@@ -51,7 +51,7 @@ public class CreateRequestInputData {
         return service;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getPatientName() {
+        return patientName;
     }
 }

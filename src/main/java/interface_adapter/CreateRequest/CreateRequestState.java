@@ -11,12 +11,11 @@ public class CreateRequestState {
     private String destination = null;
     private Service service = null;
     private String createRequestError = null;
-    private Patient patient;
+    private String patientName;
 
     /**
-     * Create a new CreateRequestState with a given patient.
-     *
-     */
+     * Create a new CreateRequestState
+     * */
     public CreateRequestState() {
 
     }
@@ -33,8 +32,8 @@ public class CreateRequestState {
         return service;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getPatient() {
+        return patientName;
     }
 
     public String getCreateRequestError() {
@@ -57,7 +56,7 @@ public class CreateRequestState {
         this.createRequestError = createRequestError;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }

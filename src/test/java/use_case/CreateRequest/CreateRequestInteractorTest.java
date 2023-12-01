@@ -1,6 +1,7 @@
 package use_case.CreateRequest;
 
 import entities.*;
+import entities.factories.service_request.InvalidLocationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,20 +30,8 @@ class CreateRequestInteractorTest {
                 1,
                 "123 Street Avenue",
                 new Service("X-ray", 200),
-                new Patient(
-                        "patient1",
-                        "pass1",
-                        "patient@mail.com",
-                        "123-123-1231",
-                        "male",
-                        "ins.",
-                        new Date(),
-                        new CreditCard(
-                                "1234567890",
-                                123,
-                                "09/12",
-                                "patient smith"),
-                        new EmergencyContact("dad smith", "123-123-1231", "dad"))
+
+                        "patient1"
         );
         // Synthetic data access objects
         apiAccessObject = new ApiAccessObject();
@@ -175,6 +164,24 @@ class CreateRequestInteractorTest {
 
         @Override
         public void saveRequest(Patient patient, ServiceRequest request) {
+        }
+
+        @Override
+        public Patient getPatient(String patientName) {
+            return new Patient(
+                    "patient1",
+                    "pass1",
+                    "patient@mail.com",
+                    "123-123-1231",
+                    "male",
+                    "ins.",
+                    new Date(),
+                    new CreditCard(
+                            "1234567890",
+                            123,
+                            "09/12",
+                            "patient smith"),
+                    new EmergencyContact("dad smith", "123-123-1231", "dad"));
         }
     }
 

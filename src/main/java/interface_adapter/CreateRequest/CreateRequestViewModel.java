@@ -1,6 +1,5 @@
 package interface_adapter.CreateRequest;
 
-import entities.Patient;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -21,8 +20,7 @@ public class CreateRequestViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     /**
-     * Create a CreateRequestViewModel object with a given patient.
-     *
+     * Create a CreateRequestViewModel
      */
     public CreateRequestViewModel() {
         super("create request");

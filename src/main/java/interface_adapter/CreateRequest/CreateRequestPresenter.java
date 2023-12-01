@@ -11,8 +11,8 @@ import use_case.CreateRequest.CreateRequestOutputData;
  */
 public class CreateRequestPresenter implements CreateRequestOutputBoundary {
     private final CreateRequestViewModel createRequestViewModel;
-    private ViewRequestViewModel viewRequestViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewRequestViewModel viewRequestViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Create a CreateRequestPresenter object, given the necessary view models.
