@@ -3,6 +3,7 @@ package app;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestPresenter;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
+import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
@@ -21,7 +22,6 @@ public class CreateRequestUseCaseFactory {
      *
      * @param viewManagerModel Model that controller the current view being shown.
      * @param createRequestViewModel Model that stores the data for the create request use case.
-     * @param viewRequestViewModel Model that stores the data for the view request use case.
      * @param apiAccessObject Object that provides access to the uber and map quest api.
      * @param userDataAccessObject Object that provides access to user data.
      * @param doctorDataAccessObject Object that provides access to doctor data.
@@ -30,7 +30,7 @@ public class CreateRequestUseCaseFactory {
      */
     public static CreateRequestView create(ViewManagerModel viewManagerModel,
                                            CreateRequestViewModel createRequestViewModel,
-                                           ViewRequestViewModel viewRequestViewModel,
+                                           HomeScreenViewModel homeScreenViewModel,
                                            CreateRequestApiAccessInterface apiAccessObject,
                                            CreateRequestUserDataAccessInterface userDataAccessObject,
                                            CreateRequestDoctorDataAccessInterface doctorDataAccessObject,
@@ -40,7 +40,7 @@ public class CreateRequestUseCaseFactory {
             CreateRequestController createRequestController = createCreateRequestUseCase(
                     viewManagerModel,
                     createRequestViewModel,
-                    viewRequestViewModel,
+                    homeScreenViewModel,
                     apiAccessObject,
                     userDataAccessObject,
                     doctorDataAccessObject);
@@ -57,7 +57,6 @@ public class CreateRequestUseCaseFactory {
      *
      * @param viewManagerModel Model that controller the current view being shown.
      * @param createRequestViewModel Model that stores the data for the create request use case.
-     * @param viewRequestViewModel Model that stores the data for the view request use case.
      * @param apiAccessObject Object that provides access to the uber and map quest api.
      * @param userDataAccessObject Object that provides access to user data.
      * @param doctorDataAccessObject Object that provides access to doctor data.
@@ -66,7 +65,7 @@ public class CreateRequestUseCaseFactory {
      */
     private static CreateRequestController createCreateRequestUseCase(ViewManagerModel viewManagerModel,
                                                                       CreateRequestViewModel createRequestViewModel,
-                                                                      ViewRequestViewModel viewRequestViewModel,
+                                                                      HomeScreenViewModel homeScreenViewModel,
                                                                       CreateRequestApiAccessInterface apiAccessObject,
                                                                       CreateRequestUserDataAccessInterface userDataAccessObject,
                                                                       CreateRequestDoctorDataAccessInterface doctorDataAccessObject) throws IOException {
@@ -74,7 +73,7 @@ public class CreateRequestUseCaseFactory {
         CreateRequestOutputBoundary createRequestOutputBoundary = new CreateRequestPresenter(
                 viewManagerModel,
                 createRequestViewModel,
-                viewRequestViewModel);
+                homeScreenViewModel);
 
         CreateRequestInputBoundary createRequestInteractor = new CreateRequestInteractor(
                 apiAccessObject,

@@ -1,5 +1,6 @@
 package interface_adapter.CreateRequest;
 
+import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestState;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
@@ -11,22 +12,22 @@ import use_case.CreateRequest.CreateRequestOutputData;
  */
 public class CreateRequestPresenter implements CreateRequestOutputBoundary {
     private final CreateRequestViewModel createRequestViewModel;
-    private final ViewRequestViewModel viewRequestViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final HomeScreenViewModel homeScreenViewModel;
 
     /**
      * Create a CreateRequestPresenter object, given the necessary view models.
      *
-     * @param viewManagerModel The model responsible for displaying the current view to the user.
+     * @param viewManagerModel       The model responsible for displaying the current view to the user.
      * @param createRequestViewModel The model responsible for managing state changes for the createRequest view.
-     * @param viewRequestViewModel The model responsible for managing state changes for the viewRequest view.
+     * @param homeScreenViewModel    The model responsible for managing state changes for the home screen
      */
     public CreateRequestPresenter(ViewManagerModel viewManagerModel,
                                   CreateRequestViewModel createRequestViewModel,
-                                  ViewRequestViewModel viewRequestViewModel) {
+                                  HomeScreenViewModel homeScreenViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.createRequestViewModel = createRequestViewModel;
-        this.viewRequestViewModel = viewRequestViewModel;
+        this.homeScreenViewModel = homeScreenViewModel;
     }
 
     /**
@@ -36,16 +37,8 @@ public class CreateRequestPresenter implements CreateRequestOutputBoundary {
      */
     @Override
     public void prepareSuccessView(CreateRequestOutputData response) {
-        // Create a new ViewRequestState whose response instance attribute is the newly generated response
-        ViewRequestState viewRequestState = this.viewRequestViewModel.getState();
-        viewRequestState.setRequest(response.getRequest());
-
-        // set the viewRequestModel's new state, alert the view of the changes
-        this.viewRequestViewModel.setState(viewRequestState);
-        viewRequestViewModel.firePropertyChanged();
-
         // change the active view, and alert the main view
-        this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
+        this.viewManagerModel.setActiveView(homeScreenViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 

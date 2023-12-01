@@ -52,7 +52,7 @@ public class App
         // results from the use case. The ViewModels are observable, and will
         // be observed by the Views.
         // LoginViewModel loginViewModel = new LoginViewModel();
-        // HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
+        HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
         SignUpViewModel signupViewModel = new SignUpViewModel();
         // ViewRequestsViewModel viewRequestsViewModel = new ViewRequestsViewModel();
         EditViewModel editProfileViewModel = new EditViewModel();
@@ -60,7 +60,6 @@ public class App
         // LeaveReviewViewModel leaveReviewViewModel = new LeaveReviewViewModel();
         CreateRequestViewModel createRequestViewModel = new CreateRequestViewModel();
         ViewRequestViewModel viewRequestViewModel = new ViewRequestViewModel();
-        HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
 
         ReturnHomeController returnHomeController = ReturnHomeUseCaseFactory.create(
                 viewManagerModel,
@@ -103,7 +102,7 @@ public class App
         // CreateRequestView createRequestView = CreateRequestUseCaseFactory.create(
         //        viewManagerModel,
         //        createRequestViewModel,
-        //        viewRequestViewModel,
+        //        homeScreenViewModel,
         //        apiAccessObject,
         //        userDataAccessObject,
         //        doctorDataAccessObject,
