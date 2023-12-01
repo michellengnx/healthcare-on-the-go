@@ -2,6 +2,7 @@ package data_access;
 
 import entities.Doctor;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -12,9 +13,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoctorDataAccessObjectTest {
-    private DoctorDataAccessObject dataAccessObject = new DoctorDataAccessObject(
-            "src/test/java/data_access/doctor_data.csv",
-            "src/test/java/data_access/service_data.csv");
+    private DoctorDataAccessObject dataAccessObject;
+
+    @BeforeEach
+    void init() {
+        try {
+            dataAccessObject = new DoctorDataAccessObject(
+                    "src/test/java/data_access/doctor_data.csv",
+                    "src/test/java/data_access/service_data.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @AfterEach
     void resetFile() {

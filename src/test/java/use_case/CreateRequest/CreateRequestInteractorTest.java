@@ -209,11 +209,6 @@ class CreateRequestInteractorTest {
         }
 
         @Override
-        public List<Doctor> getAvailableDoctors(Service service) {
-            return null;
-        }
-
-        @Override
         public void markAsBusy(Doctor doctor) {
 
         }
@@ -226,11 +221,6 @@ class CreateRequestInteractorTest {
 
         @Override
         public List<Doctor> getAvailableDoctors() {
-            return new ArrayList<>();
-        }
-
-        @Override
-        public List<Doctor> getAvailableDoctors(Service service) {
             return new ArrayList<>();
         }
 
