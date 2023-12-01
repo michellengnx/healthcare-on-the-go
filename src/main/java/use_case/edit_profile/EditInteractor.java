@@ -18,7 +18,6 @@ public class EditInteractor implements EditInputBoundary {
     }
     @Override
     public void execute(EditInputData editInputData) {
-        String oldUsername = editInputData.getOldUsername();
         String username = editInputData.getUsername();
         String password = editInputData.getPassword();
         String email = editInputData.getEmail();
@@ -35,19 +34,17 @@ public class EditInteractor implements EditInputBoundary {
         Patient patient = patientDataAccessObject.get(editInputData.getUsername());
 
 
-        Integer[] changes = patientDataAccessObject.editProfile(oldUsername, username, password, email, phoneNumber, insurance,
+        Integer[] changes = patientDataAccessObject.editProfile(username, password, email, phoneNumber, insurance,
                 creditCardNumber, cvv, expirationDate, nameOnCard,
                 emergencyName, emergencyNumber, emergencyRelationship);
 
-        if (changes[0] == -1) {
-            editPresenter.prepareFailView("Username already exists.");
-        } else if (changes[1] == -1) {
+        if (changes[1] == -1) {
             editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.");
         } else if (noChanges(changes)) {
             editPresenter.prepareFailView("No changes have been made to the account.");
         } else {
 
-            EditOutputData editOutputData = new EditOutputData(patient.getUsername(), patient.getPassword(),
+            EditOutputData editOutputData = new EditOutputData(patient.getPassword(),
                     patient.getEmail(), patient.getPhoneNumber(), patient.getInsurance(),
                     patient.getCreditCard().getCreditCardNumber(), patient.getCreditCard().getCcv(), patient.getCreditCard().getExpirationDate(), patient.getCreditCard().getNameOnCard(),
                     patient.getEmergencyContact().getName(), patient.getEmergencyContact().getPhoneNumber(), patient.getEmergencyContact().getRelationship(),
