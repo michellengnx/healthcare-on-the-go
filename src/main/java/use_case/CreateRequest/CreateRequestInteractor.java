@@ -60,7 +60,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         // create doctor matcher and variables to store matched doctor
         DoctorMatchingStrategy lowestEtaStrategy;
         DoctorMatcher matcher;
-        ServiceRequest request = null;
+        ServiceRequest request;
 
         // create a doctor matcher and attempt to create a service request
         try {
