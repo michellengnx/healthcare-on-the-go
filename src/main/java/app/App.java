@@ -1,11 +1,15 @@
 package app;
 
 
+import data_access.ApiAccessObject;
+import data_access.FilePatientDataAccessObject;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
+import interface_adapter.edit_profile.EditViewModel;
 import view.CreateRequestView;
 import view.ViewManager;
 
@@ -44,29 +48,28 @@ public class App
         // be observed by the Views.
         // LoginViewModel loginViewModel = new LoginViewModel();
         // HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
-        // SignupViewModel signupViewModel = new SignupViewModel();
+        SignUpViewModel signupViewModel = new SignUpViewModel();
         // ViewRequestsViewModel viewRequestsViewModel = new ViewRequestsViewModel();
-        // EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
+        EditViewModel editProfileViewModel = new EditViewModel();
         // LeaveReviewViewModel leaveReviewViewModel = new LeaveReviewViewModel();
-        CreateRequestViewModel createRequestViewModel = new CreateRequestViewModel(null);
+        CreateRequestViewModel createRequestViewModel = new CreateRequestViewModel();
         ViewRequestViewModel viewRequestViewModel = new ViewRequestViewModel();
         HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
-
 
         ReturnHomeController returnHomeController = ReturnHomeUseCaseFactory.create(
                 viewManagerModel,
                 homeScreenViewModel
         );
 
-        // FileUserDataAccessObject userDataAccessObject;
+        FilePatientDataAccessObject userDataAccessObject;
         // FileDoctorDataAccessObject doctorDataAccessObject;
-        // MapApiAccessObject apiAccessObject;
+        ApiAccessObject apiAccessObject;
 //
-        // try {
-        //     userDataAccessObject = new FileUserDataAccessObject();
-        // } catch (IOException e) {
-        //     throw new RuntimeException(e);
-        // }
+        try {
+             userDataAccessObject = new FilePatientDataAccessObject("");
+        } catch (IOException e) {
+             throw new RuntimeException(e);
+        }
 //
         // try {
         //     doctorDataAccessObject = new FileDoctorDataAccessObject();
