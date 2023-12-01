@@ -5,7 +5,6 @@ import entities.Patient;
 import java.util.List;
 
 public interface EditPatientDataAccessInterface {
-    boolean existsByName(String identifier);
 
     void save(Patient patient);
 
@@ -13,7 +12,7 @@ public interface EditPatientDataAccessInterface {
 
     boolean hasValidPassword(String password);
 
-    Integer[] editProfile(String oldUsername, String username, String password, String email, String phoneNumber, String insurance,
+    Integer[] editProfile(String username, String password, String email, String phoneNumber, String insurance,
                           String creditCardNumber, Integer cvv, String expirationDate, String nameOnCard,
                           String emergencyName, String emergencyNumber, String emergencyRelationship);
 }
