@@ -31,10 +31,6 @@ public class EditedState {
 
     public EditedState() {}
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -77,10 +73,6 @@ public class EditedState {
 
     public String getEmergencyRelationship() {
         return emergencyRelationship;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setPassword(String password) {
