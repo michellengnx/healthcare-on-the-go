@@ -27,7 +27,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     private final Map<String, Patient> accounts = new HashMap<>();
 
     public FilePatientDataAccessObject(String csvPath) throws IOException, ParseException {
-        csvFile = new File("/Users/izorakayumova/Documents/csc207_project/data/patient.csv");
+        csvFile = new File("data/patient.csv");
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("email", 2);
