@@ -1,8 +1,6 @@
 package interface_adapter.edit_profile;
 // these fields will be populated by the homeviewmodel, which is populated by loginviewmodel, which is populated by signupviewmodel
 public class EditState {
-
-    private String oldUsername = "";
     private String username = "";
     private String usernameError = null;
     private String password = "";
@@ -19,7 +17,6 @@ public class EditState {
     private String emergencyRelationship = "";
 
     public EditState(EditState copy) {
-        oldUsername = copy.oldUsername;
         username = copy.username;
         usernameError = copy.usernameError;
         password = copy.password;
@@ -38,10 +35,6 @@ public class EditState {
 
     public EditState() {}
 
-    public String getOldUsername() {
-        return oldUsername;
-
-    }
     public String getUsername() {
         return username;
     }
@@ -98,10 +91,6 @@ public class EditState {
 
     public String getEmergencyRelationship() {
         return emergencyRelationship;
-    }
-
-    public void setOldUsername(String s) {
-        this.oldUsername = oldUsername;
     }
 
     public void setUsername(String username) {
