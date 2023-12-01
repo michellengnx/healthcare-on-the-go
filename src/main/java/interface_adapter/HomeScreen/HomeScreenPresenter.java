@@ -2,16 +2,19 @@ package interface_adapter.HomeScreen;
 
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
+import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import use_case.HomeScreen.HomeScreenOutputBoundary;
 import use_case.HomeScreen.HomeScreenOutputData;
 import view.CreateRequestView;
+import view.SignUpView;
 
 public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     private CreateRequestViewModel createRequestViewModel;
     private ViewRequestViewModel viewRequestViewModel;
     private HomeScreenViewModel homeScreenViewModel;
+    private SignUpViewModel signUpViewModel;
     private ViewManagerModel viewManagerModel;
 
     /**
@@ -23,10 +26,12 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     public HomeScreenPresenter(CreateRequestViewModel createRequestViewModel,
                                ViewRequestViewModel viewRequestViewModel,
                                ViewManagerModel viewManagerModel,
+                               SignUpViewModel signUpViewModel,
                                HomeScreenViewModel homeScreenViewModel) {
         this.createRequestViewModel = createRequestViewModel;
         this.viewRequestViewModel = viewRequestViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.signUpViewModel = signUpViewModel;
         this.homeScreenViewModel = homeScreenViewModel;
     }
 
@@ -44,7 +49,7 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
                 this.viewManagerModel.setActiveView(createRequestViewModel.getViewName());
                 break;
             case "logout":
-                // this.viewManagerModel.setActiveView(signupViewModel.getViewName());
+                this.viewManagerModel.setActiveView(signUpViewModel.getViewName());
                 break;
             case "view requests":
                 this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());

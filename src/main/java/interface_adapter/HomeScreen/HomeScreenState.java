@@ -7,21 +7,20 @@ import entities.Service;
  * An object used to store the user's input data when creating a request.
  */
 public class HomeScreenState {
-    private Patient patient;
+    private String patient;
 
     /**
-     * Create a new CreateRequestState with a given patient.
-     *
+     * Create a new CreateRequestState.
      */
     public HomeScreenState() {
 
     }
 
-    public Patient getPatient() {
+    public String getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(String patient) {
         this.patient = patient;
     }
 }
