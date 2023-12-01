@@ -14,4 +14,12 @@ public interface CreateRequestUserDataAccessInterface {
      * @param request The request to be stored within the patient.
      */
     public void saveRequest(Patient patient, ServiceRequest request);
+
+    /**
+     * Retrieve a Patient based on their username
+     *
+     * @param patientName The patient's username.
+     * @return The Patient whose username is patientName
+     */
+    public Patient getPatient(String patientName);
 }
