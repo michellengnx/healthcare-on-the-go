@@ -28,6 +28,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Set API_KEY environment variable
+      run: echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       env:
