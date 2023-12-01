@@ -88,10 +88,10 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         return result;
     }
     @Override
-    public void addRequest(ServiceRequest request){
+    public void addRequest(ServiceRequest request, String userName){
 
         ArrayList<String> list = new ArrayList<>();
-        list.add(0, request.getPatient().getUsername());
+        list.add(0, userName);
         list.add(1, request.getCreationTime().toString());
         list.add(2, request.getDoctor().getUsername());
         list.add(3, Integer.toString(request.getUrgencyLevel()));

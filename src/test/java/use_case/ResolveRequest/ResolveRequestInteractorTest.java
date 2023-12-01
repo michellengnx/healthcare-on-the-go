@@ -43,7 +43,7 @@ class ResolveRequestInteractorTest {
                         "patient smith"),
                 new EmergencyContact("dad smith", "123-123-1231", "dad"));
 
-        request = new ServiceRequest(oneRequestPatient,
+        request = new ServiceRequest(
                 new Date(),
                 sampleDoctor,
                 1,

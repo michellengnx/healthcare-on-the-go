@@ -16,8 +16,7 @@ public class ServiceRequest {
 
     private boolean completed;
 
-    public ServiceRequest(User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
-        this.patient = patient;
+    public ServiceRequest(Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
         this.creationTime = creationTime;
         this.doctor = doctor;
         this.urgencyLevel = urgencyLevel;
@@ -80,7 +79,7 @@ public class ServiceRequest {
     public float getEta() {
         return eta;
     }
-    public User getPatient() {return patient;}
+
 
 
     public void setEta(float eta) {
