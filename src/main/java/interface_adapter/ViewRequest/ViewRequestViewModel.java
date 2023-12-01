@@ -34,6 +34,7 @@ public class ViewRequestViewModel extends ViewModel {
         this.distances = new ArrayList<Float>();
         this.completed = new ArrayList<Boolean>();
 
+
         for (ArrayList<String> request : requests) {
             this.userName.add(request.get(0));
             this.creationTime.add(request.get(1));
