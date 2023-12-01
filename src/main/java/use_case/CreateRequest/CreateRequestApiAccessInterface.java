@@ -32,4 +32,13 @@ public interface CreateRequestApiAccessInterface extends TravelCostCalculator, D
      * @return The estimated price of a car ride from startLoc to endLoc by car.
      */
     public float getPrice(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
+
+    /**
+     * Return a URL or a map of a car ride from startLoc to endLoc by car..
+     *
+     * @param startLoc Address/name representing the starting location.
+     * @param endLoc Address/name representing the end location.
+     * @return The URL of a traffic map from startLoc to endLoc by car.
+     */
+    public String getTrafficMap(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException;
 }
