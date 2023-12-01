@@ -5,17 +5,19 @@ import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
+import interface_adapter.edit_profile.EditViewModel;
 import use_case.HomeScreen.HomeScreenOutputBoundary;
 import use_case.HomeScreen.HomeScreenOutputData;
 import view.CreateRequestView;
 import view.SignUpView;
 
 public class HomeScreenPresenter implements HomeScreenOutputBoundary {
-    private CreateRequestViewModel createRequestViewModel;
-    private ViewRequestViewModel viewRequestViewModel;
-    private HomeScreenViewModel homeScreenViewModel;
-    private SignUpViewModel signUpViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final CreateRequestViewModel createRequestViewModel;
+    private final ViewRequestViewModel viewRequestViewModel;
+    private final HomeScreenViewModel homeScreenViewModel;
+    private final SignUpViewModel signUpViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private EditViewModel editProfileViewModel;
 
     /**
      * Create a HomeScreenPresenter given a CreateRequestViewModel and ViewRequestViewModel
@@ -25,11 +27,13 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
      */
     public HomeScreenPresenter(CreateRequestViewModel createRequestViewModel,
                                ViewRequestViewModel viewRequestViewModel,
+                               EditViewModel editProfileViewModel,
                                ViewManagerModel viewManagerModel,
                                SignUpViewModel signUpViewModel,
                                HomeScreenViewModel homeScreenViewModel) {
         this.createRequestViewModel = createRequestViewModel;
         this.viewRequestViewModel = viewRequestViewModel;
+        this.editProfileViewModel = editProfileViewModel;
         this.viewManagerModel = viewManagerModel;
         this.signUpViewModel = signUpViewModel;
         this.homeScreenViewModel = homeScreenViewModel;
@@ -53,6 +57,9 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
                 break;
             case "view requests":
                 this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
+                break;
+            case "edit profile":
+                this.viewManagerModel.setActiveView(editProfileViewModel.getViewName());
                 break;
             case "leave review":
                 // this.viewManagerModel.setActiveView(leaveReviewViewModel.getViewName());

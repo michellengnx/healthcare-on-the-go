@@ -7,6 +7,7 @@ import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
+import interface_adapter.edit_profile.EditViewModel;
 import use_case.HomeScreen.HomeScreenInputBoundary;
 import use_case.HomeScreen.HomeScreenInteractor;
 import use_case.HomeScreen.HomeScreenOutputBoundary;
@@ -16,12 +17,14 @@ public class HomeScreenUseCaseFactory {
     public static HomeScreenView create(ViewManagerModel viewManagerModel,
                                            CreateRequestViewModel createRequestViewModel,
                                            ViewRequestViewModel viewRequestViewModel,
+                                           EditViewModel editViewModel,
                                            SignUpViewModel signUpViewModel,
                                            HomeScreenViewModel homeScreenViewModel) {
         HomeScreenController homeScreenController = createHomeScreenUseCase(
                 viewManagerModel,
                 createRequestViewModel,
                 viewRequestViewModel,
+                editViewModel,
                 signUpViewModel,
                 homeScreenViewModel);
         return new HomeScreenView(homeScreenController, homeScreenViewModel);
@@ -31,12 +34,14 @@ public class HomeScreenUseCaseFactory {
     private static HomeScreenController createHomeScreenUseCase(ViewManagerModel viewManagerModel,
                                                                 CreateRequestViewModel createRequestViewModel,
                                                                 ViewRequestViewModel viewRequestViewModel,
+                                                                EditViewModel editProfileViewModel,
                                                                 SignUpViewModel signUpViewModel,
                                                                 HomeScreenViewModel homeScreenViewModel) {
 
         HomeScreenOutputBoundary homeScreenOutputBoundary = new HomeScreenPresenter(
                 createRequestViewModel,
                 viewRequestViewModel,
+                editProfileViewModel,
                 viewManagerModel,
                 signUpViewModel,
                 homeScreenViewModel);

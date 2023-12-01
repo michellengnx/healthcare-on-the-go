@@ -99,7 +99,7 @@ public class App
                 viewManagerModel,
                 signupViewModel,
                 userDataAccessObject);
-        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, signupViewModel, homeScreenViewModel);
+        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, signupViewModel, homeScreenViewModel);
         // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         // ViewRequestsView viewRequestsView = ViewRequestsUseCaseFactory.create();
         // EditView editProfileView = EditUseCaseFactory.create(
