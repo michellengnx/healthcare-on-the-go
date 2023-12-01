@@ -9,5 +9,9 @@
         <module name="csc207-project" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="csc207-project (1)" target="17" />
+      <module name="csc207-project (2)" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -67,7 +67,7 @@ class FileRequestDataAccessObjectTest {
         service = new Service("X-ray", 200);
         urgencyLevel = 1;
         destination = "123 street avenue";
-        request = new ServiceRequest(patient, date, doctor, urgencyLevel, destination, service, price, eta, distance);
+        request = new ServiceRequest( date, doctor, urgencyLevel, destination, service, price, eta, distance);
     }
 
 
@@ -95,9 +95,9 @@ class FileRequestDataAccessObjectTest {
         result.add(1, temp);
         result.add(2, temp);
         FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requestsTest.csv");
-        fileRequestDataAccessObject.addRequest(request);
-        fileRequestDataAccessObject.addRequest(request);
-        fileRequestDataAccessObject.addRequest(request);
+        fileRequestDataAccessObject.addRequest(request, patient.getUsername());
+        fileRequestDataAccessObject.addRequest(request, patient.getUsername());
+        fileRequestDataAccessObject.addRequest(request, patient.getUsername());
         ViewRequestUseCase viewRequestUseCase = new ViewRequestUseCase(fileRequestDataAccessObject);
         ArrayList<ArrayList<String>> patientRequests = viewRequestUseCase.getRequestDetails("patient1");
 

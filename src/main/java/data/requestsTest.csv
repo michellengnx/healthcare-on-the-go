@@ -1,4 +1,1 @@
 patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance,isComplete
-patient1,Thu Nov 30 18:26:23 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false
-patient1,Thu Nov 30 18:26:23 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false
-patient1,Thu Nov 30 18:26:23 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false
