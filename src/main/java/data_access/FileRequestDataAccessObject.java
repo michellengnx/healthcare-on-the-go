@@ -72,20 +72,12 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         }
     }
 
+
     @Override
     public ArrayList<ArrayList<String>> getRequestUser(String userName) {
-        ArrayList<ArrayList<String>> result = new ArrayList<>();
-        // this line filter through array list to get this done
-        Map<Integer, ArrayList<String>> filtered = requests.entrySet()
-                .stream()
-                .filter(map -> map.getValue().get(0).equals(userName))
-                .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
-
-        for (Map.Entry<Integer, ArrayList<String>> entry : requests.entrySet()) {
-
-            result.add(entry.getKey(), entry.getValue());
-        }
-        return result;
+        return requests.values().stream()
+                .filter(request -> request.get(0).equals(userName)) // Filter based on username
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     @Override
     public void addRequest(ServiceRequest request, String userName){
