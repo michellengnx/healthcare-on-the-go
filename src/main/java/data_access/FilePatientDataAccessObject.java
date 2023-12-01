@@ -115,7 +115,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      * @param identifier the username to check.
      * @return whether a user exists with username identifier.
      */
-    @Override
+
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
@@ -207,8 +207,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
             patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
             changes[5] = 1;
         }
-
-        System.out.println("Password change detected: " + changes[1]);
 
         save();
         return changes;
