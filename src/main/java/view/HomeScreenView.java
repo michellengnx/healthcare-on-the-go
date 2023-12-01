@@ -8,12 +8,17 @@ import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 /**
@@ -28,6 +33,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JButton viewRequests;
     private final JButton leaveReview;
     private final JButton logout;
+    //private final JLabel map;
 
     private final HomeScreenController homeScreenController;
 
@@ -46,7 +52,24 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         // screen title
         JLabel title = new JLabel(homeScreenViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        /*
+        URL url;
+        BufferedImage image;
 
+        try {
+            url = new URL("https://re-mm-assets.s3.amazonaws.com/product_photo/46595/large_large_Poly_Lime_374u_1471509935.jpg");
+        } catch (MalformedURLException e) {
+            throw new RuntimeException();
+        }
+
+        try {
+            image = ImageIO.read(url);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+        map = new JLabel(new ImageIcon(image));
+        */
         // buttons to create request and return home
         JPanel buttons = new JPanel();
         createRequest = new JButton(homeScreenViewModel.CREATE_REQUEST_BUTTON_LABEL);
@@ -91,6 +114,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        //this.add(map);
         this.add(buttons);
     }
 
