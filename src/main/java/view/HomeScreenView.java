@@ -8,6 +8,8 @@ import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import interface_adapter.edit_profile.EditController;
+import interface_adapter.edit_profile.EditViewModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,6 +35,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JButton createRequest;
     private final JButton viewRequests;
     private final JButton leaveReview;
+    private final JButton editProfile;
     private final JButton logout;
     private final JPanel requestView;
 
@@ -85,6 +88,8 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         buttons.add(viewRequests);
         leaveReview = new JButton(homeScreenViewModel.LEAVE_REVIEW_BUTTON_LABEL);
         buttons.add(leaveReview);
+        editProfile = new JButton(homeScreenViewModel.EDIT_PROFILE_BUTTON_LABEL);
+        buttons.add(editProfile);
         logout = new JButton(homeScreenViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logout);
 
@@ -118,7 +123,18 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
                 }
         );
 
+        editProfile.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        switchScreen(evt, editProfile, "edit profile");
+                    }
+                }
+        );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.requestView.setVisible(false);
 
         this.add(title);
         this.add(requestView);
@@ -143,20 +159,28 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        HomeScreenState homeScreenState = (HomeScreenState) evt.getNewValue();
+        this.requestView.setVisible(homeScreenState.isActiveRequest());
     }
 
+    /**
+     * Switch the current screen based ono which button is pressed.
+     *
+     * @param evt The event.
+     * @param buttonPressed The button pressed.
+     * @param viewName The name of the view to switch to
+     */
     private void switchScreen(ActionEvent evt, JButton buttonPressed, String viewName) {
         HomeScreenState homeScreenState = homeScreenViewModel.getState();
-        requestView.setVisible(false);
         homeScreenViewModel.setState(homeScreenState);
         homeScreenViewModel.firePropertyChanged();
 
-        if (evt.getSource().equals(createRequest)) {
+        if (evt.getSource().equals(buttonPressed)) {
             homeScreenController.execute(
-                    "create request"
+                    viewName
             );
-            requestView.setVisible(true);
         }
+
+        requestView.setVisible(false);
     }
 }

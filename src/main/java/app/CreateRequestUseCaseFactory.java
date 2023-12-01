@@ -22,7 +22,6 @@ public class CreateRequestUseCaseFactory {
      *
      * @param viewManagerModel Model that controller the current view being shown.
      * @param createRequestViewModel Model that stores the data for the create request use case.
-     * @param viewRequestViewModel Model that stores the data for the view request use case.
      * @param apiAccessObject Object that provides access to the uber and map quest api.
      * @param userDataAccessObject Object that provides access to user data.
      * @param doctorDataAccessObject Object that provides access to doctor data.
@@ -32,7 +31,6 @@ public class CreateRequestUseCaseFactory {
     public static CreateRequestView create(ViewManagerModel viewManagerModel,
                                            CreateRequestViewModel createRequestViewModel,
                                            HomeScreenViewModel homeScreenViewModel,
-                                           ViewRequestViewModel viewRequestViewModel,
                                            CreateRequestApiAccessInterface apiAccessObject,
                                            CreateRequestUserDataAccessInterface userDataAccessObject,
                                            CreateRequestDoctorDataAccessInterface doctorDataAccessObject,
@@ -43,7 +41,6 @@ public class CreateRequestUseCaseFactory {
                     viewManagerModel,
                     createRequestViewModel,
                     homeScreenViewModel,
-                    viewRequestViewModel,
                     apiAccessObject,
                     userDataAccessObject,
                     doctorDataAccessObject);
@@ -60,7 +57,6 @@ public class CreateRequestUseCaseFactory {
      *
      * @param viewManagerModel Model that controller the current view being shown.
      * @param createRequestViewModel Model that stores the data for the create request use case.
-     * @param viewRequestViewModel Model that stores the data for the view request use case.
      * @param apiAccessObject Object that provides access to the uber and map quest api.
      * @param userDataAccessObject Object that provides access to user data.
      * @param doctorDataAccessObject Object that provides access to doctor data.
@@ -70,7 +66,6 @@ public class CreateRequestUseCaseFactory {
     private static CreateRequestController createCreateRequestUseCase(ViewManagerModel viewManagerModel,
                                                                       CreateRequestViewModel createRequestViewModel,
                                                                       HomeScreenViewModel homeScreenViewModel,
-                                                                      ViewRequestViewModel viewRequestViewModel,
                                                                       CreateRequestApiAccessInterface apiAccessObject,
                                                                       CreateRequestUserDataAccessInterface userDataAccessObject,
                                                                       CreateRequestDoctorDataAccessInterface doctorDataAccessObject) throws IOException {
