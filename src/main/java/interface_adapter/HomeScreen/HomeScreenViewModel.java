@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class HomeScreenViewModel extends ViewModel {
+    public static final String DOCTOR_OTW_LABEL = "A doctor is on their way!";
     public final String TITLE_LABEL = "Home Screen";
     public final String CREATE_REQUEST_BUTTON_LABEL = "Create Request";
     public final String VIEW_REQUESTS_BUTTON_LABEL = "View Requests";

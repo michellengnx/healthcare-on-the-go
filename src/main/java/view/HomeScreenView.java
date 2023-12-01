@@ -5,6 +5,7 @@ import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenController;
+import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
 
@@ -33,7 +34,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JButton viewRequests;
     private final JButton leaveReview;
     private final JButton logout;
-    //private final JLabel map;
+    private final JPanel requestView;
 
     private final HomeScreenController homeScreenController;
 
@@ -50,9 +51,9 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         homeScreenViewModel.addPropertyChangeListener(this);
 
         // screen title
-        JLabel title = new JLabel(homeScreenViewModel.TITLE_LABEL);
+        JLabel title = new JLabel("Hello " + homeScreenViewModel.getState().getPatient());
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        /*
+
         URL url;
         BufferedImage image;
 
@@ -68,8 +69,14 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             throw new RuntimeException();
         }
 
-        map = new JLabel(new ImageIcon(image));
-        */
+        requestView = new JPanel();
+        JLabel doctorOtw = new JLabel(homeScreenViewModel.DOCTOR_OTW_LABEL);
+
+        JLabel map = new JLabel(new ImageIcon(image));
+
+        requestView.add(doctorOtw);
+        requestView.add(map);
+
         // buttons to create request and return home
         JPanel buttons = new JPanel();
         createRequest = new JButton(homeScreenViewModel.CREATE_REQUEST_BUTTON_LABEL);
@@ -113,8 +120,12 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        if (!homeScreenViewModel.getState().isActiveRequest()) {
+            requestView.setVisible(false);
+        }
+
         this.add(title);
-        //this.add(map);
+        this.add(requestView);
         this.add(buttons);
     }
 
@@ -140,6 +151,11 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     }
 
     private void switchScreen(ActionEvent evt, JButton buttonPressed, String viewName) {
+        HomeScreenState homeScreenState = homeScreenViewModel.getState();
+        homeScreenState.setActiveRequest(false);
+        homeScreenViewModel.setState(homeScreenState);
+        homeScreenViewModel.firePropertyChanged();
+
         if (evt.getSource().equals(createRequest)) {
             homeScreenController.execute(
                     "create request"

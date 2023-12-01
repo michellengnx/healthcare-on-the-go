@@ -8,6 +8,8 @@ import entities.Service;
  */
 public class HomeScreenState {
     private String patient;
+    private boolean activeRequest;
+    private String imageUrl;
 
     /**
      * Create a new CreateRequestState.
@@ -22,5 +24,21 @@ public class HomeScreenState {
 
     public void setPatient(String patient) {
         this.patient = patient;
+    }
+
+    public boolean isActiveRequest() {
+        return activeRequest;
+    }
+
+    public void setActiveRequest(boolean activeRequest) {
+        this.activeRequest = activeRequest;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
