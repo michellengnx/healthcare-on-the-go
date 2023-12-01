@@ -9,6 +9,78 @@ import java.util.ArrayList;
 
 
 public class ViewRequestViewModel extends ViewModel {
+    public ArrayList<String> getUserName(){
+        return userName;
+    }
+
+    public void setUserName(ArrayList<String> userName) {
+        this.userName = userName;
+    }
+
+    public ArrayList<String> getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(ArrayList<String> creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public ArrayList<String> getDoctorNames() {
+        return doctorNames;
+    }
+
+    public void setDoctorNames(ArrayList<String> doctorNames) {
+        this.doctorNames = doctorNames;
+    }
+
+    public ArrayList<String> getServices() {
+        return services;
+    }
+
+    public void setServices(ArrayList<String> services) {
+        this.services = services;
+    }
+
+    public ArrayList<String> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(ArrayList<String> destinations) {
+        this.destinations = destinations;
+    }
+
+    public ArrayList<Integer> getUrgencys() {
+        return urgencys;
+    }
+
+    public void setUrgencys(ArrayList<Integer> urgencys) {
+        this.urgencys = urgencys;
+    }
+
+    public ArrayList<Float> getEtas() {
+        return etas;
+    }
+
+    public void setEtas(ArrayList<Float> etas) {
+        this.etas = etas;
+    }
+
+    public ArrayList<Float> getDistances() {
+        return distances;
+    }
+
+    public void setDistances(ArrayList<Float> distances) {
+        this.distances = distances;
+    }
+
+    public ArrayList<Boolean> getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(ArrayList<Boolean> completed) {
+        this.completed = completed;
+    }
+
     private ArrayList<String> userName;
 
     private ArrayList<String> creationTime;
@@ -67,11 +139,6 @@ public class ViewRequestViewModel extends ViewModel {
 
     }
 
-    public ViewRequestState getState() {
-        return new ViewRequestState();
-    }
 
-    public void setState(ViewRequestState viewRequestState) {
 
-    }
 }
