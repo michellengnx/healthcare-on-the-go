@@ -3,9 +3,11 @@ package use_case.CreateRequest;
 import entities.Doctor;
 import entities.Patient;
 import entities.ServiceRequest;
-import entities.factories.service_request.ServiceRequestFactory;
+import entities.factories.service_request.*;
 import entities.matchers.DoctorMatcher;
 import entities.Service;
+import entities.matchers.DoctorMatchingStrategy;
+import entities.matchers.LowestEtaDoctorStrategy;
 
 import java.util.*;
 
@@ -53,64 +55,45 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         String destination = createRequestInputData.getDestination();
         Date creationTime = createRequestInputData.getCreationTime();
         int urgencyLevel = createRequestInputData.getUrgencyLevel();
-        Patient patient = createRequestInputData.getPatient();
+        Patient patient = this.userDataAccessObject.getPatient(createRequestInputData.getPatientName());
 
         // create doctor matcher and variables to store matched doctor
+        DoctorMatchingStrategy lowestEtaStrategy;
         DoctorMatcher matcher;
-        Doctor matchedDoctor;
+        ServiceRequest request = null;
 
-        float servicePrice;
-        float travelPrice;
-        float eta;
-        float distance;
-
-        // create a doctor matcher and attempt to match with a doctor
-        // subsequently calculate the necessary values needed to create a request
+        // create a doctor matcher and attempt to create a service request
         try {
+            lowestEtaStrategy = new LowestEtaDoctorStrategy(createDoctorEtaMap(destination));
             matcher = new DoctorMatcher(
                     requestedService,
-                    createDoctorEtaMap(destination));
-
-            // only match if there are available doctors
-            try {
-                matchedDoctor = matcher.match();
-            } catch (NoAvailableDoctorException e) {
-                this.completeRequestPresenter.prepareFailView("No Doctors Available!");
-                return;
-            }
-
-            travelPrice = this.apiAccessObject.getPrice(matchedDoctor.getLocation(), destination);
-            eta = this.apiAccessObject.getEta(matchedDoctor.getLocation(), destination);
-            distance = this.apiAccessObject.getDistance(matchedDoctor.getLocation(), destination);
+                    lowestEtaStrategy);
+            request = ServiceRequestFactory.create(
+                    this.apiAccessObject,
+                    this.apiAccessObject,
+                    this.apiAccessObject,
+                    matcher,
+                    requestedService,
+                    destination,
+                    urgencyLevel,
+                    creationTime
+            );
         } catch (InvalidLocationException e) {
             this.completeRequestPresenter.prepareFailView("Invalid location!");
             return;
-        } catch (ApiAccessException e) {
+        } catch (NoAvailableDoctorException e) {
+            this.completeRequestPresenter.prepareFailView("No available doctors!");
+            return;
+        } catch (DataUnavailableException e) {
             this.completeRequestPresenter.prepareFailView("There was a problem accessing the API, please try again later!");
             return;
         }
 
-        servicePrice = requestedService.getPrice();
-
-        // create the request
-        ServiceRequestFactory serviceRequestFactory = new ServiceRequestFactory();
-
-        ServiceRequest request = serviceRequestFactory.create(
-                creationTime,
-                matchedDoctor,
-                urgencyLevel,
-                destination,
-                requestedService,
-                travelPrice + servicePrice,
-                eta,
-                distance
-        );
-
         // save the user's request and mark the doctor as busy
         this.userDataAccessObject.saveRequest(patient, request);
-        this.doctorDataAccessObject.markAsBusy(matchedDoctor);
+        this.doctorDataAccessObject.markAsBusy(request.getDoctor());
 
-        CreateRequestOutputData response = new CreateRequestOutputData(request, patient);
+        CreateRequestOutputData response = new CreateRequestOutputData(request, patient.getUsername());
 
         this.completeRequestPresenter.prepareSuccessView(response);
     }
