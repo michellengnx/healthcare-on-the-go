@@ -4,6 +4,8 @@ import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
 import entities.User;
+import use_case.CreateRequest.CreateRequestApiAccessInterface;
+import use_case.CreateRequest.CreateRequestUserDataAccessInterface;
 import use_case.SignUp.SignUpUserDataAccessInterface;
 import use_case.edit_profile.EditPatientDataAccessInterface;
 

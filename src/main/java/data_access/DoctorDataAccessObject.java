@@ -6,6 +6,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import entities.Doctor;
 import entities.Review;
 import entities.Service;
+import use_case.CreateRequest.CreateRequestDoctorDataAccessInterface;
 
 import javax.print.Doc;
 import java.io.*;
@@ -16,7 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class DoctorDataAccessObject {
+public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInterface {
     private final String doctorFilePath;
     private final String servicesFilePath;
     private final List<Doctor> doctorList = new ArrayList<>();
@@ -28,7 +29,7 @@ public class DoctorDataAccessObject {
      * @param doctorFilePath The file path where doctor entities are stored.
      * @param servicesFilePath The file path where available services are stored.
      */
-    public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath) {
+    public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath) throws IOException {
         this.doctorFilePath = doctorFilePath;
         this.servicesFilePath = servicesFilePath;
 
@@ -98,9 +99,7 @@ public class DoctorDataAccessObject {
                 serviceList.put(serviceName, new Service(serviceName, servicePrice));
             }
             return serviceList;
-        } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (CsvValidationException | IOException e) {
             throw new RuntimeException(e);
         }
     }
