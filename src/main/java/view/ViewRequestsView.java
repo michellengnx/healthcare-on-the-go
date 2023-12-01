@@ -1,13 +1,16 @@
 package view;
 
 import data_access.FileRequestDataAccessObject;
-import interface_adapter.ViewRequest.RequestController;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewRequest.ViewRequestController;
+import interface_adapter.ViewRequest.ViewRequestPresenter;
+import interface_adapter.ViewRequest.ViewRequestState;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
-import use_case.ViewRequest.ViewRequestUseCase;
+import use_case.ViewRequest.ViewRequestInteractor;
+import use_case.ViewRequest.ViewRequestOutputData;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,16 +20,18 @@ import java.util.ArrayList;
 public class ViewRequestsView extends JFrame implements ActionListener {
     private final String viewName = "Request History";
     private final ViewRequestViewModel viewRequestViewModel;
-    private final RequestController requestController;
+    private final ViewRequestController requestController;
 
     private JButton homeButton;
     private JTable table;
     private JScrollPane scrollPane;
 
+
     private JPanel buttonPanel;
-    public ViewRequestsView(ViewRequestViewModel viewRequestViewModel, RequestController requestController){
+    public ViewRequestsView(ViewRequestViewModel viewRequestViewModel, ViewRequestController requestController){
         this.requestController = requestController;
         this.viewRequestViewModel = viewRequestViewModel;
+        ViewRequestState state = viewRequestViewModel.getViewRequestState();
         this.setLayout(new BorderLayout());
 
         this.buttonPanel = new JPanel();
@@ -44,15 +49,15 @@ public class ViewRequestsView extends JFrame implements ActionListener {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ArrayList<String> userName = viewRequestViewModel.getUserName();
-        ArrayList<String> doctorNames = viewRequestViewModel.getDoctorNames();
-        ArrayList<String> creationTime = viewRequestViewModel.getDoctorNames();
-        ArrayList<String> services = viewRequestViewModel.getServices();
-        ArrayList<String> destinations = viewRequestViewModel.getDestinations();
-        ArrayList<Integer> urgencies = viewRequestViewModel.getUrgencys();
-        ArrayList<Float> etas = viewRequestViewModel.getEtas();
-        ArrayList<Float> distances = viewRequestViewModel.getDistances();
-        ArrayList<Boolean> completed = viewRequestViewModel.getCompleted();
+        ArrayList<String> userName = state.getUserName();
+        ArrayList<String> doctorNames = state.getDoctorNames();
+        ArrayList<String> creationTime = state.getDoctorNames();
+        ArrayList<String> services = state.getServices();
+        ArrayList<String> destinations = state.getDestinations();
+        ArrayList<Integer> urgencies = state.getUrgencies();
+        ArrayList<Float> etas = state.getEtas();
+        ArrayList<Float> distances = state.getDistances();
+        ArrayList<Boolean> completed = state.getCompleted();
 
         // Create data for the table
         int size = userName.size();
@@ -92,11 +97,20 @@ public class ViewRequestsView extends JFrame implements ActionListener {
     }
     public static void main(String[] args) throws IOException {
         FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requests.csv");
+
+
         ArrayList<ArrayList<String>> data = fileRequestDataAccessObject.getRequestUser("patient1");
         // Example instantiation of ViewRequestViewModel
-        ViewRequestViewModel viewModel = new ViewRequestViewModel(data);
-        ViewRequestUseCase viewRequestUseCase = new ViewRequestUseCase(fileRequestDataAccessObject);
-        RequestController viewRequestController = new RequestController(viewRequestUseCase);
+        ViewRequestViewModel viewModel = new ViewRequestViewModel();
+        viewModel.setViewRequestState(new ViewRequestState(data));
+        ViewRequestPresenter viewRequestPresenter = new ViewRequestPresenter(new ViewManagerModel(),viewModel);
+
+
+        ViewRequestOutputData viewRequestOutputData = new ViewRequestOutputData(data);
+        ViewRequestInteractor viewRequestInteractor = new ViewRequestInteractor(fileRequestDataAccessObject,viewRequestPresenter);
+
+
+        ViewRequestController viewRequestController = new ViewRequestController(viewRequestInteractor);
 
         SwingUtilities.invokeLater(() -> {
             ViewRequestsView view = new ViewRequestsView(viewModel, viewRequestController); // Assuming null for RequestController
