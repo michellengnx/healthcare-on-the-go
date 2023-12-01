@@ -18,7 +18,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
     public final String viewName = "edit";
     private final EditViewModel editViewModel;
 
-    final JTextField oldUsernameInputField = new JTextField(15);
     final JTextField usernameInputField = new JTextField(15);
 
     final JPasswordField passwordInputField = new JPasswordField(15);
@@ -72,8 +71,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         subheading_emergency.setFont(new Font("Arial", Font.BOLD, 14));
         subheading_emergency.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel oldUsernameInfo = new LabelTextPanel(
-                new JLabel(EditViewModel.OLD_USERNAME_LABEL), oldUsernameInputField);
+
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(EditViewModel.NEW_USERNAME_LABEL), usernameInputField);
         LabelTextPanel passwordInfo = new LabelTextPanel(
@@ -107,7 +105,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         buttons.add(cancel);
 
         // left-align the input fields
-        oldUsernameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
         usernameInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
         passwordInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
         emailInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -128,7 +125,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                             EditState currentState = editViewModel.getState();
 
                             editController.execute(
-                                    currentState.getOldUsername(),
                                     currentState.getUsername(),
                                     currentState.getPassword(),
                                     currentState.getEmail(),
@@ -149,26 +145,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
 
         cancel.addActionListener(this);
 
-        oldUsernameInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EditState currentState = editViewModel.getState();
-                        currentState.setOldUsername(oldUsernameInputField.getText() + e.getKeyChar());
-                        editViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -457,7 +433,6 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         this.add(title);
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
         this.add(subheading_main);
-        this.add(oldUsernameInfo);
         this.add(usernameInfo);
         this.add(passwordPanel);
         this.add(emailInfo);
@@ -487,9 +462,10 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
         // pre-populate input fields
         setFields(state);
 
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
-        } if (state.getPasswordError() != null) {
+       // if (state.getUsernameError() != null) {
+        //    JOptionPane.showMessageDialog(this, state.getUsernameError());
+      //  }
+        if (state.getPasswordError() != null) {
             JOptionPane.showMessageDialog(this, state.getPasswordError());
         }
     }
