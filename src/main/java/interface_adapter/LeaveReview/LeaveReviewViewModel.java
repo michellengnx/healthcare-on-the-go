@@ -40,5 +40,3 @@ public class LeaveReviewViewModel extends ViewModel {
 
 
 
-
-
