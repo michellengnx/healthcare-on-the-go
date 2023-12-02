@@ -28,7 +28,7 @@ public class SignUpPresenter implements SignUpOutputBoundary {
     @Override
     public void prepareSuccessView(SignUpOutputData response) {
         // On success, switch to the login view.
-        LocalDateTime responseTime = LocalDateTime.parse(response.getCreationTime());
+        LocalDateTime responseTime = LocalDateTime.parse(response.getCreationTime() + "T00:00:00");
         response.setCreationTime(responseTime.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
 
         LoginState loginState = loginViewModel.getState();

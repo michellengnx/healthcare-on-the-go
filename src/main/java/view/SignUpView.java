@@ -95,8 +95,8 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
         signUp.addActionListener(evt -> {
             // Get input values from the fields
             String username = usernameInputField.getText();
-            String password = Arrays.toString(passwordInputField.getPassword());
-            String repeatPassword = Arrays.toString(repeatPasswordInputField.getPassword());
+            String password = new String(passwordInputField.getPassword());
+            String repeatPassword = new String(repeatPasswordInputField.getPassword());
             String email = emailInputField.getText();
             String phoneNumber = phoneNumberInputField.getText();
             String gender = genderInputField.getText();

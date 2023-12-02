@@ -90,7 +90,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
 
     @Override
     public boolean existByUsername(String identifier) {
-        return false;
+        return accounts.containsKey(identifier);
     }
 
     @Override
@@ -240,6 +240,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
      */
     @Override
     public boolean existsByUsername(String username) {
+        System.out.println(accounts.keySet());
         return accounts.containsKey(username);
     }
 

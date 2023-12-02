@@ -1,6 +1,7 @@
 package app;
 
 import entities.factories.user.PatientUserFactory;
+import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.Loggedin.LoggedinViewModel;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginPresenter;
@@ -24,7 +25,7 @@ public class LoginUseCaseFactory {
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedinViewModel loggedinViewModel,
+            HomeScreenViewModel loggedinViewModel,
             LoginUserDataAccessInterface userDataAccessObject) {
 
         try {
@@ -40,7 +41,7 @@ public class LoginUseCaseFactory {
     private static LoginController createLoginUseCase(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedinViewModel loggedInViewModel,
+            HomeScreenViewModel loggedInViewModel,
             LoginUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.

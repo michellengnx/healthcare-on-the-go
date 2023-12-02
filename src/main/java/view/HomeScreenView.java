@@ -40,6 +40,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JPanel requestView;
 
     private final HomeScreenController homeScreenController;
+    private final JLabel title;
 
     /**
      * Create a CreateRequestView object given the appropriate view model and controllers.
@@ -54,7 +55,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         homeScreenViewModel.addPropertyChangeListener(this);
 
         // screen title
-        JLabel title = new JLabel("Hello " + homeScreenViewModel.getState().getPatient());
+        title = new JLabel("Hello " + homeScreenViewModel.getState().getPatient());
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         URL url;
@@ -161,6 +162,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     public void propertyChange(PropertyChangeEvent evt) {
         HomeScreenState homeScreenState = (HomeScreenState) evt.getNewValue();
         this.requestView.setVisible(homeScreenState.isActiveRequest());
+        this.title.setText("Hello " + homeScreenState.getPatient());
     }
 
     /**
