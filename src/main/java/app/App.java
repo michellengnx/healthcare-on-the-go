@@ -8,6 +8,7 @@ import data_access.DoctorDataAccessObject;
 import data_access.FilePatientDataAccessObject;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
+import interface_adapter.Login.LoginViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
@@ -57,7 +58,7 @@ public class App
         // This information will be changed by a presenter object that is reporting the
         // results from the use case. The ViewModels are observable, and will
         // be observed by the Views.
-        // LoginViewModel loginViewModel = new LoginViewModel();
+        LoginViewModel loginViewModel = new LoginViewModel();
         HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
         SignUpViewModel signupViewModel = new SignUpViewModel();
         // ViewRequestsViewModel viewRequestsViewModel = new ViewRequestsViewModel();
@@ -90,14 +91,11 @@ public class App
         apiAccessObject = new ApiAccessObject(System.getenv("API_KEY"));
 
 
-
-
-
-
-        // LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, homeScreenViewModel, userDataAccessObject);
         SignUpView signUpView = SignUpUseCaseFactory.create(
                 viewManagerModel,
                 signupViewModel,
+                loginViewModel,
                 userDataAccessObject);
         HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, signupViewModel, homeScreenViewModel);
         // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
@@ -117,18 +115,16 @@ public class App
         //        returnHomeController);
 
 
-        // views.add(signUpView, signUpView.viewName);
-        // views.add(loginView, loginView.viewName);
+        views.add(signUpView, signUpView.viewName);
+        views.add(loginView, loginView.viewName);
         views.add(homeScreenView, homeScreenView.viewName);
         // views.add(leaveReviewView, leaveReviewView.viewName);
         // views.add(viewRequestsView, viewRequestsView.viewName);
         // views.add(editProfileView, editProfileView.viewName);
         // views.add(createRequestView, createRequestView.viewName);
 
-
-        viewManagerModel.setActiveView(homeScreenView.viewName);
+        viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
-
 
         application.pack();
         application.setVisible(true);
