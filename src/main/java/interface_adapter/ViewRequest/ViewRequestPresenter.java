@@ -25,19 +25,24 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
      */
     @Override
     public void prepareSuccessView(ViewRequestOutputData requests) {
+        ViewRequestState currentState = viewRequestViewModel.getState();
+
         ArrayList<ArrayList<String>> data = requests.getData();
         for (ArrayList<String> row : data) {
-            viewRequestViewModel.getViewRequestState().getUserName().add(row.get(0));
-            viewRequestViewModel.getViewRequestState().getCreationTime().add(row.get(1));
-            viewRequestViewModel.getViewRequestState().getDoctorNames().add(row.get(2));
-            viewRequestViewModel.getViewRequestState().getUrgencies().add(Integer.parseInt(row.get(3)));
-            viewRequestViewModel.getViewRequestState().getDestinations().add(row.get(4));
-            viewRequestViewModel.getViewRequestState().getServices().add(row.get(5));
-            viewRequestViewModel.getViewRequestState().getEtas().add(Float.parseFloat(row.get(7)));
-            viewRequestViewModel.getViewRequestState().getDistances().add(Float.parseFloat(row.get(8)));
-            viewRequestViewModel.getViewRequestState().getCompleted().add(Boolean.parseBoolean(row.get(9)));
+            currentState.getUserName().add(row.get(0));
+            currentState.getCreationTime().add(row.get(1));
+            currentState.getDoctorNames().add(row.get(2));
+            currentState.getUrgencies().add(Integer.parseInt(row.get(3)));
+            currentState.getDestinations().add(row.get(4));
+            currentState.getServices().add(row.get(5));
+            currentState.getEtas().add(Float.parseFloat(row.get(7)));
+            currentState.getDistances().add(Float.parseFloat(row.get(8)));
+            currentState.getCompleted().add(Boolean.parseBoolean(row.get(9)));
         }
+
+        this.viewRequestViewModel.setState(currentState);
         this.viewRequestViewModel.firePropertyChanged();
+
 
         this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

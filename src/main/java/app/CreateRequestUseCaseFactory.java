@@ -1,5 +1,6 @@
 package app;
 
+import entities.Service;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestPresenter;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
@@ -12,6 +13,7 @@ import view.CreateRequestView;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Factory that can be used to create the CreateRequestView and CreateRequestController.
@@ -34,7 +36,8 @@ public class CreateRequestUseCaseFactory {
                                            CreateRequestApiAccessInterface apiAccessObject,
                                            CreateRequestUserDataAccessInterface userDataAccessObject,
                                            CreateRequestDoctorDataAccessInterface doctorDataAccessObject,
-                                           ReturnHomeController returnHomeController) {
+                                           ReturnHomeController returnHomeController,
+                                           Map<String, Service> availableServices) {
 
         try {
             CreateRequestController createRequestController = createCreateRequestUseCase(
@@ -44,7 +47,7 @@ public class CreateRequestUseCaseFactory {
                     apiAccessObject,
                     userDataAccessObject,
                     doctorDataAccessObject);
-            return new CreateRequestView(createRequestController, returnHomeController, createRequestViewModel);
+            return new CreateRequestView(createRequestController, returnHomeController, createRequestViewModel, availableServices);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open data file.");
         }

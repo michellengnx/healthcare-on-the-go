@@ -4,6 +4,7 @@ import entities.Service;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
+import interface_adapter.Login.LoginState;
 import interface_adapter.ReturnHome.ReturnHomeController;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * View that displays the necessary interface for a patient create a new request, and a way to return to the home
@@ -26,18 +28,9 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
     private final CreateRequestViewModel createRequestViewModel;
 
     private final Integer[] urgencyLevels = {1, 2, 3};
-    private final Service[] availableServiceNames = {
-            new Service("Vaccination", 20),
-            new Service("Nutritional support", 10),
-            new Service("Pharmaceutical services", 40),
-            new Service("General health check", 60),
-            new Service("X-ray imaging", 100),
-            new Service("Blood testing", 70),
-            new Service("Psychological care", 150)
-    };
 
     private final JComboBox<Integer> urgencyLevelComboBox = new JComboBox<>(urgencyLevels);
-    private final JComboBox<Service> availableServiceComboBox = new JComboBox<>(availableServiceNames);
+    private final JComboBox<Service> availableServiceComboBox;
     private final JTextField destinationInputField = new JTextField(30);
     private final JButton createRequest;
     private final JButton cancel;
@@ -55,7 +48,8 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
      */
     public CreateRequestView(CreateRequestController createRequestController,
                              ReturnHomeController returnHomeController,
-                             CreateRequestViewModel createRequestViewModel) {
+                             CreateRequestViewModel createRequestViewModel,
+                             Map<String, Service> availableServices) {
         this.createRequestController = createRequestController;
         this.returnHomeController = returnHomeController;
         this.createRequestViewModel = createRequestViewModel;
@@ -70,7 +64,9 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         LabelComboBoxPanel urgencyLevelSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.URGENCY_LABEL), urgencyLevelComboBox
         );
-        availableServiceComboBox.setSelectedItem(new Service("Vaccination", 20));
+
+        this.availableServiceComboBox = new JComboBox<>(availableServices.values().toArray(new Service[0]));
+        availableServiceComboBox.setSelectedItem(availableServices.get("Vaccination"));
         LabelComboBoxPanel serviceSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.SERVICE_LABEL), availableServiceComboBox
         );
@@ -122,6 +118,8 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                             JComboBox<Integer> myCombo = (JComboBox<Integer>) evt.getSource();
                             Integer newUrgencyLevel = (Integer)myCombo.getSelectedItem();
                             currentState.setUrgencyLevel(newUrgencyLevel);
+                            createRequestViewModel.setState(currentState);
+                            createRequestViewModel.firePropertyChanged();
                         }
                     }
                 }
@@ -135,20 +133,34 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                             JComboBox<Service> myCombo = (JComboBox<Service>) evt.getSource();
                             Service newService = (Service)myCombo.getSelectedItem();
                             currentState.setService(newService);
+                            createRequestViewModel.setState(currentState);
+                            createRequestViewModel.firePropertyChanged();
                         }
                     }
                 }
         );
 
-        destinationInputField.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(destinationInputField)) {
-                            CreateRequestState currentState = createRequestViewModel.getState();
-                            JTextField destinationText = (JTextField) evt.getSource();
-                            String newDestination = (String)destinationText.getText();
-                            currentState.setDestination(newDestination);
-                        }
+        destinationInputField.addKeyListener(
+                new KeyListener() {
+
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        CreateRequestState currentState = createRequestViewModel.getState();
+                        JTextField destinationText = (JTextField) e.getSource();
+                        currentState.setDestination(destinationText.getText() + e.getKeyChar());
+                        createRequestViewModel.setState(currentState);
+                        createRequestViewModel.firePropertyChanged();
+                        System.out.println(destinationText.getText());
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
                     }
                 }
         );
