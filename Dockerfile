@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17-jdk-jammy AS build
 RUN mkdir -p /workspace
 WORKDIR /workspace
-COPY src/pom.xml /workspace
+COPY pom.xml /workspace
 COPY src /workspace/src
 RUN mvn -B package --file pom.xml -DskipTests
 
