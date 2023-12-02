@@ -1,0 +1,4 @@
+patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance,isComplete
+user123,Sat Dec 02 16:34:07 EST 2023,doc1,0,University of Toronto,Blood testing,88.07161,108.166664,10.18322,false
+user123,Sat Dec 02 16:51:30 EST 2023,doc3,0,University of Toronto,Blood testing,217.29253,826.95,96.11705,false
+user123,Sat Dec 02 17:25:10 EST 2023,doc1,0,University of Toronto,Blood testing,88.019684,108.2,10.07137,false

@@ -104,9 +104,9 @@ public class App
                 loginViewModel,
                 userDataAccessObject,
                 returnToLockController);
-        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, lockViewModel, homeScreenViewModel);
-        // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         ViewRequestsView viewRequestsView = ViewRequestUseCaseFactory.create(viewManagerModel, viewRequestViewModel, requestDataAccessObject, returnHomeController);
+        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, lockViewModel, homeScreenViewModel, viewRequestsView.getRequestController());
+        // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         EditView editProfileView = EditUseCaseFactory.create(
                viewManagerModel,
                editProfileViewModel,
@@ -124,7 +124,8 @@ public class App
                apiAccessObject,
                userRequestDataAccessObject,
                doctorDataAccessObject,
-               returnHomeController);
+               returnHomeController,
+                doctorDataAccessObject.getAvailableServices());
         LockView lockView = LockUseCaseFactory.create(
                 viewManagerModel,
                 lockViewModel,

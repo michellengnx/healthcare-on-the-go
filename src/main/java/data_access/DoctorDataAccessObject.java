@@ -21,6 +21,7 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
     private final String doctorFilePath;
     private final String servicesFilePath;
     private final List<Doctor> doctorList = new ArrayList<>();
+    private final Map<String, Service> availableServices;
 
 
     /**
@@ -32,9 +33,9 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
     public DoctorDataAccessObject(String doctorFilePath, String servicesFilePath) {
         this.doctorFilePath = doctorFilePath;
         this.servicesFilePath = servicesFilePath;
+        availableServices = getServices();
 
         try {
-            Map<String, Service> availableServices = getServices();
             FileReader filereader = new FileReader(doctorFilePath);
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
@@ -146,18 +147,20 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
                     certificationsBuilder.append(";").append(certification);
                 }
                 if (!certificationsBuilder.toString().isEmpty()) {
-                    certifications = certificationsBuilder.toString().substring(1);
+                    certifications = certificationsBuilder.substring(1);
                 } else {
                     certifications = "";
                 }
+
                 String isBusy = String.valueOf(doctor.isBusy());
+
                 StringBuilder servicesBuilder = new StringBuilder();
                 String qualifiedServices;
                 for (Service service : doctor.getQualifiedServices()) {
-                    certificationsBuilder.append(";").append(service.getName());
+                    servicesBuilder.append(";").append(service.getName());
                 }
-                if (!certificationsBuilder.toString().isEmpty()) {
-                    qualifiedServices = certificationsBuilder.toString().substring(1);
+                if (!servicesBuilder.toString().isEmpty()) {
+                    qualifiedServices = servicesBuilder.substring(1);
                 } else {
                     qualifiedServices = "";
                 }
@@ -207,5 +210,9 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
             }
         }
         return availableDoctors;
+    }
+
+    public Map<String, Service> getAvailableServices() {
+        return availableServices;
     }
 }

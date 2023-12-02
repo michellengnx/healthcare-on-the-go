@@ -27,6 +27,11 @@ import java.util.ArrayList;
 public class ViewRequestsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "view requests";
     private final ViewRequestViewModel viewRequestViewModel;
+
+    public ViewRequestController getRequestController() {
+        return requestController;
+    }
+
     private final ViewRequestController requestController;
     private final ReturnHomeController returnHomeController;
 
@@ -113,7 +118,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
     }
     public static void main(String[] args) throws IOException {
-        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requests.csv");
+        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("data/requests.csv");
 
 
         ArrayList<ArrayList<String>> data = fileRequestDataAccessObject.getRequestUser("patient2");
@@ -155,6 +160,42 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("property changed!!!");
+        ViewRequestState state = (ViewRequestState) evt.getNewValue();
 
+        ArrayList<String> userName = state.getUserName();
+        ArrayList<String> doctorNames = state.getDoctorNames();
+        ArrayList<String> creationTime = state.getDoctorNames();
+        ArrayList<String> services = state.getServices();
+        ArrayList<String> destinations = state.getDestinations();
+        ArrayList<Integer> urgencies = state.getUrgencies();
+        ArrayList<Float> etas = state.getEtas();
+        ArrayList<Float> distances = state.getDistances();
+        ArrayList<Boolean> completed = state.getCompleted();
+
+        String[][] data = new String[10][9];
+        int size = userName.size();
+
+        for (int i = 0; i < size; i++) {
+            data[i][0] = userName.get(i);
+            data[i][1] = doctorNames.get(i);
+            data[i][2] = creationTime.get(i);
+            data[i][3] = String.valueOf(urgencies.get(i));
+            data[i][4] = destinations.get(i);
+            data[i][5] = services.get(i);
+            data[i][6] = String.valueOf(etas.get(i));
+            data[i][7] = String.valueOf(distances.get(i));
+            data[i][8] = String.valueOf(completed.get(i));
+        }
+
+        // Column headers
+        String[] headers = {"UserName", "DoctorNames", "CreationTime", "Urgency", "Destinations",
+                "Services", "ETAs", "Distances", "Completed"};
+
+        // Create a table model with the data and headers
+        DefaultTableModel model = new DefaultTableModel(data, headers);
+
+        // Create JTable with the model
+        this.table = new JTable(model);
     }
 }

@@ -1,5 +1,6 @@
 package interface_adapter.ViewRequest;
 
+import use_case.ViewRequest.ViewRequestInputData;
 import use_case.ViewRequest.ViewRequestInteractor;
 
 public class ViewRequestController {
@@ -16,5 +17,10 @@ public class ViewRequestController {
         viewRequestViewModel.setViewRequestState(viewRequestState);
         return viewRequestViewModel;
     }
+
+    public void execute(String username) {
+        viewRequestInteractor.execute(new ViewRequestInputData(username));
+    }
+
     }
 

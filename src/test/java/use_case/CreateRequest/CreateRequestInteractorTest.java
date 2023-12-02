@@ -135,6 +135,11 @@ class CreateRequestInteractorTest {
         public float getPrice(String startLoc, String endLoc) {
             return 40;
         }
+
+        @Override
+        public String getTrafficMap(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException {
+            return null;
+        }
     }
 
     /**
@@ -154,6 +159,11 @@ class CreateRequestInteractorTest {
         @Override
         public float getPrice(String startLoc, String endLoc) throws InvalidLocationException {
             throw new InvalidLocationException("Location invalid");
+        }
+
+        @Override
+        public String getTrafficMap(String startLoc, String endLoc) throws InvalidLocationException, ApiAccessException {
+            return null;
         }
     }
 
@@ -209,11 +219,6 @@ class CreateRequestInteractorTest {
         }
 
         @Override
-        public List<Doctor> getAvailableDoctors(Service service) {
-            return null;
-        }
-
-        @Override
         public void markAsBusy(Doctor doctor) {
 
         }
@@ -226,11 +231,6 @@ class CreateRequestInteractorTest {
 
         @Override
         public List<Doctor> getAvailableDoctors() {
-            return new ArrayList<>();
-        }
-
-        @Override
-        public List<Doctor> getAvailableDoctors(Service service) {
             return new ArrayList<>();
         }
 

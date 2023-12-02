@@ -8,6 +8,7 @@ import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import interface_adapter.ViewRequest.ViewRequestController;
 import interface_adapter.edit_profile.EditController;
 import interface_adapter.edit_profile.EditViewModel;
 
@@ -40,6 +41,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JPanel requestView;
 
     private final HomeScreenController homeScreenController;
+    private final ViewRequestController viewRequestController;
     private final JLabel title;
 
     /**
@@ -49,7 +51,9 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
      * @param homeScreenViewModel The view model storing the data relevant to the home screen UI elements
      */
     public HomeScreenView(HomeScreenController homeScreenController,
-                          HomeScreenViewModel homeScreenViewModel) {
+                          HomeScreenViewModel homeScreenViewModel,
+                          ViewRequestController viewRequestController) {
+        this.viewRequestController = viewRequestController;
         this.homeScreenController = homeScreenController;
         this.homeScreenViewModel = homeScreenViewModel;
         homeScreenViewModel.addPropertyChangeListener(this);
@@ -113,6 +117,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         switchScreen(evt, viewRequests, "view requests");
+                        viewRequestController.execute(homeScreenViewModel.getState().getPatient());
                     }
                 }
         );

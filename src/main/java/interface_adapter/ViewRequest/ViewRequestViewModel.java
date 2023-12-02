@@ -25,7 +25,13 @@ public class ViewRequestViewModel extends ViewModel {
 
     }
 
+    public ViewRequestState getState() {
+        return this.viewRequestState;
+    }
 
+    public void setState(ViewRequestState newState) {
+        this.viewRequestState = newState;
+    }
 
     @Override
     public void firePropertyChanged() {
