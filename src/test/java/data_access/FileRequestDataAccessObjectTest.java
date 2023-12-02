@@ -99,7 +99,7 @@ class FileRequestDataAccessObjectTest {
         result.add(0, temp);
         result.add(1, temp);
         result.add(2, temp);
-        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requestsTest.csv");
+        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("src/test/java/data_access/requestsTest.csv");
         fileRequestDataAccessObject.clear();
         String userName = "Izora";
         fileRequestDataAccessObject.addRequest(request, "Izora");
