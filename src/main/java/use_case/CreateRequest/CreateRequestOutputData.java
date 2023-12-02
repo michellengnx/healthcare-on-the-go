@@ -9,10 +9,12 @@ import entities.ServiceRequest;
 public class CreateRequestOutputData {
     private final ServiceRequest request;
     private final String patientName;
+    private final String mapUrl;
 
-    public CreateRequestOutputData(ServiceRequest request, String patientName) {
+    public CreateRequestOutputData(ServiceRequest request, String patientName, String mapUrl) {
         this.request = request;
         this.patientName = patientName;
+        this.mapUrl = mapUrl;
     }
 
     public ServiceRequest getRequest() {
@@ -21,5 +23,9 @@ public class CreateRequestOutputData {
 
     public String getPatientName() {
         return patientName;
+    }
+
+    public String getMapUrl() {
+        return mapUrl;
     }
 }

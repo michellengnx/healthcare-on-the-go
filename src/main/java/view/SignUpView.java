@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpViewModel;
 
@@ -42,7 +43,7 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
     private final JButton signUp;
     private final JButton cancel;
 
-    public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel) {
+    public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel, ReturnToLockController returnToLockController) {
 
         this.signUpController = signUpController;
         this.signUpViewModel = signUpViewModel;
@@ -95,8 +96,8 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
         signUp.addActionListener(evt -> {
             // Get input values from the fields
             String username = usernameInputField.getText();
-            String password = Arrays.toString(passwordInputField.getPassword());
-            String repeatPassword = Arrays.toString(repeatPasswordInputField.getPassword());
+            String password = new String(passwordInputField.getPassword());
+            String repeatPassword = new String(repeatPasswordInputField.getPassword());
             String email = emailInputField.getText();
             String phoneNumber = phoneNumberInputField.getText();
             String gender = genderInputField.getText();
@@ -119,7 +120,16 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
         });
 
 
-        cancel.addActionListener(evt -> System.exit(0));
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+                            returnToLockController.execute();
+                        }
+                    }
+                }
+        );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

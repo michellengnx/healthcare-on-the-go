@@ -20,7 +20,7 @@ public class ViewRequestViewModel extends ViewModel {
     private ViewRequestState viewRequestState = new ViewRequestState();
 
     public ViewRequestViewModel() {
-        super("view request");
+        super("view requests");
 
 
     }

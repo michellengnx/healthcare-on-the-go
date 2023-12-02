@@ -1,0 +1,4 @@
+username, password, gender, birthday, email, number, id, location, certification, isBusy, qualifiedServices
+doc1,pass1,male,12/31/2003,doc1@gmail.com,123-123-1231,0,123 Street Avenue,cert1;cert2,false,Vaccination;Nutritional support
+doc2,pass2,female,11/31/2003,doc2@gmail.com,124-123-1231,0,124 Street Avenue,cert1,true,Pharmaceutical services;General health check
+doc3,pass3,male,10/31/2003,doc3@gmail.com,125-123-1231,0,125 Street Avenue,,false,X-ray imaging;Blood testing;Psychological care

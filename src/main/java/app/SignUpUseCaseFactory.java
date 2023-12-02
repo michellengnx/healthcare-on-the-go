@@ -4,6 +4,7 @@ package app;
 import data_access.FilePatientDataAccessObject;
 import entities.factories.user.PatientUserFactory;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpPresenter;
 import interface_adapter.SignUp.SignUpViewModel;
@@ -23,11 +24,11 @@ public class SignUpUseCaseFactory {
     private SignUpUseCaseFactory() {}
 
     public static SignUpView create(
-            ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, LoginViewModel loginViewModel, FilePatientDataAccessObject userDataAccessObject) {
+            ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, LoginViewModel loginViewModel, FilePatientDataAccessObject userDataAccessObject, ReturnToLockController returnToLockController) {
 
         try {
             SignUpController signUpController = createUserSignUpUseCase(viewManagerModel,  signUpViewModel, loginViewModel, userDataAccessObject);
-            return new SignUpView(signUpController, signUpViewModel);
+            return new SignUpView(signUpController, signUpViewModel, returnToLockController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

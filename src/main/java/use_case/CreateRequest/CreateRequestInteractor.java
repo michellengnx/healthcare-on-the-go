@@ -62,6 +62,8 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         DoctorMatcher matcher;
         ServiceRequest request;
 
+        String mapUrl;
+
         // create a doctor matcher and attempt to create a service request
         try {
             lowestEtaStrategy = new LowestEtaDoctorStrategy(createDoctorEtaMap(destination));
@@ -78,6 +80,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     urgencyLevel,
                     creationTime
             );
+            mapUrl = this.apiAccessObject.getTrafficMap(request.getDoctor().getLocation(), destination);
         } catch (InvalidLocationException e) {
             this.completeRequestPresenter.prepareFailView("Invalid location!");
             return;
@@ -93,7 +96,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         this.userDataAccessObject.saveRequest(patient, request);
         this.doctorDataAccessObject.markAsBusy(request.getDoctor());
 
-        CreateRequestOutputData response = new CreateRequestOutputData(request, patient.getUsername());
+        CreateRequestOutputData response = new CreateRequestOutputData(request, patient.getUsername(), mapUrl);
 
         this.completeRequestPresenter.prepareSuccessView(response);
     }
