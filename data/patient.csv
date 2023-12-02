@@ -1,2 +1,2 @@
 username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship
-user123,pass123,mail@mail.com,1231231231,male,isurance,Wed Jan 01 00:00:00 EST 2003,0000,123,12309090909,mom,name,12/12,user123
+user123,pass123,diff@mail.com,1231231231,male,isurance,Wed Jan 01 00:00:00 EST 2003,0000,123,12309090909,mom,name,12/12,user123

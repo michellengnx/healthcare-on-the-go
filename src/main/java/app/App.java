@@ -99,11 +99,16 @@ public class App
         HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, signupViewModel, homeScreenViewModel);
         // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         // ViewRequestsView viewRequestsView = ViewRequestsUseCaseFactory.create();
-        // EditView editProfileView = EditUseCaseFactory.create(
-        //        viewManagerModel,
-        //        editProfileViewModel,
-        //        editedViewModel,
-        //        userDataAccessObject);
+        EditView editProfileView = EditUseCaseFactory.create(
+               viewManagerModel,
+               editProfileViewModel,
+               editedViewModel,
+               userDataAccessObject,
+                returnHomeController);
+        EditedView editedProfileView = EditedUseCaseFactory.create(
+                editedViewModel,
+                returnHomeController
+        );
         // CreateRequestView createRequestView = CreateRequestUseCaseFactory.create(
         //        viewManagerModel,
         //        createRequestViewModel,
@@ -117,9 +122,10 @@ public class App
         views.add(signUpView, signUpView.viewName);
         views.add(loginView, loginView.viewName);
         views.add(homeScreenView, homeScreenView.viewName);
+        views.add(editedProfileView, editedProfileView.viewName);
         // views.add(leaveReviewView, leaveReviewView.viewName);
         // views.add(viewRequestsView, viewRequestsView.viewName);
-        // views.add(editProfileView, editProfileView.viewName);
+        views.add(editProfileView, editProfileView.viewName);
         // views.add(createRequestView, createRequestView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

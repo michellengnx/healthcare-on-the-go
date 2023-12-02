@@ -1,5 +1,6 @@
 package app;
 
+import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.edit_profile.EditController;
 import interface_adapter.edit_profile.EditPresenter;
@@ -36,11 +37,12 @@ public class EditUseCaseFactory {
             ViewManagerModel viewManagerModel,
             EditViewModel editViewModel,
             EditedViewModel editedViewModel,
-            EditPatientDataAccessInterface patientDataAccessObject) {
+            EditPatientDataAccessInterface patientDataAccessObject,
+            ReturnHomeController returnHomeController) {
 
         try {
             EditController editController = createEditUseCase(viewManagerModel, editViewModel, editedViewModel, patientDataAccessObject);
-            return new EditView(editViewModel, editController);
+            return new EditView(editViewModel, editController, returnHomeController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
