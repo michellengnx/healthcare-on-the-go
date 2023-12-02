@@ -12,6 +12,8 @@ public class ServiceRequest {
     float eta; // calculated using API
     float distance; // calculated using API
 
+    User patient;
+
     private boolean completed;
 
     public ServiceRequest(Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance) {
@@ -77,6 +79,8 @@ public class ServiceRequest {
     public float getEta() {
         return eta;
     }
+
+
 
     public void setEta(float eta) {
         this.eta = eta;

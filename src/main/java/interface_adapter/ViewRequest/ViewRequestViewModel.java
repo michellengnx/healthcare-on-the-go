@@ -1,15 +1,31 @@
 package interface_adapter.ViewRequest;
 
+import entities.ServiceRequest;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
-// TODO : IMPLEMENT
+
 
 public class ViewRequestViewModel extends ViewModel {
+    public ViewRequestState getViewRequestState() {
+        return viewRequestState;
+    }
+
+    public void setViewRequestState(ViewRequestState viewRequestState) {
+        this.viewRequestState = viewRequestState;
+    }
+
+    private ViewRequestState viewRequestState = new ViewRequestState();
+
     public ViewRequestViewModel() {
         super("view request");
+
+
     }
+
+
 
     @Override
     public void firePropertyChanged() {
@@ -21,10 +37,6 @@ public class ViewRequestViewModel extends ViewModel {
 
     }
 
-    public ViewRequestState getState() {
-        return new ViewRequestState();
-    }
 
-    public void setState(ViewRequestState viewRequestState) {
-    }
+
 }

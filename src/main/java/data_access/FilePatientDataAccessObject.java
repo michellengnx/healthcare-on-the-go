@@ -3,7 +3,7 @@ package data_access;
 import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
-import entities.User;
+import use_case.Login.LoginUserDataAccessInterface;
 import use_case.SignUp.SignUpUserDataAccessInterface;
 import use_case.edit_profile.EditPatientDataAccessInterface;
 
@@ -13,12 +13,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Manages data access for patient profiles using a CSV file as the data store.
  */
 // add implements LoginUserDataAccessInterface
-public class FilePatientDataAccessObject implements EditPatientDataAccessInterface, SignUpUserDataAccessInterface {
+public class FilePatientDataAccessObject implements EditPatientDataAccessInterface, SignUpUserDataAccessInterface, LoginUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -82,6 +86,11 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     public void save(Patient patient) {
         accounts.put(patient.getUsername(), patient);
         this.save();
+    }
+
+    @Override
+    public boolean existByUsername(String identifier) {
+        return false;
     }
 
     @Override
