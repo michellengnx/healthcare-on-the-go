@@ -1,4 +1,4 @@
-package test;
+package data_access;
 
 import data_access.FileRequestDataAccessObject;
 import entities.*;
@@ -48,7 +48,7 @@ class FileRequestDataAccessObjectTest {
                 "mail1@mail.com",
                 "123-123-1231",
                 "male",
-                new Date(),
+                date,
                 1,
                 "23 Road Lane",
                 new ArrayList<>(),
@@ -60,7 +60,7 @@ class FileRequestDataAccessObjectTest {
                 "123-123-1231",
                 "male",
                 "ins.",
-                new Date(),
+                date,
                 new CreditCard(
                         "1234567890",
                         123,
@@ -81,6 +81,7 @@ class FileRequestDataAccessObjectTest {
          * Initialize an input data object, and common data access objects.
          *
          */
+
         ArrayList<String> temp = new ArrayList<String>();
         temp.add(0, patient.getUsername());
         temp.add(1, date.toString());
@@ -99,6 +100,7 @@ class FileRequestDataAccessObjectTest {
         result.add(1, temp);
         result.add(2, temp);
         FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requestsTest.csv");
+        fileRequestDataAccessObject.clear();
         String userName = "Izora";
         fileRequestDataAccessObject.addRequest(request, "Izora");
         fileRequestDataAccessObject.addRequest(request, "Izora");
@@ -116,6 +118,7 @@ class FileRequestDataAccessObjectTest {
             for (int j = 0; j < expected.size(); j++) {
                 assertEquals(expected.get(j), actual.get(j), "Values should be equal");
             }
+
 
 
         }
