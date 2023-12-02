@@ -1,0 +1,4 @@
+patient,creation_time,doctor,urgency_level,destination,service,price,eta,distance,isComplete
+Izora,Fri Dec 01 20:07:34 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false
+Izora,Fri Dec 01 20:07:34 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false
+Izora,Fri Dec 01 20:07:34 EST 2023,xrayDoc,1,123 street avenue,X-ray,10.0,20.0,20.0,false

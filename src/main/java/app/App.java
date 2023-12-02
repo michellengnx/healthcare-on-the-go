@@ -30,8 +30,7 @@ import java.text.ParseException;
  */
 public class App
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 
