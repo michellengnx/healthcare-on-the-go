@@ -1,38 +1,51 @@
 package interface_adapter.edit_profile;
 // these fields will be populated by the homeviewmodel, which is populated by loginviewmodel, which is populated by signupviewmodel
+/**
+ * An object used to store the user's input data when editing a patient profile.
+ */
 public class EditState {
     private String username = "";
-    private String usernameError = null;
     private String password = "";
     private String passwordError = null;
     private String email = "";
-    private String emailError = null;
     private String phoneNumber = "";
-    private String phoneNumberError = null;
     private String insurance = "";
-    private String insuranceError = null;
+    private String creditCardNumber = "";
+    private Integer cvv = 0;
+    private String expirationDate = "";
+    private String nameOnCard = "";
+    private String emergencyName = "";
+    private String emergencyNumber = "";
+    private String emergencyRelationship = "";
 
+    /**
+     * Constructs an EditState object by copying the content of another EditState object.
+     *
+     * @param copy The EditState object to copy.
+     */
     public EditState(EditState copy) {
         username = copy.username;
-        usernameError = copy.usernameError;
         password = copy.password;
         passwordError = copy.passwordError;
         email = copy.email;
-        emailError = copy.emailError;
         phoneNumber = copy.phoneNumber;
-        phoneNumberError = copy.phoneNumberError;
         insurance = copy.insurance;
-        insuranceError = copy.insuranceError;
+        creditCardNumber = copy.creditCardNumber;
+        cvv = copy.cvv;
+        expirationDate = copy.expirationDate;
+        nameOnCard = copy.nameOnCard;
+        emergencyName = copy.emergencyName;
+        emergencyNumber = copy.emergencyNumber;
+        emergencyRelationship = copy.emergencyRelationship;
     }
 
+    /**
+     * Constructs an empty EditState object.
+     */
     public EditState() {}
 
     public String getUsername() {
         return username;
-    }
-
-    public String getUsernameError() {
-        return usernameError;
     }
 
     public String getPassword() {
@@ -47,33 +60,46 @@ public class EditState {
         return email;
     }
 
-    public String getEmailError() {
-        return emailError;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getPhoneNumberError() {
-        return phoneNumberError;
-    }
 
     public String getInsurance() {
         return insurance;
     }
 
-    public String getInsuranceError() {
-        return insuranceError;
+    public String getCreditCardNumber() {
+        return creditCardNumber;
     }
 
+    public Integer getCvv() {
+        return cvv;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public String getEmergencyName() {
+        return emergencyName;
+    }
+
+    public String getEmergencyNumber() {
+        return emergencyNumber;
+    }
+
+
+    public String getEmergencyRelationship() {
+        return emergencyRelationship;
+    }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setUsernameError(String usernameError) {
-        this.usernameError = usernameError;
     }
 
     public void setPassword(String newPassword) {
@@ -83,27 +109,44 @@ public class EditState {
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
     }
+
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setEmailError(String emailError) {
-        this.emailError = emailError;
     }
 
     public void setPhoneNumber(String newPhoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setPhoneNumberError(String newPhoneNumberError) {
-        this.phoneNumberError = phoneNumberError;
-    }
-
     public void setInsurance(String newInsurance) {
         this.insurance = insurance;
     }
 
-    public void setInsuranceError(String newInsuranceError) {
-        this.insuranceError = insuranceError;
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public void setCvv(Integer cvv) {
+        this.cvv = cvv;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
+
+    public void setEmergencyName(String emergencyName) {
+        this.emergencyName = emergencyName;
+    }
+
+    public void setEmergencyNumber(String emergencyNumber) {
+        this.emergencyNumber = emergencyNumber;
+    }
+
+    public void setEmergencyRelationship(String emergencyRelationship) {
+        this.emergencyRelationship = emergencyRelationship;
     }
 }

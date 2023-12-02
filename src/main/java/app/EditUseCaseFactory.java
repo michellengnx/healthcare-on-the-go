@@ -14,12 +14,24 @@ import view.EditView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory that facilitates the creation of an EditView and EditController for editing user profiles.
+ */
 public class EditUseCaseFactory {
 
     /** Prevent instantiation. */
 
     private EditUseCaseFactory() {}
 
+    /**
+     * Creates an EditView instance based on the provided parameters.
+     *
+     * @param viewManagerModel       Model controlling the current view being shown.
+     * @param editViewModel          Model storing data for editing a user's profile.
+     * @param editedViewModel       Model storing data for the edited user profile.
+     * @param patientDataAccessObject Object providing access to patient data.
+     * @return The view for editing user profiles.
+     */
     public static EditView create(
             ViewManagerModel viewManagerModel,
             EditViewModel editViewModel,
@@ -36,6 +48,16 @@ public class EditUseCaseFactory {
         return null;
     }
 
+    /**
+     * Creates an EditController responsible for handling the edit profile use case.
+     *
+     * @param viewManagerModel Model controlling the current view being shown.
+     * @param editViewModel Model storing data for editing a user's profile.
+     * @param editedViewModel Model storing data for the edited user profile.
+     * @param patientDataAccessObject Object providing access to patient data.
+     * @return The controller for executing the edit profile use case.
+     * @throws IOException If the patient data access object encounters a file access issue.
+     */
     private static EditController createEditUseCase(
             ViewManagerModel viewManagerModel,
             EditViewModel editViewModel,
