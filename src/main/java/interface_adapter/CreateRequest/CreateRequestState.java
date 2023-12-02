@@ -14,7 +14,7 @@ public class CreateRequestState {
     private String patientName;
 
     /**
-     * Create a new CreateRequestState with a given patient.
+     * Create a new CreateRequestState
      * */
     public CreateRequestState() {
 

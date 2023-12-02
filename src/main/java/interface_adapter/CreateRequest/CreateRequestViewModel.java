@@ -20,7 +20,7 @@ public class CreateRequestViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     /**
-     * Create a CreateRequestViewModel object with a given patient.
+     * Create a CreateRequestViewModel
      */
     public CreateRequestViewModel() {
         super("create request");
