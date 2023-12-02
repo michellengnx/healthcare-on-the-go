@@ -85,6 +85,9 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         } catch (InvalidLocationException e) {
             this.completeRequestPresenter.prepareFailView("Invalid location!");
             return;
+        } catch (ApiAccessException e) {
+            this.completeRequestPresenter.prepareFailView("There was a problem accessing the API, please try again later!");
+            return;
         }
 
         servicePrice = requestedService.getPrice();
@@ -118,7 +121,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
      * @param destination The destination to which the doctor is traveling.
      * @return A Map from available doctors to their ETA to destination.
      */
-    private Map<Doctor, Float> createDoctorEtaMap(String destination) throws InvalidLocationException {
+    private Map<Doctor, Float> createDoctorEtaMap(String destination) throws InvalidLocationException, ApiAccessException {
         List<Doctor> availableDoctors = this.doctorDataAccessObject.getAvailableDoctors();
         Map<Doctor, Float> doctorEtaMap = new HashMap<>();
 
