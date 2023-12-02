@@ -2,20 +2,22 @@ package interface_adapter.HomeScreen;
 
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
+import interface_adapter.LockView.LockViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import interface_adapter.edit_profile.EditViewModel;
 import use_case.HomeScreen.HomeScreenOutputBoundary;
 import use_case.HomeScreen.HomeScreenOutputData;
-import view.CreateRequestView;
-import view.SignUpView;
+import view.LockView;
+
+import java.util.concurrent.locks.Lock;
 
 public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     private final CreateRequestViewModel createRequestViewModel;
     private final ViewRequestViewModel viewRequestViewModel;
     private final HomeScreenViewModel homeScreenViewModel;
-    private final SignUpViewModel signUpViewModel;
+    private final LockViewModel lockViewModel;
     private final ViewManagerModel viewManagerModel;
     private EditViewModel editProfileViewModel;
 
@@ -29,13 +31,13 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
                                ViewRequestViewModel viewRequestViewModel,
                                EditViewModel editProfileViewModel,
                                ViewManagerModel viewManagerModel,
-                               SignUpViewModel signUpViewModel,
+                               LockViewModel lockViewModel,
                                HomeScreenViewModel homeScreenViewModel) {
         this.createRequestViewModel = createRequestViewModel;
         this.viewRequestViewModel = viewRequestViewModel;
         this.editProfileViewModel = editProfileViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.signUpViewModel = signUpViewModel;
+        this.lockViewModel = lockViewModel;
         this.homeScreenViewModel = homeScreenViewModel;
     }
 
@@ -53,9 +55,10 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
                 this.viewManagerModel.setActiveView(createRequestViewModel.getViewName());
                 break;
             case "logout":
-                this.viewManagerModel.setActiveView(signUpViewModel.getViewName());
+                this.viewManagerModel.setActiveView(lockViewModel.getViewName());
                 break;
             case "view requests":
+                System.out.println("Viewing requests!!!!");
                 this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
                 break;
             case "edit profile":
@@ -65,6 +68,7 @@ public class HomeScreenPresenter implements HomeScreenOutputBoundary {
                 // this.viewManagerModel.setActiveView(leaveReviewViewModel.getViewName());
                 break;
         }
+        System.out.println(outputData.getViewName());
 
         this.viewManagerModel.firePropertyChanged();
     }

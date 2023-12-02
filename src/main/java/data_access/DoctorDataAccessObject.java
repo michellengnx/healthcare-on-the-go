@@ -6,6 +6,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import entities.Doctor;
 import entities.Review;
 import entities.Service;
+import use_case.CreateRequest.CreateRequestDoctorDataAccessInterface;
 
 import javax.print.Doc;
 import java.io.*;
@@ -16,7 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class DoctorDataAccessObject {
+public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInterface {
     private final String doctorFilePath;
     private final String servicesFilePath;
     private final List<Doctor> doctorList = new ArrayList<>();

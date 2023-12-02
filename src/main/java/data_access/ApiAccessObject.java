@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import use_case.CreateRequest.ApiAccessException;
 import entities.factories.service_request.InvalidLocationException;
+import use_case.CreateRequest.CreateRequestApiAccessInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApiAccessObject {
+public class ApiAccessObject implements CreateRequestApiAccessInterface {
     private final String apiKey;
 
     public ApiAccessObject(String apiKey) {
