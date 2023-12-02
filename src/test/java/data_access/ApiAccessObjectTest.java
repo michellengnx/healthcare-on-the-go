@@ -3,17 +3,17 @@ package data_access;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.CreateRequest.ApiAccessException;
-import use_case.CreateRequest.InvalidLocationException;
+import entities.factories.service_request.InvalidLocationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ApiAccessObjectTest {
-    private final String apiKey = "";
+    private final String apiKey = System.getenv("API_KEY");;
     private final ApiAccessObject apiAccessObject = new ApiAccessObject(apiKey);
 
     @Test
     void testGetEta() {
-        if (this.apiKey.equals("")) {
+        if (apiKey == null) {
             return;
         } else {
             try {

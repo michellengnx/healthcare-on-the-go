@@ -8,18 +8,18 @@ import entities.ServiceRequest;
  */
 public class CreateRequestOutputData {
     private final ServiceRequest request;
-    private final Patient patient;
+    private final String patientName;
 
-    public CreateRequestOutputData(ServiceRequest request, Patient patient) {
+    public CreateRequestOutputData(ServiceRequest request, String patientName) {
         this.request = request;
-        this.patient = patient;
+        this.patientName = patientName;
     }
 
     public ServiceRequest getRequest() {
         return request;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getPatientName() {
+        return patientName;
     }
 }

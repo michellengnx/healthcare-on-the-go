@@ -10,19 +10,29 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Represents the view for displaying an edited profile.
+ */
 public class EditedView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "edited";
     private final EditedViewModel editedViewModel;
-    // should other buttons be here? aim: show the profile after changes have been made
-    JLabel username;
     JLabel password;
     JLabel email;
     JLabel phoneNumber;
     JLabel insurance;
+    JLabel creditCardName;
+    JLabel cvv;
+    JLabel expirationDate;
+    JLabel nameOnCard;
+    JLabel emergencyName;
+    JLabel emergencyNumber;
+    JLabel emergencyRelationship;
     final JButton returnHomePage;
 
     /**
-     * A window with a title and a JButton.
+     * Constructs an EditedView object.
+     * * A window with a title and a JButton.
+     * @param editedViewModel The view model associated with the edited profile view.
      */
     public EditedView(EditedViewModel editedViewModel) {
         this.editedViewModel = editedViewModel;
@@ -32,12 +42,18 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel userProfileInfo = new JLabel("Changes have been successfully saved: ");
-        // should these buttons be here?
-        username = new JLabel();
         password = new JLabel();
         email = new JLabel();
         phoneNumber = new JLabel();
         insurance = new JLabel();
+        creditCardName = new JLabel();
+        cvv = new JLabel();
+        expirationDate = new JLabel();
+        nameOnCard = new JLabel();
+        emergencyName = new JLabel();
+        emergencyNumber = new JLabel();
+        emergencyRelationship = new JLabel();
+
 
         JPanel buttons = new JPanel();
         returnHomePage = new JButton(editedViewModel.EXIT_BUTTON_LABEL);
@@ -48,12 +64,18 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(userProfileInfo); // should this be called username info?
-        this.add(username); // buttons should be here?
+        this.add(userProfileInfo);
         this.add(password);
         this.add(email);
         this.add(phoneNumber);
         this.add(insurance);
+        this.add(creditCardName);
+        this.add(cvv);
+        this.add(expirationDate);
+        this.add(nameOnCard);
+        this.add(emergencyName);
+        this.add(emergencyNumber);
+        this.add(emergencyRelationship);
         this.add(buttons);
     }
 
@@ -64,14 +86,26 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Handles changes in the property.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditedState state = (EditedState) evt.getNewValue();
-        username.setText(state.getUsername());
         password.setText(state.getPassword());
         email.setText(state.getEmail());
         phoneNumber.setText(state.getPhoneNumber());
         insurance.setText(state.getInsurance());
-        // check if other parameters are needed
+        creditCardName.setText(state.getCreditCardNumber());
+        cvv.setText(String.valueOf(state.getCvv()));
+        expirationDate.setText(state.getExpirationDate());
+        nameOnCard.setText(state.getNameOnCard());
+        emergencyName.setText(state.getEmergencyName());
+        emergencyNumber.setText(state.getEmergencyNumber());
+        emergencyRelationship.setText(state.getEmergencyRelationship());
+
+
     }
 }

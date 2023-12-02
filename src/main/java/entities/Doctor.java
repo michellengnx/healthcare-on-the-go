@@ -17,6 +17,7 @@ public class Doctor extends User {
 
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
+
     private final List<Review> reviews = new ArrayList<>();
 
     public Double getRating() {
@@ -38,6 +39,8 @@ public class Doctor extends User {
     public void setTotalReviews(int totalreviews) {
         this.totalreviews = totalreviews;
     }
+
+
 
     /**
      * Requires each doctor to have a unique id.
@@ -64,5 +67,18 @@ public class Doctor extends User {
 
     public List<Service> getQualifiedServices() {
         return qualifiedServices;
+    }
+
+    public boolean isBusy() {
+        boolean isBusy = false;
+        return isBusy;
+    }
+
+    public void setBusy(boolean busy) {
+        boolean isBusy = busy;
+    }
+
+    public Integer getId_() {
+        return id_;
     }
 }
