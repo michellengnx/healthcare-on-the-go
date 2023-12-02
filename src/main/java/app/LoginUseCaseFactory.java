@@ -1,10 +1,12 @@
 package app;
 
 import entities.factories.user.PatientUserFactory;
+import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.Loggedin.LoggedinViewModel;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginPresenter;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.ViewManagerModel;
 
 import use_case.Login.LoginInputBoundary;
@@ -24,12 +26,13 @@ public class LoginUseCaseFactory {
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedinViewModel loggedinViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) {
+            HomeScreenViewModel loggedinViewModel,
+            LoginUserDataAccessInterface userDataAccessObject,
+            ReturnToLockController returnToLockController) {
 
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedinViewModel, userDataAccessObject);
-            return new LoginView(loginViewModel, loginController);
+            return new LoginView(loginViewModel, loginController, returnToLockController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
@@ -40,7 +43,7 @@ public class LoginUseCaseFactory {
     private static LoginController createLoginUseCase(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedinViewModel loggedInViewModel,
+            HomeScreenViewModel loggedInViewModel,
             LoginUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
