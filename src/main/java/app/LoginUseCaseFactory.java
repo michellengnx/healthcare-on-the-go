@@ -6,6 +6,7 @@ import interface_adapter.Loggedin.LoggedinViewModel;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginPresenter;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.ViewManagerModel;
 
 import use_case.Login.LoginInputBoundary;
@@ -26,11 +27,12 @@ public class LoginUseCaseFactory {
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             HomeScreenViewModel loggedinViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) {
+            LoginUserDataAccessInterface userDataAccessObject,
+            ReturnToLockController returnToLockController) {
 
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedinViewModel, userDataAccessObject);
-            return new LoginView(loginViewModel, loginController);
+            return new LoginView(loginViewModel, loginController, returnToLockController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

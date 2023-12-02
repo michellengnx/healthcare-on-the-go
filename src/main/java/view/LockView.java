@@ -1,23 +1,20 @@
 package view;
 
-import app.SignUpUseCaseFactory;
 import data_access.FilePatientDataAccessObject;
-import interface_adapter.SignUp.SignUpController;
-import interface_adapter.SignUp.SignUpViewModel;
-import interface_adapter.ViewManagerModel;
-import use_case.LockView.LockViewModel;
-import use_case.SignUp.SignUpInputData;
-import use_case.SignUp.SignUpInteractor;
-import use_case.SignUp.SignUpOutputData;
+import interface_adapter.LockView.LockController;
+import interface_adapter.LockView.LockViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class LockView extends JFrame implements ActionListener {
+public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
+    public String viewName = "lock";
     private JPanel buttonPanel;
     private final String patientDataPath = "/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/patients.csv";
     private JButton login;
@@ -25,7 +22,7 @@ public class LockView extends JFrame implements ActionListener {
     private JPanel labelPanel;
     private JLabel welcome;
     private LockViewModel lockViewModel;
-    public LockView(LockViewModel lockViewModel){
+    public LockView(LockViewModel lockViewModel, LockController lockController){
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
@@ -34,6 +31,29 @@ public class LockView extends JFrame implements ActionListener {
         this.setSize(800,600);
         this.login.addActionListener(this);
         this.signup.addActionListener(this);
+
+        signup.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(signup)) {
+                            lockController.execute("sign up");
+                        }
+                    }
+                }
+        );
+
+        login.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(login)) {
+                            lockController.execute("log in");
+                        }
+                    }
+                }
+        );
+
         this.buttonPanel.add(signup);
         this.buttonPanel.add(login);
         this.setLayout(new BorderLayout());
@@ -57,6 +77,11 @@ public class LockView extends JFrame implements ActionListener {
 
     public static void main(String[] args) throws IOException, ParseException {
         FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("/data/patinets.csv");
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
 
     }
 }

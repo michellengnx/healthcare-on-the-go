@@ -3,6 +3,7 @@ package view;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.ReturnToLock.ReturnToLockController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +29,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton cancel;
     private final LoginController loginController;
 
-    public LoginView(LoginViewModel loginViewModel, LoginController controller) {
+    public LoginView(LoginViewModel loginViewModel, LoginController controller, ReturnToLockController returnToLockController) {
 
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
@@ -63,7 +64,16 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+                            returnToLockController.execute();
+                        }
+                    }
+                }
+        );
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override

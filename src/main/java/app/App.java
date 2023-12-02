@@ -3,18 +3,18 @@ package app;
 
 
 
-import data_access.ApiAccessObject;
-import data_access.DoctorDataAccessObject;
-import data_access.FilePatientDataAccessObject;
+import data_access.*;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import interface_adapter.edit_profile.EditViewModel;
 import interface_adapter.edited_profile.EditedViewModel;
+import interface_adapter.LockView.LockViewModel;
 import view.*;
 
 
@@ -60,26 +60,33 @@ public class App
         LoginViewModel loginViewModel = new LoginViewModel();
         HomeScreenViewModel homeScreenViewModel = new HomeScreenViewModel();
         SignUpViewModel signupViewModel = new SignUpViewModel();
-        // ViewRequestsViewModel viewRequestsViewModel = new ViewRequestsViewModel();
         EditViewModel editProfileViewModel = new EditViewModel();
         EditedViewModel editedViewModel = new EditedViewModel();
         // LeaveReviewViewModel leaveReviewViewModel = new LeaveReviewViewModel();
         CreateRequestViewModel createRequestViewModel = new CreateRequestViewModel();
         ViewRequestViewModel viewRequestViewModel = new ViewRequestViewModel();
+        LockViewModel lockViewModel = new LockViewModel();
 
 
         ReturnHomeController returnHomeController = ReturnHomeUseCaseFactory.create(
                 viewManagerModel,
                 homeScreenViewModel
         );
-
+        ReturnToLockController returnToLockController = ReturnToLockUseCaseFactory.create(
+                viewManagerModel,
+                lockViewModel
+        );
 
         FilePatientDataAccessObject userDataAccessObject;
         DoctorDataAccessObject doctorDataAccessObject;
         ApiAccessObject apiAccessObject;
+        FileRequestDataAccessObject requestDataAccessObject;
+        FileUserRequestDataAccessObject userRequestDataAccessObject;
 //
         try {
             userDataAccessObject = new FilePatientDataAccessObject("data/patients.csv");
+            requestDataAccessObject = new FileRequestDataAccessObject("data/requests.csv");
+            userRequestDataAccessObject = new FileUserRequestDataAccessObject(userDataAccessObject, requestDataAccessObject);
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -90,15 +97,16 @@ public class App
         apiAccessObject = new ApiAccessObject(System.getenv("API_KEY"));
 
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, homeScreenViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, homeScreenViewModel, userDataAccessObject, returnToLockController);
         SignUpView signUpView = SignUpUseCaseFactory.create(
                 viewManagerModel,
                 signupViewModel,
                 loginViewModel,
-                userDataAccessObject);
-        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, signupViewModel, homeScreenViewModel);
+                userDataAccessObject,
+                returnToLockController);
+        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, lockViewModel, homeScreenViewModel);
         // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-        // ViewRequestsView viewRequestsView = ViewRequestsUseCaseFactory.create();
+        ViewRequestsView viewRequestsView = ViewRequestUseCaseFactory.create(viewManagerModel, viewRequestViewModel, requestDataAccessObject, returnHomeController);
         EditView editProfileView = EditUseCaseFactory.create(
                viewManagerModel,
                editProfileViewModel,
@@ -109,14 +117,20 @@ public class App
                 editedViewModel,
                 returnHomeController
         );
-        // CreateRequestView createRequestView = CreateRequestUseCaseFactory.create(
-        //        viewManagerModel,
-        //        createRequestViewModel,
-        //        homeScreenViewModel,
-        //        apiAccessObject,
-        //        userDataAccessObject,
-        //        doctorDataAccessObject,
-        //        returnHomeController);
+        CreateRequestView createRequestView = CreateRequestUseCaseFactory.create(
+               viewManagerModel,
+               createRequestViewModel,
+               homeScreenViewModel,
+               apiAccessObject,
+               userRequestDataAccessObject,
+               doctorDataAccessObject,
+               returnHomeController);
+        LockView lockView = LockUseCaseFactory.create(
+                viewManagerModel,
+                lockViewModel,
+                signupViewModel,
+                loginViewModel
+        );
 
 
         views.add(signUpView, signUpView.viewName);
@@ -124,11 +138,12 @@ public class App
         views.add(homeScreenView, homeScreenView.viewName);
         views.add(editedProfileView, editedProfileView.viewName);
         // views.add(leaveReviewView, leaveReviewView.viewName);
-        // views.add(viewRequestsView, viewRequestsView.viewName);
+        views.add(viewRequestsView, viewRequestsView.viewName);
         views.add(editProfileView, editProfileView.viewName);
-        // views.add(createRequestView, createRequestView.viewName);
+        views.add(createRequestView, createRequestView.viewName);
+        views.add(lockView, lockView.viewName);
 
-        viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(lockView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

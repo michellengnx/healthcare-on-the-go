@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpViewModel;
 
@@ -42,7 +43,7 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
     private final JButton signUp;
     private final JButton cancel;
 
-    public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel) {
+    public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel, ReturnToLockController returnToLockController) {
 
         this.signUpController = signUpController;
         this.signUpViewModel = signUpViewModel;
@@ -119,7 +120,16 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
         });
 
 
-        cancel.addActionListener(evt -> System.exit(0));
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+                            returnToLockController.execute();
+                        }
+                    }
+                }
+        );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

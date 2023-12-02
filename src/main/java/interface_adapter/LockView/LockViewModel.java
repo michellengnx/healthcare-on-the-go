@@ -1,10 +1,12 @@
-package use_case.LockView;
+package interface_adapter.LockView;
 
+import interface_adapter.ViewModel;
 import view.LockView;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LockViewModel extends LockView {
+public class LockViewModel extends ViewModel {
     public final String TITLE_LABEL = "Lock Screen";
 
 
@@ -12,13 +14,17 @@ public class LockViewModel extends LockView {
     public  final String SIGNUP_BUTTON_LABEL = "Sign up";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public LockViewModel(LockViewModel lockViewModel) {
-        super(lockViewModel);
-
+    public LockViewModel() {
+        super("lock");
     }
 
     public void firePropertyChanged() {
         support.firePropertyChange("state", null,null);
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+
     }
 
 }
