@@ -38,8 +38,11 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
 
     private final JTextField expirationDateInputField = new JTextField(15);
     private final JTextField nameOnCardInputField = new JTextField(15);
+    private final JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
 
-//    button
+
+
+    //    button
     private final JButton signUp;
     private final JButton cancel;
 
@@ -53,6 +56,7 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
 
 
 // name + text field
+
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(SignUpViewModel.USERNAME_LABEL), usernameInputField);
         LabelTextPanel passwordInfo = new LabelTextPanel(
@@ -119,6 +123,8 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
             );
         });
 
+        // add
+
 
         cancel.addActionListener(
                 new ActionListener() {
@@ -131,11 +137,25 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
+        showPasswordCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                });
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(usernameInfo);
         this.add(passwordInfo);
+        this.add(showPasswordCheckBox);
         this.add(repeatPasswordInfo);
         this.add(emailInfo);
         this.add(phoneNumberInfo);
