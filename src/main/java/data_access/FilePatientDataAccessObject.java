@@ -222,7 +222,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
             patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
             changes[4] = 1;
-        } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) &&
+        } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) ||
                     changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
             patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
             changes[5] = 1;

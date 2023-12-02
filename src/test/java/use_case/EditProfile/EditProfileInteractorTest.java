@@ -46,10 +46,9 @@ public class EditProfileInteractorTest {
             writer.print("");
             writer.close();
 
-            FilePatientDataAccessObject fudao = new FilePatientDataAccessObject("./users.csv");
-            fudao.save(samplePatient);
+            patientDataAccessInterface = new FilePatientDataAccessObject("./users.csv");
+            patientDataAccessInterface.save(samplePatient);
 
-            patientDataAccessInterface = fudao;
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
