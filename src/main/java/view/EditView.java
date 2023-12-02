@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.edit_profile.EditController;
 import interface_adapter.edit_profile.EditState;
 import interface_adapter.edit_profile.EditViewModel;
@@ -58,7 +59,7 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
      * @param editViewModel the view model associated with the edit profile view.
      * @param controller the controller handling edit profile actions.
      */
-    public EditView(EditViewModel editViewModel, EditController controller) {
+    public EditView(EditViewModel editViewModel, EditController controller, ReturnHomeController returnHomeController) {
 
         this.editController = controller;
         this.editViewModel = editViewModel;
@@ -136,7 +137,14 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        returnHomeController.execute();
+                    }
+                }
+        );
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override

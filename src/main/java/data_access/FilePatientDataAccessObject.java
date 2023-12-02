@@ -204,26 +204,28 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         Patient patient = accounts.get(username);
 
         if (changeExists(patient.getPassword(), password)) {
-            if (!hasValidPassword(password)) {
+            if (!hasValidPassword(password) || password.isEmpty()) {
                 changes[0] = -1;
             } else {
                 patient.setPassword(password);
                 changes[0] = 1;
             }
-        } if (changeExists(patient.getEmail(), email)) {
+        } if (changeExists(patient.getEmail(), email) && !email.isEmpty()) {
             patient.setEmail(email);
             changes[1] = 1;
-        } if (changeExists(patient.getPhoneNumber(), phoneNumber)) {
+        } if (changeExists(patient.getPhoneNumber(), phoneNumber) && !phoneNumber.isEmpty()) {
             patient.setPhoneNumber(phoneNumber);
             changes[2] = 1;
-        } if (changeExists(patient.getInsurance(), insurance)) {
+        } if (changeExists(patient.getInsurance(), insurance) && !insurance.isEmpty()) {
             patient.setInsurance(insurance);
             changes[3] = 1;
-        } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber)) {
+        } if (changeExists(patient.getCreditCard().getCreditCardNumber(), creditCardNumber) && !creditCardNumber.isEmpty()) {
             patient.setCreditCard(new CreditCard(creditCardNumber, cvv, expirationDate, nameOnCard));
             changes[4] = 1;
-        } if (changeExists(patient.getEmergencyContact().getName(), emergencyName) ||
-                    changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber)) {
+        } if ((changeExists(patient.getEmergencyContact().getName(), emergencyName) ||
+                    changeExists(patient.getEmergencyContact().getPhoneNumber(), emergencyNumber) ||
+                changeExists(patient.getEmergencyContact().getRelationship(), emergencyRelationship)) &&
+                !emergencyName.isEmpty() && !emergencyNumber.isEmpty() && !emergencyRelationship.isEmpty()) {
             patient.setEmergencyContact(new EmergencyContact(emergencyName, emergencyNumber, emergencyRelationship));
             changes[5] = 1;
         }

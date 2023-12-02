@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.edited_profile.EditedState;
 import interface_adapter.edited_profile.EditedViewModel;
 
@@ -34,7 +35,8 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
      * * A window with a title and a JButton.
      * @param editedViewModel The view model associated with the edited profile view.
      */
-    public EditedView(EditedViewModel editedViewModel) {
+    public EditedView(EditedViewModel editedViewModel,
+                      ReturnHomeController returnHomeController) {
         this.editedViewModel = editedViewModel;
         this.editedViewModel.addPropertyChangeListener(this);
 
@@ -57,6 +59,18 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
 
         JPanel buttons = new JPanel();
         returnHomePage = new JButton(editedViewModel.EXIT_BUTTON_LABEL);
+
+        returnHomePage.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(returnHomePage)) {
+                            returnHomeController.execute();
+                        }
+                    }
+                }
+        );
+
         buttons.add(returnHomePage);
 
         returnHomePage.addActionListener(this);
