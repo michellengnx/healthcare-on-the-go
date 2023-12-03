@@ -8,6 +8,7 @@ import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import interface_adapter.ViewRequest.ViewRequestController;
 import interface_adapter.edit_profile.EditController;
 import interface_adapter.edit_profile.EditViewModel;
 
@@ -40,7 +41,9 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
     private final JPanel requestView;
 
     private final HomeScreenController homeScreenController;
+    private final ViewRequestController viewRequestController;
     private final JLabel title;
+    private final JLabel map;
 
     /**
      * Create a CreateRequestView object given the appropriate view model and controllers.
@@ -49,7 +52,9 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
      * @param homeScreenViewModel The view model storing the data relevant to the home screen UI elements
      */
     public HomeScreenView(HomeScreenController homeScreenController,
-                          HomeScreenViewModel homeScreenViewModel) {
+                          HomeScreenViewModel homeScreenViewModel,
+                          ViewRequestController viewRequestController) {
+        this.viewRequestController = viewRequestController;
         this.homeScreenController = homeScreenController;
         this.homeScreenViewModel = homeScreenViewModel;
         homeScreenViewModel.addPropertyChangeListener(this);
@@ -73,12 +78,15 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             throw new RuntimeException();
         }
 
+        map = new JLabel(new ImageIcon(image));
+
         requestView = new JPanel();
-        JLabel doctorOtw = new JLabel(homeScreenViewModel.DOCTOR_OTW_LABEL);
 
-        JLabel map = new JLabel(new ImageIcon(image));
+        requestView.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        requestView.add(doctorOtw);
+        JLabel docOtw = new JLabel(homeScreenViewModel.DOCTOR_OTW_LABEL);
+
+        requestView.add(docOtw);
         requestView.add(map);
 
         // buttons to create request and return home
@@ -113,6 +121,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         switchScreen(evt, viewRequests, "view requests");
+                        viewRequestController.execute(homeScreenViewModel.getState().getPatient());
                     }
                 }
         );
@@ -134,6 +143,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.requestView.setLayout(new BoxLayout(this.requestView, BoxLayout.Y_AXIS));
 
         this.requestView.setVisible(false);
 
@@ -163,6 +173,17 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         HomeScreenState homeScreenState = (HomeScreenState) evt.getNewValue();
         this.requestView.setVisible(homeScreenState.isActiveRequest());
         this.title.setText("Hello " + homeScreenState.getPatient());
+        URL url;
+        BufferedImage image;
+
+        try {
+            url = new URL(homeScreenState.getImageUrl());
+            image = ImageIO.read(url);
+            ImageIcon myMap = new ImageIcon(image);
+            this.map.setIcon(myMap);
+        } catch (IOException e) {
+
+        }
     }
 
     /**

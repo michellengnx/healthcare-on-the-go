@@ -25,19 +25,46 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
      */
     @Override
     public void prepareSuccessView(ViewRequestOutputData requests) {
+        ViewRequestState currentState = viewRequestViewModel.getState();
+
         ArrayList<ArrayList<String>> data = requests.getData();
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> creationTimes = new ArrayList<>();
+        ArrayList<String> doctorNames = new ArrayList<>();
+        ArrayList<Integer> urgencies = new ArrayList<>();
+        ArrayList<String> destinations = new ArrayList<>();
+        ArrayList<String> services = new ArrayList<>();
+        ArrayList<Float> etas = new ArrayList<>();
+        ArrayList<Float> distances = new ArrayList<>();
+        ArrayList<Boolean> completed = new ArrayList<>();
+
         for (ArrayList<String> row : data) {
-            viewRequestViewModel.getViewRequestState().getUserName().add(row.get(0));
-            viewRequestViewModel.getViewRequestState().getCreationTime().add(row.get(1));
-            viewRequestViewModel.getViewRequestState().getDoctorNames().add(row.get(2));
-            viewRequestViewModel.getViewRequestState().getUrgencies().add(Integer.parseInt(row.get(3)));
-            viewRequestViewModel.getViewRequestState().getDestinations().add(row.get(4));
-            viewRequestViewModel.getViewRequestState().getServices().add(row.get(5));
-            viewRequestViewModel.getViewRequestState().getEtas().add(Float.parseFloat(row.get(7)));
-            viewRequestViewModel.getViewRequestState().getDistances().add(Float.parseFloat(row.get(8)));
-            viewRequestViewModel.getViewRequestState().getCompleted().add(Boolean.parseBoolean(row.get(9)));
+            usernames.add(row.get(0));
+            creationTimes.add(row.get(1));
+            doctorNames.add(row.get(2));
+            urgencies.add(Integer.parseInt(row.get(3)));
+            destinations.add(row.get(4));
+            services.add(row.get(5));
+            etas.add(Float.parseFloat(row.get(7)));
+            distances.add(Float.parseFloat(row.get(8)));
+            completed.add(Boolean.parseBoolean(row.get(9)));
         }
+
+        currentState.setUserName(usernames);
+        currentState.setCreationTime(creationTimes);
+        currentState.setDoctorNames(doctorNames);
+        currentState.setUrgencies(urgencies);
+        currentState.setDestinations(destinations);
+        currentState.setServices(services);
+        currentState.setEtas(etas);
+        currentState.setDistances(distances);
+        currentState.setCompleted(completed);
+
+        this.viewRequestViewModel.setState(currentState);
         this.viewRequestViewModel.firePropertyChanged();
+
+        System.out.println("viewing test 123");
+        System.out.println(currentState.getUserName());
 
         this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
