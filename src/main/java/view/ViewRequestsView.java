@@ -27,6 +27,11 @@ import java.util.ArrayList;
 public class ViewRequestsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "view requests";
     private final ViewRequestViewModel viewRequestViewModel;
+
+    public ViewRequestController getRequestController() {
+        return requestController;
+    }
+
     private final ViewRequestController requestController;
     private final ReturnHomeController returnHomeController;
 
@@ -40,6 +45,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.requestController = requestController;
         this.viewRequestViewModel = viewRequestViewModel;
         this.returnHomeController = returnHomeController;
+        this.viewRequestViewModel.addPropertyChangeListener(this);
         ViewRequestState state = viewRequestViewModel.getViewRequestState();
         this.setLayout(new BorderLayout());
 
@@ -57,11 +63,6 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         );
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(homeButton);
-
-
-
-
-
 
         JLabel title = new JLabel("Request History");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,7 +106,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.setSize(800, 600);
         // Add table to a scroll pane
         scrollPane = new JScrollPane(table);
-        add(scrollPane);
+        this.add(scrollPane);
         this.add(buttonPanel,BorderLayout.SOUTH);
 
         setVisible(true);
@@ -113,7 +114,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
     }
     public static void main(String[] args) throws IOException {
-        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/requests.csv");
+        FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("data/requests.csv");
 
 
         ArrayList<ArrayList<String>> data = fileRequestDataAccessObject.getRequestUser("patient2");
@@ -136,11 +137,6 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
             ViewRequestsView view = new ViewRequestsView(viewModel, viewRequestController, returnHomeController); // Assuming null for RequestController
            // Fetch and display the data
         });
-
-
-
-
-
     }
 
 
@@ -155,6 +151,41 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("property changed!!!");
+        JTable table = (JTable) this.scrollPane.getViewport().getView();
+        ((DefaultTableModel) table.getModel()).setRowCount(0);
+        ViewRequestState state = (ViewRequestState) evt.getNewValue();
 
+        ArrayList<String> userName = state.getUserName();
+        ArrayList<String> doctorNames = state.getDoctorNames();
+        ArrayList<String> creationTime = state.getDoctorNames();
+        ArrayList<String> services = state.getServices();
+        ArrayList<String> destinations = state.getDestinations();
+        ArrayList<Integer> urgencies = state.getUrgencies();
+        ArrayList<Float> etas = state.getEtas();
+        ArrayList<Float> distances = state.getDistances();
+        ArrayList<Boolean> completed = state.getCompleted();
+
+        int size = userName.size();
+        String[][] data = new String[size][9];
+
+        for (int i = 0; i < size; i++) {
+            data[i][0] = userName.get(i);
+            data[i][1] = doctorNames.get(i);
+            data[i][2] = creationTime.get(i);
+            data[i][3] = String.valueOf(urgencies.get(i));
+            data[i][4] = destinations.get(i);
+            data[i][5] = services.get(i);
+            data[i][6] = String.valueOf(etas.get(i));
+            data[i][7] = String.valueOf(distances.get(i));
+            data[i][8] = String.valueOf(completed.get(i));
+            ((DefaultTableModel) (table.getModel())).addRow(data[i]);
+        }
+
+        System.out.println(data[0][0]);
+
+        // Column headers
+        String[] headers = {"UserName", "DoctorNames", "CreationTime", "Urgency", "Destinations",
+                "Services", "ETAs", "Distances", "Completed"};
     }
 }

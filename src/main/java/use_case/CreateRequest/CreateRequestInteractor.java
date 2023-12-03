@@ -66,10 +66,12 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
 
         // create a doctor matcher and attempt to create a service request
         try {
+            System.out.println("trying;" + destination + ";");
             lowestEtaStrategy = new LowestEtaDoctorStrategy(createDoctorEtaMap(destination));
             matcher = new DoctorMatcher(
                     requestedService,
                     lowestEtaStrategy);
+            System.out.println("matched!");
             request = ServiceRequestFactory.create(
                     this.apiAccessObject,
                     this.apiAccessObject,
@@ -80,7 +82,9 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
                     urgencyLevel,
                     creationTime
             );
+            System.out.println("Request created!");
             mapUrl = this.apiAccessObject.getTrafficMap(request.getDoctor().getLocation(), destination);
+            System.out.println("URL generated!");
         } catch (InvalidLocationException e) {
             this.completeRequestPresenter.prepareFailView("Invalid location!");
             return;
@@ -112,6 +116,7 @@ public class CreateRequestInteractor implements CreateRequestInputBoundary {
         Map<Doctor, Float> doctorEtaMap = new HashMap<>();
 
         for (Doctor doctor : availableDoctors) {
+            System.out.println(doctor.getLocation());
             doctorEtaMap.put(doctor, this.apiAccessObject.getEta(doctor.getLocation(), destination));
         }
 
