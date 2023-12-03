@@ -22,7 +22,6 @@ import java.text.ParseException;
  */
 public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
-
     private JPanel buttonPanel;
     private final String patientDataPath = "data/patients.csv";
     private JButton login;
@@ -44,7 +43,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
      * @param lockViewModel  The view model for the lock screen.
      * @param lockController The controller for handling lock screen actions.
      */
-    public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
+    public LockView(LockViewModel lockViewModel, LockController lockController){
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
