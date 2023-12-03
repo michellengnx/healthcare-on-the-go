@@ -24,6 +24,15 @@ public class ServiceRequestFactory {
      * @throws NoAvailableDoctorException If there are no available doctors.
      * @throws InvalidLocationException If either the destination or the doctor's location is invalid.
      */
+    private Doctor doctor;
+    private float price;
+    private float eta;
+    private float distance;
+    private String destination;
+    private int urgencyLevel;
+    private Service service;
+    private Date creationTime;
+
     public static ServiceRequest create(DistanceCalculator distanceCalculator,
                                  EtaCalculator etaCalculator,
                                  TravelCostCalculator travelCostCalculator,

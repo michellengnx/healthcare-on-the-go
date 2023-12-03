@@ -67,7 +67,7 @@ class DoctorMatcherTest {
      * Ensure the closest doctor is returned when no specialized doctors are available.
      */
     @Test
-    void noSpecializedDoctorTest() {
+    void noSpecializedDoctorTestEta() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
         doctorEta.put(nutritionalServicesSpecialist, 30f);
         doctorEta.put(checkUpSpecialist, 40f);
@@ -86,7 +86,7 @@ class DoctorMatcherTest {
      * Ensure the specialized doctor is returned when they are less than 60 minutes away.
      */
     @Test
-    void hasSpecializedDoctorTest() {
+    void hasSpecializedDoctorTestEta() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
         doctorEta.put(xRaySpecialist, 50f);
         doctorEta.put(nutritionalServicesSpecialist, 30f);
@@ -106,7 +106,7 @@ class DoctorMatcherTest {
      * Ensure the closest doctor is returned when the specialized doctor is an hour or more away.
      */
     @Test
-    void specializedDoctorTooFarTest() {
+    void specializedDoctorTooFarEta() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
         doctorEta.put(xRaySpecialist, 60f);
         doctorEta.put(nutritionalServicesSpecialist, 30f);
@@ -126,10 +126,86 @@ class DoctorMatcherTest {
      * Ensure an exception is raised when no doctors are available.
      */
     @Test
-    void failTest() {
+    void failTestEta() {
         Map<Doctor, Float> doctorEta = new HashMap<>();
 
         DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorEta));
+
+        try {
+            matcher.match();
+            fail("Success not expected");
+        } catch (NoAvailableDoctorException e) {
+            return;
+        }
+    }
+
+    /**
+     * Ensure the closest doctor is returned when no specialized doctors are available.
+     */
+    @Test
+    void noSpecializedDoctorTestDistance() {
+        Map<Doctor, Float> doctorDistance = new HashMap<>();
+        doctorDistance.put(nutritionalServicesSpecialist, 30f);
+        doctorDistance.put(checkUpSpecialist, 40f);
+
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new LowestEtaDoctorStrategy(doctorDistance));
+
+        try {
+            Doctor matchedDoctor = matcher.match();
+            assertEquals("nutriDoc", matchedDoctor.getUsername());
+        } catch (NoAvailableDoctorException e) {
+            fail("Failure not expected");
+        }
+    }
+
+    /**
+     * Ensure the specialized doctor is returned when they are less than 60 minutes away.
+     */
+    @Test
+    void hasSpecializedDoctorTestDistance() {
+        Map<Doctor, Float> doctorDistance = new HashMap<>();
+        doctorDistance.put(xRaySpecialist, 50f);
+        doctorDistance.put(nutritionalServicesSpecialist, 30f);
+        doctorDistance.put(checkUpSpecialist, 40f);
+
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new ClosestDoctorStrategy(doctorDistance));
+
+        try {
+            Doctor matchedDoctor = matcher.match();
+            assertEquals("xrayDoc", matchedDoctor.getUsername());
+        } catch (NoAvailableDoctorException e) {
+            fail("Failure not expected");
+        }
+    }
+
+    /**
+     * Ensure the closest doctor is returned when the specialized doctor is an hour or more away.
+     */
+    @Test
+    void specializedDoctorTooFarTestDistance() {
+        Map<Doctor, Float> doctorDistance = new HashMap<>();
+        doctorDistance.put(xRaySpecialist, 200f);
+        doctorDistance.put(nutritionalServicesSpecialist, 30f);
+        doctorDistance.put(checkUpSpecialist, 40f);
+
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new ClosestDoctorStrategy(doctorDistance));
+
+        try {
+            Doctor matchedDoctor = matcher.match();
+            assertEquals("nutriDoc", matchedDoctor.getUsername());
+        } catch (NoAvailableDoctorException e) {
+            fail("Failure not expected");
+        }
+    }
+
+    /**
+     * Ensure an exception is raised when no doctors are available.
+     */
+    @Test
+    void failTestDistance() {
+        Map<Doctor, Float> doctorDistance = new HashMap<>();
+
+        DoctorMatcher matcher = new DoctorMatcher(xRay, new ClosestDoctorStrategy(doctorDistance));
 
         try {
             matcher.match();

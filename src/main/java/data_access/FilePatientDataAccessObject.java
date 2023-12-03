@@ -89,7 +89,7 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
     }
 
     @Override
-    public boolean existByUsername(String identifier) {
+    public boolean existsByUsername(String identifier) {
         return accounts.containsKey(identifier);
     }
 
@@ -120,16 +120,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * Return whether a user exists with username identifier.
-     * @param identifier the username to check.
-     * @return whether a user exists with username identifier.
-     */
-
-    public boolean existsByName(String identifier) {
-        return accounts.containsKey(identifier);
     }
 
     /**
@@ -232,18 +222,6 @@ public class FilePatientDataAccessObject implements EditPatientDataAccessInterfa
 
         save();
         return changes;
-    }
-
-    /**
-     * Checks whether a user exists with a specific username.
-     *
-     * @param username The username to check.
-     * @return True if a user exists with the provided username, otherwise false.
-     */
-    @Override
-    public boolean existsByUsername(String username) {
-        System.out.println(accounts.keySet());
-        return accounts.containsKey(username);
     }
 
     /**

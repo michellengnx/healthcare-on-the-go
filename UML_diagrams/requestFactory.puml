@@ -1,0 +1,28 @@
+@startuml
+mainframe ServiceRequest create(DistanceCalculator distanceCalculator,EtaCalculator etaCalculator,TravelCostCalculator travelCostCalculator,DoctorMatcher doctorMatcher,...)
+    [-> "DoctorMatcher":match()
+    activate "DoctorMatcher"
+    return doctor
+
+    [-> "Doctor":getLocation()
+    activate "Doctor"
+    return doctorLocation
+
+    [-> "TravelCostCalculator":getPrice(doctorLocation, destination)
+    activate "TravelCostCalculator"
+    return price
+
+
+    [-> "EtaCalculator":getEta(doctorLocation, destination)
+        activate "EtaCalculator"
+        return eta
+
+    [-> "DistanceCalculator":getDistance(doctorLocation, destination)
+        activate "DistanceCalculator"
+        return distance
+
+    [-> "ServiceRequest":ServiceRequest(creationTime, doctor, urgencyLevel, destination, service, price, eta, distance)
+    activate "ServiceRequest"
+    return request
+
+@enduml
