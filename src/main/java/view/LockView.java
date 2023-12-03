@@ -4,6 +4,7 @@ import data_access.FilePatientDataAccessObject;
 import interface_adapter.LockView.LockController;
 import interface_adapter.LockView.LockViewModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -25,7 +27,15 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     private JLabel appInfo;
     private JLabel buttonInfo;
     private LockViewModel lockViewModel;
-    public LockView(LockViewModel lockViewModel, LockController lockController){
+
+    private File imageFile;
+    private Image image;
+    private Image scaledImage;
+    private JLabel imageLabel;
+
+
+
+    public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
@@ -34,6 +44,11 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         this.setSize(800,600);
         this.login.addActionListener(this);
         this.signup.addActionListener(this);
+        this.imageFile = new File("/Users/ismaelchona/IdeaProject/csc207-project/image/pickMe.jpeg");
+        this.image = ImageIO.read(imageFile);
+        this.scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+        this.imageLabel = new JLabel(new ImageIcon(scaledImage));
+
 
         signup.addActionListener(
                 new ActionListener() {
@@ -92,7 +107,10 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         labelPanel.add(buttonInfo);
 
         // Add the label panel to the CENTER of the main panel
-        this.add(labelPanel, BorderLayout.CENTER);
+        this.add(labelPanel, BorderLayout.NORTH);
+
+        // Ad image under the label
+        this.add(imageLabel, BorderLayout.CENTER);
 
         // Create a panel for buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
