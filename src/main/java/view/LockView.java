@@ -22,7 +22,7 @@ import java.text.ParseException;
  */
 public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
-    private final Color myBlue = new Color(153, 204, 255);
+
     private JPanel buttonPanel;
     private final String patientDataPath = "data/patients.csv";
     private JButton login;
@@ -45,14 +45,11 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
      * @param lockController The controller for handling lock screen actions.
      */
     public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
-        this.setBackground(myBlue);
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
         this.buttonPanel = new JPanel(new FlowLayout());
-        this.buttonPanel.setBackground(myBlue);
         this.labelPanel = new JPanel(new FlowLayout());
-        this.labelPanel.setBackground(myBlue);
         this.setSize(800,600);
         this.login.addActionListener(this);
         this.signup.addActionListener(this);
@@ -60,7 +57,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         this.image = ImageIO.read(imageFile);
         this.scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
         this.imageLabel = new JLabel(new ImageIcon(scaledImage));
-        this.imageLabel.setBackground(myBlue);
+
 
 
         signup.addActionListener(
@@ -88,7 +85,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         this.setLayout(new BorderLayout());
 
         JPanel labelPanel = new JPanel();
-        labelPanel.setBackground(myBlue);
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
         labelPanel.setBorder(new EmptyBorder(100, 0, 100, 0));
 
@@ -127,7 +123,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         buttonPanel.setBorder(new EmptyBorder(20, 0, 20, 0)); // Adjust top and bottom margins as needed
         buttonPanel.add(signup);
         buttonPanel.add(login);
-        buttonPanel.setBackground(myBlue);
 
         // Add the button panel to the SOUTH of the main panel
         this.add(buttonPanel, BorderLayout.SOUTH);
