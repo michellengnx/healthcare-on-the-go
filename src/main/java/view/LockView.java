@@ -75,7 +75,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
 
         // Add appInfo label
         JLabel appInfo = new JLabel("<html>Your go-to ride-hailing app to get accessible healthcare "
-                + "<br>right at the comfort at your home &#x1F3E5;</html>");
+                + "<br>right at the comfort of your home &#x1F3E5;</html>");
         appInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
         appInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         appInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
