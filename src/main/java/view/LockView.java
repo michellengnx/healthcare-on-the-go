@@ -52,7 +52,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         this.setSize(800,600);
         this.login.addActionListener(this);
         this.signup.addActionListener(this);
-        this.imageFile = new File("/Users/ismaelchona/IdeaProject/csc207-project/image/pickMe.jpeg");
+        this.imageFile = new File("image/pickMe.jpeg");
         this.image = ImageIO.read(imageFile);
         this.scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
         this.imageLabel = new JLabel(new ImageIcon(scaledImage));
