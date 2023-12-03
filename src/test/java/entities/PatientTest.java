@@ -1,54 +1,84 @@
 package entities;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Calendar;
-/* TODO: Date is deprecated; look into alternative for util.Date */
+import java.util.ArrayList;
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class PatientTest {
+class PatientTest {
+
     @Test
-    public void testPatientConstructor() {
-        final EmergencyContact emergencyContact = new EmergencyContact(
-                "Michelle",
-                "6473036832",
-                "friend"
-        );
+    void testPatientInitialization() {
+        // Create a sample CreditCard object
+        CreditCard creditCard = new CreditCard("1234567890123456", 123, "12/25", "John Doe");
 
-        final CreditCard creditCard = new CreditCard(
-                "000000000000",
-                123,
-                "Tomorrow",
-                "Michelle N"
-        );
-        final Date birthday = new Date(2001, Calendar.DECEMBER,11);
+        // Create a sample EmergencyContact object
+        EmergencyContact emergencyContact = new EmergencyContact("Jane Doe", "9876543210", "Friend");
 
-        Patient p = new Patient(
-                "patient",
-                "patient",
-                "patient@domain.com",
-                "1111111111",
-                "Female",
-                "11111111",
-                birthday,
+        // Create a sample Patient object
+        Patient patient = new Patient(
+                "testUser",
+                "testPassword",
+                "test@example.com",
+                "1234567890",
+                "Male",
+                "Insurance123",
+                new Date(),
                 creditCard,
                 emergencyContact
         );
 
-        assertEquals("patient",p.getUsername());
-        assertEquals("patient",p.getPassword());
-        assertEquals("patient@domain.com",p.getEmail());
-        assertEquals("1111111111",p.getPhoneNumber());
-        assertEquals("Female",p.getGender());
-        assertEquals("11111111",p.getInsurance());
-        assertEquals(birthday,p.getBirthday());
-        assertEquals(creditCard,p.getCreditCard());
-        assertEquals(emergencyContact,p.getEmergencyContact());
+        // Check if the Patient object is initialized correctly
+        assertNotNull(patient);
+        assertEquals("testUser", patient.getUsername());
+        assertEquals("testPassword", patient.getPassword());
+        assertEquals("test@example.com", patient.getEmail());
+        assertEquals("1234567890", patient.getPhoneNumber());
+        assertEquals("Male", patient.getGender());
+        assertEquals("Insurance123", patient.getInsurance());
+        assertEquals(creditCard, patient.getCreditCard());
+        assertEquals(emergencyContact, patient.getEmergencyContact());
+        assertNotNull(patient.getRequests());
+        assertEquals(0, patient.getRequests().size());
 
+//        Modify
 
+        // Modify the CreditCard and EmergencyContact of the Patient
+        CreditCard newCreditCard = new CreditCard("9876543210987654", 456, "01/30", "New Card");
+        EmergencyContact newEmergencyContact = new EmergencyContact("New Contact", "1234567890", "Family");
 
+        patient.setBirthday(new Date());
+        patient.setUsername("newUsername");
+        patient.setGender("Female");
+        patient.setCreditCard(newCreditCard);
+        patient.setEmergencyContact(newEmergencyContact);
 
+        // Check if modifications are applied correctly
+        assertEquals(new Date(), patient.getBirthday());
+        assertEquals("newUsername",patient.getUsername());
+        assertEquals("Female",patient.getGender());
+        assertEquals(newCreditCard, patient.getCreditCard());
+        assertEquals(newEmergencyContact, patient.getEmergencyContact());
+
+        // Create a sample ServiceRequest
+        ServiceRequest serviceRequest = new ServiceRequest(
+                new Date(),
+                new Doctor("doctorUsername", "doctorPassword", "doctor@example.com",
+                        "9876543210", "Male", new Date(), 1, "Hospital",
+                        new ArrayList<>(), new ArrayList<>()),
+                1, "Hospital", new Service("Test Service", 50.0f), 50.0f, 30.0f, 10.0f
+        );
+
+        // Add the ServiceRequest to the Patient's requests
+        ArrayList<ServiceRequest> requests = new ArrayList<>();
+        requests.add(serviceRequest);
+        patient.setRequests(requests);
+
+        // Check if the ServiceRequest is added correctly
+        assertEquals(1, patient.getRequests().size());
+        assertEquals(serviceRequest, patient.getRequests().get(0));
     }
 }
