@@ -67,6 +67,7 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
 
         this.availableServiceComboBox = new JComboBox<>(availableServices.values().toArray(new Service[0]));
         availableServiceComboBox.setSelectedItem(availableServices.get("Vaccination"));
+        this.createRequestViewModel.getState().setService(availableServices.get("Vaccination"));
         LabelComboBoxPanel serviceSelect = new LabelComboBoxPanel(
                 new JLabel(createRequestViewModel.SERVICE_LABEL), availableServiceComboBox
         );
@@ -196,5 +197,6 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
         if (createRequestState.getCreateRequestError() != null) {
             JOptionPane.showMessageDialog(this, createRequestState.getCreateRequestError());
         }
+        createRequestState.setCreateRequestError(null);
     }
 }

@@ -1,5 +1,5 @@
 username,password,email,phone_number,gender,insurance,birthday,credit_card_number,cvv,card_expiration_date,name_on_card,emergency_contact_name,emergency_phone_number,emergency_contact_relationship
-test_patient,Test@1234,test@example.com,123-456-7890,male,insurance,Sat Dec 02 16:04:05 EST 2023,1234567890123456,123,01/23,Test Patient,Test Emergency,987-654-3210,Emergency
-patient1,Abcd123@,izora.kayumova@mail.utoronto.ca,437-241-3083,male,GSC Everywhere,Sat Dec 02 16:04:05 EST 2023,0123456789,456,08/26,patient Eve,mama Smith,125-125-1235,mom
+test_patient,Test@1234,test@example.com,123-456-7890,male,insurance,Sat Dec 02 19:36:27 EST 2023,1234567890123456,123,01/23,Test Patient,Test Emergency,987-654-3210,Emergency
+patient1,Abcd123@,izora.kayumova@mail.utoronto.ca,437-241-3083,male,GSC Everywhere,Sat Dec 02 19:36:27 EST 2023,0123456789,456,08/26,patient Eve,mama Smith,125-125-1235,mom
 user123,pass123,diff@mail.com,1231231231,male,isurance,Wed Jan 01 00:00:00 EST 2003,0000,123,12309090909,mom,name,12/12,user123
 username,Password1$,mail@mail.ca,1231331,maile,geico,Wed Mar 13 00:00:00 EST 1331,44444444444,331,133133131,ben,ben,02/31,ben

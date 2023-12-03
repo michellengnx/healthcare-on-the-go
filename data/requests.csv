@@ -2,3 +2,13 @@ patient,creation_time,doctor,urgency_level,destination,service,price,eta,distanc
 user123,Sat Dec 02 16:34:07 EST 2023,doc1,0,University of Toronto,Blood testing,88.07161,108.166664,10.18322,false
 user123,Sat Dec 02 16:51:30 EST 2023,doc3,0,University of Toronto,Blood testing,217.29253,826.95,96.11705,false
 user123,Sat Dec 02 17:25:10 EST 2023,doc1,0,University of Toronto,Blood testing,88.019684,108.2,10.07137,false
+user123,Sat Dec 02 19:37:56 EST 2023,doc2,0,University of Toronto,Vaccination,21.22798,9.266666,0.23196001,false
+user123,Sat Dec 02 20:38:04 EST 2023,doc1,0,University of Toronto,Vaccination,37.855175,106.36667,10.18235,false
+user123,Sat Dec 02 20:45:43 EST 2023,doc3,0,University Of Toronto,Vaccination,167.29253,826.95,96.11705,false
+user123,Sat Dec 02 20:47:30 EST 2023,doc2,0,University of Toronto,Vaccination,21.29919,9.85,0.23438,false
+user123,Sat Dec 02 20:55:19 EST 2023,doc1,0,York University,Vaccination,20.0,0.0,0.0,false
+user123,Sat Dec 02 20:59:11 EST 2023,doc3,0,Scotiabank Arena,Vaccination,167.02835,825.0833,96.03671,false
+user123,Sat Dec 02 21:01:06 EST 2023,doc1,0,Scotiabank Arena,Vaccination,37.56514,104.75,9.99028,false
+user123,Sat Dec 02 21:06:47 EST 2023,doc1,0,University of Toronto,Vaccination,37.829315,106.61667,10.07063,false
+user123,Sat Dec 02 21:12:39 EST 2023,doc2,0,University of Toronto,Vaccination,21.316715,9.983334,0.23743,false
+user123,Sat Dec 02 21:13:32 EST 2023,doc1,0,York University,Vaccination,20.0,0.0,0.0,false

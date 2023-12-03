@@ -52,6 +52,7 @@ public class CreateRequestPresenter implements CreateRequestOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
+        System.out.println("!!! FAILING !!!");
         // Create a new CreateRequestState with the given error message
         CreateRequestState createRequestState = createRequestViewModel.getState();
         createRequestState.setCreateRequestError(error);
