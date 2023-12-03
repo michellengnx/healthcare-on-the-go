@@ -28,21 +28,43 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
         ViewRequestState currentState = viewRequestViewModel.getState();
 
         ArrayList<ArrayList<String>> data = requests.getData();
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> creationTimes = new ArrayList<>();
+        ArrayList<String> doctorNames = new ArrayList<>();
+        ArrayList<Integer> urgencies = new ArrayList<>();
+        ArrayList<String> destinations = new ArrayList<>();
+        ArrayList<String> services = new ArrayList<>();
+        ArrayList<Float> etas = new ArrayList<>();
+        ArrayList<Float> distances = new ArrayList<>();
+        ArrayList<Boolean> completed = new ArrayList<>();
+
         for (ArrayList<String> row : data) {
-            currentState.getUserName().add(row.get(0));
-            currentState.getCreationTime().add(row.get(1));
-            currentState.getDoctorNames().add(row.get(2));
-            currentState.getUrgencies().add(Integer.parseInt(row.get(3)));
-            currentState.getDestinations().add(row.get(4));
-            currentState.getServices().add(row.get(5));
-            currentState.getEtas().add(Float.parseFloat(row.get(7)));
-            currentState.getDistances().add(Float.parseFloat(row.get(8)));
-            currentState.getCompleted().add(Boolean.parseBoolean(row.get(9)));
+            usernames.add(row.get(0));
+            creationTimes.add(row.get(1));
+            doctorNames.add(row.get(2));
+            urgencies.add(Integer.parseInt(row.get(3)));
+            destinations.add(row.get(4));
+            services.add(row.get(5));
+            etas.add(Float.parseFloat(row.get(7)));
+            distances.add(Float.parseFloat(row.get(8)));
+            completed.add(Boolean.parseBoolean(row.get(9)));
         }
+
+        currentState.setUserName(usernames);
+        currentState.setCreationTime(creationTimes);
+        currentState.setDoctorNames(doctorNames);
+        currentState.setUrgencies(urgencies);
+        currentState.setDestinations(destinations);
+        currentState.setServices(services);
+        currentState.setEtas(etas);
+        currentState.setDistances(distances);
+        currentState.setCompleted(completed);
 
         this.viewRequestViewModel.setState(currentState);
         this.viewRequestViewModel.firePropertyChanged();
 
+        System.out.println("viewing test 123");
+        System.out.println(currentState.getUserName());
 
         this.viewManagerModel.setActiveView(viewRequestViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

@@ -45,6 +45,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.requestController = requestController;
         this.viewRequestViewModel = viewRequestViewModel;
         this.returnHomeController = returnHomeController;
+        this.viewRequestViewModel.addPropertyChangeListener(this);
         ViewRequestState state = viewRequestViewModel.getViewRequestState();
         this.setLayout(new BorderLayout());
 
@@ -62,11 +63,6 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         );
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(homeButton);
-
-
-
-
-
 
         JLabel title = new JLabel("Request History");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -110,7 +106,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.setSize(800, 600);
         // Add table to a scroll pane
         scrollPane = new JScrollPane(table);
-        add(scrollPane);
+        this.add(scrollPane);
         this.add(buttonPanel,BorderLayout.SOUTH);
 
         setVisible(true);
@@ -141,11 +137,6 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
             ViewRequestsView view = new ViewRequestsView(viewModel, viewRequestController, returnHomeController); // Assuming null for RequestController
            // Fetch and display the data
         });
-
-
-
-
-
     }
 
 
@@ -161,6 +152,8 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("property changed!!!");
+        JTable table = (JTable) this.scrollPane.getViewport().getView();
+        ((DefaultTableModel) table.getModel()).setRowCount(0);
         ViewRequestState state = (ViewRequestState) evt.getNewValue();
 
         ArrayList<String> userName = state.getUserName();
@@ -173,8 +166,8 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         ArrayList<Float> distances = state.getDistances();
         ArrayList<Boolean> completed = state.getCompleted();
 
-        String[][] data = new String[10][9];
         int size = userName.size();
+        String[][] data = new String[size][9];
 
         for (int i = 0; i < size; i++) {
             data[i][0] = userName.get(i);
@@ -186,16 +179,13 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
             data[i][6] = String.valueOf(etas.get(i));
             data[i][7] = String.valueOf(distances.get(i));
             data[i][8] = String.valueOf(completed.get(i));
+            ((DefaultTableModel) (table.getModel())).addRow(data[i]);
         }
+
+        System.out.println(data[0][0]);
 
         // Column headers
         String[] headers = {"UserName", "DoctorNames", "CreationTime", "Urgency", "Destinations",
                 "Services", "ETAs", "Distances", "Completed"};
-
-        // Create a table model with the data and headers
-        DefaultTableModel model = new DefaultTableModel(data, headers);
-
-        // Create JTable with the model
-        this.table = new JTable(model);
     }
 }
