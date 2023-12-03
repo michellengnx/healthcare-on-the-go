@@ -108,10 +108,10 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
 
 
         JPanel buttons = new JPanel();
-        signUp = new JButton(SignUpViewModel.SIGNUP_BUTTON_LABEL);
-        buttons.add(signUp);
         cancel = new JButton(SignUpViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        signUp = new JButton(SignUpViewModel.SIGNUP_BUTTON_LABEL);
+        buttons.add(signUp);
 
         signUp.addActionListener(evt -> {
             // Get input values from the fields
