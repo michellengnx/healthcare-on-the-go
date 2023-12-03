@@ -1,5 +1,6 @@
 package use_case.edit_profile;
 
+import entities.PasswordValidator;
 import entities.Patient;
 
 import java.util.ArrayList;
@@ -53,7 +54,16 @@ public class EditInteractor implements EditInputBoundary {
                 creditCardNumber, cvv, expirationDate, nameOnCard,
                 emergencyName, emergencyNumber, emergencyRelationship);
 
-        if (changes[1] == -1) {
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+
+        PasswordValidator passwordValidator = new PasswordValidator();
+        passwordValidator.addPattern("^.*\\d.*$"); // contains a digit
+        passwordValidator.addPattern("^.*[a-z].*$"); // contains lower case letter
+        passwordValidator.addPattern("^.*[A-Z].*$"); // contains upper case letter
+        passwordValidator.addPattern("^.*[@#$%^&+=].*$"); // contains special character case letter
+        passwordValidator.addPattern("^.{8,}$"); // at least 8 characters
+
+        if (!passwordValidator.validatePassword(password)) {
             editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.");
         } else if (noChanges(changes)) {
             editPresenter.prepareFailView("No changes have been made to the account.");

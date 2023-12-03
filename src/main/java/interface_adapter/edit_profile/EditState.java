@@ -103,7 +103,7 @@ public class EditState {
     }
 
     public void setPassword(String newPassword) {
-        this.password = password;
+        this.password = newPassword;
     }
 
     public void setPasswordError(String passwordError) {
