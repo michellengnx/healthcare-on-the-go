@@ -76,12 +76,10 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
 
         this.setLayout(new BorderLayout());
 
-        // Create a panel for labels using a BoxLayout (vertical arrangement)
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
-        labelPanel.setBorder(new EmptyBorder(100, 0, 100, 0)); // Adjust top and bottom margins as needed
+        labelPanel.setBorder(new EmptyBorder(100, 0, 100, 0));
 
-        // Add welcome label
         JLabel welcome = new JLabel("Welcome to Healthcare On the Go!");
         welcome.setFont(new Font("Arial", Font.BOLD, 25));
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -90,7 +88,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         // Add space between welcome and appInfo labels
         labelPanel.add(Box.createVerticalStrut(20));
 
-        // Add appInfo label
         JLabel appInfo = new JLabel("<html>Your go-to ride-hailing app to get accessible healthcare "
                 + "<br>right at the comfort of your home &#x1F3E5;</html>");
         appInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -101,26 +98,24 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         // Add space between appInfo and buttonInfo labels
         labelPanel.add(Box.createVerticalStrut(20));
 
-        // Add buttonInfo label
         JLabel buttonInfo = new JLabel("If you already have an account, please login. If not, please sign up");
         buttonInfo.setFont(new Font("Tahoma", Font.ITALIC, 12)); // Suggested font: Tahoma
         buttonInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
         labelPanel.add(buttonInfo);
 
+
         // Add the label panel to the CENTER of the main panel
         this.add(labelPanel, BorderLayout.NORTH);
 
         // Ad image under the label
         this.add(imageLabel, BorderLayout.CENTER);
-
-        // Create a panel for buttons
+      
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBorder(new EmptyBorder(20, 0, 20, 0)); // Adjust top and bottom margins as needed
         buttonPanel.add(signup);
         buttonPanel.add(login);
 
-        // Add the button panel to the SOUTH of the main panel
         this.add(buttonPanel, BorderLayout.SOUTH);
 
         this.setVisible(true);
