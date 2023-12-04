@@ -1,6 +1,7 @@
 package data_access;
 
 import entities.ServiceRequest;
+import use_case.ViewRequest.RequestDataAccessInterface;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 //User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance)
-public class FileRequestDataAccessObject implements RequestDataAccess {
+public class FileRequestDataAccessObject implements RequestDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<Integer, ArrayList<String>> requests = new HashMap<>();
     private final File csvFile;

@@ -9,7 +9,7 @@ import use_case.CreateRequest.CreateRequestUserDataAccessInterface;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class FileUserRequestDataAccessObjectTest {
+class FileUserRequestDataAccessInterfaceObjectTest {
 
     private FilePatientDataAccessObject filePatientDataAccessObject;
     private FileRequestDataAccessObject fileRequestDataAccessObject;

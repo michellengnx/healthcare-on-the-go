@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileRequestDataAccessObjectTest {
+class FileRequestDataAccessInterfaceObjectTest {
     private final Service xRay = new Service("X-Ray", 200);
     private CreateRequestInputData inputData;
     private Doctor doctor;

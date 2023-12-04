@@ -1,17 +1,15 @@
 package use_case.ViewRequest;
 
 
-import data_access.RequestDataAccess;
-
 import java.util.ArrayList;
 
 public class ViewRequestInteractor implements ViewRequestInputBoundary {
-    private final RequestDataAccess requestDataAccess;
+    private final RequestDataAccessInterface requestDataAccess;
     private final ViewRequestOutputBoundary viewData;
 
 
-    public ViewRequestInteractor(RequestDataAccess requestDataAccess, ViewRequestOutputBoundary viewRequestOutputBoundary) {
-        this.requestDataAccess = requestDataAccess;
+    public ViewRequestInteractor(RequestDataAccessInterface requestDataAccessInterface, ViewRequestOutputBoundary viewRequestOutputBoundary) {
+        this.requestDataAccess = requestDataAccessInterface;
         this.viewData = viewRequestOutputBoundary;
     }
 
