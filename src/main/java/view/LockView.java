@@ -43,7 +43,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
      * @param lockViewModel  The view model for the lock screen.
      * @param lockController The controller for handling lock screen actions.
      */
-    public LockView(LockViewModel lockViewModel, LockController lockController){
+    public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
@@ -111,7 +111,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         buttonInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
         labelPanel.add(buttonInfo);
 
-        // Add the label panel to the CENTER of the main panel
         this.add(labelPanel, BorderLayout.NORTH);
 
         // Ad image under the label
