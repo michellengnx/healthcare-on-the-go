@@ -1,8 +1,6 @@
-package use_case.edit_profile;
+package use_case.EditProfile;
 
 import entities.Patient;
-
-import java.util.List;
 
 /**
  * Interface defining methods to access and modify patient data.

@@ -1,4 +1,4 @@
-package use_case.edit_profile;
+package use_case.EditProfile;
 
 /**
  * Represents input data for editing a profile.

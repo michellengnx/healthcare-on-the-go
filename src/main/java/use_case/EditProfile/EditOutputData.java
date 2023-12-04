@@ -1,4 +1,4 @@
-package use_case.edit_profile;
+package use_case.EditProfile;
 
 /**
  * Data class representing output after editing a profile.
