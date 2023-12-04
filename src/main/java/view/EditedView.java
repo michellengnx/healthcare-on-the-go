@@ -40,10 +40,6 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
         this.editedViewModel = editedViewModel;
         this.editedViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Edited Profile Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel userProfileInfo = new JLabel("Changes have been successfully saved: ");
         password = new JLabel();
         email = new JLabel();
         phoneNumber = new JLabel();
@@ -75,22 +71,44 @@ public class EditedView extends JPanel implements ActionListener, PropertyChange
 
         returnHomePage.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
 
-        this.add(title);
-        this.add(userProfileInfo);
-        this.add(password);
-        this.add(email);
-        this.add(phoneNumber);
-        this.add(insurance);
-        this.add(creditCardName);
-        this.add(cvv);
-        this.add(expirationDate);
-        this.add(nameOnCard);
-        this.add(emergencyName);
-        this.add(emergencyNumber);
-        this.add(emergencyRelationship);
-        this.add(buttons);
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JLabel title = new JLabel("Edited Profile Screen");
+        titlePanel.add(title);
+
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 10, 5, 10); // Padding
+
+
+        centerPanel.add(new JLabel("Changes have been successfully saved: "), gbc);
+        centerPanel.add(password, gbc);
+        centerPanel.add(email, gbc);
+        centerPanel.add(insurance, gbc);
+        centerPanel.add(creditCardName, gbc);
+        centerPanel.add(cvv, gbc);
+        centerPanel.add(expirationDate, gbc);
+        centerPanel.add(nameOnCard, gbc);
+        centerPanel.add(emergencyName, gbc);
+        centerPanel.add(emergencyNumber, gbc);
+        centerPanel.add(emergencyRelationship, gbc);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(returnHomePage);
+
+
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+        this.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     /**
