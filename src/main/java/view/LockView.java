@@ -124,7 +124,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         buttonPanel.add(signup);
         buttonPanel.add(login);
 
-        // Add the button panel to the SOUTH of the main panel
         this.add(buttonPanel, BorderLayout.SOUTH);
 
         this.setVisible(true);
