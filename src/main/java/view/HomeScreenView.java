@@ -157,7 +157,6 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.add(requestView, BorderLayout.CENTER);
 
-        // Add panels to the main panel in their desired positions
         this.add(topPanel, BorderLayout.NORTH);
         this.add(centerPanel, BorderLayout.CENTER);
         this.add(bottomPanel, BorderLayout.SOUTH);
