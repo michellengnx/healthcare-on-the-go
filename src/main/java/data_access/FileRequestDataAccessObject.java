@@ -1,12 +1,12 @@
 package data_access;
 
 import entities.ServiceRequest;
-import entities.ServiceRequestFactory;
-import use_case.CreateRequest.CreateRequestUserDataAccessInterface;
-
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 //User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance)
