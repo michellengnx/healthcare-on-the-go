@@ -63,7 +63,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.setLayout(new BorderLayout());
 
         this.buttonPanel = new JPanel();
-        this.homeButton = new JButton("home");
+        this.homeButton = new JButton("Home");
         this.homeButton.addActionListener(
                 new ActionListener() {
                     @Override
