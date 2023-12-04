@@ -45,4 +45,8 @@ public class ViewManagerModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
+
+    public String getActiveView() {
+        return this.activeViewName;
+    }
 }
