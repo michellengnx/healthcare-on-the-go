@@ -21,6 +21,8 @@ import use_case.LockView.LockOutputBoundary;
 import view.HomeScreenView;
 import view.LockView;
 
+import java.io.IOException;
+
 /**
  * Factory class to create the LockView and its dependencies.
  */
@@ -38,7 +40,7 @@ public class LockUseCaseFactory {
     public static LockView create(ViewManagerModel viewManagerModel,
                                         LockViewModel lockViewModel,
                                         SignUpViewModel signUpViewModel,
-                                        LoginViewModel loginViewModel) {
+                                        LoginViewModel loginViewModel) throws IOException {
         LockController lockController = createLockUseCase(
                 viewManagerModel,
                 signUpViewModel,
