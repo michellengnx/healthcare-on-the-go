@@ -21,7 +21,20 @@ import use_case.LockView.LockOutputBoundary;
 import view.HomeScreenView;
 import view.LockView;
 
+/**
+ * Factory class to create the LockView and its dependencies.
+ */
 public class LockUseCaseFactory {
+
+    /**
+     * Creates a LockView instance with the necessary dependencies.
+     *
+     * @param viewManagerModel The view manager model.
+     * @param lockViewModel    The lock view model.
+     * @param signUpViewModel  The sign-up view model.
+     * @param loginViewModel   The login view model.
+     * @return The created LockView.
+     */
     public static LockView create(ViewManagerModel viewManagerModel,
                                         LockViewModel lockViewModel,
                                         SignUpViewModel signUpViewModel,
@@ -34,6 +47,14 @@ public class LockUseCaseFactory {
 
     }
 
+    /**
+     * Creates a LockController instance with the required dependencies.
+     *
+     * @param viewManagerModel The view manager model.
+     * @param signUpViewModel  The sign-up view model.
+     * @param loginViewModel   The login view model.
+     * @return The created LockController.
+     */
     private static LockController createLockUseCase(ViewManagerModel viewManagerModel,
                                                           SignUpViewModel signUpViewModel,
                                                           LoginViewModel loginViewModel) {

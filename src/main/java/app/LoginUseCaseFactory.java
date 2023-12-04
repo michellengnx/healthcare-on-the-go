@@ -18,11 +18,24 @@ import view.LoginView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory class to create the LoginView and its dependencies.
+ */
 public class LoginUseCaseFactory {
 
     /** Prevent instantiation. */
     private LoginUseCaseFactory() {}
 
+    /**
+     * Creates a LoginView instance with the necessary dependencies.
+     *
+     * @param viewManagerModel      The view manager model.
+     * @param loginViewModel       The login view model.
+     * @param loggedinViewModel    The logged-in view model.
+     * @param userDataAccessObject The user data access object.
+     * @param returnToLockController The return to lock controller.
+     * @return The created LoginView.
+     */
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
@@ -40,6 +53,16 @@ public class LoginUseCaseFactory {
         return null;
     }
 
+    /**
+     * Creates a LoginController instance with the required dependencies.
+     *
+     * @param viewManagerModel      The view manager model.
+     * @param loginViewModel       The login view model.
+     * @param loggedInViewModel    The logged-in view model.
+     * @param userDataAccessObject The user data access object.
+     * @return The created LoginController.
+     * @throws IOException If there's an issue with file I/O.
+     */
     private static LoginController createLoginUseCase(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,

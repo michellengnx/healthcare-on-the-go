@@ -18,11 +18,24 @@ import view.SignUpView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory class to create the SignUpView and its dependencies.
+ */
 public class SignUpUseCaseFactory {
 
     /** Prevent instantiation. */
     private SignUpUseCaseFactory() {}
 
+    /**
+     * Creates a SignUpView instance with the necessary dependencies.
+     *
+     * @param viewManagerModel     The view manager model.
+     * @param signUpViewModel     The sign-up view model.
+     * @param loginViewModel      The login view model.
+     * @param userDataAccessObject The user data access object.
+     * @param returnToLockController The return to lock controller.
+     * @return The created SignUpView.
+     */
     public static SignUpView create(
             ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel, LoginViewModel loginViewModel, FilePatientDataAccessObject userDataAccessObject, ReturnToLockController returnToLockController) {
 
@@ -36,7 +49,16 @@ public class SignUpUseCaseFactory {
         return null;
     }
 
-
+    /**
+     * Creates a SignUpController instance with the required dependencies.
+     *
+     * @param viewManagerModel      The view manager model.
+     * @param signUpViewModel      The sign-up view model.
+     * @param loginViewModel       The login view model.
+     * @param userDataAccessObject The user data access object.
+     * @return The created SignUpController.
+     * @throws IOException If there's an issue with file I/O.
+     */
     private static SignUpController createUserSignUpUseCase(ViewManagerModel viewManagerModel, SignUpViewModel signUpViewModel,  LoginViewModel loginViewModel, SignUpUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
