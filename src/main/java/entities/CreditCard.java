@@ -50,7 +50,4 @@ public class CreditCard {
         this.expirationDate = expirationDate;
     }
 
-    public void setCvv(Integer cvv) {
-        this.ccv = cvv;
-    }
 }
