@@ -8,6 +8,7 @@ import entities.matchers.DoctorMatcher;
 import entities.Service;
 import entities.matchers.DoctorMatchingStrategy;
 import entities.matchers.LowestEtaDoctorStrategy;
+import entities.matchers.NoAvailableDoctorException;
 
 import java.util.*;
 

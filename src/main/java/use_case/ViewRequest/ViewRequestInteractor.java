@@ -1,8 +1,6 @@
 package use_case.ViewRequest;
 
 
-import data_access.RequestDataAccess;
-
 import java.util.ArrayList;
 
 public class ViewRequestInteractor implements ViewRequestInputBoundary {
