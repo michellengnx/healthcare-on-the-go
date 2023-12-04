@@ -107,10 +107,10 @@ public class EditView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(EditViewModel.NEW_EMERGENCY_RELATIONSHIP_LABEL), emergencyRelationshipInputField);
 
         JPanel buttons = new JPanel();
-        editProfile = new JButton(EditViewModel.EDIT_PROFILE_BUTTON_LABEL);
-        buttons.add(editProfile);
         cancel = new JButton(EditViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        editProfile = new JButton(EditViewModel.EDIT_PROFILE_BUTTON_LABEL);
+        buttons.add(editProfile);
 
         editProfile.addActionListener(
                 new ActionListener() {
