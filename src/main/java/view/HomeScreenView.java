@@ -96,6 +96,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         requestView.setAlignmentX(Component.CENTER_ALIGNMENT);
         map = new JLabel(new ImageIcon(image));
         JLabel docOtw = new JLabel(homeScreenViewModel.DOCTOR_OTW_LABEL);
+        docOtw.setAlignmentX(Component.CENTER_ALIGNMENT);
         requestView.add(docOtw);
         requestView.add(map);
         requestView.setVisible(false);
