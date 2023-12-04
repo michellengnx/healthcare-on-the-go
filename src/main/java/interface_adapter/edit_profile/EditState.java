@@ -115,11 +115,11 @@ public class EditState {
     }
 
     public void setPhoneNumber(String newPhoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = newPhoneNumber;
     }
 
     public void setInsurance(String newInsurance) {
-        this.insurance = insurance;
+        this.insurance = newInsurance;
     }
 
     public void setCreditCardNumber(String creditCardNumber) {
