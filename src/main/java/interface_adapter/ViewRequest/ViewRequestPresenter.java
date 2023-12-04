@@ -9,10 +9,19 @@ import use_case.ViewRequest.ViewRequestOutputData;
 
 import java.util.ArrayList;
 
+/**
+ * Presenter responsible for preparing and updating the view based on ViewRequestOutputData.
+ */
 public class ViewRequestPresenter implements ViewRequestOutputBoundary {
     private final ViewRequestViewModel viewRequestViewModel;
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructs a ViewRequestPresenter instance.
+     *
+     * @param viewManagerModel     The model managing the views.
+     * @param viewRequestViewModel The ViewModel for the ViewRequest view.
+     */
     public ViewRequestPresenter(ViewManagerModel viewManagerModel, ViewRequestViewModel viewRequestViewModel){
         this.viewRequestViewModel = viewRequestViewModel;
         this.viewManagerModel = viewManagerModel;
@@ -21,7 +30,9 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
 
 
     /**
-     * @param requests
+     * Prepares the view with successful ViewRequestOutputData.
+     *
+     * @param requests The successful output data containing request details.
      */
     @Override
     public void prepareSuccessView(ViewRequestOutputData requests) {
@@ -72,7 +83,9 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
     }
 
     /**
-     * @param error
+     * Handles the failure scenario while preparing the view.
+     *
+     * @param error The error message encountered during view preparation.
      */
     @Override
     public void prepareFailView(String error) {
