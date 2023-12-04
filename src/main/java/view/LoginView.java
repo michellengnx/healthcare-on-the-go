@@ -14,6 +14,10 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The LoginView class represents the view for the login screen.
+ * It provides fields for username and password entry, along with login and cancel buttons.
+ */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "log in";
@@ -29,6 +33,13 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton cancel;
     private final LoginController loginController;
 
+    /**
+     * Constructs a LoginView with the given LoginViewModel, LoginController, and ReturnToLockController.
+     *
+     * @param loginViewModel       The view model for the login screen.
+     * @param controller           The controller handling login actions.
+     * @param returnToLockController The controller to return to the lock screen.
+     */
     public LoginView(LoginViewModel loginViewModel, LoginController controller, ReturnToLockController returnToLockController) {
 
         this.loginController = controller;
@@ -150,12 +161,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     }
 
     /**
-     * React to a button click that results in evt.
+     * Handles action events from buttons.
+     *
+     * @param evt The event to be processed.
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Handles property change events.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();

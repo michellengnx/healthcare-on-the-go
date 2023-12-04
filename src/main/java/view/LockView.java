@@ -14,6 +14,10 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * The LockView class represents the view for the lock screen.
+ * It provides options for users to log in or sign up.
+ */
 public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
     private JPanel buttonPanel;
@@ -25,6 +29,13 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     private JLabel appInfo;
     private JLabel buttonInfo;
     private LockViewModel lockViewModel;
+
+    /**
+     * Constructs the LockView with the given LockViewModel and LockController.
+     *
+     * @param lockViewModel  The view model for the lock screen.
+     * @param lockController The controller for handling lock screen actions.
+     */
     public LockView(LockViewModel lockViewModel, LockController lockController){
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
@@ -100,7 +111,9 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     /**
-     * @param e the event to be processed
+     * Handles action events from buttons.
+     *
+     * @param e The event to be processed.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -108,11 +121,23 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
 
+    /**
+     * Main method to demonstrate the LockView functionality.
+     *
+     * @param args Command-line arguments.
+     * @throws IOException    Signals that an I/O exception has occurred.
+     * @throws ParseException Signals that a parse exception has occurred.
+     */
     public static void main(String[] args) throws IOException, ParseException {
         FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("data/patients.csv");
 
     }
 
+    /**
+     * Handles property change events.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

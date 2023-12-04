@@ -6,9 +6,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a panel containing a formatted text field for inputting dates in the MM/dd/yyyy format.
+ */
 public class DateInputField extends JPanel {
     private final JFormattedTextField dateTextField;
 
+    /**
+     * Constructs a DateInputField with the specified size.
+     *
+     * @param size The size of the text field.
+     */
     DateInputField(int size) {
         try {
             MaskFormatter mask = new MaskFormatter("##/##/####");
@@ -21,6 +29,11 @@ public class DateInputField extends JPanel {
         }
     }
 
+    /**
+     * Gets the selected date from the input field.
+     *
+     * @return The selected date, or null if no date is selected or an error occurs during parsing.
+     */
     public Date getSelectedDate() {
         try {
             String inputDate = dateTextField.getText();
