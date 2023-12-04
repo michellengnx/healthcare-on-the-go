@@ -4,6 +4,7 @@ import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.ReturnToLock.ReturnToLockController;
+import view.common_components.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;
