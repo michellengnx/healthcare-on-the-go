@@ -28,11 +28,11 @@ class FilePatientDataAccessObjectTest {
     @BeforeEach
     public void setUp() {
         try {
-            PrintWriter writer = new PrintWriter("test_data/patient_data.csv");
+            PrintWriter writer = new PrintWriter("./patient_data.csv");
             writer.print("");
             writer.close();
 
-            dataAccessObject = new FilePatientDataAccessObject("test_data/patients_data.csv");
+            dataAccessObject = new FilePatientDataAccessObject("./patient_data.csv");
 
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
