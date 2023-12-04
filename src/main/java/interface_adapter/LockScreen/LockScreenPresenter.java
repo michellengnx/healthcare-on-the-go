@@ -1,20 +1,18 @@
-package interface_adapter.LockView;
+package interface_adapter.LockScreen;
 
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
-import use_case.LockView.LockOutputBoundary;
-import view.LoginView;
-import view.SignUpView;
+import use_case.LockScreen.LockScreenOutputBoundary;
 
-public class LockPresenter implements LockOutputBoundary {
+public class LockScreenPresenter implements LockScreenOutputBoundary {
     ViewManagerModel viewManagerModel;
     SignUpViewModel signUpViewModel;
     LoginViewModel loginViewModel;
 
-    public LockPresenter(ViewManagerModel viewManagerModel,
-                         SignUpViewModel signUpViewModel,
-                         LoginViewModel loginViewModel) {
+    public LockScreenPresenter(ViewManagerModel viewManagerModel,
+                               SignUpViewModel signUpViewModel,
+                               LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.signUpViewModel = signUpViewModel;
         this.loginViewModel = loginViewModel;

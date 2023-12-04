@@ -14,7 +14,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
 import interface_adapter.edit_profile.EditViewModel;
 import interface_adapter.edited_profile.EditedViewModel;
-import interface_adapter.LockView.LockViewModel;
+import interface_adapter.LockScreen.LockScreenModel;
 import view.*;
 
 
@@ -65,7 +65,7 @@ public class App
         // LeaveReviewViewModel leaveReviewViewModel = new LeaveReviewViewModel();
         CreateRequestViewModel createRequestViewModel = new CreateRequestViewModel();
         ViewRequestViewModel viewRequestViewModel = new ViewRequestViewModel();
-        LockViewModel lockViewModel = new LockViewModel();
+        LockScreenModel lockScreenModel = new LockScreenModel();
 
 
         ReturnHomeController returnHomeController = ReturnHomeUseCaseFactory.create(
@@ -74,7 +74,7 @@ public class App
         );
         ReturnToLockController returnToLockController = ReturnToLockUseCaseFactory.create(
                 viewManagerModel,
-                lockViewModel
+                lockScreenModel
         );
 
         FilePatientDataAccessObject userDataAccessObject;
@@ -105,7 +105,7 @@ public class App
                 userDataAccessObject,
                 returnToLockController);
         ViewRequestsView viewRequestsView = ViewRequestUseCaseFactory.create(viewManagerModel, viewRequestViewModel, requestDataAccessObject, returnHomeController);
-        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, lockViewModel, homeScreenViewModel, viewRequestsView.getRequestController());
+        HomeScreenView homeScreenView = HomeScreenUseCaseFactory.create(viewManagerModel, createRequestViewModel, viewRequestViewModel, editProfileViewModel, lockScreenModel, homeScreenViewModel, viewRequestsView.getRequestController());
         // LeaveReviewView leaveReviewView = LeaveReviewUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         EditView editProfileView = EditUseCaseFactory.create(
                viewManagerModel,
@@ -126,9 +126,9 @@ public class App
                doctorDataAccessObject,
                returnHomeController,
                 doctorDataAccessObject.getAvailableServices());
-        LockView lockView = LockUseCaseFactory.create(
+        LockScreenView lockView = LockUseCaseFactory.create(
                 viewManagerModel,
-                lockViewModel,
+                lockScreenModel,
                 signupViewModel,
                 loginViewModel
         );

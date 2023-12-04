@@ -1,38 +1,28 @@
 package app;
 
-import interface_adapter.CreateRequest.CreateRequestViewModel;
-import interface_adapter.HomeScreen.HomeScreenController;
-import interface_adapter.HomeScreen.HomeScreenPresenter;
-import interface_adapter.HomeScreen.HomeScreenViewModel;
-import interface_adapter.LockView.LockController;
-import interface_adapter.LockView.LockPresenter;
-import interface_adapter.LockView.LockViewModel;
+import interface_adapter.LockScreen.LockController;
+import interface_adapter.LockScreen.LockScreenPresenter;
+import interface_adapter.LockScreen.LockScreenModel;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.ViewRequest.ViewRequestViewModel;
-import interface_adapter.edit_profile.EditViewModel;
-import use_case.HomeScreen.HomeScreenInputBoundary;
-import use_case.HomeScreen.HomeScreenInteractor;
-import use_case.HomeScreen.HomeScreenOutputBoundary;
-import use_case.LockView.LockInputBoundary;
-import use_case.LockView.LockInteractor;
-import use_case.LockView.LockOutputBoundary;
-import view.HomeScreenView;
-import view.LockView;
+import use_case.LockScreen.LockScreenInputBoundary;
+import use_case.LockScreen.LockScreenInteractor;
+import use_case.LockScreen.LockScreenOutputBoundary;
+import view.LockScreenView;
 
 import java.io.IOException;
 
 public class LockUseCaseFactory {
-    public static LockView create(ViewManagerModel viewManagerModel,
-                                        LockViewModel lockViewModel,
+    public static LockScreenView create(ViewManagerModel viewManagerModel,
+                                        LockScreenModel lockScreenModel,
                                         SignUpViewModel signUpViewModel,
                                         LoginViewModel loginViewModel) throws IOException {
         LockController lockController = createLockUseCase(
                 viewManagerModel,
                 signUpViewModel,
                 loginViewModel);
-        return new LockView(lockViewModel, lockController);
+        return new LockScreenView(lockScreenModel, lockController);
 
     }
 
@@ -40,14 +30,14 @@ public class LockUseCaseFactory {
                                                           SignUpViewModel signUpViewModel,
                                                           LoginViewModel loginViewModel) {
 
-        LockOutputBoundary lockPresenter = new LockPresenter(
+        LockScreenOutputBoundary lockPresenter = new LockScreenPresenter(
                 viewManagerModel,
                 signUpViewModel,
                 loginViewModel);
 
-        LockInputBoundary lockInputBoundary = new LockInteractor(
+        LockScreenInputBoundary lockScreenInputBoundary = new LockScreenInteractor(
                 lockPresenter);
 
-        return new LockController(lockInputBoundary);
+        return new LockController(lockScreenInputBoundary);
     }
 }

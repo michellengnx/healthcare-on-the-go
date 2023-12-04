@@ -4,8 +4,7 @@ import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenPresenter;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
-import interface_adapter.LockView.LockViewModel;
-import interface_adapter.SignUp.SignUpViewModel;
+import interface_adapter.LockScreen.LockScreenModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestController;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
@@ -20,7 +19,7 @@ public class HomeScreenUseCaseFactory {
                                         CreateRequestViewModel createRequestViewModel,
                                         ViewRequestViewModel viewRequestViewModel,
                                         EditViewModel editViewModel,
-                                        LockViewModel lockViewModel,
+                                        LockScreenModel lockScreenModel,
                                         HomeScreenViewModel homeScreenViewModel,
                                         ViewRequestController viewRequestController) {
         HomeScreenController homeScreenController = createHomeScreenUseCase(
@@ -28,7 +27,7 @@ public class HomeScreenUseCaseFactory {
                 createRequestViewModel,
                 viewRequestViewModel,
                 editViewModel,
-                lockViewModel,
+                lockScreenModel,
                 homeScreenViewModel);
         return new HomeScreenView(homeScreenController, homeScreenViewModel, viewRequestController);
 
@@ -38,7 +37,7 @@ public class HomeScreenUseCaseFactory {
                                                                 CreateRequestViewModel createRequestViewModel,
                                                                 ViewRequestViewModel viewRequestViewModel,
                                                                 EditViewModel editProfileViewModel,
-                                                                LockViewModel lockViewModel,
+                                                                LockScreenModel lockScreenModel,
                                                                 HomeScreenViewModel homeScreenViewModel) {
 
         HomeScreenOutputBoundary homeScreenOutputBoundary = new HomeScreenPresenter(
@@ -46,7 +45,7 @@ public class HomeScreenUseCaseFactory {
                 viewRequestViewModel,
                 editProfileViewModel,
                 viewManagerModel,
-                lockViewModel,
+                lockScreenModel,
                 homeScreenViewModel);
 
         HomeScreenInputBoundary homeScreenInputBoundary = new HomeScreenInteractor(

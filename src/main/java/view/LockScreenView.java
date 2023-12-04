@@ -1,8 +1,8 @@
 package view;
 
 import data_access.FilePatientDataAccessObject;
-import interface_adapter.LockView.LockController;
-import interface_adapter.LockView.LockViewModel;
+import interface_adapter.LockScreen.LockController;
+import interface_adapter.LockScreen.LockScreenModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
+public class LockScreenView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
 
     private JPanel buttonPanel;
@@ -27,7 +27,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     private JLabel welcome;
     private JLabel appInfo;
     private JLabel buttonInfo;
-    private LockViewModel lockViewModel;
+    private LockScreenModel lockScreenModel;
 
     private File imageFile;
     private Image image;
@@ -36,10 +36,10 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
 
 
 
-    public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
-        this.lockViewModel = lockViewModel;
-        this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
-        this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
+    public LockScreenView(LockScreenModel lockScreenModel, LockController lockController) throws IOException {
+        this.lockScreenModel = lockScreenModel;
+        this.login = new JButton(lockScreenModel.LOGIN_BUTTON_LABEL);
+        this.signup = new JButton(lockScreenModel.SIGNUP_BUTTON_LABEL);
         this.buttonPanel = new JPanel(new FlowLayout());
         this.labelPanel = new JPanel(new FlowLayout());
         this.setSize(800,600);

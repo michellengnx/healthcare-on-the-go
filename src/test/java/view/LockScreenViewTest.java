@@ -12,7 +12,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-public class LockViewTest {
+public class LockScreenViewTest {
 
 
     /**
@@ -39,7 +39,7 @@ public class LockViewTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        LockView lockView = (LockView) jp2.getComponent(7);
+        LockScreenView lockView = (LockScreenView) jp2.getComponent(7);
 
         JPanel buttonPanel = (JPanel) lockView.getComponent(2);
 // 0 - signup, 1 - login
