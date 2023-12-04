@@ -2,6 +2,9 @@ package use_case.SignUp;
 
 import java.util.Date;
 
+/**
+ * Represents the input data for a user sign-up operation.
+ */
 public class SignUpInputData {
 
     final private String username;
