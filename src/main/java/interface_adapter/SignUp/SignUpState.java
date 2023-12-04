@@ -19,4 +19,8 @@ public class SignUpState {
     public void setError(String error) {
         this.error = error;
     }
+
+    public Object getCreateRequestError() {
+        return this.error;
+    }
 }

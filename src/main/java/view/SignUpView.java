@@ -1,7 +1,9 @@
 package view;
 
+import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
+import interface_adapter.SignUp.SignUpState;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.edit_profile.EditViewModel;
 
@@ -242,7 +244,11 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        SignUpState signUpState = (SignUpState) evt.getNewValue();
+        if (signUpState.getCreateRequestError() != null) {
+            JOptionPane.showMessageDialog(this, signUpState.getCreateRequestError());
+        }
+        signUpState.setError(null);
     }
 
 
