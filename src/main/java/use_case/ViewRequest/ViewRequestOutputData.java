@@ -2,6 +2,9 @@ package use_case.ViewRequest;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the output data containing the requested details for viewing.
+ */
 public class ViewRequestOutputData {
     public ArrayList<ArrayList<String>> getData() {
         return data;
