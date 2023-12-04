@@ -8,15 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class HomeScreenViewTest {
 
-
-    /**
-     * ensures there are at least 2 users in the CSV file for testing purposes
-     */
 
     public HomeScreenView getView() {
         JFrame app = null;
@@ -71,6 +68,7 @@ public class HomeScreenViewTest {
     /**
      * Test that the Create Request button is present and where it is expected to be
      */
+
     @Test
     public void testCreateRequestButtonPresent() throws IOException {
         App.main(null);
