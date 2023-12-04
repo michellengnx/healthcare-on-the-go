@@ -6,7 +6,7 @@ With insufficient accessibility and access to transportation services, hundreds 
 
 ## Software Specification
 
-Healthcare On The Go addresses the challenge above by linking patients with essential medical services. Patients can request the necessary care needed on demand by creating a profile on the application. Through the Healthcare On The Go dashboard, patients will be able to select their desired medical care, the urgency level of the request, and their location. The program will then display a visual representation of the distance between the patient and the doctor, the price of the service when ordering a ride, and the ETA of the doctor. Additionally, patients will be able to leave a review for the doctor that attended them.
+Healthcare On The Go addresses the challenge above by linking patients with essential medical services. Patients can request the necessary care needed on demand by creating a profile on the application, with the possibility to edit their details whenever requested by the user. Through the Healthcare On The Go dashboard, patients will be able to select their desired medical care, the urgency level of the request, and their location. The program will then display a visual representation of the distance between the patient and the doctor, the price of the service when ordering a ride, and the ETA of the doctor.
 
 ## Built With :hammer:
 
@@ -33,11 +33,10 @@ Distance : 10.617559 miles, ETA : 6596 seconds
 
 ## List of Technical Problems Blocking Progress
 
-- displaying a map for patients to see when ordering a ride
-- connecting or storing a doctor database to the application
-- creating a 'cancel order' method
+- displaying a map for patients to see when ordering a ride _[completed]_
 
 ## Authors :information_desk_person:
 
 Group 163 - TUT0401
+
 See the list of [contributors](https://github.com/michellengnx/csc207-project/contributors) who participated in this project.
