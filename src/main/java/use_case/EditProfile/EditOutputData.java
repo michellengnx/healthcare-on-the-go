@@ -97,4 +97,7 @@ public class EditOutputData {
         return emergencyRelationship;
     }
 
+    public boolean isUseCaseFailed() {
+        return this.useCaseFailed;
+    }
 }

@@ -49,4 +49,8 @@ public class CreditCard {
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    public void setCvv(Integer cvv) {
+        this.ccv = cvv;
+    }
 }
