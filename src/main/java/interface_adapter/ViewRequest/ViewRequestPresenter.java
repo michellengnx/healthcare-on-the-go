@@ -1,9 +1,6 @@
 package interface_adapter.ViewRequest;
 
-import interface_adapter.SignUp.SignUpPresenter;
 import interface_adapter.ViewManagerModel;
-import use_case.SignUp.SignUpOutputData;
-import use_case.ViewRequest.ViewRequestInteractor;
 import use_case.ViewRequest.ViewRequestOutputBoundary;
 import use_case.ViewRequest.ViewRequestOutputData;
 
@@ -88,8 +85,5 @@ public class ViewRequestPresenter implements ViewRequestOutputBoundary {
      * @param error The error message encountered during view preparation.
      */
     @Override
-    public void prepareFailView(String error) {
-
-
-    }
+    public void prepareFailView(String error) {}
 }
