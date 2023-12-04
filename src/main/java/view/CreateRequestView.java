@@ -31,7 +31,7 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
 
     private final JComboBox<Integer> urgencyLevelComboBox = new JComboBox<>(urgencyLevels);
     private final JComboBox<Service> availableServiceComboBox;
-    private final JTextField destinationInputField = new JTextField(30);
+    private final JTextField destinationInputField = new JTextField(15);
     private final JButton createRequest;
     private final JButton cancel;
 
@@ -76,10 +76,10 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
 
         // buttons to create request and return home
         JPanel buttons = new JPanel();
-        createRequest = new JButton(createRequestViewModel.CREATE_REQUEST_BUTTON_LABEL);
-        buttons.add(createRequest);
         cancel = new JButton(createRequestViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        createRequest = new JButton(createRequestViewModel.CREATE_REQUEST_BUTTON_LABEL);
+        buttons.add(createRequest);
 
         // create the request with the data in the view's state when the createRequest button is clicked
         createRequest.addActionListener(
@@ -166,13 +166,25 @@ public class CreateRequestView extends JPanel implements ActionListener, Propert
                 }
         );
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+        inputPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        this.add(title);
-        this.add(urgencyLevelSelect);
-        this.add(serviceSelect);
-        this.add(destinationInfo);
-        this.add(buttons);
+        inputPanel.add(Box.createVerticalStrut(1)); // Add vertical space between components
+        inputPanel.add(urgencyLevelSelect);
+        inputPanel.add(Box.createVerticalStrut(1)); // Add vertical space between components
+        inputPanel.add(serviceSelect);
+        inputPanel.add(Box.createVerticalStrut(1)); // Add vertical space between components
+        inputPanel.add(destinationInfo);
+
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.add(title);
+
+        this.setLayout(new BorderLayout());
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(inputPanel, BorderLayout.CENTER);
+        this.add(buttons, BorderLayout.SOUTH);
     }
 
     /**
