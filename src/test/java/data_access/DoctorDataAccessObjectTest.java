@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DoctorDataAccessObjectTest {
     private DoctorDataAccessObject dataAccessObject = new DoctorDataAccessObject(
-            "src/test/java/data_access/doctor_data.csv",
-            "src/test/java/data_access/service_data.csv");
+            "test_data/doctor_data.csv",
+            "test_data/service_data.csv");
 
     @AfterEach
     void resetFile() {
         try {
-            String content = Files.readString(Paths.get("src/test/java/data_access/immutable_doctor_data.csv"));
-            PrintWriter out = new PrintWriter("src/test/java/data_access/doctor_data.csv");
+            String content = Files.readString(Paths.get("test_data/immutable_doctor_data.csv"));
+            PrintWriter out = new PrintWriter("test_data/doctor_data.csv");
             out.println(content);
             out.close();
         } catch (IOException e) {
