@@ -4,8 +4,9 @@ import entities.Service;
 import interface_adapter.CreateRequest.CreateRequestController;
 import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
-import interface_adapter.Login.LoginState;
 import interface_adapter.ReturnHome.ReturnHomeController;
+import view.common_components.LabelComboBoxPanel;
+import view.common_components.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;
