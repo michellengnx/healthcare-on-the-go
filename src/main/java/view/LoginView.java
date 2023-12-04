@@ -137,11 +137,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        // Password panel that includes the password field and the show/hide checkbox
-        JPanel passwordPanel = new JPanel();
-        passwordPanel.add(passwordInfo);
-        passwordPanel.add(showPasswordCheckBox);
-
         this.setLayout(new BorderLayout());
 
         JPanel welcomePanel = new JPanel();
@@ -161,16 +156,29 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         welcomePanel.add(loginLabel);
         welcomePanel.add(Box.createVerticalGlue()); // Add spacing below
 
-        // Center align username and password fields
-        JPanel inputFieldsPanel = new JPanel(new GridLayout(2, 1, 5, 5)); // Grid layout for username and password
+        JPanel inputFieldsPanel = new JPanel();
+        inputFieldsPanel.setLayout(new BoxLayout(inputFieldsPanel, BoxLayout.Y_AXIS));
         inputFieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        inputFieldsPanel.add(usernameInfo);
+        JPanel usernamePanel = new JPanel();
+        usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
+        usernamePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        usernamePanel.add(usernameInfo);
+        passwordPanel.add(passwordInfo);
+
+        inputFieldsPanel.add(usernamePanel);
         inputFieldsPanel.add(passwordPanel);
+        inputFieldsPanel.add(showPasswordCheckBox);
+        inputFieldsPanel.add(Box.createVerticalGlue()); // Add vertical glue to center the components
+
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(Box.createVerticalGlue()); // Add spacing at the top
         this.add(title);
         this.add(Box.createVerticalGlue()); // Add spacing between title and welcome message
         this.add(welcomePanel);
