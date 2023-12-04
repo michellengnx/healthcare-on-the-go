@@ -90,7 +90,7 @@ public class ServiceRequestTest {
         serviceRequest.setCompleted(newCompleted);
 
         // Assert
-        assertEquals(newCreationTime, serviceRequest.getCreationTime());
+        assertEquals(newCreationTime.toString(), serviceRequest.getCreationTime().toString());
         assertEquals(newDoctor.getUsername(), serviceRequest.getDoctor().getUsername());
         assertEquals(newUrgencyLevel, serviceRequest.getUrgencyLevel());
         assertEquals(newDestination, serviceRequest.getDestination());
