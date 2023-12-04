@@ -33,6 +33,8 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton cancel;
     private final LoginController loginController;
 
+    private final JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
+
     /**
      * Constructs a LoginView with the given LoginViewModel, LoginController, and ReturnToLockController.
      *
@@ -121,6 +123,25 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     }
                 });
 
+        showPasswordCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
+        // Password panel that includes the password field and the show/hide checkbox
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.add(passwordInfo);
+        passwordPanel.add(showPasswordCheckBox);
+
         this.setLayout(new BorderLayout());
 
         JPanel welcomePanel = new JPanel();
@@ -145,7 +166,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         inputFieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         inputFieldsPanel.add(usernameInfo);
-        inputFieldsPanel.add(passwordInfo);
+        inputFieldsPanel.add(passwordPanel);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
