@@ -14,6 +14,10 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The LoginView class represents the view for the login screen.
+ * It provides fields for username and password entry, along with login and cancel buttons.
+ */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "log in";
@@ -29,6 +33,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton cancel;
     private final LoginController loginController;
 
+    private final JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
+
+    /**
+     * Constructs a LoginView with the given LoginViewModel, LoginController, and ReturnToLockController.
+     *
+     * @param loginViewModel       The view model for the login screen.
+     * @param controller           The controller handling login actions.
+     * @param returnToLockController The controller to return to the lock screen.
+     */
     public LoginView(LoginViewModel loginViewModel, LoginController controller, ReturnToLockController returnToLockController) {
 
         this.loginController = controller;
@@ -110,6 +123,20 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     }
                 });
 
+        showPasswordCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
         this.setLayout(new BorderLayout());
 
         JPanel welcomePanel = new JPanel();
@@ -129,16 +156,29 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         welcomePanel.add(loginLabel);
         welcomePanel.add(Box.createVerticalGlue()); // Add spacing below
 
-        // Center align username and password fields
-        JPanel inputFieldsPanel = new JPanel(new GridLayout(2, 1, 5, 5)); // Grid layout for username and password
+        JPanel inputFieldsPanel = new JPanel();
+        inputFieldsPanel.setLayout(new BoxLayout(inputFieldsPanel, BoxLayout.Y_AXIS));
         inputFieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        inputFieldsPanel.add(usernameInfo);
-        inputFieldsPanel.add(passwordInfo);
+        JPanel usernamePanel = new JPanel();
+        usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
+        usernamePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        usernamePanel.add(usernameInfo);
+        passwordPanel.add(passwordInfo);
+
+        inputFieldsPanel.add(usernamePanel);
+        inputFieldsPanel.add(passwordPanel);
+        inputFieldsPanel.add(showPasswordCheckBox);
+        inputFieldsPanel.add(Box.createVerticalGlue()); // Add vertical glue to center the components
+
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(Box.createVerticalGlue()); // Add spacing at the top
         this.add(title);
         this.add(Box.createVerticalGlue()); // Add spacing between title and welcome message
         this.add(welcomePanel);
@@ -150,12 +190,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     }
 
     /**
-     * React to a button click that results in evt.
+     * Handles action events from buttons.
+     *
+     * @param evt The event to be processed.
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
 
+    /**
+     * Handles property change events.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();

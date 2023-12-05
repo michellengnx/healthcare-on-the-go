@@ -5,6 +5,9 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * ViewModel for the Logged-in View, handling data for the logged-in state.
+ */
 public class LoggedinViewModel extends ViewModel {
     public final String TITLE_LABEL = "Logged In View";
 
@@ -17,6 +20,11 @@ public class LoggedinViewModel extends ViewModel {
         super("logged in");
     }
 
+    /**
+     * Sets the state of being logged in.
+     *
+     * @param state The state of being logged in to set.
+     */
     public void setState(LoggedinState state) {
         this.state = state;
     }
@@ -37,11 +45,20 @@ public class LoggedinViewModel extends ViewModel {
         return state;
     }
 
-
+    /**
+     * Retrieves the username of the logged-in user.
+     *
+     * @return The username of the logged-in user.
+     */
     public String getLoggedInUser() {
         return loggedInUser;
     }
 
+    /**
+     * Sets the username of the logged-in user.
+     *
+     * @param loggedInUser The username of the logged-in user to set.
+     */
     public void setLoggedInUser(String loggedInUser) {
         this.loggedInUser = loggedInUser;
     }

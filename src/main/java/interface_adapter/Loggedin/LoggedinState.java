@@ -1,8 +1,16 @@
 package interface_adapter.Loggedin;
 
+/**
+ * Represents the state of a user being logged in.
+ */
 public class LoggedinState {
     private String username = "";
 
+    /**
+     * Constructs a LoggedinState by copying another instance.
+     *
+     * @param copy The LoggedinState instance to copy.
+     */
     public LoggedinState(LoggedinState copy) {
         username = copy.username;
     }

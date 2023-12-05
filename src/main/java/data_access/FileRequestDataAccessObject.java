@@ -8,11 +8,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance)
+/**
+ * Manages data access for service requests through a CSV file.
+ */
 public class FileRequestDataAccessObject implements RequestDataAccess {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<Integer, ArrayList<String>> requests = new HashMap<>();
     private final File csvFile;
 
+    /**
+     * Constructs a FileRequestDataAccessObject by initializing data from a CSV file.
+     *
+     * @param csvPath The path to the CSV file containing request data.
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
     public FileRequestDataAccessObject(String csvPath) throws IOException {
         csvFile = new File(csvPath);
         headers.put("patient", 0);
@@ -68,12 +77,25 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
     }
 
 
+    /**
+     * Retrieves requests associated with a specific user.
+     *
+     * @param userName The username for which requests are to be retrieved.
+     * @return A list of requests associated with the provided username.
+     */
     @Override
     public ArrayList<ArrayList<String>> getRequestUser(String userName) {
         return requests.values().stream()
                 .filter(request -> request.get(0).equals(userName)) // Filter based on username
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    /**
+     * Adds a new request for the provided username.
+     *
+     * @param request  The service request to be added.
+     * @param userName The username associated with the request.
+     */
     @Override
     public void addRequest(ServiceRequest request, String userName){
 
@@ -100,14 +122,19 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
 
 
     }
+
+    /**
+     * Clears all requests except for headers.
+     */
     @Override
     public void clear() {
         requests.clear(); // Clear all requests except headers
         save(); // Save the changes to the file (empty content)
     }
 
-
-
+    /**
+     * Saves the current requests data to the CSV file.
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -128,9 +155,3 @@ public class FileRequestDataAccessObject implements RequestDataAccess {
         }
     }
 }
-
-
-
-
-
-

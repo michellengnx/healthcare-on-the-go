@@ -12,7 +12,7 @@ public class EditedViewModel extends ViewModel {
     public final String TITLE_LABEL = "Edited View";
 
     private EditedState state = new EditedState();
-    public static final String EXIT_BUTTON_LABEL = "Return to home screen";
+    public static final String EXIT_BUTTON_LABEL = "Home";
     private String editedProfile;
 
     /**

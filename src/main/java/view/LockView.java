@@ -16,9 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * The LockView class represents the view for the lock screen.
+ * It provides options for users to log in or sign up.
+ */
 public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
-
     private JPanel buttonPanel;
     private final String patientDataPath = "data/patients.csv";
     private JButton login;
@@ -34,8 +37,12 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     private Image scaledImage;
     private JLabel imageLabel;
 
-
-
+    /**
+     * Constructs the LockView with the given LockViewModel and LockController.
+     *
+     * @param lockViewModel  The view model for the lock screen.
+     * @param lockController The controller for handling lock screen actions.
+     */
     public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
@@ -104,13 +111,11 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         buttonInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
         labelPanel.add(buttonInfo);
 
-
-        // Add the label panel to the CENTER of the main panel
         this.add(labelPanel, BorderLayout.NORTH);
 
         // Ad image under the label
         this.add(imageLabel, BorderLayout.CENTER);
-      
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBorder(new EmptyBorder(20, 0, 20, 0)); // Adjust top and bottom margins as needed
         buttonPanel.add(signup);
@@ -122,7 +127,9 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     /**
-     * @param e the event to be processed
+     * Handles action events from buttons.
+     *
+     * @param e The event to be processed.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -130,11 +137,23 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
 
+    /**
+     * Main method to demonstrate the LockView functionality.
+     *
+     * @param args Command-line arguments.
+     * @throws IOException    Signals that an I/O exception has occurred.
+     * @throws ParseException Signals that a parse exception has occurred.
+     */
     public static void main(String[] args) throws IOException, ParseException {
         FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("data/patients.csv");
 
     }
 
+    /**
+     * Handles property change events.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

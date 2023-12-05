@@ -7,6 +7,9 @@ import use_case.SignUp.validators.InputValidation;
 
 import java.time.LocalDate;
 
+/**
+ * Handles the sign-up use case logic.
+ */
 public class SignUpInteractor implements SignUpInputBoundary {
     final SignUpUserDataAccessInterface userDataAccessObject;
     final SignUpOutputBoundary userPresenter;
@@ -20,6 +23,11 @@ public class SignUpInteractor implements SignUpInputBoundary {
         this.patientUserFactory = patientUserFactory;
     }
 
+    /**
+     * Executes the sign-up process based on the provided sign-up input data.
+     *
+     * @param signUpInputData The data containing user sign-up information.
+     */
     @Override
     public void execute(SignUpInputData signUpInputData) {
         PasswordValidator passwordValidator = new PasswordValidator();

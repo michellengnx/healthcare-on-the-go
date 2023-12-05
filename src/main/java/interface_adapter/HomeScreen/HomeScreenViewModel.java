@@ -13,7 +13,7 @@ public class HomeScreenViewModel extends ViewModel {
     public final String CREATE_REQUEST_BUTTON_LABEL = "Create Request";
     public final String VIEW_REQUESTS_BUTTON_LABEL = "View Requests";
     public final String LEAVE_REVIEW_BUTTON_LABEL = "Leave Review";
-    public final String LOGOUT_BUTTON_LABEL = "LogOut";
+    public final String LOGOUT_BUTTON_LABEL = "Log out";
     private HomeScreenState state;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

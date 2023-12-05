@@ -13,7 +13,20 @@ import view.ViewRequestsView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory class to create the ViewRequestsView and its dependencies.
+ */
 public class ViewRequestUseCaseFactory {
+
+    /**
+     * Creates a ViewRequestsView instance with the necessary dependencies.
+     *
+     * @param viewManagerModel   The view manager model.
+     * @param viewRequestViewModel The view request view model.
+     * @param requestDataAccess  The request data access object.
+     * @param returnHomeController The return home controller.
+     * @return The created ViewRequestsView.
+     */
     public static ViewRequestsView create(
             ViewManagerModel viewManagerModel,
             ViewRequestViewModel viewRequestViewModel,
@@ -30,7 +43,15 @@ public class ViewRequestUseCaseFactory {
         return null;
     }
 
-
+    /**
+     * Creates a ViewRequestController instance with the required dependencies.
+     *
+     * @param viewManagerModel   The view manager model.
+     * @param viewRequestViewModel The view request view model.
+     * @param requestDataAccess  The request data access object.
+     * @return The created ViewRequestController.
+     * @throws IOException If there's an issue with file I/O.
+     */
     private static ViewRequestController createViewRequestUseCase(ViewManagerModel viewManagerModel,
                                                                   ViewRequestViewModel viewRequestViewModel,
                                                                   RequestDataAccess requestDataAccess) throws IOException {

@@ -13,7 +13,7 @@ public class CreateRequestViewModel extends ViewModel {
     public final String TITLE_LABEL = "Create Request";
     public final String URGENCY_LABEL = "Choose Urgency Level";
     public final String SERVICE_LABEL = "Choose Service";
-    public final String DESTINATION_LABEL = "Choose Destination (Optional)";
+    public final String DESTINATION_LABEL = "Enter Destination";
     public final String CREATE_REQUEST_BUTTON_LABEL = "Create Request";
     public final String CANCEL_BUTTON_LABEL = "Cancel";
     private CreateRequestState state;

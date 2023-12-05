@@ -7,11 +7,21 @@ import use_case.LockView.LockOutputBoundary;
 import view.LoginView;
 import view.SignUpView;
 
+/**
+ * Presenter handling lock-related output interactions.
+ */
 public class LockPresenter implements LockOutputBoundary {
     ViewManagerModel viewManagerModel;
     SignUpViewModel signUpViewModel;
     LoginViewModel loginViewModel;
 
+    /**
+     * Constructs a LockPresenter with necessary view models and the view manager.
+     *
+     * @param viewManagerModel The view manager model handling view updates.
+     * @param signUpViewModel  The view model for the sign-up view.
+     * @param loginViewModel   The view model for the login view.
+     */
     public LockPresenter(ViewManagerModel viewManagerModel,
                          SignUpViewModel signUpViewModel,
                          LoginViewModel loginViewModel) {
@@ -20,6 +30,11 @@ public class LockPresenter implements LockOutputBoundary {
         this.loginViewModel = loginViewModel;
     }
 
+    /**
+     * Prepares the success view based on the provided view name.
+     *
+     * @param viewName The name of the view to be set as the active view.
+     */
     public void prepareSuccessView(String viewName) {
         switch (viewName) {
             case "log in":
