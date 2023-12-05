@@ -4,7 +4,7 @@ import entities.Doctor;
 import entities.Service;
 import entities.ServiceRequest;
 import entities.matchers.DoctorMatcher;
-import use_case.CreateRequest.NoAvailableDoctorException;
+import entities.matchers.NoAvailableDoctorException;
 
 import java.util.Date;
 

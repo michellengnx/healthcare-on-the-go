@@ -4,7 +4,6 @@ import entities.Doctor;
 import entities.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.CreateRequest.NoAvailableDoctorException;
 
 import java.util.*;
 

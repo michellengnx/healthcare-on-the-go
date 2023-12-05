@@ -4,25 +4,39 @@ import data_access.FilePatientDataAccessObject;
 import interface_adapter.LockView.LockController;
 import interface_adapter.LockView.LockViewModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
 public class LockView extends JPanel implements ActionListener, PropertyChangeListener {
     public String viewName = "lock";
+
     private JPanel buttonPanel;
-    private final String patientDataPath = "/Users/ismaelchona/IdeaProject/csc207-project/src/main/java/data/patients.csv";
+    private final String patientDataPath = "data/patients.csv";
     private JButton login;
     private JButton signup;
     private JPanel labelPanel;
     private JLabel welcome;
+    private JLabel appInfo;
+    private JLabel buttonInfo;
     private LockViewModel lockViewModel;
-    public LockView(LockViewModel lockViewModel, LockController lockController){
+
+    private File imageFile;
+    private Image image;
+    private Image scaledImage;
+    private JLabel imageLabel;
+
+
+
+    public LockView(LockViewModel lockViewModel, LockController lockController) throws IOException {
         this.lockViewModel = lockViewModel;
         this.login = new JButton(lockViewModel.LOGIN_BUTTON_LABEL);
         this.signup = new JButton(lockViewModel.SIGNUP_BUTTON_LABEL);
@@ -31,6 +45,12 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
         this.setSize(800,600);
         this.login.addActionListener(this);
         this.signup.addActionListener(this);
+        this.imageFile = new File("image/pickMe.jpeg");
+        this.image = ImageIO.read(imageFile);
+        this.scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+        this.imageLabel = new JLabel(new ImageIcon(scaledImage));
+
+
 
         signup.addActionListener(
                 new ActionListener() {
@@ -54,17 +74,52 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
-        this.buttonPanel.add(signup);
-        this.buttonPanel.add(login);
         this.setLayout(new BorderLayout());
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
+        labelPanel.setBorder(new EmptyBorder(100, 0, 100, 0));
+
+        JLabel welcome = new JLabel("Welcome to Healthcare On the Go!");
+        welcome.setFont(new Font("Arial", Font.BOLD, 25));
+        welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelPanel.add(welcome);
+
+        // Add space between welcome and appInfo labels
+        labelPanel.add(Box.createVerticalStrut(20));
+
+        JLabel appInfo = new JLabel("<html>Your go-to ride-hailing app to get accessible healthcare "
+                + "<br>right at the comfort of your home &#x1F3E5;</html>");
+        appInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        appInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        appInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
+        labelPanel.add(appInfo);
+
+        // Add space between appInfo and buttonInfo labels
+        labelPanel.add(Box.createVerticalStrut(20));
+
+        JLabel buttonInfo = new JLabel("If you already have an account, please login. If not, please sign up");
+        buttonInfo.setFont(new Font("Tahoma", Font.ITALIC, 12)); // Suggested font: Tahoma
+        buttonInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonInfo.setHorizontalAlignment(SwingConstants.CENTER); // Align center horizontally
+        labelPanel.add(buttonInfo);
+
+
+        // Add the label panel to the CENTER of the main panel
+        this.add(labelPanel, BorderLayout.NORTH);
+
+        // Ad image under the label
+        this.add(imageLabel, BorderLayout.CENTER);
+      
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBorder(new EmptyBorder(20, 0, 20, 0)); // Adjust top and bottom margins as needed
+        buttonPanel.add(signup);
+        buttonPanel.add(login);
+
         this.add(buttonPanel, BorderLayout.SOUTH);
 
-        this.welcome = new JLabel("Welcome to Health care on the go! If you already have an account please login. If not please signup.");
-        this.labelPanel.add(welcome);
-        this.add(welcome, BorderLayout.CENTER);
         this.setVisible(true);
     }
-
 
     /**
      * @param e the event to be processed
@@ -76,7 +131,7 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
 
 
     public static void main(String[] args) throws IOException, ParseException {
-        FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("/data/patinets.csv");
+        FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("data/patients.csv");
 
     }
 

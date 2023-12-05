@@ -64,7 +64,7 @@ public class EditInteractor implements EditInputBoundary {
         passwordValidator.addPattern("^.{8,}$"); // at least 8 characters
 
         if (!passwordValidator.validatePassword(password)) {
-            editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.");
+            editPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.\nMust contain:\n- a digit\n-a lower case letter\n- an upper case letter\n- a special character (A#$%^&)\nMust also be at least 8 characters");
         } else if (noChanges(changes)) {
             editPresenter.prepareFailView("No changes have been made to the account.");
         } else {

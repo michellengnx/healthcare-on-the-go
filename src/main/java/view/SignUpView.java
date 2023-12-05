@@ -1,8 +1,11 @@
 package view;
 
+import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
+import interface_adapter.SignUp.SignUpState;
 import interface_adapter.SignUp.SignUpViewModel;
+import interface_adapter.edit_profile.EditViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,22 +46,41 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
     private final JButton signUp;
     private final JButton cancel;
 
+    private final JCheckBox showPasswordCheckBox1 = new JCheckBox("Show Password");
+    private final JCheckBox showPasswordCheckBox2 = new JCheckBox("Show Password");
+
     public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel, ReturnToLockController returnToLockController) {
 
         this.signUpController = signUpController;
         this.signUpViewModel = signUpViewModel;
         signUpViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(SignUpViewModel.TITLE_LABEL);
-        title.setAlignmentX(Component.LEFT_ALIGNMENT);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
 // name + text field
+        JLabel subheading_main = new JLabel(SignUpViewModel.SUBHEADING_MAIN_LABEL);
+        subheading_main.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_main.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel subheading_card = new JLabel(SignUpViewModel.SUBHEADING_CREDIT_CARD_LABEL);
+        subheading_card.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_card.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel subheading_emergency = new JLabel(SignUpViewModel.SUBHEADING_EMERGENCY_CONTACT_LABEL);
+        subheading_emergency.setFont(new Font("Arial", Font.BOLD, 14));
+        subheading_emergency.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(SignUpViewModel.USERNAME_LABEL), usernameInputField);
+
         LabelTextPanel passwordInfo = new LabelTextPanel(
                 new JLabel(SignUpViewModel.PASSWORD_LABEL), passwordInputField);
+
         LabelTextPanel repeatPasswordInfo = new LabelTextPanel(
                 new JLabel(SignUpViewModel.REPEAT_PASSWORD_LABEL), repeatPasswordInputField);
+
         LabelTextPanel emailInfo = new LabelTextPanel(
                 new JLabel(SignUpViewModel.EMAIL_LABEL), emailInputField);
         LabelTextPanel phoneNumberInfo = new LabelTextPanel(
@@ -88,10 +110,10 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
 
 
         JPanel buttons = new JPanel();
-        signUp = new JButton(SignUpViewModel.SIGNUP_BUTTON_LABEL);
-        buttons.add(signUp);
         cancel = new JButton(SignUpViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        signUp = new JButton(SignUpViewModel.SIGNUP_BUTTON_LABEL);
+        buttons.add(signUp);
 
         signUp.addActionListener(evt -> {
             // Get input values from the fields
@@ -131,24 +153,77 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
+        showPasswordCheckBox1.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox1.isSelected()) {
+                            passwordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            passwordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
+        showPasswordCheckBox2.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Toggle the visibility of password characters
+                        if (showPasswordCheckBox2.isSelected()) {
+                            repeatPasswordInputField.setEchoChar((char) 0); // Show characters
+                        } else {
+                            repeatPasswordInputField.setEchoChar('*'); // Hide characters
+                        }
+                    }
+                }
+        );
+
+        // Password panel that includes the password field and the show/hide checkbox
+        JPanel passwordPanel1 = new JPanel();
+        passwordPanel1.add(passwordInfo);
+        passwordPanel1.add(showPasswordCheckBox1);
+
+        JPanel passwordPanel2 = new JPanel();
+        passwordPanel2.add(repeatPasswordInfo);
+        passwordPanel2.add(showPasswordCheckBox2);
+
+
+        JPanel mainPanel = new JPanel(new GridLayout(9, 1));
+        mainPanel.add(usernameInfo);
+        mainPanel.add(passwordPanel1);
+        mainPanel.add(passwordPanel2);
+        mainPanel.add(emailInfo);
+        mainPanel.add(phoneNumberInfo);
+        mainPanel.add(genderInfo);
+        mainPanel.add(insuranceInfo);
+        mainPanel.add(birthdayInfo);
+
+        JPanel creditCardPanel = new JPanel(new GridLayout(4, 1));
+        creditCardPanel.add(creditCardNumberInfo);
+        creditCardPanel.add(ccvInfo);
+        creditCardPanel.add(expirationDateInfo);
+        creditCardPanel.add(nameOnCardInfo);
+
+        JPanel emergencyPanel = new JPanel(new GridLayout(3, 1));
+        emergencyPanel.add(contactNameInfo);
+        emergencyPanel.add(contactPhoneNumberInfo);
+        emergencyPanel.add(contactRelationshipInfo);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(usernameInfo);
-        this.add(passwordInfo);
-        this.add(repeatPasswordInfo);
-        this.add(emailInfo);
-        this.add(phoneNumberInfo);
-        this.add(genderInfo);
-        this.add(insuranceInfo);
-        this.add(birthdayInfo);
-        this.add(creditCardNumberInfo);
-        this.add(contactNameInfo);
-        this.add(contactPhoneNumberInfo);
-        this.add(contactRelationshipInfo);
-        this.add(ccvInfo);
-        this.add(expirationDateInfo);
-        this.add(nameOnCardInfo);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
+        this.add(subheading_main);
+        this.add(mainPanel);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
+        this.add(subheading_card);
+        this.add(creditCardPanel);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
+        this.add(subheading_emergency);
+        this.add(emergencyPanel);
         this.add(buttons);
     }
 
@@ -169,7 +244,11 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        SignUpState signUpState = (SignUpState) evt.getNewValue();
+        if (signUpState.getCreateRequestError() != null) {
+            JOptionPane.showMessageDialog(this, signUpState.getCreateRequestError());
+        }
+        signUpState.setError(null);
     }
 
 

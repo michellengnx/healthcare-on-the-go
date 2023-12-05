@@ -28,11 +28,14 @@ class FilePatientDataAccessObjectTest {
     @BeforeEach
     public void setUp() {
         try {
-            PrintWriter writer = new PrintWriter("./patient_data.csv");
+            PrintWriter writer = new PrintWriter("test_data/patient_data.csv");
             writer.print("");
             writer.close();
 
-            dataAccessObject = new FilePatientDataAccessObject("./patients_data.csv");
+
+            dataAccessObject = new FilePatientDataAccessObject("test_data/patients_data.csv");
+
+
 
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
@@ -71,7 +74,7 @@ class FilePatientDataAccessObjectTest {
         assertTrue(dataAccessObject.hasValidPassword("StrongP@ss1"));
         assertFalse(dataAccessObject.hasValidPassword("weakpass"));
         assertFalse(dataAccessObject.hasValidPassword("missingNumber@"));
-        assertFalse(dataAccessObject.hasValidPassword("Nodigit123"));
+        assertFalse(dataAccessObject.hasValidPassword("NoSpecial123"));
         // Add more password validation scenarios
     }
 

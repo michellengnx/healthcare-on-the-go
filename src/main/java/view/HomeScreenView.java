@@ -204,6 +204,6 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             );
         }
 
-        requestView.setVisible(false);
+        homeScreenViewModel.getState().setActiveRequest(false);
     }
 }

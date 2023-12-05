@@ -1,4 +1,4 @@
-package use_case.EditProfile;
+package data_access.integration_test.EditProfile;
 
 import data_access.FilePatientDataAccessObject;
 import entities.*;

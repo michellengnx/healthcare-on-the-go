@@ -21,6 +21,9 @@ import use_case.LockView.LockOutputBoundary;
 import view.HomeScreenView;
 import view.LockView;
 
+import javax.swing.*;
+import java.io.IOException;
+
 public class LockUseCaseFactory {
     public static LockView create(ViewManagerModel viewManagerModel,
                                         LockViewModel lockViewModel,
@@ -30,8 +33,12 @@ public class LockUseCaseFactory {
                 viewManagerModel,
                 signUpViewModel,
                 loginViewModel);
-        return new LockView(lockViewModel, lockController);
-
+        try {
+            return new LockView(lockViewModel, lockController);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open image file.");
+        }
+        return null;
     }
 
     private static LockController createLockUseCase(ViewManagerModel viewManagerModel,

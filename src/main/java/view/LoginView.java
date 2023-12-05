@@ -44,10 +44,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 new JLabel("Password"), passwordInputField);
 
         JPanel buttons = new JPanel();
-        logIn = new JButton(LoginViewModel.LOGIN_BUTTON_LABEL);
-        buttons.add(logIn);
         cancel = new JButton(LoginViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        logIn = new JButton(LoginViewModel.LOGIN_BUTTON_LABEL);
+        buttons.add(logIn);
 
         logIn.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -91,7 +91,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             public void keyReleased(KeyEvent e) {
             }
         });
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         passwordInputField.addKeyListener(
                 new KeyListener() {
@@ -111,12 +110,43 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     }
                 });
 
+        this.setLayout(new BorderLayout());
+
+        JPanel welcomePanel = new JPanel();
+        welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.Y_AXIS));
+        welcomePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel welcomeLabel = new JLabel("Welcome back to Healthcare On the Go!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel loginLabel = new JLabel("We hope you are doing well and receive your desired medical service by logging back in.");
+        loginLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        welcomePanel.add(Box.createVerticalGlue()); // Add spacing above
+        welcomePanel.add(welcomeLabel);
+        welcomePanel.add(loginLabel);
+        welcomePanel.add(Box.createVerticalGlue()); // Add spacing below
+
+        // Center align username and password fields
+        JPanel inputFieldsPanel = new JPanel(new GridLayout(2, 1, 5, 5)); // Grid layout for username and password
+        inputFieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        inputFieldsPanel.add(usernameInfo);
+        inputFieldsPanel.add(passwordInfo);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(Box.createVerticalGlue()); // Add spacing at the top
         this.add(title);
-        this.add(usernameInfo);
-        this.add(usernameErrorField);
-        this.add(passwordInfo);
-        this.add(passwordErrorField);
+        this.add(Box.createVerticalGlue()); // Add spacing between title and welcome message
+        this.add(welcomePanel);
+        this.add(Box.createVerticalGlue()); // Add spacing between welcome message and input fields
+        this.add(inputFieldsPanel);
+        this.add(Box.createVerticalGlue()); // Add spacing between input fields and buttons
         this.add(buttons);
+        this.add(Box.createVerticalGlue()); // Add spacing at the bottom
     }
 
     /**
