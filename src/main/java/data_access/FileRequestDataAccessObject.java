@@ -1,8 +1,6 @@
 package data_access;
 
 import entities.ServiceRequest;
-import entities.ServiceRequestFactory;
-import use_case.CreateRequest.CreateRequestUserDataAccessInterface;
 
 
 import java.io.*;

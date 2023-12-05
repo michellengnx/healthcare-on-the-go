@@ -1,4 +1,9 @@
-package entities;
+package entities.factories;
+
+import entities.Doctor;
+import entities.Service;
+import entities.ServiceRequest;
+import entities.User;
 
 import java.util.Date;
 
