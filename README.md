@@ -1,5 +1,11 @@
 # Healthcare On the Go :ambulance:
 
+## How to Run :
+
+1. Clone the repo to your local device
+2. Retrieve an API key from the [MapQuest API](https://developer.mapquest.com/)
+3. Run the `main(String args[])` method in `src/main/java/app/App.java`, and ensure your run configuration is set such that the `API_KEY` environment variable corresponds your personally generated API key
+
 ## Description of Project Domain
 
 With insufficient accessibility and access to transportation services, hundreds of people, particularly seniors, are under threat of missing critical medical care. Subsequently, our project domain is a **ride-hailing platform**, where _patients_ can request _doctors_ to visit them at the comfort of their homes.
