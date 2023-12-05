@@ -1,23 +1,16 @@
 package data_access;
 
-import entities.Doctor;
 import entities.CreditCard;
 import entities.EmergencyContact;
 import entities.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.edit_profile.EditPatientDataAccessInterface;
+import use_case.EditProfile.EditPatientDataAccessInterface;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

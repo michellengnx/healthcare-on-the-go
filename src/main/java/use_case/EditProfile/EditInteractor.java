@@ -1,11 +1,7 @@
-package use_case.edit_profile;
+package use_case.EditProfile;
 
 import entities.PasswordValidator;
 import entities.Patient;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Interactor responsible for handling the editing of a patient's profile.

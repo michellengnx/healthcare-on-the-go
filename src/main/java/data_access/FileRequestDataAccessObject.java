@@ -1,17 +1,19 @@
 package data_access;
 
 import entities.ServiceRequest;
-import use_case.ViewRequest.RequestDataAccess;
+import use_case.ViewRequest.RequestDataAccessInterface;
+
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 //User patient, Date creationTime, Doctor doctor, int urgencyLevel, String destination, Service service, float price, float eta, float distance)
-/**
- * Manages data access for service requests through a CSV file.
- */
-public class FileRequestDataAccessObject implements RequestDataAccess {
+
+public class FileRequestDataAccessObject implements RequestDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<Integer, ArrayList<String>> requests = new HashMap<>();
     private final File csvFile;

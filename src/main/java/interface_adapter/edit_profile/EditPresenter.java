@@ -3,8 +3,8 @@ package interface_adapter.edit_profile;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.edited_profile.EditedState;
 import interface_adapter.edited_profile.EditedViewModel;
-import use_case.edit_profile.EditOutputBoundary;
-import use_case.edit_profile.EditOutputData;
+import use_case.EditProfile.EditOutputBoundary;
+import use_case.EditProfile.EditOutputData;
 
 /**
  * Presenter responsible for preparing views based on edit profile use case responses.

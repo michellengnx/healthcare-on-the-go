@@ -10,15 +10,6 @@ public class SignUpState {
 
     }
 
-    /**
-     * Constructs a SignUpState instance by copying another instance.
-     *
-     * @param copy The SignUpState instance to copy.
-     */
-    public SignUpState(SignUpState copy) {
-        this.error = copy.error;
-    }
-
 
     /**
      * Retrieves the error message during the sign-up process.

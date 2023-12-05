@@ -1,7 +1,6 @@
 package interface_adapter.LockView;
 
 import interface_adapter.ViewModel;
-import view.LockView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

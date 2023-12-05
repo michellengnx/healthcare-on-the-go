@@ -28,11 +28,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-      continue-on-error: true
+    - name: Setup xvfb for screen 0 and build with Maven
+      run: Xvfb :1 -screen 0 1600x1200x24 &
+    - run: mvn -B package --file pom.xml
       env:
+        DISPLAY: :1
         API_KEY: ${{ secrets.API_KEY }}
+        continue-on-error: true
+
     - name: Show Test Results
       run: |
         ls -R target/surefire-reports

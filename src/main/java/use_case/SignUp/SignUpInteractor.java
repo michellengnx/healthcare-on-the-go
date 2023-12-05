@@ -34,7 +34,7 @@ public class SignUpInteractor implements SignUpInputBoundary {
         passwordValidator.addPattern("^.*\\d.*$"); // contains a digit
         passwordValidator.addPattern("^.*[a-z].*$"); // contains lower case letter
         passwordValidator.addPattern("^.*[A-Z].*$"); // contains upper case letter
-        passwordValidator.addPattern("^.*[@#$%^&+=].*$"); // contains special character case letter
+        passwordValidator.addPattern("^.*[!@#$%^&+=].*$"); // contains special character case letter
         passwordValidator.addPattern("^.{8,}$"); // at least 8 characters
 
 //        This check requires querying the csv file
@@ -43,7 +43,7 @@ public class SignUpInteractor implements SignUpInputBoundary {
         } else if (userDataAccessObject.existsByEmail(signUpInputData.getEmail())) {
             userPresenter.prepareFailView("Email already exists.");
         } else if (!passwordValidator.validatePassword(signUpInputData.getPassword())) {
-            userPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.\nMust contain:\n- a digit\n-a lower case letter\n- an upper case letter\n- a special character (A#$%^&)\nMust also be at least 8 characters");
+            userPresenter.prepareFailView("Password doesn't satisfy the necessary requirements.\nMust contain:\n- a digit\n- a lower case letter\n- an upper case letter\n- a special character (!@#$%^&)\nMust also be at least 8 characters");
         }
 
 //        This check doesn't require querying the csv file and should be helper method for the use case

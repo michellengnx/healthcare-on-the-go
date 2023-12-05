@@ -4,8 +4,6 @@ import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.LockView.LockOutputBoundary;
-import view.LoginView;
-import view.SignUpView;
 
 /**
  * Presenter handling lock-related output interactions.

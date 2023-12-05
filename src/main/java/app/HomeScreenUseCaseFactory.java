@@ -5,7 +5,7 @@ import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenPresenter;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
 import interface_adapter.LockView.LockViewModel;
-import interface_adapter.SignUp.SignUpViewModel;
+import interface_adapter.LockView.LockViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestController;
 import interface_adapter.ViewRequest.ViewRequestViewModel;

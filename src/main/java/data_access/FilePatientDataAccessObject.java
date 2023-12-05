@@ -5,7 +5,7 @@ import entities.EmergencyContact;
 import entities.Patient;
 import use_case.Login.LoginUserDataAccessInterface;
 import use_case.SignUp.SignUpUserDataAccessInterface;
-import use_case.edit_profile.EditPatientDataAccessInterface;
+import use_case.EditProfile.EditPatientDataAccessInterface;
 
 import java.io.*;
 import java.text.ParseException;

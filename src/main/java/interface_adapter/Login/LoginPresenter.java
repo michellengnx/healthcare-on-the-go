@@ -3,8 +3,6 @@ package interface_adapter.Login;
 
 import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
-import interface_adapter.Loggedin.LoggedinState;
-import interface_adapter.Loggedin.LoggedinViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.Login.LoginOutputBoundary;
 import use_case.Login.LoginOutputData;
@@ -39,7 +37,7 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         LoginState loginState = loginViewModel.getState();
-        loginState.setUsernameError(error);
+        loginState.setError(error);
         loginViewModel.firePropertyChanged();
     }
 }

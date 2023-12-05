@@ -1,7 +1,7 @@
 package interface_adapter.edit_profile;
 
-import use_case.edit_profile.EditInputBoundary;
-import use_case.edit_profile.EditInputData;
+import use_case.EditProfile.EditInputBoundary;
+import use_case.EditProfile.EditInputData;
 
 /**
  * Controller responsible for handling edit profile requests.

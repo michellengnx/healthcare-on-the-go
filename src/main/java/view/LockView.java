@@ -136,19 +136,6 @@ public class LockView extends JPanel implements ActionListener, PropertyChangeLi
 
     }
 
-
-    /**
-     * Main method to demonstrate the LockView functionality.
-     *
-     * @param args Command-line arguments.
-     * @throws IOException    Signals that an I/O exception has occurred.
-     * @throws ParseException Signals that a parse exception has occurred.
-     */
-    public static void main(String[] args) throws IOException, ParseException {
-        FilePatientDataAccessObject filePatientDataAccessObject = new FilePatientDataAccessObject("data/patients.csv");
-
-    }
-
     /**
      * Handles property change events.
      *

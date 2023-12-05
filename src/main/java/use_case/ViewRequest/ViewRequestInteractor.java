@@ -7,18 +7,18 @@ import java.util.ArrayList;
  * Interactor responsible for handling the viewing of request details.
  */
 public class ViewRequestInteractor implements ViewRequestInputBoundary {
-    private final RequestDataAccess requestDataAccess;
+    private final RequestDataAccessInterface requestDataAccess;
     private final ViewRequestOutputBoundary viewData;
 
 
     /**
      * Constructs a ViewRequestInteractor.
      *
-     * @param requestDataAccess       The data access object for retrieving request details.
+     * @param requestDataAccessInterface       The data access object for retrieving request details.
      * @param viewRequestOutputBoundary The output boundary for presenting view request data.
      */
-    public ViewRequestInteractor(RequestDataAccess requestDataAccess, ViewRequestOutputBoundary viewRequestOutputBoundary) {
-        this.requestDataAccess = requestDataAccess;
+    public ViewRequestInteractor(RequestDataAccessInterface requestDataAccessInterface, ViewRequestOutputBoundary viewRequestOutputBoundary) {
+        this.requestDataAccess = requestDataAccessInterface;
         this.viewData = viewRequestOutputBoundary;
     }
 

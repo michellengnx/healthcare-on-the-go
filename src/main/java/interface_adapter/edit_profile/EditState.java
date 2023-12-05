@@ -18,26 +18,6 @@ public class EditState {
     private String emergencyNumber = "";
     private String emergencyRelationship = "";
 
-    /**
-     * Constructs an EditState object by copying the content of another EditState object.
-     *
-     * @param copy The EditState object to copy.
-     */
-    public EditState(EditState copy) {
-        username = copy.username;
-        password = copy.password;
-        passwordError = copy.passwordError;
-        email = copy.email;
-        phoneNumber = copy.phoneNumber;
-        insurance = copy.insurance;
-        creditCardNumber = copy.creditCardNumber;
-        cvv = copy.cvv;
-        expirationDate = copy.expirationDate;
-        nameOnCard = copy.nameOnCard;
-        emergencyName = copy.emergencyName;
-        emergencyNumber = copy.emergencyNumber;
-        emergencyRelationship = copy.emergencyRelationship;
-    }
 
     /**
      * Constructs an empty EditState object.
@@ -115,11 +95,11 @@ public class EditState {
     }
 
     public void setPhoneNumber(String newPhoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = newPhoneNumber;
     }
 
     public void setInsurance(String newInsurance) {
-        this.insurance = insurance;
+        this.insurance = newInsurance;
     }
 
     public void setCreditCardNumber(String creditCardNumber) {
