@@ -1,4 +1,4 @@
-package interface_adapter.edit_profile;
+package interface_adapter.EditProfile;
 // these fields will be populated by the homeviewmodel, which is populated by loginviewmodel, which is populated by signupviewmodel
 /**
  * An object used to store the user's input data when editing a patient profile.

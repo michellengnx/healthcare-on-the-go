@@ -1,4 +1,4 @@
-package use_case.LockView;
+package use_case.Lock;
 
 /**
  * Represents the input boundary for locking the view.

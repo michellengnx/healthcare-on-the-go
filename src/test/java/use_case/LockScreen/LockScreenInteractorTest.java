@@ -2,9 +2,9 @@
 package use_case.LockScreen;
 
 import org.junit.jupiter.api.Test;
-import use_case.LockView.LockInputBoundary;
-import use_case.LockView.LockInteractor;
-import use_case.LockView.LockOutputBoundary;
+import use_case.Lock.LockInputBoundary;
+import use_case.Lock.LockInteractor;
+import use_case.Lock.LockOutputBoundary;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

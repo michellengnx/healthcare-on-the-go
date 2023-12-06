@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpState;

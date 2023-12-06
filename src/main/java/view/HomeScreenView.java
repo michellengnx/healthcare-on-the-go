@@ -1,16 +1,9 @@
 package view;
 
-import entities.Service;
-import interface_adapter.CreateRequest.CreateRequestController;
-import interface_adapter.CreateRequest.CreateRequestState;
-import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenController;
 import interface_adapter.HomeScreen.HomeScreenState;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
-import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.ViewRequest.ViewRequestController;
-import interface_adapter.edit_profile.EditController;
-import interface_adapter.edit_profile.EditViewModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,7 +16,6 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 
 /**
  * View that displays the necessary interface for a patient create a new request, and a way to return to the home

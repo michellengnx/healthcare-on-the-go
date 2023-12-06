@@ -3,7 +3,7 @@ package interface_adapter.LockView;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
-import use_case.LockView.LockOutputBoundary;
+import use_case.Lock.LockOutputBoundary;
 
 /**
  * Presenter handling lock-related output interactions.

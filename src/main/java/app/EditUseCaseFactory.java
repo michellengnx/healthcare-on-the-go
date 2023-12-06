@@ -2,10 +2,10 @@ package app;
 
 import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.edit_profile.EditController;
-import interface_adapter.edit_profile.EditPresenter;
-import interface_adapter.edit_profile.EditViewModel;
-import interface_adapter.edited_profile.EditedViewModel;
+import interface_adapter.EditProfile.EditController;
+import interface_adapter.EditProfile.EditPresenter;
+import interface_adapter.EditProfile.EditViewModel;
+import interface_adapter.EditedProfile.EditedViewModel;
 import use_case.EditProfile.EditInputBoundary;
 import use_case.EditProfile.EditInteractor;
 import use_case.EditProfile.EditOutputBoundary;

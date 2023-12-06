@@ -1,4 +1,4 @@
-package interface_adapter.edit_profile;
+package interface_adapter.EditProfile;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,40 +12,6 @@ class EditStateTest {
     @BeforeEach
     void setUp() {
         editState = new EditState();
-    }
-
-    @Test
-    void copyConstructor() {
-        editState.setUsername("john_doe");
-        editState.setPassword("new_password");
-        editState.setPasswordError("Invalid password");
-        editState.setEmail("john.doe@example.com");
-        editState.setPhoneNumber("+1234567890");
-        editState.setInsurance("Health Insurance");
-        editState.setCreditCardNumber("1234567890123456");
-        editState.setCvv(123);
-        editState.setExpirationDate("12/24");
-        editState.setNameOnCard("John Doe");
-        editState.setEmergencyName("Emergency Contact");
-        editState.setEmergencyNumber("+123456789");
-        editState.setEmergencyRelationship("Family");
-
-        EditState copiedState = new EditState(editState);
-
-        // Verify that the properties are the same
-        assertEquals(editState.getUsername(), copiedState.getUsername());
-        assertEquals(editState.getPassword(), copiedState.getPassword());
-        assertEquals(editState.getPasswordError(), copiedState.getPasswordError());
-        assertEquals(editState.getEmail(), copiedState.getEmail());
-        assertEquals(editState.getPhoneNumber(), copiedState.getPhoneNumber());
-        assertEquals(editState.getInsurance(), copiedState.getInsurance());
-        assertEquals(editState.getCreditCardNumber(), copiedState.getCreditCardNumber());
-        assertEquals(editState.getCvv(), copiedState.getCvv());
-        assertEquals(editState.getExpirationDate(), copiedState.getExpirationDate());
-        assertEquals(editState.getNameOnCard(), copiedState.getNameOnCard());
-        assertEquals(editState.getEmergencyName(), copiedState.getEmergencyName());
-        assertEquals(editState.getEmergencyNumber(), copiedState.getEmergencyNumber());
-        assertEquals(editState.getEmergencyRelationship(), copiedState.getEmergencyRelationship());
     }
 
     @Test

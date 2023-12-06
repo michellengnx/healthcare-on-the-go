@@ -1,4 +1,4 @@
-package view;
+package view.common_components;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -17,7 +17,7 @@ public class DateInputField extends JPanel {
      *
      * @param size The size of the text field.
      */
-    DateInputField(int size) {
+    public DateInputField(int size) {
         try {
             MaskFormatter mask = new MaskFormatter("##/##/####");
             dateTextField = new JFormattedTextField(mask);

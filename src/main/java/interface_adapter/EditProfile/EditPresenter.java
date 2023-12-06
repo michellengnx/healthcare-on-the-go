@@ -1,8 +1,8 @@
-package interface_adapter.edit_profile;
+package interface_adapter.EditProfile;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.edited_profile.EditedState;
-import interface_adapter.edited_profile.EditedViewModel;
+import interface_adapter.EditedProfile.EditedState;
+import interface_adapter.EditedProfile.EditedViewModel;
 import use_case.EditProfile.EditOutputBoundary;
 import use_case.EditProfile.EditOutputData;
 

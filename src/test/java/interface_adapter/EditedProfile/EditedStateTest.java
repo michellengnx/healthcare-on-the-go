@@ -1,6 +1,5 @@
-package interface_adapter.edited_profile;
+package interface_adapter.EditedProfile;
 
-import interface_adapter.edited_profile.EditedState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

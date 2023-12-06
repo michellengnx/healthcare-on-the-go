@@ -6,15 +6,15 @@ package app;
 import data_access.*;
 import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.HomeScreen.HomeScreenViewModel;
+import interface_adapter.LockView.LockViewModel;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.ReturnHome.ReturnHomeController;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
-import interface_adapter.edit_profile.EditViewModel;
-import interface_adapter.edited_profile.EditedViewModel;
-import interface_adapter.LockView.LockViewModel;
+import interface_adapter.EditProfile.EditViewModel;
+import interface_adapter.EditedProfile.EditedViewModel;
 import view.*;
 
 
@@ -30,7 +30,7 @@ import java.text.ParseException;
  */
 public class App
 {
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws IOException {
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 
@@ -126,7 +126,7 @@ public class App
                doctorDataAccessObject,
                returnHomeController,
                 doctorDataAccessObject.getAvailableServices());
-        LockView lockView = LockUseCaseFactory.create(
+                LockView lockView = LockUseCaseFactory.create(
                 viewManagerModel,
                 lockViewModel,
                 signupViewModel,
@@ -134,15 +134,15 @@ public class App
         );
 
 
-        views.add(signUpView, signUpView.viewName);
-        views.add(loginView, loginView.viewName);
-        views.add(homeScreenView, homeScreenView.viewName);
-        views.add(editedProfileView, editedProfileView.viewName);
+        views.add(signUpView, signUpView.viewName); //0
+        views.add(loginView, loginView.viewName); //1
+        views.add(homeScreenView, homeScreenView.viewName); //2
+        views.add(editedProfileView, editedProfileView.viewName); //3
         // views.add(leaveReviewView, leaveReviewView.viewName);
-        views.add(viewRequestsView, viewRequestsView.viewName);
-        views.add(editProfileView, editProfileView.viewName);
-        views.add(createRequestView, createRequestView.viewName);
-        views.add(lockView, lockView.viewName);
+        views.add(viewRequestsView, viewRequestsView.viewName); //4
+        views.add(editProfileView, editProfileView.viewName); //5
+        views.add(createRequestView, createRequestView.viewName); //6
+        views.add(lockView, lockView.viewName); //7
 
         viewManagerModel.setActiveView(lockView.viewName);
         viewManagerModel.firePropertyChanged();

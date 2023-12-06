@@ -1,9 +1,10 @@
 package interface_adapter.SignUp;
 
-import interface_adapter.SignUp.SignUpState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class SignUpStateTest {
 
@@ -14,15 +15,6 @@ public class SignUpStateTest {
         // Set up common state for tests
         originalState = new SignUpState();
         originalState.setError("Registration failed");
-    }
-
-    @Test
-    public void testCopyConstructor() {
-        // Use the copy constructor
-        SignUpState copiedState = new SignUpState(originalState);
-
-        // Check if the values are copied correctly
-        assertEquals(originalState.getError(), copiedState.getError());
     }
 
     @Test

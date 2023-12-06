@@ -1,4 +1,4 @@
-package interface_adapter.edit_profile;
+package interface_adapter.EditProfile;
 
 import interface_adapter.ViewModel;
 
