@@ -1,11 +1,13 @@
 package view;
 
-import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
 import interface_adapter.SignUp.SignUpState;
 import interface_adapter.SignUp.SignUpViewModel;
-import interface_adapter.edit_profile.EditViewModel;
+import view.common_components.DateInputField;
+import view.common_components.LabelDatePanel;
+import view.common_components.LabelNumberPanel;
+import view.common_components.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 import java.util.Date;
 
 /**

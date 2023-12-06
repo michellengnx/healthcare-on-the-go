@@ -6,9 +6,9 @@ import interface_adapter.LockView.LockViewModel;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.ViewManagerModel;
-import use_case.LockView.LockInputBoundary;
-import use_case.LockView.LockInteractor;
-import use_case.LockView.LockOutputBoundary;
+import use_case.Lock.LockInputBoundary;
+import use_case.Lock.LockInteractor;
+import use_case.Lock.LockOutputBoundary;
 import view.LockView;
 
 import javax.swing.*;

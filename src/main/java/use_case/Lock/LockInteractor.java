@@ -1,6 +1,4 @@
-package use_case.LockView;
-
-import interface_adapter.LockView.LockPresenter;
+package use_case.Lock;
 
 /**
  * Represents the interactor responsible for the locking operation.

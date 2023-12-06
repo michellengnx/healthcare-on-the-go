@@ -1,4 +1,4 @@
-package use_case.LockView;
+package use_case.Lock;
 
 /**
  * Defines the output boundary contract for the locking operation.

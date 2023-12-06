@@ -1,8 +1,8 @@
 package view;
 
 import interface_adapter.ReturnHome.ReturnHomeController;
-import interface_adapter.edited_profile.EditedState;
-import interface_adapter.edited_profile.EditedViewModel;
+import interface_adapter.EditedProfile.EditedState;
+import interface_adapter.EditedProfile.EditedViewModel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,9 +1,11 @@
 package view;
 
 import interface_adapter.ReturnHome.ReturnHomeController;
-import interface_adapter.edit_profile.EditController;
-import interface_adapter.edit_profile.EditState;
-import interface_adapter.edit_profile.EditViewModel;
+import interface_adapter.EditProfile.EditController;
+import interface_adapter.EditProfile.EditState;
+import interface_adapter.EditProfile.EditViewModel;
+import view.common_components.LabelNumberPanel;
+import view.common_components.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;

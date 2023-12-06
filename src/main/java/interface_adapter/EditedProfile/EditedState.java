@@ -1,4 +1,4 @@
-package interface_adapter.edited_profile;
+package interface_adapter.EditedProfile;
 
 /**
  * Represents the state of an edited profile, containing various fields such as password, email, phone number,

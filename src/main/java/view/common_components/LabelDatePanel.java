@@ -1,4 +1,4 @@
-package view;
+package view.common_components;
 
 import javax.swing.*;
 
@@ -14,7 +14,7 @@ public class LabelDatePanel extends JPanel {
      * @param label The label component.
      * @param date  The DateInputField component.
      */
-    LabelDatePanel(JLabel label, DateInputField date){
+    public LabelDatePanel(JLabel label, DateInputField date){
         this.add(label);
         this.add(date);
     }

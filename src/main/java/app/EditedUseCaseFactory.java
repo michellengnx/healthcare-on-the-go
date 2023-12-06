@@ -1,7 +1,7 @@
 package app;
 
 import interface_adapter.ReturnHome.ReturnHomeController;
-import interface_adapter.edited_profile.EditedViewModel;
+import interface_adapter.EditedProfile.EditedViewModel;
 import view.EditedView;
 
 /**

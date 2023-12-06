@@ -5,10 +5,9 @@ import interface_adapter.CreateRequest.CreateRequestViewModel;
 import interface_adapter.LockView.LockViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewRequest.ViewRequestViewModel;
-import interface_adapter.edit_profile.EditViewModel;
+import interface_adapter.EditProfile.EditViewModel;
 import use_case.HomeScreen.HomeScreenOutputBoundary;
 import use_case.HomeScreen.HomeScreenOutputData;
-import view.LockView;
 
 public class HomeScreenPresenter implements HomeScreenOutputBoundary {
     private final CreateRequestViewModel createRequestViewModel;

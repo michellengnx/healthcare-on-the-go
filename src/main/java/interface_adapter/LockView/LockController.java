@@ -1,8 +1,6 @@
 package interface_adapter.LockView;
 
-import use_case.LockView.LockInputBoundary;
-import use_case.Login.LoginInputBoundary;
-import use_case.Login.LoginInputData;
+import use_case.Lock.LockInputBoundary;
 
 /**
  * Controller handling locking functionalities in the application.

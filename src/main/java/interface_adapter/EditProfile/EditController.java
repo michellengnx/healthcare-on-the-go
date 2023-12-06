@@ -1,4 +1,4 @@
-package interface_adapter.edit_profile;
+package interface_adapter.EditProfile;
 
 import use_case.EditProfile.EditInputBoundary;
 import use_case.EditProfile.EditInputData;
