@@ -24,6 +24,10 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the view for displaying request history within a table format.
+ * Extends JPanel and implements ActionListener, PropertyChangeListener.
+ */
 public class ViewRequestsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "view requests";
     private final ViewRequestViewModel viewRequestViewModel;
@@ -41,6 +45,15 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
 
     private JPanel buttonPanel;
+
+    /**
+     * Constructs a ViewRequestsView based on ViewRequestViewModel, ViewRequestController,
+     * and ReturnHomeController instances to display the request history.
+     *
+     * @param viewRequestViewModel The ViewModel containing the state for viewing requests.
+     * @param requestController    The controller responsible for managing view request operations.
+     * @param returnHomeController The controller for handling the return to the home screen action.
+     */
     public ViewRequestsView(ViewRequestViewModel viewRequestViewModel, ViewRequestController requestController, ReturnHomeController returnHomeController){
         this.requestController = requestController;
         this.viewRequestViewModel = viewRequestViewModel;
@@ -50,7 +63,7 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.setLayout(new BorderLayout());
 
         this.buttonPanel = new JPanel();
-        this.homeButton = new JButton("home");
+        this.homeButton = new JButton("Home");
         this.homeButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -110,9 +123,14 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
         this.add(buttonPanel,BorderLayout.SOUTH);
 
         setVisible(true);
-
-
     }
+
+    /**
+     * The main method demonstrating the instantiation of ViewRequestsView and the associated controllers.
+     *
+     * @param args Command line arguments (not used in this context).
+     * @throws IOException On input/output exception.
+     */
     public static void main(String[] args) throws IOException {
         FileRequestDataAccessObject fileRequestDataAccessObject = new FileRequestDataAccessObject("data/requests.csv");
 
@@ -141,7 +159,9 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
 
     /**
-     * @param e the event to be processed
+     * Handles actionPerformed events triggered by components in the view.
+     *
+     * @param e The ActionEvent to be processed.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -149,6 +169,11 @@ public class ViewRequestsView extends JPanel implements ActionListener, Property
 
     }
 
+    /**
+     * Responds to property changes triggered by the ViewModel and updates the view accordingly.
+     *
+     * @param evt The PropertyChangeEvent object describing the change in the model.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("property changed!!!");

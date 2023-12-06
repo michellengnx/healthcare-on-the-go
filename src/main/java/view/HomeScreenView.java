@@ -42,6 +42,7 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
 
     private final HomeScreenController homeScreenController;
     private final ViewRequestController viewRequestController;
+
     private final JLabel title;
     private final JLabel map;
 
@@ -60,8 +61,13 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
         homeScreenViewModel.addPropertyChangeListener(this);
 
         // screen title
-        title = new JLabel("Hello " + homeScreenViewModel.getState().getPatient());
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Center align components
+        title = new JLabel("Hello " + homeScreenViewModel.getState().getPatient() + " " + "\uD83D\uDC4B");
+        title.setFont(new Font("Arial", Font.BOLD, 14));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        topPanel.add(title);
+
 
         URL url;
         BufferedImage image;
@@ -78,29 +84,34 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             throw new RuntimeException();
         }
 
-        map = new JLabel(new ImageIcon(image));
+        // buttons to create request and return home
+        // Bottom panel for buttons in a grid layout
+        createRequest = new JButton(homeScreenViewModel.CREATE_REQUEST_BUTTON_LABEL);
+        viewRequests = new JButton(homeScreenViewModel.VIEW_REQUESTS_BUTTON_LABEL);
+        leaveReview = new JButton(homeScreenViewModel.LEAVE_REVIEW_BUTTON_LABEL);
+        editProfile = new JButton(homeScreenViewModel.EDIT_PROFILE_BUTTON_LABEL);
+        logout = new JButton(homeScreenViewModel.LOGOUT_BUTTON_LABEL);
 
         requestView = new JPanel();
-
         requestView.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        map = new JLabel(new ImageIcon(image));
         JLabel docOtw = new JLabel(homeScreenViewModel.DOCTOR_OTW_LABEL);
-
+        docOtw.setAlignmentX(Component.CENTER_ALIGNMENT);
         requestView.add(docOtw);
         requestView.add(map);
+        requestView.setVisible(false);
 
-        // buttons to create request and return home
-        JPanel buttons = new JPanel();
-        createRequest = new JButton(homeScreenViewModel.CREATE_REQUEST_BUTTON_LABEL);
-        buttons.add(createRequest);
-        viewRequests = new JButton(homeScreenViewModel.VIEW_REQUESTS_BUTTON_LABEL);
-        buttons.add(viewRequests);
-        leaveReview = new JButton(homeScreenViewModel.LEAVE_REVIEW_BUTTON_LABEL);
-        buttons.add(leaveReview);
-        editProfile = new JButton(homeScreenViewModel.EDIT_PROFILE_BUTTON_LABEL);
-        buttons.add(editProfile);
-        logout = new JButton(homeScreenViewModel.LOGOUT_BUTTON_LABEL);
-        buttons.add(logout);
+        JPanel bottomPanel = new JPanel(new GridLayout(2, 2, 5, 5)); // 2 rows, 2 columns, spacing
+        bottomPanel.add(createRequest);
+        bottomPanel.add(viewRequests);
+        bottomPanel.add(leaveReview);
+        bottomPanel.add(editProfile);
+
+        // Panel for the logout button positioned at the top right corner
+        JPanel logoutPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        logoutPanel.add(logout);
+
+
 
         // create the request with the data in the view's state when the createRequest button is clicked
         createRequest.addActionListener(
@@ -142,14 +153,17 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
                 }
         );
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.requestView.setLayout(new BoxLayout(this.requestView, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
 
-        this.requestView.setVisible(false);
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(requestView, BorderLayout.CENTER);
 
-        this.add(title);
-        this.add(requestView);
-        this.add(buttons);
+        this.add(topPanel, BorderLayout.NORTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+        this.add(bottomPanel, BorderLayout.SOUTH);
+        this.add(logoutPanel, BorderLayout.NORTH);
+
+
     }
 
     /**
@@ -204,6 +218,6 @@ public class HomeScreenView extends JPanel implements ActionListener, PropertyCh
             );
         }
 
-        requestView.setVisible(false);
+        homeScreenViewModel.getState().setActiveRequest(false);
     }
 }

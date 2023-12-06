@@ -1,4 +1,4 @@
-package use_case.CreateRequest;
+package entities.matchers;
 
 /**
  * Exception to be thrown whenever there are no doctors available to carry out a request.

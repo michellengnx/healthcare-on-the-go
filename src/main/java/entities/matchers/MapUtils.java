@@ -2,7 +2,6 @@ package entities.matchers;
 
 import entities.Doctor;
 import entities.Service;
-import use_case.CreateRequest.NoAvailableDoctorException;
 
 import java.util.HashMap;
 import java.util.Map;

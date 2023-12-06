@@ -2,14 +2,6 @@ package entities.matchers;
 
 import entities.Doctor;
 import entities.Service;
-import use_case.CreateRequest.CreateRequestApiAccessInterface;
-import use_case.CreateRequest.CreateRequestDoctorDataAccessInterface;
-import use_case.CreateRequest.NoAvailableDoctorException;
-
-import javax.print.Doc;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class DoctorMatcher {
     private final Service service;

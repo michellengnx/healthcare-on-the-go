@@ -2,6 +2,10 @@ package interface_adapter.ViewRequest;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the state of view-specific data for handling view-related information
+ * in the context of viewing request details.
+ */
 public class ViewRequestState {
     private ArrayList<String> userName = new ArrayList<>();
     private ArrayList<String> creationTime = new ArrayList<>();
@@ -87,7 +91,11 @@ public class ViewRequestState {
     private ArrayList<Float> distances = new ArrayList<>();
     private ArrayList<Boolean> completed = new ArrayList<>();
 
-    // Copy constructor
+    /**
+     * Copy constructor to create a new instance by copying another instance of ViewRequestState.
+     *
+     * @param copy The ViewRequestState object to copy.
+     */
     public ViewRequestState(ViewRequestState copy) {
         this.userName.addAll(copy.userName);
         this.creationTime.addAll(copy.creationTime);
@@ -100,6 +108,11 @@ public class ViewRequestState {
         this.completed.addAll(copy.completed);
     }
 
+    /**
+     * Constructor to initialize ViewRequestState from an ArrayList of request data.
+     *
+     * @param requestData The ArrayList containing request details to initialize the state.
+     */
     public ViewRequestState(ArrayList<ArrayList<String>> requestData) {
         for (ArrayList<String> request : requestData) {
             this.userName.add(request.get(0));

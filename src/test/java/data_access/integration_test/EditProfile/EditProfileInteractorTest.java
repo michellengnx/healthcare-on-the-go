@@ -1,10 +1,10 @@
-package use_case.EditProfile;
+package data_access.integration_test.EditProfile;
 
 import data_access.FilePatientDataAccessObject;
 import entities.*;
-import use_case.edit_profile.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import use_case.EditProfile.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;

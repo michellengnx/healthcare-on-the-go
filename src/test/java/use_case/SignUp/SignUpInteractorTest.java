@@ -129,8 +129,8 @@ class SignUpInteractorTest {
         // Create and return a sample SignUpInputData for testing
         return new SignUpInputData(
                 "testUser",
-                "testPassword",
-                "testPassword",
+                "testPassword1@",
+                "testPassword1@",
                 "test@example.com",
                 "1234567890",
                 "Male",

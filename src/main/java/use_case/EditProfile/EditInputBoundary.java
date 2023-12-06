@@ -1,4 +1,4 @@
-package use_case.edit_profile;
+package use_case.EditProfile;
 
 /**
  * Represents the boundary interface for handling input operations related to editing a profile.

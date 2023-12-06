@@ -1,20 +1,8 @@
 package app;
 
 import interface_adapter.ReturnHome.ReturnHomeController;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.edit_profile.EditController;
-import interface_adapter.edit_profile.EditPresenter;
-import interface_adapter.edit_profile.EditViewModel;
 import interface_adapter.edited_profile.EditedViewModel;
-import use_case.edit_profile.EditInputBoundary;
-import use_case.edit_profile.EditInteractor;
-import use_case.edit_profile.EditOutputBoundary;
-import use_case.edit_profile.EditPatientDataAccessInterface;
-import view.EditView;
 import view.EditedView;
-
-import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Factory that facilitates the creation of an EditView and EditController for editing user profiles.

@@ -86,6 +86,11 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
         }
     }
 
+    /**
+     * Get a map of the services a doctor is able to provide.
+     *
+     * @return a map of the services a doctor is able to provide.
+     */
     private Map<String, Service> getServices() {
         Map<String, Service> serviceList = new HashMap<>();
         try {
@@ -107,6 +112,9 @@ public class DoctorDataAccessObject implements CreateRequestDoctorDataAccessInte
         }
     }
 
+    /**
+     * Save the data representation of the doctor list into memory
+     */
     private void save() {
         File file = new File(this.doctorFilePath);
         try {

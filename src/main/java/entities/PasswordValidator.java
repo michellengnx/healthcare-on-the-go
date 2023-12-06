@@ -30,7 +30,6 @@ public class PasswordValidator {
             // and regular expression.
             Matcher m = p.matcher(password);
             if (!m.matches()) {
-                System.out.println(pattern + password);
                 return false;
             }
         }

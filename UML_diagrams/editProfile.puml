@@ -1,0 +1,77 @@
+@startuml
+mainframe void actionPerformed(String urgencyLevel, Doctor doctor, Service service, String destination)
+    [-> "RequestView":actionPerformed(urgencyLevel, doctor, service, destination)
+    activate "RequestView"
+
+    "RequestView" -> "RequestController":execute(date, urgencyLevel, doctor, service, destination)
+    activate "RequestController"
+
+
+    "RequestController" -> "RequestInputData":<<create>>
+    activate "RequestInputData"
+    return InputDataObject
+
+    "RequestController" -> "RequestInteractor":execute(InputDataObject)
+    activate "RequestInteractor"
+
+
+    "RequestInteractor" -> "ServiceRequestFactory":create(...)
+    activate "ServiceRequestFactory"
+
+    "ServiceRequestFactory" -> "DoctorMatcher":match()
+        activate "DoctorMatcher"
+        return doctor
+    "ServiceRequestFactory" -> "TravelCostCalculator":getPrice(doctorLocation, destination)
+    activate "TravelCostCalculator"
+    return price
+    "ServiceRequestFactory" -> "EtaCalculator":getEta(doctorLocation, destination)
+    activate "EtaCalculator"
+    return eta
+    "ServiceRequestFactory" -> "DistanceCalculator":getDistance(doctorLocation, destination)
+    activate "DistanceCalculator"
+    return distance
+    "ServiceRequestFactory" -> "ServiceRequest":ServiceRequest(...)
+        activate "ServiceRequest"
+        return distance
+
+    return request
+
+    "RequestInteractor" -> "APIAccessInterface":getTrafficMap(doctorLocation, destination)
+        activate "APIAccessInterface"
+    return trafficMap
+    "RequestInteractor" -> "UserDataAccessInterface":saveRequest(user, request)
+            activate "UserDataAccessInterface"
+        return
+    "RequestInteractor" -> "DoctorDataAccessInterface":markAsBusy(doctor)
+            activate "DoctorDataAccessInterface"
+        return
+
+    "RequestInteractor" -> "RequestOutputData":<<creates>>
+        activate "RequestOutputData"
+        return OutputDataObject
+
+    "RequestInteractor" -> "RequestPresenter":prepareSuccessView(OutputDataObject)
+    activate "RequestPresenter"
+
+    "RequestPresenter" -> "HomeScreenViewModel":setState(newHomeScreenState)
+        activate "HomeScreenViewModel"
+        return
+        "RequestPresenter" -> "HomeScreenViewModel":firePropertyChanged()
+                activate "HomeScreenViewModel"
+                return
+    "RequestPresenter" -> "ViewManagerModel":setActiveView(homeScreenViewModel.getViewName())
+            activate "ViewManagerModel"
+            return
+            "RequestPresenter" -> "ViewManagerModel":firePropertyChanged()
+                        activate "ViewManagerModel"
+                        return
+
+    return
+
+    return
+
+    return
+
+    return
+
+@enduml

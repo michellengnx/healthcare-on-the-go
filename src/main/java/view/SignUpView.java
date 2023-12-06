@@ -1,7 +1,9 @@
 package view;
 
+import interface_adapter.CreateRequest.CreateRequestState;
 import interface_adapter.ReturnToLock.ReturnToLockController;
 import interface_adapter.SignUp.SignUpController;
+import interface_adapter.SignUp.SignUpState;
 import interface_adapter.SignUp.SignUpViewModel;
 import interface_adapter.edit_profile.EditViewModel;
 
@@ -14,6 +16,12 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * SignUpView represents the graphical user interface for user signup.
+ * It includes input fields for various user details such as username, password,
+ * email, phone number, gender, insurance, credit card information, emergency contact, etc.
+ * Provides buttons for signup and cancel operations.
+ */
 public class SignUpView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "sign up";
 
@@ -47,6 +55,14 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
     private final JCheckBox showPasswordCheckBox1 = new JCheckBox("Show Password");
     private final JCheckBox showPasswordCheckBox2 = new JCheckBox("Show Password");
 
+
+    /**
+     * Constructs the SignUpView with necessary controllers and viewModel.
+     *
+     * @param signUpController      The controller handling signup operations.
+     * @param signUpViewModel       The viewModel containing data for signup view.
+     * @param returnToLockController The controller for returning to the lock screen.
+     */
     public SignUpView(SignUpController signUpController, SignUpViewModel signUpViewModel, ReturnToLockController returnToLockController) {
 
         this.signUpController = signUpController;
@@ -226,7 +242,9 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
     }
 
     /**
-     * React to a button click that results in evt.
+     * Reacts to an action event, such as button clicks.
+     *
+     * @param evt The action event triggered.
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
@@ -242,7 +260,11 @@ public class SignUpView extends JPanel implements ActionListener, PropertyChange
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        SignUpState signUpState = (SignUpState) evt.getNewValue();
+        if (signUpState.getCreateRequestError() != null) {
+            JOptionPane.showMessageDialog(this, signUpState.getCreateRequestError());
+        }
+        signUpState.setError(null);
     }
 
 

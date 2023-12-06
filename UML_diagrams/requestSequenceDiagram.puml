@@ -1,5 +1,5 @@
 @startuml
-mainframe bool createRequest(String urgencyLevel, Doctor doctor, Service service, String destination)
+mainframe bool createRequest(String urgencyLevel, Service service, String destination)
     [-> "RequestView":actionPerformed(urgencyLevel, doctor, service, destination)
     activate "RequestView"
 
