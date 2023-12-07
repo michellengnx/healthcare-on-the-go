@@ -1,6 +1,6 @@
 # Healthcare On the Go :ambulance:
 
-## How to Run :
+## How to Run
 
 1. Clone the repo to your local device
 2. Retrieve an API key from the [MapQuest API](https://developer.mapquest.com/)
