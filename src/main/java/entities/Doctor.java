@@ -10,10 +10,37 @@ public class Doctor extends User {
     private final List<String> certifications;
     // would you use a random method to make up certifications based on request?
     private final List<Service> qualifiedServices;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
     // may delete this later on or raise a NonImplemented error
     // as doctors are generated as soon as a request is made
-    private final Map<Doctor, List<Review>> reviews = new HashMap<>();
-    private boolean isBusy = false;
+
+    private final List<Review> reviews = new ArrayList<>();
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    private Double rating;
+    private int totalreviews;
+
+
+    public int getTotalReviews() {
+        return totalreviews;
+    }
+
+    public void setTotalReviews(int totalreviews) {
+        this.totalreviews = totalreviews;
+    }
+
+
 
     /**
      * Requires each doctor to have a unique id.
@@ -26,6 +53,8 @@ public class Doctor extends User {
         this.location = location;
         this.certifications = certifications;
         this.qualifiedServices = qualifiedServices;
+        this.rating = 4.0;
+        this.totalreviews = 0;
     }
 
     public String getLocation() {
@@ -41,11 +70,12 @@ public class Doctor extends User {
     }
 
     public boolean isBusy() {
+        boolean isBusy = false;
         return isBusy;
     }
 
     public void setBusy(boolean busy) {
-        isBusy = busy;
+        boolean isBusy = busy;
     }
 
     public Integer getId_() {
